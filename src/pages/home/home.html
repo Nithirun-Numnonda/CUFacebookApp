@@ -1,14 +1,35 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-content style="background-color: #FDC8C8" >
+    <div style="height:30%;text-align: center;" >
+        <img src="../../assets/imgs/testLogo.png" style="margin-top:2%;height:60%"/>
+    </div>
+    <div style="margin:auto;width:40%;height:20%;text-align: center;">
+    <ion-list insert>
+          
+          <ion-item >
+            <ion-label stacked>Username</ion-label>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+          <ion-item></ion-item>
+          
+          <ion-item style="background-color:rgb(71,88,147);height:50px;">
+              <img src="../../assets/imgs/facebook-Logo.png" style="height:50px;"/>
+              <button style="margin-top:5px;width:100px;height:50px;background-color:rgb(71,88,147)"[navPush]="tabsPage">Login</button>
+          </ion-item>
+      </ion-list>
+        
+        
+          
+        
+      
+       </div>
+    
 </ion-content>
+
+
