@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HttpProvider } from '../../providers/http/http-provider';
 
 /**
  * Generated class for the DashboardPage page.
@@ -12,12 +13,62 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html',
+  providers: [HttpProvider]
 })
 export class DashboardPage {
+  newsData: any;
+  hourValue: String;
+  dayValue: String;
+  monthValue: String;
+  yearValue: String;
+  topValue: String;
+  hours: Array<String> = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
+  days: Array<String> = ['0','1', '2', '3', '4', '5', '6', '7'];
+  months: Array<String> = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+  years: Array<String> = ['0','1', '2', '3', '4', '5', '6', '7'];
+  top: Array<String> = ['','1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider) {
+    this.hourValue=this.hours[0];
+    this.dayValue=this.days[0];
+    this.monthValue=this.months[1];
+    this.yearValue=this.years[0];
+    this.topValue=this.top[0];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
   }
-
+  getCommentsData() {
+    
+    if(this.hourValue!='0'||this.dayValue!='0'||this.monthValue!='0'||this.yearValue!='0')
+      this.httpProvider.getCommentsData(this.topValue,this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
+      result => {
+        this.newsData = result.data;
+        console.log("Success : " + JSON.stringify(result));
+      },
+      err => {
+        console.error("Error : " + err);
+      },
+      () => {
+        console.log('getData completed');
+      }
+    );
+  }
+  getLikesData() {
+    
+    if(this.hourValue!='0'||this.dayValue!='0'||this.monthValue!='0'||this.yearValue!='0')
+      this.httpProvider.getLikesData(this.topValue,this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
+      result => {
+        this.newsData = result.data;
+        console.log("Success : " + JSON.stringify(result));
+      },
+      err => {
+        console.error("Error : " + err);
+      },
+      () => {
+        console.log('getData completed');
+      }
+    );
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
   }

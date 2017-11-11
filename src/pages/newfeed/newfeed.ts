@@ -29,10 +29,9 @@ export class NewfeedPage {
   }
 
   getdata(){
-    
-    this.httpProvider.getJsonData().subscribe(
+    this.httpProvider.getCommentsData('','1','0','0','0').subscribe(
       result => {
-        this.newsData=result.friends;
+        this.newsData=result.data;
         console.log("Success : "+JSON.stringify(result));
       },
       err =>{

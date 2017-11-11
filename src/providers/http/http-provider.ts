@@ -14,11 +14,50 @@ export class HttpProvider {
   constructor(public http: Http) {
     console.log('Hello HttpProvider Provider');
   }
-  getJsonData(){
-    var token = 'EAACEdEose0cBAKz0usZAsEChwLpZCfr8chpstg7d8ZBcmtflT8KVJcBq4mbP38qatnKYvApX9VpwvmONv4fQeBUKuTYM3kN0biLwbx7zHrXAkUVGBHrZBIHYzGd98SlhadAZA5GrSG3Azr8M7gESY0difszqSbRM908ThR6KnKCNqAivO2v18ejQgfW867PhHTKcJF7hNBAZDZD';
-    // return this.http.get('https://www.reddit.com/r/worldnews/.json')
-    return this.http.get('http://localhost:8080/facebook?fields=id,name&since=-2%20year&access_token='+token)
-    .map(res => res.json());
+  getCommentsData(top,hour,day,month,year){
+    var token = 'EAACEdEose0cBAEStAwV7Fr4Wh5HlH2U7zclJPJ7ZBp6prj2I3bZBF4UdlbueaWaiduzHPZBSPhuXJtJ9yGMKSNECHt4el9QJpGDQ10trwn2TuDFmgGCyJHprMPG8oGu3Su924vzoWVK5xegzkcgCwtJw3n3yO7WHQNKkxaMZCZAxvan6Pl1BSiWI8Ab23V4UFt9TPfPyRTAZDZD';
+    var request='http://localhost:8080/comments?fields=id,name&since=-';
+    if(year!='0'){
+      request+=year+'%20years%20';
+    }
+    if(month!='0'){
+      request+=month+'%20months%20';
+    }
+    if(day!='0'){
+      request+=day+'%20days%20';
+    }
+    if(hour!='0'){
+      request+=hour+'%20hour%20';
+    }
+    if(top!=''){
+      request+='&top='+top;
+    }
+    request+='&access_token='+token;
+    console.log("req: "+request);
+    return this.http.get(request).map(res => res.json());
+    
+  }
+  getLikesData(top,hour,day,month,year){
+    var token = 'EAACEdEose0cBAEStAwV7Fr4Wh5HlH2U7zclJPJ7ZBp6prj2I3bZBF4UdlbueaWaiduzHPZBSPhuXJtJ9yGMKSNECHt4el9QJpGDQ10trwn2TuDFmgGCyJHprMPG8oGu3Su924vzoWVK5xegzkcgCwtJw3n3yO7WHQNKkxaMZCZAxvan6Pl1BSiWI8Ab23V4UFt9TPfPyRTAZDZD';
+    var request='http://localhost:8080/likes?fields=id,name&since=-';
+    if(year!='0'){
+      request+=year+'%20years%20';
+    }
+    if(month!='0'){
+      request+=month+'%20months%20';
+    }
+    if(day!='0'){
+      request+=day+'%20days%20';
+    }
+    if(hour!='0'){
+      request+=hour+'%20hour%20';
+    }
+    if(top!=''){
+      request+='&top='+top;
+    }
+    request+='&access_token='+token;
+    console.log("req: "+request);
+    return this.http.get(request).map(res => res.json());
     
   }
 

@@ -13,6 +13,51 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding="">
+  <ion-item>
+    <ion-label >Hours</ion-label>
+    <ion-select item-left [(ngModel)]="hourValue">
+      <ion-option *ngFor='let hour of hours'>{{hour}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label item-right>Days</ion-label>
+    <ion-select item-left [(ngModel)]="dayValue">
+      <ion-option *ngFor='let day of days'>{{day}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+      <ion-label item-right>Months</ion-label>
+      <ion-select item-left [(ngModel)]="monthValue">
+        <ion-option *ngFor='let month of months'>{{month}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label item-right>Years</ion-label>
+        <ion-select item-left [(ngModel)]="yearValue">
+          <ion-option *ngFor='let year of years'>{{year}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label item-right>Top</ion-label>
+        <ion-select item-left [(ngModel)]="topValue">
+          <ion-option *ngFor='let t of top'>{{t}}</ion-option>
+        </ion-select>
+      </ion-item>
 
+  <button ion-item (click)="getCommentsData()">Get Comments Data</button>
+  <button ion-item (click)="getLikesData()">Get Likes Data</button>
+  <ion-list *ngFor="let item of newsData">
+    <ion-card>
+      <img [attr.src]="item.pic" style="max-width: 100%;height: auto;width: auto;">
+      <ion-card-content>        
+      <ion-card-title>
+        {{item.name+" : "}}
+        {{item.likes}}
+        {{item.comments}}
+      </ion-card-title>
+      
+      </ion-card-content>
+     </ion-card> 
+  </ion-list>
 </ion-content>
