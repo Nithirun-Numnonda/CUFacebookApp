@@ -49,8 +49,9 @@
   <button ion-item (click)="getLikesData()">Get Likes Data</button>
   <ion-list *ngFor="let item of newsData">
     <ion-card>
-      <img [attr.src]="item.pic" style="max-width: 100%;height: auto;width: auto;">
-      <ion-card-content>        
+      
+      <ion-card-content>
+          <img [attr.src]="item.pic" style="max-width: 60%;height: auto;width: auto;">        
       <ion-card-title>
         {{item.name+" : "}}
         {{item.likes}}
