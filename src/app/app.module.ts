@@ -13,6 +13,7 @@ import { NotificationPage } from '../pages/notification/notification';
 import { SettingPage } from '../pages/setting/setting';
 import { HttpProvider } from '../providers/http/http-provider';
 import {HttpModule} from '@angular/http';
+import { Facebook } from '@ionic-native/facebook';
 @NgModule({
   declarations: [
     MyApp,
@@ -42,9 +43,10 @@ import {HttpModule} from '@angular/http';
   ],
   providers: [
     StatusBar,
-    SplashScreen,
+    SplashScreen,Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpProvider
+    HttpProvider,
+    
   ]
 })
 export class AppModule {}

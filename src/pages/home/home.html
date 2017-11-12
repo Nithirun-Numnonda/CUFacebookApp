@@ -7,20 +7,11 @@
     <div style="margin:auto;width:40%;height:20%;text-align: center;">
     <ion-list insert>
           
-          <ion-item >
-            <ion-label stacked>Username</ion-label>
-            <ion-input type="text" value=""></ion-input>
-          </ion-item>
-        
-          <ion-item>
-            <ion-label stacked>Password</ion-label>
-            <ion-input type="password"></ion-input>
-          </ion-item>
-          <ion-item></ion-item>
+         
           
           <ion-item style="background-color:rgb(71,88,147);height:50px;">
               <img src="../../assets/imgs/facebook-Logo.png" style="height:50px;"/>
-              <button style="margin-top:5px;width:100px;height:50px;background-color:rgb(71,88,147)"[navPush]="tabsPage">Login</button>
+              <button style="margin-top:5px;width:100px;height:50px;background-color:rgb(71,88,147)"(click)="login()">Login</button>
           </ion-item>
       </ion-list>
         

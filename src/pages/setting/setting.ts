@@ -1,5 +1,7 @@
+import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Facebook } from '@ionic-native/facebook';
 
 /**
  * Generated class for the SettingPage page.
@@ -14,12 +16,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'setting.html',
 })
 export class SettingPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  homePage:HomePage
+  constructor(public navCtrl: NavController, public navParams: NavParams,private facebook:Facebook) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingPage');
+  }
+  getAccess(){
+    var token = this.facebook.getAccessToken()
+    console.log(token);
+  }
+  logout() {
+    this.facebook.logout().then((response) =>{
+      alert(JSON.stringify(response));
+      this.navCtrl.push(HomePage);
+    }, (error) => {
+      alert(error);
+    })
   }
 
 }
