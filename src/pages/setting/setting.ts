@@ -26,14 +26,16 @@ export class SettingPage {
   getAccess(){
     var token = this.facebook.getAccessToken()
     console.log(token);
+    alert(token);
   }
   logout() {
     this.facebook.logout().then((response) =>{
       alert(JSON.stringify(response));
-      this.navCtrl.push(HomePage);
+      
     }, (error) => {
       alert(error);
     })
+    this.navCtrl.push(HomePage);
   }
 
 }

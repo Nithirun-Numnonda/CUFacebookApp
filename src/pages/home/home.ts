@@ -24,7 +24,7 @@ export class HomePage {
   login() {
     let permissions = new Array<string>();
    //let nav = this.navCtrl;
-    permissions = ["public_profile"];
+    permissions = ["public_profile","user_posts","user_friends","user_likes"];
        
     this.facebook.login(permissions).then((response) => {
      let userId = response.authResponse.userID;

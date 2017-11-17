@@ -17,71 +17,49 @@ export class HttpProvider {
 
   constructor(public http: Http, public facebook: Facebook) {
     console.log('Hello HttpProvider Provider');
+    this.token = 'EAAa6rQfXhlABAJGHMbq8qqJ5FQnVnsQdqH1bYBycGyBM7xiBgpw6JdKR6ElnptJGYg2VITnLpKIWv1njL8eU3I2bxksT86DakP3E7VbzKwYYIZCEfrWCAbCO86sbSs6M0LZAHNcw16jWkIf05gYAe1wwyUp4z26ZAgi4rPKs2sZA9nFZBZBBq49P5ZByDPZC0trmTi15jgVkVQZDZD';
   }
   init() {
-    this.facebook.browserInit(this.APP_ID, "v2.11");
+    this.facebook.browserInit(this.APP_ID, "v2.10");
   }
 
-  getToken(){
-    
-    // this.facebook.getAccessToken().then(value => { this.token= value });
-    this.facebook.getLoginStatus().then(function(response) {
-      console.log(response)
-      if (response.status === 'connected') {
-        var accessToken = response.authResponse.accessToken;
-        console.log('accessToken: '+accessToken);
-        return ''+accessToken;
-      } 
-    });
-
-    
+  getToken() {
+    this.facebook.getAccessToken().then(value => { this.token = value });
   }
+  setHttpRequest(type, top, hour, day, month, year) {
+    this.getToken();
+    console.log("token: " + this.token);
+    var request = 'http://192.168.43.75:8080/' + type + '?since=-';
+    if (year != '0') {
+      request += year + '%20years%20';
+    }
+    if (month != '0') {
+      request += month + '%20months%20';
+    }
+    if (day != '0') {
+      request += day + '%20days%20';
+    }
+    if (hour != '0') {
+      request += hour + '%20hour%20';
+    }
+    if (top != '') {
+      request += '&top=' + top;
+    }
+    request += '&access_token=' + this.token;
+    console.log("req: " + request);
+    return request;
+  }
+
   getCommentsData(top, hour, day, month, year) {
-    var token =this.getToken();
-    console.log("token: " + token);
-    var request = 'http://192.168.43.75:8080/comments?fields=id,name&since=-';
-    if (year != '0') {
-      request += year + '%20years%20';
-    }
-    if (month != '0') {
-      request += month + '%20months%20';
-    }
-    if (day != '0') {
-      request += day + '%20days%20';
-    }
-    if (hour != '0') {
-      request += hour + '%20hour%20';
-    }
-    if (top != '') {
-      request += '&top=' + top;
-    }
-    request += '&access_token=' + token;
-    console.log("req: " + request);
-    return this.http.get(request).map(res => res.json());
-
+    return this.http.get(
+      this.setHttpRequest('comments', top, hour, day, month, year))
+      .map(res => res.json());
   }
+  
   getLikesData(top, hour, day, month, year) {
-    var token = 'EAAa6rQfXhlABAGvZBLXSwV98t1VgfzVqLyiucxAWR5f4gzGYZCGOJyihENhNbZCcQY1Ixe7XfUZBRck1QDtlr4RnsmPJbP5SVfJvCoZAINUJWzenzP6hcNKQhglZBIrt8ZBC51A8plGq2K20qpJW7EmwKZA3kt7kk2pkhsCuQjpxAKRWfLGZAHH2ho3saGyadPxaLOO7DbM5iZCvuT6Qj1HFdMueSwAtMZCy7gZD';
-    var request = 'http://192.168.43.75:8080/likes?fields=id,name&since=-';
-    if (year != '0') {
-      request += year + '%20years%20';
-    }
-    if (month != '0') {
-      request += month + '%20months%20';
-    }
-    if (day != '0') {
-      request += day + '%20days%20';
-    }
-    if (hour != '0') {
-      request += hour + '%20hour%20';
-    }
-    if (top != '') {
-      request += '&top=' + top;
-    }
-    request += '&access_token=' + token;
-    console.log("req: " + request);
-    return this.http.get(request).map(res => res.json());
-
+    return this.http.get(
+      this.setHttpRequest('reactions', top, hour, day, month, year))
+      .map(res => res.json());
   }
 
 }
