@@ -51,13 +51,20 @@
     <ion-card>
       
       <ion-card-content>
-          <img [attr.src]="item.pic" style="max-width: 60%;height: auto;width: auto;">        
-      <ion-card-title>
+          <img [attr.src]="item.pic" style="height: 75px;width: 75px;">        
+      <ion-card-header>
         {{item.name+" : "}}
-        {{item.likes}}
-        {{item.comments}}
-      </ion-card-title>
-      
+      </ion-card-header>
+        <div *ngIf="item.TOTAL">
+          Like :{{item.LIKE}} 
+          Love :{{item.LOVE}}
+          Wow  :{{item.WOW}}
+          Haha :{{item.HAHA}}
+          Sad :{{item.SAD}}
+          Angry :{{item.ANGRY}}
+          Thanksful :{{item.THANKFUL}}
+          Total :{{item.TOTAL}}</div>
+        <div *ngIf="item.comments">Comment : {{item.comments}}</div>
       </ion-card-content>
      </ion-card> 
   </ion-list>
