@@ -25,11 +25,11 @@ export class NewfeedPage {
       content: `
       <ion-spinner ></ion-spinner>`
     });
-    this.getdata();
+    //this.getdata();
   }
 
   getdata(){
-    this.httpProvider.getCommentsData('','1','0','0','0').subscribe(
+    this.httpProvider.getCommentsData('','3','0','0','0').subscribe(
       result => {
         this.newsData=result.data;
         console.log("Success : "+JSON.stringify(result));

@@ -2,6 +2,7 @@ import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
+import { App } from 'ionic-angular';
 
 /**
  * Generated class for the SettingPage page.
@@ -17,7 +18,7 @@ import { Facebook } from '@ionic-native/facebook';
 })
 export class SettingPage {
   homePage:HomePage
-  constructor(public navCtrl: NavController, public navParams: NavParams,private facebook:Facebook) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private facebook:Facebook,private app:App) {
   }
 
   ionViewDidLoad() {
@@ -35,7 +36,8 @@ export class SettingPage {
     }, (error) => {
       alert(error);
     })
-    this.navCtrl.push(HomePage);
+    let nav = this.app.getRootNav();
+    nav.push(HomePage);
   }
 
 }

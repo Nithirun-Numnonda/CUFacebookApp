@@ -31,7 +31,7 @@ export class DashboardPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider) {
     this.hourValue = this.hours[0];
     this.dayValue = this.days[0];
-    this.monthValue = this.months[1];
+    this.monthValue = this.months[3];
     this.yearValue = this.years[0];
     this.topValue = this.top[0];
 

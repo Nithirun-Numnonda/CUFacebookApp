@@ -33,16 +33,6 @@ export class HomePage {
      this.facebook.api("/me?fields=name,gender", params)
      .then(function(profile) {
        profile.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
-      //  NativeStorage.setItem('profile',
-      //  {
-      //    name: profile.name,
-      //    gender: profile.gender,
-      //    picture: profile.picture
-      //  })
-      //  .then(function(){
-      //  }, function (error) {
-      //    console.log(error);
-      //  })
      })
      
      alert('Logged in Successfully!');
