@@ -14,8 +14,9 @@
 
 
 <ion-content padding="">
-  <ion-item>
-    <ion-label >Hours</ion-label>
+  <button ion-button full round (click)="onButtonClick()">Advance Filter</button>
+  <div *ngIf="buttonClicked"><ion-item>
+    <ion-label>Hours</ion-label>
     <ion-select item-left [(ngModel)]="hourValue">
       <ion-option *ngFor='let hour of hours'>{{hour}}</ion-option>
     </ion-select>
@@ -44,7 +45,7 @@
           <ion-option *ngFor='let t of top'>{{t}}</ion-option>
         </ion-select>
       </ion-item>
-
+  </div>
   <button ion-item (click)="getCommentsData()">Get Comments Data</button>
   <button ion-item (click)="getLikesData()">Get Likes Data</button>
   <ion-list *ngFor="let item of newsData">
@@ -55,15 +56,15 @@
       <ion-card-header>
         {{item.name+" : "}}
       </ion-card-header>
-        <div *ngIf="item.TOTAL">
-          Like :{{item.LIKE}} 
-          Love :{{item.LOVE}}
-          Wow  :{{item.WOW}}
-          Haha :{{item.HAHA}}
-          Sad :{{item.SAD}}
-          Angry :{{item.ANGRY}}
-          Thanksful :{{item.THANKFUL}}
-          Total :{{item.TOTAL}}</div>
+        <div *ngIf="item.total">
+          Like :{{item.like}} 
+          Love :{{item.love}}
+          Wow  :{{item.wow}}
+          Haha :{{item.haha}}
+          Sad :{{item.sad}}
+          Angry :{{item.angry}}
+          Thanksful :{{item.thankful}}
+          Total :{{item.total}}</div>
         <div *ngIf="item.comments">Comment : {{item.comments}}</div>
       </ion-card-content>
      </ion-card> 

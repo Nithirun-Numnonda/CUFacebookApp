@@ -21,10 +21,10 @@ export class NewfeedPage {
   loading: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider:HttpProvider, public loadingCtrl:LoadingController) {
-    this.loading = this.loadingCtrl.create({
-      content: `
-      <ion-spinner ></ion-spinner>`
-    });
+    // this.loading = this.loadingCtrl.create({
+    //   content: `
+    //   <ion-spinner ></ion-spinner>`
+    // });
     //this.getdata();
   }
 
