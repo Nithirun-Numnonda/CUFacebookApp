@@ -6,14 +6,27 @@
 -->
 <ion-header>
   <ion-navbar>
-  <ion-title>
-  Newfeed
-  </ion-title>
+    <ion-title>
+      Newfeed
+    </ion-title>
   </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-  <ion-list *ngFor="let item of newsData" >
-  <ion-item><img [attr.src]="item.pic">{{item.name + ' : '+ item.comments}}</ion-item>
-  </ion-list>
-  </ion-content>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Bar Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Line Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

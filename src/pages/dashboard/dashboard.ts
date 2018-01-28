@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,LoadingController} from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
+import { Chart } from 'chart.js';
 
 /**
  * Generated class for the DashboardPage page.
@@ -16,6 +17,8 @@ import { HttpProvider } from '../../providers/http/http-provider';
   providers: [HttpProvider]
 })
 export class DashboardPage {
+
+  
   newsData: any;
   hourValue: String;
   dayValue: String;
@@ -35,10 +38,6 @@ export class DashboardPage {
     this.monthValue = this.months[3];
     this.yearValue = this.years[0];
     this.topValue = this.top[0];
-    
-    
-        
-
   }
   onButtonClick() {
             this.buttonClicked = !this.buttonClicked;
@@ -93,6 +92,47 @@ export class DashboardPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
+  }
+  createGraph() {
+ 
+    // this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+    //     type: 'bar',
+    //     data: {
+    //         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    //         datasets: [{
+    //             label: '# of Votes',
+    //             data: [12, 19, 3, 5, 2, 3],
+    //             backgroundColor: [
+    //                 'rgba(255, 99, 132, 0.2)',
+    //                 'rgba(54, 162, 235, 0.2)',
+    //                 'rgba(255, 206, 86, 0.2)',
+    //                 'rgba(75, 192, 192, 0.2)',
+    //                 'rgba(153, 102, 255, 0.2)',
+    //                 'rgba(255, 159, 64, 0.2)'
+    //             ],
+    //             borderColor: [
+    //                 'rgba(255,99,132,1)',
+    //                 'rgba(54, 162, 235, 1)',
+    //                 'rgba(255, 206, 86, 1)',
+    //                 'rgba(75, 192, 192, 1)',
+    //                 'rgba(153, 102, 255, 1)',
+    //                 'rgba(255, 159, 64, 1)'
+    //             ],
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             yAxes: [{
+    //                 ticks: {
+    //                     beginAtZero:true
+    //                 }
+    //             }]
+    //         }
+    //     }
+
+    // });
   }
 
 }

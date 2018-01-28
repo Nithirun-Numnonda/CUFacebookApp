@@ -14,6 +14,7 @@ import { SettingPage } from '../pages/setting/setting';
 import { HttpProvider } from '../providers/http/http-provider';
 import {HttpModule} from '@angular/http';
 import { Facebook } from '@ionic-native/facebook';
+import { SwingModule } from 'angular2-swing';
 @NgModule({
   declarations: [
     MyApp,
@@ -27,6 +28,7 @@ import { Facebook } from '@ionic-native/facebook';
   imports: [
     BrowserModule,
     HttpModule,
+    SwingModule,
     IonicModule.forRoot(MyApp,{
       tabsPlacement: 'top'
     })

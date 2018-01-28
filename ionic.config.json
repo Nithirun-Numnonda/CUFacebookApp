@@ -1,6 +1,6 @@
 {
   "name": "CUFacebookApp",
-  "app_id": "",
+  "app_id": "1cf0349e",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

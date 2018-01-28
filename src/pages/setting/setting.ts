@@ -38,6 +38,7 @@ export class SettingPage {
     })
     let nav = this.app.getRootNav();
     nav.push(HomePage);
+    
   }
 
 }
