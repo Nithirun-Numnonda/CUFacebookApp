@@ -158,8 +158,9 @@ export class NewfeedPage {
   });
   }
   ionViewDidLoad() {
-   this.getCommentsData();
-   this.createGraph();
+   this.httpProvider.getPosts();
+    //this.getCommentsData();
+   //this.createGraph();
   }
   // ngAfterViewInit() {
   //   // Either subscribe in controller or set in HTML
