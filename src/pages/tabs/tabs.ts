@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
 import { NewfeedPage } from '../newfeed/newfeed';
-import { NotificationPage } from '../notification/notification';
+import { FriendsPage } from '../friends/friends';
 import { SettingPage } from '../setting/setting';
 
 /**
@@ -21,7 +21,7 @@ export class TabsPage {
 
   dashboardRoot = DashboardPage
   newfeedRoot = NewfeedPage
-  notificationRoot = NotificationPage
+  friendsRoot = FriendsPage
   settingRoot = SettingPage
 
 

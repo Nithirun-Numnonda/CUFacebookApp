@@ -9,7 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { NewfeedPage } from '../pages/newfeed/newfeed';
-import { NotificationPage } from '../pages/notification/notification';
+import { FriendsPage } from '../pages/friends/friends';
 import { SettingPage } from '../pages/setting/setting';
 import { HttpProvider } from '../providers/http/http-provider';
 import {HttpModule} from '@angular/http';
@@ -22,7 +22,7 @@ import { SwingModule } from 'angular2-swing';
     TabsPage,
     DashboardPage,
     NewfeedPage,
-    NotificationPage,
+    FriendsPage,
     SettingPage
   ],
   imports: [
@@ -40,7 +40,7 @@ import { SwingModule } from 'angular2-swing';
     TabsPage,
     DashboardPage,
     NewfeedPage,
-    NotificationPage,
+    FriendsPage,
     SettingPage
   ],
   providers: [
