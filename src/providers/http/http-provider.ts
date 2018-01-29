@@ -20,7 +20,7 @@ export class HttpProvider {
 
   constructor(public http: Http, private facebook:Facebook) {
     console.log('Hello HttpProvider Provider');
-    this.accessToken = 'EAACEdEose0cBAOb0M0hWswgsYDZAGE7Qdgt0DJyFmuZCldiCUF3HLuNvfONZCTyeRwNpZA3XjdFy4II5ZAG3bb5YpVxIyBW21YDzhFvALEENmCJ4oMwPjTZActX1T2U2wJ4Ci3B9LWZCEKh49RRYaRz8qpGax4T5uZCQDAtfLCtwBLJTYri5cyHDX8u0WZBLjfaBYbefKC7JwdgZDZD';
+    this.accessToken = 'EAACEdEose0cBALMzYtuTMyxk6TtTsI5R6iqDZCGDKH5B02hVYLmysRUcS6VfR4i1gvZARG5J8iy94kijFGFT5wKaIiEtzoH5CISSH0JvLL5zqZCv2hECcK3p6oPrZCAjZBSAZBd232sGRkdiA7YhC96jgBigzg619FZAZBRECIZAZCcTxiFtUdkytNMI0ZC20tL7x262raIAJh1wgZDZD';
   }
   init() {
     this.facebook.browserInit(this.APP_ID, "v2.10");

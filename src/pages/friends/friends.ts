@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,LoadingController} from 'ionic-angular';
+import { HttpProvider } from '../../providers/http/http-provider';
 import { Chart } from 'chart.js';
 
 /**
@@ -11,30 +12,63 @@ import { Chart } from 'chart.js';
 
 @IonicPage()
 @Component({
-  selector: 'page-friends',
-  templateUrl: 'friends.html',
+    selector: 'page-friends',
+    templateUrl: 'friends.html',
 })
 export class FriendsPage {
-  @ViewChild('barCanvas') barCanvas;
-  @ViewChild('doughnutCanvas') doughnutCanvas;
-  @ViewChild('lineCanvas') lineCanvas;
-  
-  barChart: any;
-  doughnutChart: any;
-  lineChart: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    @ViewChild('barCanvas') barCanvas;
+    @ViewChild('doughnutCanvas') doughnutCanvas;
+    @ViewChild('lineCanvas') lineCanvas;
 
-  ionViewDidLoad() {
- 
+    barChart: any;
+    doughnutChart: any;
+    lineChart: any;
+    newsData: any;
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private httpProvider: HttpProvider,
+        private loadingController: LoadingController
+    ) {
+    }
+    ionViewDidLoad() {
+        this.getCommentsData();
+        
+    }
+    getCommentsData() {
+        let loading = this.loadingController.create({ content: "Loading,please wait..." });
+        loading.present();
+            this.httpProvider.getCommentsData(10, 0, 0, 3, 0).subscribe(
+                result => {
+                    if (result.data.error)
+                        if (result.data.error.type == "OAuthException") {
+                            console.log("Token expired!!!");
+                            return this.getCommentsData();
+                        }
+                    this.newsData = result.data;
+                    console.log("Success : " + JSON.stringify(result.data[0].name));
+                    loading.dismissAll();
+                    this.createGraph();
+                },
+                err => {
+                    console.error("Error : " + err);
+                    loading.dismissAll();
+                },
+                () => {
+                    console.log('getData completed');
+                }
+            );
+    }
+    createGraph() {
+
         this.barChart = new Chart(this.barCanvas.nativeElement, {
- 
+
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: [this.newsData[0].name, this.newsData[1].name, this.newsData[2].name, this.newsData[3].name, this.newsData[4].name, this.newsData[5].name],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: '# of Comments',
+                    data: [this.newsData[0].comments, this.newsData[1].comments, this.newsData[2].comments, this.newsData[3].comments,this.newsData[4].comments, this.newsData[5].comments],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -58,16 +92,16 @@ export class FriendsPage {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero:true
+                            beginAtZero: true
                         }
                     }]
                 }
             }
- 
+
         });
- 
+
         this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
- 
+
             type: 'doughnut',
             data: {
                 labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -92,11 +126,11 @@ export class FriendsPage {
                     ]
                 }]
             }
- 
+
         });
- 
+
         this.lineChart = new Chart(this.lineCanvas.nativeElement, {
- 
+
             type: 'line',
             data: {
                 labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -125,9 +159,9 @@ export class FriendsPage {
                     }
                 ]
             }
- 
+
         });
- 
+
     }
 
 }
