@@ -32,18 +32,18 @@ export class FriendsPage {
     ) {
     }
     ionViewDidLoad() {
-        this.getCommentsData();
+        this.getFacebookData();
         
     }
-    getCommentsData() {
+    getFacebookData() {
         let loading = this.loadingController.create({ content: "Loading,please wait..." });
         loading.present();
-            this.httpProvider.getCommentsData(10, 0, 0, 3, 0).subscribe(
+            this.httpProvider.getFacebookData(10, 0, 0, 3, 0).subscribe(
                 result => {
                     if (result.data.error)
                         if (result.data.error.type == "OAuthException") {
                             console.log("Token expired!!!");
-                            return this.getCommentsData();
+                            return this.getFacebookData();
                         }
                     this.newsData = result.data;
                     console.log("Success : " + JSON.stringify(result.data[0].name));

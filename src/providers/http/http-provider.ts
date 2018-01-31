@@ -1,6 +1,6 @@
 import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
@@ -18,9 +18,9 @@ export class HttpProvider {
   private graphUrl = 'https://graph.facebook.com/';
   private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
 
-  constructor(public http: Http, private facebook:Facebook) {
+  constructor(public http: Http, private facebook: Facebook) {
     console.log('Hello HttpProvider Provider');
-    this.accessToken = 'EAACEdEose0cBALMzYtuTMyxk6TtTsI5R6iqDZCGDKH5B02hVYLmysRUcS6VfR4i1gvZARG5J8iy94kijFGFT5wKaIiEtzoH5CISSH0JvLL5zqZCv2hECcK3p6oPrZCAjZBSAZBd232sGRkdiA7YhC96jgBigzg619FZAZBRECIZAZCcTxiFtUdkytNMI0ZC20tL7x262raIAJh1wgZDZD';
+    this.accessToken = 'EAACEdEose0cBAH0zFZAgcrRw20UbST72rtFzRBCmpZC2D03EJItkNCr1ymBY3I4ZA4gyl0dt8ZBSS2K6TMzlFGZBm7QC6zjZBZC2wEX3bBvLHZBZADrQEJwESta9tnzGpZAklWZBoMMwGZCSaBJf7G6ZCv2iu8NaCDnuSsBNBmwQUSPHgoQ7xZCpvuYWpuxZAw1FmWKsZC2YzOHnQbilNAZDZD';
   }
   init() {
     this.facebook.browserInit(this.APP_ID, "v2.10");
@@ -37,7 +37,7 @@ export class HttpProvider {
       request += year + '%20years%20';
     }
     if (month != '0') {
-      request += month + '%20months%20';
+      request += month + '%20month%20';
     }
     if (day != '0') {
       request += day + '%20days%20';
@@ -45,38 +45,50 @@ export class HttpProvider {
     if (hour != '0') {
       request += hour + '%20hour%20';
     }
+    request+="&until=-0 year";
     if (top != '') {
       request += '&top=' + top;
     }
-    request += '&access_token=' + this.accessToken;
+
     console.log("req: " + request);
     return request;
   }
 
-  getCommentsData(top, hour, day, month, year) {
-    return this.http.get(
-      this.setHttpRequest('comments', top, hour, day, month, year))
-      .map(res => res.json());
+  getFacebookData(top, hour, day, month, year) {
+    let headers = new Headers();
+      headers.append('access_token', this.accessToken);
+      return this.http.get(
+        this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers })
+        .map(res => res.json());
   }
-  
-  getLikesData(top, hour, day, month, year) {
-    return this.http.get(
-      this.setHttpRequest('reactions', top, hour, day, month, year))
-      .map(res => res.json());
-  }
-  getPosts(){
+  // getCommentsData(top, hour, day, month, year) {
+  //   let headers = new Headers();
+  //   headers.append('access_token', this.accessToken);
+  //   return this.http.get(
+  //     this.setHttpRequest('comments', top, hour, day, month, year), { headers: headers })
+  //     .map(res => res.json());
+  // }
+
+  // getLikesData(top, hour, day, month, year) {
+  //   let headers = new Headers();
+  //   headers.append('access_token', this.accessToken);
+  //   return this.http.get(
+  //     this.setHttpRequest('reactions', top, hour, day, month, year))
+  //     .map(res => res.json());
+  // }
+  getPosts() {
     console.log(this.accessToken);
     let p = new Promise((resolve, reject) => {
-    this.facebook.api('/10208259982656709?fields=feed', ['user_posts','user_friends','user_likes']).then(
-      (userData) => {
+      this.facebook.api('/10208259982656709?fields=feed', ['user_posts', 'user_friends', 'user_likes']).then(
+        (userData) => {
           alert(JSON.stringify(userData));
           resolve(userData);
-      },(err) => {
+        }, (err) => {
           alert(JSON.stringify(err));
           reject(err);
-      });
+        });
     });
-    
-   }
+
+  }
 
 }

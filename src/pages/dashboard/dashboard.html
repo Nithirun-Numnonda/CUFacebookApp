@@ -46,8 +46,8 @@
         </ion-select>
       </ion-item>
   </div>
-  <button ion-item (click)="getCommentsData()">Get Comments Data</button>
-  <button ion-item (click)="getLikesData()">Get Likes Data</button>
+  <button ion-item (click)="getFacebookData()">Get Comments Data</button>
+  <button ion-item (click)="getFacebookData()">Get Likes Data</button>
   <ion-list *ngFor="let item of newsData">
     <ion-card>
       
@@ -56,16 +56,16 @@
       <ion-card-header>
         {{item.name+" : "}}
       </ion-card-header>
-        <div *ngIf="item.total">
-          Like :{{item.like}} 
-          Love :{{item.love}}
-          Wow  :{{item.wow}}
-          Haha :{{item.haha}}
-          Sad :{{item.sad}}
-          Angry :{{item.angry}}
-          Thanksful :{{item.thankful}}
-          Total :{{item.total}}</div>
-        <div *ngIf="item.comments">Comment : {{item.comments}}</div>
+        <!-- <div *ngIf="item.reactions.total">
+          Like :{{item.reactions.like}} 
+          Love :{{item.reactions.love}}
+          Wow  :{{item.reactions.wow}}
+          Haha :{{item.reactions.haha}}
+          Sad :{{item.reactions.sad}}
+          Angry :{{item.reactions.angry}}
+          Thanksful :{{item.reactions.thankful}}
+          Total :{{item.reactions.total}}</div>-->
+        <div *ngIf="item.comments">Comment : {{item.comments}}</div> 
       </ion-card-content>
      </ion-card> 
   </ion-list>

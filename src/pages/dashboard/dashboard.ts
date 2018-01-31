@@ -42,18 +42,14 @@ export class DashboardPage {
   onButtonClick() {
             this.buttonClicked = !this.buttonClicked;
   }
-  getCommentsData() {
+  getFacebookData() {
     let loading = this.loadingController.create({content : "Loading,please wait..."});
     loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
-      this.httpProvider.getCommentsData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
+      this.httpProvider.getFacebookData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
         result => {
-          if (result.data.error)
-            if (result.data.error.type == "OAuthException") {
-              console.log("Token expired!!!");
-              return this.getCommentsData();
-            }
-          this.newsData = result.data;
+          
+          this.newsData = result.comments;
           console.log("Success : " + JSON.stringify(result));
           loading.dismissAll();
         },
@@ -66,30 +62,30 @@ export class DashboardPage {
         }
       );
   }
-  getLikesData() {
-    let loading = this.loadingController.create({content : "Loading,please wait..."});
-    loading.present();
-    if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
-      this.httpProvider.getLikesData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
-        result => {
-          if (result.data.error)
-            if (result.data.error.type == "OAuthException") {
-              console.log("Token expired!!!");
-              return this.getLikesData();
-            }
-          this.newsData = result.data;
-          console.log("Success : " + JSON.stringify(result));
-          loading.dismissAll();
-        },
-        err => {
-          console.error("Error : " + err);
-          loading.dismissAll();
-        },
-        () => {
-          console.log('getData completed');
-        }
-      );
-  }
+  // getLikesData() {
+  //   let loading = this.loadingController.create({content : "Loading,please wait..."});
+  //   loading.present();
+  //   if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
+  //     this.httpProvider.getLikesData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
+  //       result => {
+  //         if (result.data.error)
+  //           if (result.data.error.type == "OAuthException") {
+  //             console.log("Token expired!!!");
+  //             return this.getLikesData();
+  //           }
+  //         this.newsData = result.data;
+  //         console.log("Success : " + JSON.stringify(result));
+  //         loading.dismissAll();
+  //       },
+  //       err => {
+  //         console.error("Error : " + err);
+  //         loading.dismissAll();
+  //       },
+  //       () => {
+  //         console.log('getData completed');
+  //       }
+  //     );
+  // }
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
   }
