@@ -105,41 +105,74 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var DashboardPage = (function () {
+    //for retry getData
     function DashboardPage(navCtrl, navParams, httpProvider, loadingController) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.httpProvider = httpProvider;
         this.loadingController = loadingController;
+        //for advance filter
         this.hours = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
         this.days = ['0', '1', '2', '3', '4', '5', '6', '7'];
         this.months = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         this.years = ['0', '1', '2', '3', '4', '5', '6', '7'];
         this.top = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-        this.buttonClicked = false; //Whatever you want to initialise it as
+        //advance filter
+        this.buttonClicked = false;
+        //initial default parameter
         this.hourValue = this.hours[0];
         this.dayValue = this.days[0];
         this.monthValue = this.months[3];
         this.yearValue = this.years[0];
         this.topValue = this.top[0];
     }
+    //for advance filter
     DashboardPage.prototype.onButtonClick = function () {
         this.buttonClicked = !this.buttonClicked;
     };
+    //call when refresh
+    DashboardPage.prototype.doRefresh = function (refresher) {
+        console.log('Begin async operation', refresher);
+        //get data again
+        this.getFacebookData();
+        refresher.complete();
+    };
+    //get Facebook Data from httpProvider
     DashboardPage.prototype.getFacebookData = function () {
         var _this = this;
-        var loading = this.loadingController.create({ content: "Loading,please wait..." });
-        loading.present();
+        // let loading = this.loadingController.create({content : "Loading,please wait..."});
+        // loading.present();
         if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
-            this.httpProvider.getFacebookData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(function (result) {
-                _this.newsData = result.comments;
+            //call method from httpProvider
+            this.httpProvider.getFacebookData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
+            //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+            function (result) {
+                //check if server send error back
+                if (result.error) {
+                    //check if token expire?
+                    if (result.error.type == "OAuthException") {
+                        console.log("Token expired!!!");
+                        return _this.getFacebookData();
+                    }
+                }
+                //assign data to view
+                _this.commentsData = result.comments;
+                _this.reactionsData = result.reactions;
                 console.log("Success : " + JSON.stringify(result));
-                loading.dismissAll();
+                // loading.dismissAll();
             }, function (err) {
+                //call if fail to get request
                 console.error("Error : " + err);
-                loading.dismissAll();
+                alert("Can't get Data from the server: " + err);
+                // loading.dismissAll();
             }, function () {
                 console.log('getData completed');
             });
+    };
+    //call when view did load
+    DashboardPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad DashboardPage');
+        this.getFacebookData();
     };
     // getLikesData() {
     //   let loading = this.loadingController.create({content : "Loading,please wait..."});
@@ -165,9 +198,7 @@ var DashboardPage = (function () {
     //       }
     //     );
     // }
-    DashboardPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad DashboardPage');
-    };
+    //for create graph
     DashboardPage.prototype.createGraph = function () {
         // this.barChart = new Chart(this.barCanvas.nativeElement, {
         //     type: 'bar',
@@ -210,7 +241,7 @@ var DashboardPage = (function () {
 }());
 DashboardPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Dashboard</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding="">\n  <button ion-button full round (click)="onButtonClick()">Advance Filter</button>\n  <div *ngIf="buttonClicked"><ion-item>\n    <ion-label>Hours</ion-label>\n    <ion-select item-left [(ngModel)]="hourValue">\n      <ion-option *ngFor=\'let hour of hours\'>{{hour}}</ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n    <ion-label item-right>Days</ion-label>\n    <ion-select item-left [(ngModel)]="dayValue">\n      <ion-option *ngFor=\'let day of days\'>{{day}}</ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n      <ion-label item-right>Months</ion-label>\n      <ion-select item-left [(ngModel)]="monthValue">\n        <ion-option *ngFor=\'let month of months\'>{{month}}</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n        <ion-label item-right>Years</ion-label>\n        <ion-select item-left [(ngModel)]="yearValue">\n          <ion-option *ngFor=\'let year of years\'>{{year}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label item-right>Top</ion-label>\n        <ion-select item-left [(ngModel)]="topValue">\n          <ion-option *ngFor=\'let t of top\'>{{t}}</ion-option>\n        </ion-select>\n      </ion-item>\n  </div>\n  <button ion-item (click)="getFacebookData()">Get Comments Data</button>\n  <button ion-item (click)="getFacebookData()">Get Likes Data</button>\n  <ion-list *ngFor="let item of newsData">\n    <ion-card>\n      \n      <ion-card-content>\n          <img [attr.src]="item.pic" style="height: 75px;width: 75px;">        \n      <ion-card-header>\n        {{item.name+" : "}}\n      </ion-card-header>\n        <!-- <div *ngIf="item.reactions.total">\n          Like :{{item.reactions.like}} \n          Love :{{item.reactions.love}}\n          Wow  :{{item.reactions.wow}}\n          Haha :{{item.reactions.haha}}\n          Sad :{{item.reactions.sad}}\n          Angry :{{item.reactions.angry}}\n          Thanksful :{{item.reactions.thankful}}\n          Total :{{item.reactions.total}}</div>-->\n        <div *ngIf="item.comments">Comment : {{item.comments}}</div> \n      </ion-card-content>\n     </ion-card> \n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
+        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Dashboard</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding="">\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content\n            pullingIcon="arrow-dropdown"\n            pullingText="Pull to refresh"\n            refreshingSpinner="circles"\n            refreshingText="Refreshing...">\n        </ion-refresher-content>\n    </ion-refresher>\n  <button ion-button full round (click)="onButtonClick()">Advance Filter</button>\n  <div *ngIf="buttonClicked"><ion-item>\n    <ion-label>Hours</ion-label>\n    <ion-select item-left [(ngModel)]="hourValue">\n      <ion-option *ngFor=\'let hour of hours\'>{{hour}}</ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n    <ion-label item-right>Days</ion-label>\n    <ion-select item-left [(ngModel)]="dayValue">\n      <ion-option *ngFor=\'let day of days\'>{{day}}</ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n      <ion-label item-right>Months</ion-label>\n      <ion-select item-left [(ngModel)]="monthValue">\n        <ion-option *ngFor=\'let month of months\'>{{month}}</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n        <ion-label item-right>Years</ion-label>\n        <ion-select item-left [(ngModel)]="yearValue">\n          <ion-option *ngFor=\'let year of years\'>{{year}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label item-right>Top</ion-label>\n        <ion-select item-left [(ngModel)]="topValue">\n          <ion-option *ngFor=\'let t of top\'>{{t}}</ion-option>\n        </ion-select>\n      </ion-item>\n  </div>\n  <ion-list *ngFor="let item of commentsData">\n    <ion-card>\n      <ion-card-content>\n          <img [attr.src]="item.pic" style="height: 75px;width: 75px;">        \n      <ion-card-header>\n        {{item.name+" : "}}\n      </ion-card-header>\n        <div *ngIf="item.comments">Comment : {{item.comments}}</div>\n      </ion-card-content>\n    </ion-card> \n </ion-list>\n <ion-list *ngFor="let item of reactionsData">\n  <ion-card>\n    <ion-card-content>\n        <img [attr.src]="item.pic" style="height: 75px;width: 75px;">\n        <ion-card-header>\n          {{item.name+" : "}}\n        </ion-card-header>\n        <div *ngIf="item.total">\n          Like :{{item.like}} \n          Love :{{item.love}}\n          Wow  :{{item.wow}}\n          Haha :{{item.haha}}\n          Sad :{{item.sad}}\n          Angry :{{item.angry}}\n          Thanksful :{{item.thankful}}\n          Total :{{item.total}}</div>\n        </ion-card-content>\n      </ion-card> \n   </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _d || Object])
@@ -393,10 +424,12 @@ FriendsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'page-friends',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n  Generated template for the FriendsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>friends</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<ion-card>\n      <ion-card-header>\n        Bar Chart\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #barCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n \n    <ion-card>\n      <ion-card-header>\n        Doughnut Chart\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #doughnutCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n \n    <ion-card>\n      <ion-card-header>\n        Line Chart\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #lineCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
 ], FriendsPage);
 
-var _a, _b, _c, _d;
 //# sourceMappingURL=friends.js.map
 
 /***/ }),
@@ -461,6 +494,7 @@ var NewfeedPage = (function () {
                 .filter(function (x) { return x.type == "photo"; })
                 .map(function (x) { return x.media.image; });
         };
+        //for tinder
         //console.log(this.httpProvider.getPosts());
         // this.stackConfig = {
         //   throwOutConfidence: (offsetX, offsetY, element) => {
@@ -487,6 +521,7 @@ var NewfeedPage = (function () {
     //   this.cards = [{ email: '' }];
     //   this.addNewCards(2);
     // }
+    ////part tinder
     // Called whenever we drag an element
     NewfeedPage.prototype.onItemMove = function (element, x, y, r) {
         var color = '';
@@ -535,14 +570,6 @@ var NewfeedPage = (function () {
     };
     return NewfeedPage;
 }());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewChild"])('barCanvas'),
-    __metadata("design:type", Object)
-], NewfeedPage.prototype, "barCanvas", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewChild"])('lineCanvas'),
-    __metadata("design:type", Object)
-], NewfeedPage.prototype, "lineCanvas", void 0);
 NewfeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
         selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n  Generated template for the NewfeedPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Newfeed\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-header>\n      Bar Chart\n    </ion-card-header>\n    <ion-card-content>\n      <canvas #barCanvas></canvas>\n    </ion-card-content>\n  </ion-card>\n  <ion-card>\n    <ion-card-header>\n      Line Chart\n    </ion-card-header>\n    <ion-card-content>\n      <canvas #lineCanvas></canvas>\n    </ion-card-content>\n  </ion-card>\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
@@ -1137,19 +1164,23 @@ var HttpProvider = (function () {
     function HttpProvider(http, facebook) {
         this.http = http;
         this.facebook = facebook;
+        //initial
         this.APP_ID = 1894102183937616;
         this.graphUrl = 'https://graph.facebook.com/';
         this.graphQuery = "date_format=U&fields=posts{from,created_time,message,attachments}";
         console.log('Hello HttpProvider Provider');
-        this.accessToken = 'EAACEdEose0cBAH0zFZAgcrRw20UbST72rtFzRBCmpZC2D03EJItkNCr1ymBY3I4ZA4gyl0dt8ZBSS2K6TMzlFGZBm7QC6zjZBZC2wEX3bBvLHZBZADrQEJwESta9tnzGpZAklWZBoMMwGZCSaBJf7G6ZCv2iu8NaCDnuSsBNBmwQUSPHgoQ7xZCpvuYWpuxZAw1FmWKsZC2YzOHnQbilNAZDZD';
+        //for test in computer
+        this.accessToken = 'EAACEdEose0cBAJxB5fZCLkT1Y7z2Bk3FUImrVB9O580SONJy4j6aUZCNr72aqA0uW0xN6cWtvCPTuvVP6p8zEdRZCmeMr10bkOhLLGIZAP7AgU5YvCtpVSE6ZB8ZAtCY1886F0xmOhYQ86liqwK98uW6shZCnwXOuXmt8lyP0LyyTYign6qDFsnlt919ZClZCn2h8AcrEDHslIAZDZD';
     }
     HttpProvider.prototype.init = function () {
-        this.facebook.browserInit(this.APP_ID, "v2.10");
+        this.facebook.browserInit(this.APP_ID, "v2.11");
     };
+    //get user token from facebook
     HttpProvider.prototype.getToken = function () {
         var _this = this;
         this.facebook.getAccessToken().then(function (value) { _this.accessToken = value; });
     };
+    //set url for http request from python server
     HttpProvider.prototype.setHttpRequest = function (type, top, hour, day, month, year) {
         // this.getToken();
         console.log("token: " + this.accessToken);
@@ -1174,6 +1205,7 @@ var HttpProvider = (function () {
         return request;
     };
     HttpProvider.prototype.getFacebookData = function (top, hour, day, month, year) {
+        //set header to authorize with access token
         var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]();
         headers.append('access_token', this.accessToken);
         return this.http.get(this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers })
@@ -1193,6 +1225,7 @@ var HttpProvider = (function () {
     //     this.setHttpRequest('reactions', top, hour, day, month, year))
     //     .map(res => res.json());
     // }
+    //feature for newfeed??
     HttpProvider.prototype.getPosts = function () {
         var _this = this;
         console.log(this.accessToken);
@@ -1210,10 +1243,9 @@ var HttpProvider = (function () {
 }());
 HttpProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */]])
 ], HttpProvider);
 
-var _a, _b;
 //# sourceMappingURL=http-provider.js.map
 
 /***/ }),

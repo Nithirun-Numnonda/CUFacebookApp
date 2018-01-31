@@ -18,49 +18,87 @@ import { Chart } from 'chart.js';
 })
 export class DashboardPage {
 
-  
-  newsData: any;
+  //for Data facebook
+  commentsData: any;
+  reactionsData: any;
+
+  //for parameter to getFacebookData()
   hourValue: String;
   dayValue: String;
   monthValue: String;
   yearValue: String;
   topValue: String;
+
+  //for advance filter
   hours: Array<String> = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
   days: Array<String> = ['0', '1', '2', '3', '4', '5', '6', '7'];
   months: Array<String> = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   years: Array<String> = ['0', '1', '2', '3', '4', '5', '6', '7'];
   top: Array<String> = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-  buttonClicked: boolean = false; //Whatever you want to initialise it as
+  
+  //advance filter
+  buttonClicked: boolean = false; 
+
+  //for retry getData
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider,private loadingController: LoadingController) {
+    //initial default parameter
     this.hourValue = this.hours[0];
     this.dayValue = this.days[0];
     this.monthValue = this.months[3];
     this.yearValue = this.years[0];
     this.topValue = this.top[0];
   }
+  //for advance filter
   onButtonClick() {
             this.buttonClicked = !this.buttonClicked;
   }
+  //call when refresh
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    //get data again
+    this.getFacebookData()
+    refresher.complete();
+  }
+  //get Facebook Data from httpProvider
   getFacebookData() {
-    let loading = this.loadingController.create({content : "Loading,please wait..."});
-    loading.present();
+    // let loading = this.loadingController.create({content : "Loading,please wait..."});
+    // loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
+      //call method from httpProvider
       this.httpProvider.getFacebookData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
+        //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
         result => {
-          
-          this.newsData = result.comments;
+          //check if server send error back
+          if(result.error){
+            //check if token expire?
+            if (result.error.type == "OAuthException") {
+              console.log("Token expired!!!");
+              return this.getFacebookData();
+            }
+          }
+          //assign data to view
+          this.commentsData = result.comments;
+          this.reactionsData = result.reactions;
           console.log("Success : " + JSON.stringify(result));
-          loading.dismissAll();
+          // loading.dismissAll();
         },
         err => {
+          //call if fail to get request
           console.error("Error : " + err);
-          loading.dismissAll();
+          alert("Can't get Data from the server: "+err);
+          // loading.dismissAll();
         },
         () => {
           console.log('getData completed');
         }
       );
+  }
+
+  //call when view did load
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad DashboardPage');
+    this.getFacebookData();
   }
   // getLikesData() {
   //   let loading = this.loadingController.create({content : "Loading,please wait..."});
@@ -86,9 +124,8 @@ export class DashboardPage {
   //       }
   //     );
   // }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
-  }
+  
+  //for create graph
   createGraph() {
  
     // this.barChart = new Chart(this.barCanvas.nativeElement, {

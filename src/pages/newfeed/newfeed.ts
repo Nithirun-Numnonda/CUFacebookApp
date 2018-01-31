@@ -30,12 +30,7 @@ import { Chart } from 'chart.js';
 })
 export class NewfeedPage {
   // @ViewChild('myswing1') swingStack: SwingStackComponent;
-  // @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
-  @ViewChild('barCanvas') barCanvas;
-  @ViewChild('lineCanvas') lineCanvas;
-
-  barChart: any;
-  lineChart: any;
+  // @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>; 
 
   newsData: any;
   loading: any;
@@ -46,6 +41,7 @@ export class NewfeedPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private httpProvider: HttpProvider, public loadingController: LoadingController, private http: Http) {
+    //for tinder
     //console.log(this.httpProvider.getPosts());
     // this.stackConfig = {
     //   throwOutConfidence: (offsetX, offsetY, element) => {
@@ -74,6 +70,8 @@ export class NewfeedPage {
   //   this.cards = [{ email: '' }];
   //   this.addNewCards(2);
   // }
+
+  ////part tinder
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
     var color = '';
@@ -141,4 +139,5 @@ export class NewfeedPage {
       .filter(x => x.type == "photo")
       .map(x => x.media.image);
   }
+  ////end part tinder
 }

@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class HttpProvider {
+  //initial
   APP_ID: number = 1894102183937616;
   accessToken: string;
   private graphUrl = 'https://graph.facebook.com/';
@@ -20,15 +21,18 @@ export class HttpProvider {
 
   constructor(public http: Http, private facebook: Facebook) {
     console.log('Hello HttpProvider Provider');
-    this.accessToken = 'EAACEdEose0cBAH0zFZAgcrRw20UbST72rtFzRBCmpZC2D03EJItkNCr1ymBY3I4ZA4gyl0dt8ZBSS2K6TMzlFGZBm7QC6zjZBZC2wEX3bBvLHZBZADrQEJwESta9tnzGpZAklWZBoMMwGZCSaBJf7G6ZCv2iu8NaCDnuSsBNBmwQUSPHgoQ7xZCpvuYWpuxZAw1FmWKsZC2YzOHnQbilNAZDZD';
-  }
-  init() {
-    this.facebook.browserInit(this.APP_ID, "v2.10");
+    //for test in computer
+    this.accessToken = 'EAACEdEose0cBAHtWQZBJGWdx7RMUtazYxIAjq0TR47ePxnP1wQgvznu9Lixq2woKV4jI3rm2tJN4WT6xm4ZBn3tZA484Map0wbqasnJd5hUB6ZCztKCSCKj8YaTaj5axZCXL6YtLIbcEAmQJxIqpreZAPyCOjdqY7JK5ZAG0znslrBEZC3uR1ZAC5n3oZB2993xkpFjXDZBfOTvhgZDZD';
   }
 
+  init() {
+    this.facebook.browserInit(this.APP_ID, "v2.11");
+  }
+  //get user token from facebook
   getToken() {
     this.facebook.getAccessToken().then(value => { this.accessToken = value });
   }
+  //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
     // this.getToken();
     console.log("token: " + this.accessToken);
@@ -55,6 +59,7 @@ export class HttpProvider {
   }
 
   getFacebookData(top, hour, day, month, year) {
+    //set header to authorize with access token
     let headers = new Headers();
       headers.append('access_token', this.accessToken);
       return this.http.get(
@@ -76,6 +81,8 @@ export class HttpProvider {
   //     this.setHttpRequest('reactions', top, hour, day, month, year))
   //     .map(res => res.json());
   // }
+
+  //feature for newfeed??
   getPosts() {
     console.log(this.accessToken);
     let p = new Promise((resolve, reject) => {

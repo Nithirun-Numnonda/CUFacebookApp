@@ -14,6 +14,14 @@
 
 
 <ion-content padding="">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingSpinner="circles"
+            refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
   <button ion-button full round (click)="onButtonClick()">Advance Filter</button>
   <div *ngIf="buttonClicked"><ion-item>
     <ion-label>Hours</ion-label>
@@ -46,27 +54,34 @@
         </ion-select>
       </ion-item>
   </div>
-  <button ion-item (click)="getFacebookData()">Get Comments Data</button>
-  <button ion-item (click)="getFacebookData()">Get Likes Data</button>
-  <ion-list *ngFor="let item of newsData">
+  <ion-list *ngFor="let item of commentsData">
     <ion-card>
-      
       <ion-card-content>
           <img [attr.src]="item.pic" style="height: 75px;width: 75px;">        
       <ion-card-header>
         {{item.name+" : "}}
       </ion-card-header>
-        <!-- <div *ngIf="item.reactions.total">
-          Like :{{item.reactions.like}} 
-          Love :{{item.reactions.love}}
-          Wow  :{{item.reactions.wow}}
-          Haha :{{item.reactions.haha}}
-          Sad :{{item.reactions.sad}}
-          Angry :{{item.reactions.angry}}
-          Thanksful :{{item.reactions.thankful}}
-          Total :{{item.reactions.total}}</div>-->
-        <div *ngIf="item.comments">Comment : {{item.comments}}</div> 
+        <div *ngIf="item.comments">Comment : {{item.comments}}</div>
       </ion-card-content>
-     </ion-card> 
-  </ion-list>
+    </ion-card> 
+ </ion-list>
+ <ion-list *ngFor="let item of reactionsData">
+  <ion-card>
+    <ion-card-content>
+        <img [attr.src]="item.pic" style="height: 75px;width: 75px;">
+        <ion-card-header>
+          {{item.name+" : "}}
+        </ion-card-header>
+        <div *ngIf="item.total">
+          Like :{{item.like}} 
+          Love :{{item.love}}
+          Wow  :{{item.wow}}
+          Haha :{{item.haha}}
+          Sad :{{item.sad}}
+          Angry :{{item.angry}}
+          Thanksful :{{item.thankful}}
+          Total :{{item.total}}</div>
+        </ion-card-content>
+      </ion-card> 
+   </ion-list>
 </ion-content>
