@@ -1,20 +1,20 @@
 import { HttpProvider } from './../../providers/http/http-provider';
-import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import {
-  StackConfig,
-  Stack,
-  Card,
-  ThrowEvent,
-  DragEvent,
-  SwingStackComponent,
-  SwingCardComponent
-} from 'angular2-swing';
-import { Chart } from 'chart.js';
+// import {
+//   StackConfig,
+//   Stack,
+//   Card,
+//   ThrowEvent,
+//   DragEvent,
+//   SwingStackComponent,
+//   SwingCardComponent
+// } from 'angular2-swing';
+
 /**
  * Generated class for the NewfeedPage page.
  *
@@ -35,7 +35,7 @@ export class NewfeedPage {
   newsData: any;
   loading: any;
   cards: Array<any>;
-  stackConfig: StackConfig;
+  // stackConfig: StackConfig;
   recentCard: string = '';
   public posts: Observable<any[]>;
 

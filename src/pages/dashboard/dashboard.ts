@@ -40,7 +40,7 @@ export class DashboardPage {
   buttonClicked: boolean = false; 
 
   //for retry getData
-
+  private retryTime;
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider,private loadingController: LoadingController) {
     //initial default parameter
     this.hourValue = this.hours[0];
@@ -48,6 +48,8 @@ export class DashboardPage {
     this.monthValue = this.months[3];
     this.yearValue = this.years[0];
     this.topValue = this.top[0];
+
+    this.retryTime=0;
   }
   //for advance filter
   onButtonClick() {
@@ -74,14 +76,20 @@ export class DashboardPage {
             //check if token expire?
             if (result.error.type == "OAuthException") {
               console.log("Token expired!!!");
-              return this.getFacebookData();
+              this.retryTime+=1;
+              if(this.retryTime < 3)
+                return this.getFacebookData();
+              else
+                alert("Access Token expired!!!");
             }
+
           }
           //assign data to view
           this.commentsData = result.comments;
           this.reactionsData = result.reactions;
           console.log("Success : " + JSON.stringify(result));
           // loading.dismissAll();
+          this.retryTime=0;
         },
         err => {
           //call if fail to get request
@@ -127,7 +135,9 @@ export class DashboardPage {
   
   //for create graph
   createGraph() {
- 
+    let loading = this.loadingController.create({content : "Loading,please wait..."});
+    loading.present();
+    loading.dismissAll();
     // this.barChart = new Chart(this.barCanvas.nativeElement, {
 
     //     type: 'bar',

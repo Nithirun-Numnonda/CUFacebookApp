@@ -1,7 +1,6 @@
 import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 
@@ -16,13 +15,13 @@ export class HttpProvider {
   //initial
   APP_ID: number = 1894102183937616;
   accessToken: string;
-  private graphUrl = 'https://graph.facebook.com/';
-  private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
+  // private graphUrl = 'https://graph.facebook.com/';
+  // private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
 
   constructor(public http: Http, private facebook: Facebook) {
     console.log('Hello HttpProvider Provider');
     //for test in computer
-    this.accessToken = 'EAACEdEose0cBAHtWQZBJGWdx7RMUtazYxIAjq0TR47ePxnP1wQgvznu9Lixq2woKV4jI3rm2tJN4WT6xm4ZBn3tZA484Map0wbqasnJd5hUB6ZCztKCSCKj8YaTaj5axZCXL6YtLIbcEAmQJxIqpreZAPyCOjdqY7JK5ZAG0znslrBEZC3uR1ZAC5n3oZB2993xkpFjXDZBfOTvhgZDZD';
+    this.accessToken = 'EAACEdEose0cBAPEli3KZAMj4SzGkBuOtH4mwFdsx5PlZAqC9yINhbNJyC1715W8ASoInCLDVHOer9NElZCOvGfDHwiKS4d5UXDJpKnKO5e5JNRlUZAyaIY5fZA1Fva8nn65GWVAHuROZAx82kKeRwoL1DmZB1mrNLKPK2Ug4Trd8NZC3BOAIZBRuW9nVtIHN6eHSWhvnBRnYncgZDZD';
   }
 
   init() {
@@ -84,6 +83,7 @@ export class HttpProvider {
 
   //feature for newfeed??
   getPosts() {
+    
     console.log(this.accessToken);
     let p = new Promise((resolve, reject) => {
       this.facebook.api('/10208259982656709?fields=feed', ['user_posts', 'user_friends', 'user_likes']).then(
@@ -91,10 +91,14 @@ export class HttpProvider {
           alert(JSON.stringify(userData));
           resolve(userData);
         }, (err) => {
+          if(err == 'cordova_not_available')
+            return null;
           alert(JSON.stringify(err));
           reject(err);
+          
         });
     });
+    return p;
 
   }
 

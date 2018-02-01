@@ -32,7 +32,7 @@ export class FriendsPage {
     ) {
     }
     ionViewDidLoad() {
-        this.getFacebookData();
+        //this.getFacebookData();
         
     }
     getFacebookData() {
@@ -40,8 +40,8 @@ export class FriendsPage {
         loading.present();
             this.httpProvider.getFacebookData(10, 0, 0, 3, 0).subscribe(
                 result => {
-                    if (result.data.error)
-                        if (result.data.error.type == "OAuthException") {
+                    if (result.error)
+                        if (result.error.type == "OAuthException") {
                             console.log("Token expired!!!");
                             return this.getFacebookData();
                         }

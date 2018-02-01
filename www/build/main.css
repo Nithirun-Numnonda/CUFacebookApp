@@ -25517,6 +25517,10 @@ page-dashboard .alignme {
   margin-left: 80%;
 }
 
+page-dashboard .btn-wrapper {
+  text-align: center;
+}
+
 page-home #myswing1 {
   width: 90%;
   height: 200px;
