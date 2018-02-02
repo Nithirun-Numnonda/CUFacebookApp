@@ -45,7 +45,7 @@ export class HomePage {
      if(error == 'cordova_not_available'){      
        this.navCtrl.push(TabsPage);
      }else
-        alert(error);
+        alert("Error: "+JSON.stringify(error));
      console.log(error);
    });
  }
