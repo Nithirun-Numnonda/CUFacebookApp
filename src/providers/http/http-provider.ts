@@ -21,7 +21,7 @@ export class HttpProvider {
   constructor(public http: Http, private facebook: Facebook) {
     console.log('Hello HttpProvider Provider');
     //for test in computer
-    this.accessToken = 'EAACEdEose0cBAPEli3KZAMj4SzGkBuOtH4mwFdsx5PlZAqC9yINhbNJyC1715W8ASoInCLDVHOer9NElZCOvGfDHwiKS4d5UXDJpKnKO5e5JNRlUZAyaIY5fZA1Fva8nn65GWVAHuROZAx82kKeRwoL1DmZB1mrNLKPK2Ug4Trd8NZC3BOAIZBRuW9nVtIHN6eHSWhvnBRnYncgZDZD';
+    this.accessToken = 'EAACEdEose0cBAKZB4xS0xnZBYcrFya14Gv4EBHs2XbRRgRuLh1iMrDnHtcqpqxuf2CqXlTYDZCaUgz3B7Lf1cI1vZBtL6HzjF73ztW7iscxZBDa0Ozd0J5GzSATSI6qm4ONtnvjRSIo7JLQbf7UooAarSBkMpmF7PYxSyL2OWiQDQ9wJmDfbgYt4qqZA2cS4Gvh0ZAFEsiYcQZDZD';
   }
 
   init() {
@@ -35,7 +35,7 @@ export class HttpProvider {
   setHttpRequest(type, top, hour, day, month, year) {
     // this.getToken();
     console.log("token: " + this.accessToken);
-    var request = 'http://localhost:8080/' + type + '?since=-';
+    var request = 'http://103.233.194.200:8080/' + type + '?since=-';
     if (year != '0') {
       request += year + '%20years%20';
     }

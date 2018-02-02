@@ -205,6 +205,9 @@ var DashboardPage = (function () {
     // }
     //for create graph
     DashboardPage.prototype.createGraph = function () {
+        var loading = this.loadingController.create({ content: "Loading,please wait..." });
+        loading.present();
+        loading.dismissAll();
         // this.barChart = new Chart(this.barCanvas.nativeElement, {
         //     type: 'bar',
         //     data: {
@@ -293,15 +296,15 @@ var FriendsPage = (function () {
         this.loadingController = loadingController;
     }
     FriendsPage.prototype.ionViewDidLoad = function () {
-        this.getFacebookData();
+        //this.getFacebookData();
     };
     FriendsPage.prototype.getFacebookData = function () {
         var _this = this;
         var loading = this.loadingController.create({ content: "Loading,please wait..." });
         loading.present();
         this.httpProvider.getFacebookData(10, 0, 0, 3, 0).subscribe(function (result) {
-            if (result.data.error)
-                if (result.data.error.type == "OAuthException") {
+            if (result.error)
+                if (result.error.type == "OAuthException") {
                     console.log("Token expired!!!");
                     return _this.getFacebookData();
                 }
@@ -466,6 +469,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import {
+//   StackConfig,
+//   Stack,
+//   Card,
+//   ThrowEvent,
+//   DragEvent,
+//   SwingStackComponent,
+//   SwingCardComponent
+// } from 'angular2-swing';
 /**
  * Generated class for the NewfeedPage page.
  *
@@ -480,6 +492,7 @@ var NewfeedPage = (function () {
         this.httpProvider = httpProvider;
         this.loadingController = loadingController;
         this.http = http;
+        // stackConfig: StackConfig;
         this.recentCard = '';
         this.mapPosts = function (post) {
             return {
@@ -1174,7 +1187,7 @@ var HttpProvider = (function () {
         this.APP_ID = 1894102183937616;
         console.log('Hello HttpProvider Provider');
         //for test in computer
-        this.accessToken = 'EAACEdEose0cBAPEli3KZAMj4SzGkBuOtH4mwFdsx5PlZAqC9yINhbNJyC1715W8ASoInCLDVHOer9NElZCOvGfDHwiKS4d5UXDJpKnKO5e5JNRlUZAyaIY5fZA1Fva8nn65GWVAHuROZAx82kKeRwoL1DmZB1mrNLKPK2Ug4Trd8NZC3BOAIZBRuW9nVtIHN6eHSWhvnBRnYncgZDZD';
+        this.accessToken = 'EAACEdEose0cBAKZB4xS0xnZBYcrFya14Gv4EBHs2XbRRgRuLh1iMrDnHtcqpqxuf2CqXlTYDZCaUgz3B7Lf1cI1vZBtL6HzjF73ztW7iscxZBDa0Ozd0J5GzSATSI6qm4ONtnvjRSIo7JLQbf7UooAarSBkMpmF7PYxSyL2OWiQDQ9wJmDfbgYt4qqZA2cS4Gvh0ZAFEsiYcQZDZD';
     }
     HttpProvider.prototype.init = function () {
         this.facebook.browserInit(this.APP_ID, "v2.11");
@@ -1188,7 +1201,7 @@ var HttpProvider = (function () {
     HttpProvider.prototype.setHttpRequest = function (type, top, hour, day, month, year) {
         // this.getToken();
         console.log("token: " + this.accessToken);
-        var request = 'http://localhost:8080/' + type + '?since=-';
+        var request = 'http://103.233.194.200:8080/' + type + '?since=-';
         if (year != '0') {
             request += year + '%20years%20';
         }
@@ -1250,10 +1263,9 @@ var HttpProvider = (function () {
 }());
 HttpProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */]])
 ], HttpProvider);
 
-var _a, _b;
 //# sourceMappingURL=http-provider.js.map
 
 /***/ }),
