@@ -10,57 +10,43 @@
     </ion-navbar>
   </ion-header>
 <ion-content padding="">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content
-            pullingIcon="arrow-dropdown"
-            pullingText="Pull to refresh"
-            refreshingSpinner="circles"
-            refreshingText="Refreshing...">
-        </ion-refresher-content>
-    </ion-refresher>
-    <div *ngIf = "pageTriger == 'tutor'">
-        <ion-card>
-          <ion-card-header>
-            Bar Chart
-          </ion-card-header>
-          <ion-card-content>
-            <canvas #barCanvas></canvas>
-          </ion-card-content>
-        </ion-card>
-    </div>
-    <div *ngIf="buttonClicked">     
-  <button ion-button full round (click)="onButtonClick()">Advance Filter</button>
-  <ion-item>
-    <ion-label>Hours</ion-label>
-    <ion-select item-left [(ngModel)]="hourValue">
-      <ion-option *ngFor='let hour of hours'>{{hour}}</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label item-right>Days</ion-label>
-    <ion-select item-left [(ngModel)]="dayValue">
-      <ion-option *ngFor='let day of days'>{{day}}</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-      <ion-label item-right>Months</ion-label>
-      <ion-select item-left [(ngModel)]="monthValue">
-        <ion-option *ngFor='let month of months'>{{month}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-        <ion-label item-right>Years</ion-label>
-        <ion-select item-left [(ngModel)]="yearValue">
-          <ion-option *ngFor='let year of years'>{{year}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label item-right>Top</ion-label>
-        <ion-select item-left [(ngModel)]="topValue">
-          <ion-option *ngFor='let t of top'>{{t}}</ion-option>
-        </ion-select>
-      </ion-item>
+    
+  <ion-header>
+      <ion-toolbar class="btn-wrapper">
+          <div [ngSwitch]="TypeData">
+          <ion-title *ngSwitchCase="'commentsData'">Top Comments Users on Your Posts</ion-title>
+          <ion-title *ngSwitchCase="'likesData'">Top Likes Users on Your Posts</ion-title>
+          </div>
+        </ion-toolbar>
+        <ion-segment [(ngModel)]="TypeData" color="primary" >
+            <ion-segment-button value="commentsData">
+              Top Comments
+            </ion-segment-button>
+            <ion-segment-button value="likesData">
+                Top Likes
+            </ion-segment-button>
+          </ion-segment>
+  </ion-header>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+      </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf = "pageTriger == 'tutor'">
+      <ion-card>
+        <ion-card-header>
+          Bar Chart
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barCanvas></canvas>
+        </ion-card-content>
+      </ion-card>
   </div>
+  <div [ngSwitch]="TypeData">
+    <div *ngSwitchCase="'commentsData'">
   <ion-list *ngFor="let item of commentsData">
     <ion-card>
       <ion-card-content>
@@ -72,6 +58,8 @@
       </ion-card-content>
     </ion-card> 
  </ion-list>
+</div>
+<div *ngSwitchCase="'likesData'">
  <ion-list *ngFor="let item of reactionsData">
   <ion-card>
     <ion-card-content>
@@ -91,6 +79,41 @@
         </ion-card-content>
       </ion-card> 
    </ion-list>
+  </div>
+   <div *ngIf="buttonClicked">     
+      <button ion-button full round (click)="onButtonClick()">Advance Filter</button>
+      <ion-item>
+        <ion-label>Hours</ion-label>
+        <ion-select item-left [(ngModel)]="hourValue">
+          <ion-option *ngFor='let hour of hours'>{{hour}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label item-right>Days</ion-label>
+        <ion-select item-left [(ngModel)]="dayValue">
+          <ion-option *ngFor='let day of days'>{{day}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label item-right>Months</ion-label>
+          <ion-select item-left [(ngModel)]="monthValue">
+            <ion-option *ngFor='let month of months'>{{month}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label item-right>Years</ion-label>
+            <ion-select item-left [(ngModel)]="yearValue">
+              <ion-option *ngFor='let year of years'>{{year}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label item-right>Top</ion-label>
+            <ion-select item-left [(ngModel)]="topValue">
+              <ion-option *ngFor='let t of top'>{{t}}</ion-option>
+            </ion-select>
+          </ion-item>
+      </div>
+    </div>
 </ion-content>
 <ion-footer>
   <div class="btn-wrapper">

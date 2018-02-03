@@ -24,17 +24,17 @@ export class HomePage {
   login() {
     let permissions = new Array<string>();
    //let nav = this.navCtrl;
-    permissions = ["public_profile","user_posts","user_friends","user_likes"];
+    permissions = ["public_profile","user_posts","user_friends"];
        
     this.facebook.login(permissions).then((response) => {
      let userId = response.authResponse.userID;
      let params = new Array<string>();
- 
+      
      this.facebook.api("/me?fields=name,gender", params)
      .then(function(profile) {
        profile.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
      })
-     
+     console.log(permissions);
      alert('Logged in Successfully!');
      console.log(JSON.stringify(response.authResponse));
      this.authResponse = response.authResponse;

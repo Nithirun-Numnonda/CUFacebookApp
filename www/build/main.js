@@ -42,7 +42,7 @@ var HomePage = (function () {
         var _this = this;
         var permissions = new Array();
         //let nav = this.navCtrl;
-        permissions = ["public_profile", "user_posts", "user_friends", "user_likes"];
+        permissions = ["public_profile", "user_posts", "user_friends"];
         this.facebook.login(permissions).then(function (response) {
             var userId = response.authResponse.userID;
             var params = new Array();
@@ -50,6 +50,7 @@ var HomePage = (function () {
                 .then(function (profile) {
                 profile.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
             });
+            console.log(permissions);
             alert('Logged in Successfully!');
             console.log(JSON.stringify(response.authResponse));
             _this.authResponse = response.authResponse;
@@ -68,7 +69,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/'\n\n<ion-content style="background-color: #B6E3E0" >\n    <div style="height:30%;text-align: center;" >\n        <img src="assets/imgs/testLogo.png" style="margin-top:2%;height:60%"/>\n    </div>\n    <div style="margin:auto;width:40%;height:20%;text-align: center;">\n    <ion-list insert>        \n            <button ion-button icon-start (click)="login()">\n                <ion-icon name="key"></ion-icon>\n                Login</button>\n      </ion-list>\n        \n        \n          \n        \n      \n       </div>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/,
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/'\n\n<ion-content style="background-color: #B6E3E0" >\n    <div style="height:30%;text-align: center;" >\n        <img src="assets/imgs/testLogo.png" style="margin-top:2%;height:60%"/>\n    </div>\n    <div style="margin:auto;width:40%;height:20%;text-align: center;">\n    <ion-list insert>        \n            <button ion-button icon-start (click)="login()">\n                <ion-icon name="logo-facebook"></ion-icon>\n                Login with Facebook</button>\n      </ion-list>\n        \n        \n          \n        \n      \n       </div>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_4__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_4__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* Platform */]])
@@ -118,6 +119,8 @@ var DashboardPage = (function () {
         this.top = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         //advance filter
         this.buttonClicked = false;
+        //for controlUI
+        this.TypeData = 'commentsData';
         //initial default parameter
         this.hourValue = this.hours[0];
         this.dayValue = this.days[0];
@@ -140,8 +143,8 @@ var DashboardPage = (function () {
     //get Facebook Data from httpProvider
     DashboardPage.prototype.getFacebookData = function () {
         var _this = this;
-        // let loading = this.loadingController.create({content : "Loading,please wait..."});
-        // loading.present();
+        var loading = this.loadingController.create({ content: "Loading,please wait..." });
+        loading.present();
         if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
             //call method from httpProvider
             this.httpProvider.getFacebookData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
@@ -163,13 +166,13 @@ var DashboardPage = (function () {
                 _this.commentsData = result.comments;
                 _this.reactionsData = result.reactions;
                 console.log("Success : " + JSON.stringify(result));
-                // loading.dismissAll();
+                loading.dismissAll();
                 _this.retryTime = 0;
             }, function (err) {
                 //call if fail to get request
                 console.error("Error : " + err);
                 alert("Can't get Data from the server: " + err);
-                // loading.dismissAll();
+                loading.dismissAll();
             }, function () {
                 console.log('getData completed');
             });
@@ -249,7 +252,7 @@ var DashboardPage = (function () {
 }());
 DashboardPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n      <ion-title>Dashboard</ion-title>\n    </ion-navbar>\n  </ion-header>\n<ion-content padding="">\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content\n            pullingIcon="arrow-dropdown"\n            pullingText="Pull to refresh"\n            refreshingSpinner="circles"\n            refreshingText="Refreshing...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <div *ngIf = "pageTriger == \'tutor\'">\n        <ion-card>\n          <ion-card-header>\n            Bar Chart\n          </ion-card-header>\n          <ion-card-content>\n            <canvas #barCanvas></canvas>\n          </ion-card-content>\n        </ion-card>\n    </div>\n    <div *ngIf="buttonClicked">     \n  <button ion-button full round (click)="onButtonClick()">Advance Filter</button>\n  <ion-item>\n    <ion-label>Hours</ion-label>\n    <ion-select item-left [(ngModel)]="hourValue">\n      <ion-option *ngFor=\'let hour of hours\'>{{hour}}</ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n    <ion-label item-right>Days</ion-label>\n    <ion-select item-left [(ngModel)]="dayValue">\n      <ion-option *ngFor=\'let day of days\'>{{day}}</ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n      <ion-label item-right>Months</ion-label>\n      <ion-select item-left [(ngModel)]="monthValue">\n        <ion-option *ngFor=\'let month of months\'>{{month}}</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n        <ion-label item-right>Years</ion-label>\n        <ion-select item-left [(ngModel)]="yearValue">\n          <ion-option *ngFor=\'let year of years\'>{{year}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label item-right>Top</ion-label>\n        <ion-select item-left [(ngModel)]="topValue">\n          <ion-option *ngFor=\'let t of top\'>{{t}}</ion-option>\n        </ion-select>\n      </ion-item>\n  </div>\n  <ion-list *ngFor="let item of commentsData">\n    <ion-card>\n      <ion-card-content>\n          <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">        \n      <ion-card-header>\n        {{item.name+" : "}}\n      </ion-card-header>\n        <div *ngIf="item.comments">Comment : {{item.comments}}</div>\n      </ion-card-content>\n    </ion-card> \n </ion-list>\n <ion-list *ngFor="let item of reactionsData">\n  <ion-card>\n    <ion-card-content>\n        <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n        <ion-card-header>\n          {{item.name+" : "}}\n        </ion-card-header>\n        <div *ngIf="item.total">\n          Like :{{item.like}} \n          Love :{{item.love}}\n          Wow  :{{item.wow}}\n          Haha :{{item.haha}}\n          Sad :{{item.sad}}\n          Angry :{{item.angry}}\n          Thanksful :{{item.thankful}}\n          Total :{{item.total}}</div>\n        </ion-card-content>\n      </ion-card> \n   </ion-list>\n</ion-content>\n<ion-footer>\n  <div class="btn-wrapper">\n    <button ion-button icon-only color="secondary">\n      <ion-icon name="arrow-up"></ion-icon>\n    </button>\n  </div>\n</ion-footer>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
+        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n      <ion-title>Dashboard</ion-title>\n    </ion-navbar>\n  </ion-header>\n<ion-content padding="">\n    \n  <ion-header>\n      <ion-toolbar class="btn-wrapper">\n          <div [ngSwitch]="TypeData">\n          <ion-title *ngSwitchCase="\'commentsData\'">Top Comments Users on Your Posts</ion-title>\n          <ion-title *ngSwitchCase="\'likesData\'">Top Likes Users on Your Posts</ion-title>\n          </div>\n        </ion-toolbar>\n        <ion-segment [(ngModel)]="TypeData" color="primary" >\n            <ion-segment-button value="commentsData">\n              Top Comments\n            </ion-segment-button>\n            <ion-segment-button value="likesData">\n                Top Likes\n            </ion-segment-button>\n          </ion-segment>\n  </ion-header>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content\n          pullingIcon="arrow-dropdown"\n          pullingText="Pull to refresh"\n          refreshingSpinner="circles"\n          refreshingText="Refreshing...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <div *ngIf = "pageTriger == \'tutor\'">\n      <ion-card>\n        <ion-card-header>\n          Bar Chart\n        </ion-card-header>\n        <ion-card-content>\n          <canvas #barCanvas></canvas>\n        </ion-card-content>\n      </ion-card>\n  </div>\n  <div [ngSwitch]="TypeData">\n    <div *ngSwitchCase="\'commentsData\'">\n  <ion-list *ngFor="let item of commentsData">\n    <ion-card>\n      <ion-card-content>\n          <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">        \n      <ion-card-header>\n        {{item.name+" : "}}\n      </ion-card-header>\n        <div *ngIf="item.comments">Comment : {{item.comments}}</div>\n      </ion-card-content>\n    </ion-card> \n </ion-list>\n</div>\n<div *ngSwitchCase="\'likesData\'">\n <ion-list *ngFor="let item of reactionsData">\n  <ion-card>\n    <ion-card-content>\n        <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n        <ion-card-header>\n          {{item.name+" : "}}\n        </ion-card-header>\n        <div *ngIf="item.total">\n          Like :{{item.like}} \n          Love :{{item.love}}\n          Wow  :{{item.wow}}\n          Haha :{{item.haha}}\n          Sad :{{item.sad}}\n          Angry :{{item.angry}}\n          Thanksful :{{item.thankful}}\n          Total :{{item.total}}</div>\n        </ion-card-content>\n      </ion-card> \n   </ion-list>\n  </div>\n   <div *ngIf="buttonClicked">     \n      <button ion-button full round (click)="onButtonClick()">Advance Filter</button>\n      <ion-item>\n        <ion-label>Hours</ion-label>\n        <ion-select item-left [(ngModel)]="hourValue">\n          <ion-option *ngFor=\'let hour of hours\'>{{hour}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label item-right>Days</ion-label>\n        <ion-select item-left [(ngModel)]="dayValue">\n          <ion-option *ngFor=\'let day of days\'>{{day}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n          <ion-label item-right>Months</ion-label>\n          <ion-select item-left [(ngModel)]="monthValue">\n            <ion-option *ngFor=\'let month of months\'>{{month}}</ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item>\n            <ion-label item-right>Years</ion-label>\n            <ion-select item-left [(ngModel)]="yearValue">\n              <ion-option *ngFor=\'let year of years\'>{{year}}</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label item-right>Top</ion-label>\n            <ion-select item-left [(ngModel)]="topValue">\n              <ion-option *ngFor=\'let t of top\'>{{t}}</ion-option>\n            </ion-select>\n          </ion-item>\n      </div>\n    </div>\n</ion-content>\n<ion-footer>\n  <div class="btn-wrapper">\n    <button ion-button icon-only color="secondary">\n      <ion-icon name="arrow-up"></ion-icon>\n    </button>\n  </div>\n</ion-footer>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
@@ -1204,7 +1207,7 @@ var HttpProvider = (function () {
             this.getToken();
         else {
             //for test in computer
-            this.accessToken = 'EAACEdEose0cBADkxZBVRbs38GInIXXj46Vt93D9caJ4tWfjorDkyuFRZBAky6d9MPpUTjDmMNqgEQ2ZBs6N4b7uP1u4HJ07pjzH6z9U6AZB7NlK66ZBcW872DZCbRbHcKJ6f4NemZBwoPCJJmZAxudKbaJuezdxdDU6t6dhAVL7kDzmKGyh6J3Q30JoLhJhu1J3I5qtykyDPsQZDZD';
+            this.accessToken = 'EAACEdEose0cBAIR9gZCUuV1oXsgQYYQTBSEgsn7WdBSsL7tvUzJJrK5AZBM0MoObjP2XexSxlwZBP1grWQvBZB7r0wzPFxLyxu7FZAkDsq3lLy9HzRtIRWj3v4CowZBoYx02eJncdZChsPJkiZAXosPm4QiAWZBibLkIPjmlMYNEZBqadh7AjopTLwChMx1hGqCHd4nm4UVULcbgZDZD';
         }
         console.log("token: " + this.accessToken);
         var request = 'http://103.233.194.200:8080/' + type + '?since=-';

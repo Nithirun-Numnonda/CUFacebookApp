@@ -41,6 +41,9 @@ export class DashboardPage {
 
   //for retry getData
   private retryTime;
+
+  //for controlUI
+  TypeData: String='commentsData'
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider,private loadingController: LoadingController) {
     //initial default parameter
     this.hourValue = this.hours[0];
@@ -64,8 +67,8 @@ export class DashboardPage {
   }
   //get Facebook Data from httpProvider
   getFacebookData() {
-    // let loading = this.loadingController.create({content : "Loading,please wait..."});
-    // loading.present();
+    let loading = this.loadingController.create({content : "Loading,please wait..."});
+    loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
       //call method from httpProvider
       this.httpProvider.getFacebookData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
@@ -88,14 +91,14 @@ export class DashboardPage {
           this.commentsData = result.comments;
           this.reactionsData = result.reactions;
           console.log("Success : " + JSON.stringify(result));
-          // loading.dismissAll();
+          loading.dismissAll();
           this.retryTime=0;
         },
         err => {
           //call if fail to get request
           console.error("Error : " + err);
           alert("Can't get Data from the server: "+err);
-          // loading.dismissAll();
+          loading.dismissAll();
         },
         () => {
           console.log('getData completed');
