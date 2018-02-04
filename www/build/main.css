@@ -25519,6 +25519,15 @@ page-dashboard .alignme {
 
 page-dashboard .btn-wrapper {
   text-align: center;
+  font: x-small;
+}
+
+page-dashboard #dashboardContent {
+  margin-top: 50x;
+}
+
+page-dashboard #subheader {
+  font-size: 2px;
 }
 
 page-home #myswing1 {

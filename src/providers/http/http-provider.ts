@@ -37,7 +37,7 @@ export class HttpProvider {
       this.getToken();
     else{
       //for test in computer
-      this.accessToken = 'EAACEdEose0cBAIR9gZCUuV1oXsgQYYQTBSEgsn7WdBSsL7tvUzJJrK5AZBM0MoObjP2XexSxlwZBP1grWQvBZB7r0wzPFxLyxu7FZAkDsq3lLy9HzRtIRWj3v4CowZBoYx02eJncdZChsPJkiZAXosPm4QiAWZBibLkIPjmlMYNEZBqadh7AjopTLwChMx1hGqCHd4nm4UVULcbgZDZD';
+      this.accessToken = 'EAACEdEose0cBAEiPTuM5jmyHZBJFhtlbRJzDSBwKAamWCVqZAu10k6HRR6R2hnxOJGZAWaOGWwiJAipHZAC24Bj7tUGPNg9G91KGZCJbZC22CJZAkQVU7M4JypUrUHpEbhusleGLyPdKeWwAmAHIkmoyy8emFooQRTVgOeBmbA8vX5nfmLpwUL71KOWZBdHbjKLi1ZBRI9IAA2AZDZD';
     }
     console.log("token: " + this.accessToken);
     var request = 'http://103.233.194.200:8080/' + type + '?since=-';

@@ -43,7 +43,8 @@ export class DashboardPage {
   private retryTime;
 
   //for controlUI
-  TypeData: String='commentsData'
+  typeData: String='commentsData'
+  pageTriger: String='chart'
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider,private loadingController: LoadingController) {
     //initial default parameter
     this.hourValue = this.hours[0];
@@ -179,6 +180,15 @@ export class DashboardPage {
     //     }
 
     // });
+  }
+
+  trigerPage(){
+    if(this.pageTriger == 'chart'){
+      this.pageTriger='list';
+    }else if(this.pageTriger == 'list'){
+      this.pageTriger='chart';
+    }
+
   }
 
 }
