@@ -34,7 +34,7 @@ export class HttpProvider {
       this.facebook.getAccessToken().then(value => { this.accessToken = value });
       else {
         //for test in computer
-        this.accessToken = 'EAACEdEose0cBAHmpcJtUZAmABvZAAPbRi33MGhm1epWtXtgyhiqC97rj0fRliuYpQZC9qDZAu5LIUAzferuvH26QO4UJVlNg4CEOZA4Kk6DJnGZAqPsCNhW1C77hnAZAPOOCqV1EOP0Lchn3ZCicRnsClIJVzKpgPsTYh0p76cdooBOrOzY3tVrlF4LIsJc1mwwLP9xGGXxjFgZDZD';
+        this.accessToken = 'EAACEdEose0cBANM5JK4PZCRbFNny8ZAyvZCW2TdiFqO8of5iUNkLoC8ZAY5ZCqf0WgjIGmZBWX6bvURWKA582mwTBwwb8YQuaNFq4XAIRGTYI2dtzSLZBISIof4oBAnvtxoIxfWswiLSHxxSfffiiXVPD2cTocvNlWzEUgL2C8ZCLnWko1VSZCRKVMP7O4Er1mzJiHBd5SwGZB3AZDZD';
       }
   }
   //set url for http request from python server

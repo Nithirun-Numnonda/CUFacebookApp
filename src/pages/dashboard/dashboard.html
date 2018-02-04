@@ -5,124 +5,134 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar>
-      <ion-title>Dashboard</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>Dashboard</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding="">
+  <ion-header>
+    <ion-toolbar class="btn-wrapper">
+      <div [ngSwitch]="typeData" *ngIf="pageTriger == 'list'">
+        <div><ion-title *ngSwitchCase="'commentsData'" id="subheader">Top Comments Users on Your Posts</ion-title>
+        <ion-title *ngSwitchCase="'likesData'" id="subheader">Top Likes Users on Your Posts</ion-title>
+
+        <ion-segment [(ngModel)]="typeData" color="primary">
+          <ion-segment-button value="commentsData">
+            Top Comments
+          </ion-segment-button>
+          <ion-segment-button value="likesData">
+            Top Likes
+          </ion-segment-button>
+        </ion-segment>
+        </div>
+      </div>
+      <div *ngIf="pageTriger == 'chart'">
+          <ion-title >Top Comments Users on Your Posts</ion-title>
+        </div>
+    </ion-toolbar>
   </ion-header>
 
-  <ion-content padding=""> 
-  <ion-header>
-      <ion-toolbar class="btn-wrapper">
-          <div [ngSwitch]="typeData">
-          <ion-title  *ngSwitchCase="'commentsData'" id="subheader">Top Comments Users on Your Posts</ion-title>
-          <ion-title  *ngSwitchCase="'likesData'" id="subheader">Top Likes Users on Your Posts</ion-title>
-          
-          <ion-segment [(ngModel)]="typeData" color="primary" >
-            <ion-segment-button value="commentsData">
-              Top Comments
-            </ion-segment-button>
-            <ion-segment-button value="likesData">
-                Top Likes
-            </ion-segment-button>
-          </ion-segment>
-        </div>
-        </ion-toolbar>
-      </ion-header>    
-  
-  
+
   <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content
-          pullingIcon="arrow-dropdown"
-          pullingText="Pull to refresh"
-          refreshingSpinner="circles"
-          refreshingText="Refreshing...">
-      </ion-refresher-content>
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
   </ion-refresher>
-  <div *ngIf = "pageTriger == 'chart'">
-      <ion-card>
-        <ion-card-header>
-          Bar Chart
-        </ion-card-header>
-        <ion-card-content>
-          <canvas #barCanvas></canvas>
-        </ion-card-content>
-      </ion-card>
-  </div>
-  <div *ngIf = "pageTriger == 'list'">
-  <div [ngSwitch]="typeData" id="dashboardContent">
-    <div *ngSwitchCase="'commentsData'">
-  <ion-list *ngFor="let item of commentsData">
+  <div *ngIf="pageTriger == 'chart'">
     <ion-card>
-      <ion-card-content>
-          <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">        
       <ion-card-header>
-        {{item.name+" : "}}
+        Bar Chart
       </ion-card-header>
-        <div *ngIf="item.comments">Comment : {{item.comments}}</div>
+      <ion-card-content>
+        <canvas #barCanvas></canvas>
       </ion-card-content>
-    </ion-card> 
- </ion-list>
-</div>
-<div *ngSwitchCase="'likesData'">
- <ion-list *ngFor="let item of reactionsData">
-  <ion-card>
-    <ion-card-content>
-        <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">
-        <ion-card-header>
-          {{item.name+" : "}}
-        </ion-card-header>
-        <div *ngIf="item.total">
-          Like :{{item.like}} 
-          Love :{{item.love}}
-          Wow  :{{item.wow}}
-          Haha :{{item.haha}}
-          Sad :{{item.sad}}
-          Angry :{{item.angry}}
-          Thanksful :{{item.thankful}}
-          Total :{{item.total}}</div>
-        </ion-card-content>
-      </ion-card> 
-   </ion-list>
+    </ion-card>
   </div>
-   <div *ngIf="buttonClicked">     
-      <button ion-button full round (click)="onButtonClick()">Advance Filter</button>
-      <ion-item>
-        <ion-label>Hours</ion-label>
-        <ion-select item-left [(ngModel)]="hourValue">
-          <ion-option *ngFor='let hour of hours'>{{hour}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label item-right>Days</ion-label>
-        <ion-select item-left [(ngModel)]="dayValue">
-          <ion-option *ngFor='let day of days'>{{day}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
+  <div *ngIf="pageTriger == 'list'" class='dashboardContent'>
+    <div [ngSwitch]="typeData">
+      <div *ngSwitchCase="'commentsData'">
+        <ion-list *ngFor="let item of commentsData">
+          <ion-card>
+            <ion-card-content>
+              <table>
+                <tr>
+                  <td>
+                    <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">
+                  </td>
+                  <td>
+                    <ion-card-header>
+                      {{item.name+" : "}}
+                    </ion-card-header>
+                    <div *ngIf="item.comments" id='subcard'>Comment : {{item.comments}}</div>
+                  </td>
+                </tr>
+              </table>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </div>
+      <div *ngSwitchCase="'likesData'">
+        <ion-list *ngFor="let item of reactionsData">
+          <ion-card>
+            <ion-card-content>
+              <table>
+                <tr>
+                  <td>
+                    <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">
+                  </td>
+                  <td>
+                    <ion-card-header>
+                      {{item.name+" : "}}
+                    </ion-card-header>
+                    <div *ngIf="item.total" id='subcard'>
+                      Like :{{item.like}} Love :{{item.love}} Wow :{{item.wow}} Haha :{{item.haha}} Sad :{{item.sad}} Angry :{{item.angry}} Thanksful
+                      :{{item.thankful}} Total :{{item.total}}</div>
+                  </td>
+                </tr>
+              </table>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </div>
+      <div *ngIf="buttonClicked">
+        <button ion-button full round (click)="onButtonClick()">Advance Filter</button>
+        <ion-item>
+          <ion-label>Hours</ion-label>
+          <ion-select item-left [(ngModel)]="hourValue">
+            <ion-option *ngFor='let hour of hours'>{{hour}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label item-right>Days</ion-label>
+          <ion-select item-left [(ngModel)]="dayValue">
+            <ion-option *ngFor='let day of days'>{{day}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
           <ion-label item-right>Months</ion-label>
           <ion-select item-left [(ngModel)]="monthValue">
             <ion-option *ngFor='let month of months'>{{month}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label item-right>Years</ion-label>
-            <ion-select item-left [(ngModel)]="yearValue">
-              <ion-option *ngFor='let year of years'>{{year}}</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label item-right>Top</ion-label>
-            <ion-select item-left [(ngModel)]="topValue">
-              <ion-option *ngFor='let t of top'>{{t}}</ion-option>
-            </ion-select>
-          </ion-item>
+          <ion-label item-right>Years</ion-label>
+          <ion-select item-left [(ngModel)]="yearValue">
+            <ion-option *ngFor='let year of years'>{{year}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label item-right>Top</ion-label>
+          <ion-select item-left [(ngModel)]="topValue">
+            <ion-option *ngFor='let t of top'>{{t}}</ion-option>
+          </ion-select>
+        </ion-item>
       </div>
     </div>
-    </div>
+  </div>
 </ion-content>
 <ion-footer>
   <div class="btn-wrapper">
-    <button ion-button icon-only color="secondary" (click)='trigerPage()' >
+    <button ion-button icon-only color="secondary" (click)='trigerPage()'>
       <ion-icon name="arrow-up" *ngIf="pageTriger == 'list'"></ion-icon>
       <ion-icon name="arrow-down" *ngIf="pageTriger == 'chart'"></ion-icon>
     </button>
