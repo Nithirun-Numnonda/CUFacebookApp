@@ -264,10 +264,9 @@ DashboardPage = __decorate([
         selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n  Generated template for the DashboardPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n      <ion-title>Dashboard</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n  <ion-content padding=""> \n  <ion-header>\n      <ion-toolbar class="btn-wrapper">\n          <div [ngSwitch]="typeData">\n          <ion-title  *ngSwitchCase="\'commentsData\'" id="subheader">Top Comments Users on Your Posts</ion-title>\n          <ion-title  *ngSwitchCase="\'likesData\'" id="subheader">Top Likes Users on Your Posts</ion-title>\n          \n          <ion-segment [(ngModel)]="typeData" color="primary" >\n            <ion-segment-button value="commentsData">\n              Top Comments\n            </ion-segment-button>\n            <ion-segment-button value="likesData">\n                Top Likes\n            </ion-segment-button>\n          </ion-segment>\n        </div>\n        </ion-toolbar>\n      </ion-header>    \n  \n  \n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content\n          pullingIcon="arrow-dropdown"\n          pullingText="Pull to refresh"\n          refreshingSpinner="circles"\n          refreshingText="Refreshing...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <div *ngIf = "pageTriger == \'chart\'">\n      <ion-card>\n        <ion-card-header>\n          Bar Chart\n        </ion-card-header>\n        <ion-card-content>\n          <canvas #barCanvas></canvas>\n        </ion-card-content>\n      </ion-card>\n  </div>\n  <div *ngIf = "pageTriger == \'list\'">\n  <div [ngSwitch]="typeData" id="dashboardContent">\n    <div *ngSwitchCase="\'commentsData\'">\n  <ion-list *ngFor="let item of commentsData">\n    <ion-card>\n      <ion-card-content>\n          <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">        \n      <ion-card-header>\n        {{item.name+" : "}}\n      </ion-card-header>\n        <div *ngIf="item.comments">Comment : {{item.comments}}</div>\n      </ion-card-content>\n    </ion-card> \n </ion-list>\n</div>\n<div *ngSwitchCase="\'likesData\'">\n <ion-list *ngFor="let item of reactionsData">\n  <ion-card>\n    <ion-card-content>\n        <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n        <ion-card-header>\n          {{item.name+" : "}}\n        </ion-card-header>\n        <div *ngIf="item.total">\n          Like :{{item.like}} \n          Love :{{item.love}}\n          Wow  :{{item.wow}}\n          Haha :{{item.haha}}\n          Sad :{{item.sad}}\n          Angry :{{item.angry}}\n          Thanksful :{{item.thankful}}\n          Total :{{item.total}}</div>\n        </ion-card-content>\n      </ion-card> \n   </ion-list>\n  </div>\n   <div *ngIf="buttonClicked">     \n      <button ion-button full round (click)="onButtonClick()">Advance Filter</button>\n      <ion-item>\n        <ion-label>Hours</ion-label>\n        <ion-select item-left [(ngModel)]="hourValue">\n          <ion-option *ngFor=\'let hour of hours\'>{{hour}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label item-right>Days</ion-label>\n        <ion-select item-left [(ngModel)]="dayValue">\n          <ion-option *ngFor=\'let day of days\'>{{day}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n          <ion-label item-right>Months</ion-label>\n          <ion-select item-left [(ngModel)]="monthValue">\n            <ion-option *ngFor=\'let month of months\'>{{month}}</ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item>\n            <ion-label item-right>Years</ion-label>\n            <ion-select item-left [(ngModel)]="yearValue">\n              <ion-option *ngFor=\'let year of years\'>{{year}}</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label item-right>Top</ion-label>\n            <ion-select item-left [(ngModel)]="topValue">\n              <ion-option *ngFor=\'let t of top\'>{{t}}</ion-option>\n            </ion-select>\n          </ion-item>\n      </div>\n    </div>\n    </div>\n</ion-content>\n<ion-footer>\n  <div class="btn-wrapper">\n    <button ion-button icon-only color="secondary" (click)=\'trigerPage()\' >\n      <ion-icon name="arrow-up" *ngIf="pageTriger == \'list\'"></ion-icon>\n      <ion-icon name="arrow-down" *ngIf="pageTriger == \'chart\'"></ion-icon>\n    </button>\n  </div>\n</ion-footer>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
 ], DashboardPage);
 
-var _a, _b, _c, _d;
 //# sourceMappingURL=dashboard.js.map
 
 /***/ }),
@@ -539,7 +538,19 @@ var NewfeedPage = (function () {
         // };
     }
     NewfeedPage.prototype.ionViewDidLoad = function () {
-        this.httpProvider.getPosts();
+        this.httpProvider.getPosts().subscribe(
+        //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+        function (result) {
+            //check if server send error back
+            //assign data to view
+            console.log("Success : " + JSON.stringify(result));
+        }, function (err) {
+            //call if fail to get request
+            console.error("Error : " + err);
+            alert("Can't get Data from the server: " + err);
+        }, function () {
+            console.log('getData completed');
+        });
         //this.getCommentsData();
         //this.createGraph();
     };
@@ -605,10 +616,10 @@ NewfeedPage = __decorate([
         selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n  Generated template for the NewfeedPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Newfeed\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]) === "function" && _e || Object])
 ], NewfeedPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=newfeed.js.map
 
 /***/ }),
@@ -1201,6 +1212,7 @@ var HttpProvider = (function () {
         this.platform = platform;
         //initial
         this.APP_ID = 1894102183937616;
+        this.serverIP = 'http://103.233.194.200:8080/';
         console.log('Hello HttpProvider Provider');
     }
     HttpProvider.prototype.init = function () {
@@ -1209,18 +1221,20 @@ var HttpProvider = (function () {
     //get user token from facebook
     HttpProvider.prototype.getToken = function () {
         var _this = this;
-        this.facebook.getAccessToken().then(function (value) { _this.accessToken = value; });
+        if (this.platform.is('cordova'))
+            this.facebook.getAccessToken().then(function (value) { _this.accessToken = value; });
+        else {
+            //for test in computer
+            this.accessToken = 'EAACEdEose0cBAHmpcJtUZAmABvZAAPbRi33MGhm1epWtXtgyhiqC97rj0fRliuYpQZC9qDZAu5LIUAzferuvH26QO4UJVlNg4CEOZA4Kk6DJnGZAqPsCNhW1C77hnAZAPOOCqV1EOP0Lchn3ZCicRnsClIJVzKpgPsTYh0p76cdooBOrOzY3tVrlF4LIsJc1mwwLP9xGGXxjFgZDZD';
+        }
     };
     //set url for http request from python server
     HttpProvider.prototype.setHttpRequest = function (type, top, hour, day, month, year) {
-        if (this.platform.is('cordova'))
-            this.getToken();
-        else {
-            //for test in computer
-            this.accessToken = 'EAACEdEose0cBAEiPTuM5jmyHZBJFhtlbRJzDSBwKAamWCVqZAu10k6HRR6R2hnxOJGZAWaOGWwiJAipHZAC24Bj7tUGPNg9G91KGZCJbZC22CJZAkQVU7M4JypUrUHpEbhusleGLyPdKeWwAmAHIkmoyy8emFooQRTVgOeBmbA8vX5nfmLpwUL71KOWZBdHbjKLi1ZBRI9IAA2AZDZD';
-        }
+        this.getToken();
         console.log("token: " + this.accessToken);
-        var request = 'http://103.233.194.200:8080/' + type + '?since=-';
+        var request = this.serverIP + type;
+        if (type == 'dashboard')
+            request += "?since=-";
         if (year != '0') {
             request += year + '%20years%20';
         }
@@ -1233,7 +1247,8 @@ var HttpProvider = (function () {
         if (hour != '0') {
             request += hour + '%20hour%20';
         }
-        request += "&until=-0 year";
+        if (type == 'dashboard')
+            request += "&until=-0 year";
         if (top != '') {
             request += '&top=' + top;
         }
@@ -1264,19 +1279,39 @@ var HttpProvider = (function () {
     //feature for newfeed??
     HttpProvider.prototype.getPosts = function () {
         var _this = this;
-        console.log(this.accessToken);
+        this.getToken();
+        var uid = '878312008845622';
         var p = new Promise(function (resolve, reject) {
-            _this.facebook.api('/me?fields=feed', ['user_posts', 'user_friends', 'user_likes']).then(function (userData) {
+            _this.facebook.api('/me', ['user_posts', 'user_friends', 'user_likes']).then(function (userData) {
                 console.log(JSON.stringify(userData));
-                resolve(userData);
+                uid = userData.id;
             }, function (err) {
                 if (err == 'cordova_not_available')
-                    return null;
+                    uid = '878312008845622';
                 alert(JSON.stringify(err));
-                reject(err);
+                //reject(err);
             });
         });
-        return p;
+        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        headers.append('access_token', this.accessToken);
+        this.http.get(this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
+            .map(function (res) { return res.json(); });
+        return this.http.get(this.setHttpRequest('newsfeed/' + uid, '', '0', '0', '0', '0'), { headers: headers })
+            .map(function (res) { return res.json(); });
+        // console.log(this.accessToken);
+        // let p = new Promise((resolve, reject) => {
+        //   this.facebook.api('/me?fields=feed', ['user_posts', 'user_friends', 'user_likes']).then(
+        //     (userData) => {
+        //       console.log(JSON.stringify(userData));
+        //       resolve(userData);
+        //     }, (err) => {
+        //       if (err == 'cordova_not_available')
+        //         return null;
+        //       alert(JSON.stringify(err));
+        //       reject(err);
+        //     });
+        // });
+        // return p;
     };
     return HttpProvider;
 }());
