@@ -25522,12 +25522,16 @@ page-dashboard .btn-wrapper {
   font: x-small;
 }
 
-page-dashboard #dashboardContent {
-  margin-top: 50x;
+.dashboardContent {
+  margin-top: 75px;
 }
 
-page-dashboard #subheader {
+#subheader {
   font-size: 2px;
+}
+
+#subcard {
+  margin-left: 10px;
 }
 
 page-home #myswing1 {

@@ -16,6 +16,7 @@ export class HttpProvider {
   //initial
   APP_ID: number = 1894102183937616;
   accessToken: string;
+  serverIP: string = 'http://103.233.194.200:8080/';
   // private graphUrl = 'https://graph.facebook.com/';
   // private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
 
@@ -29,18 +30,22 @@ export class HttpProvider {
   }
   //get user token from facebook
   getToken() {
-    this.facebook.getAccessToken().then(value => { this.accessToken = value });
+    if (this.platform.is('cordova'))
+      this.facebook.getAccessToken().then(value => { this.accessToken = value });
+      else {
+        //for test in computer
+        this.accessToken = 'EAACEdEose0cBANM5JK4PZCRbFNny8ZAyvZCW2TdiFqO8of5iUNkLoC8ZAY5ZCqf0WgjIGmZBWX6bvURWKA582mwTBwwb8YQuaNFq4XAIRGTYI2dtzSLZBISIof4oBAnvtxoIxfWswiLSHxxSfffiiXVPD2cTocvNlWzEUgL2C8ZCLnWko1VSZCRKVMP7O4Er1mzJiHBd5SwGZB3AZDZD';
+      }
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
-    if (this.platform.is('cordova'))
+    
       this.getToken();
-    else{
-      //for test in computer
-      this.accessToken = 'EAACEdEose0cBAEiPTuM5jmyHZBJFhtlbRJzDSBwKAamWCVqZAu10k6HRR6R2hnxOJGZAWaOGWwiJAipHZAC24Bj7tUGPNg9G91KGZCJbZC22CJZAkQVU7M4JypUrUHpEbhusleGLyPdKeWwAmAHIkmoyy8emFooQRTVgOeBmbA8vX5nfmLpwUL71KOWZBdHbjKLi1ZBRI9IAA2AZDZD';
-    }
+    
     console.log("token: " + this.accessToken);
-    var request = 'http://103.233.194.200:8080/' + type + '?since=-';
+    var request = this.serverIP + type ;
+    if (type == 'dashboard')
+      request += "?since=-";
     if (year != '0') {
       request += year + '%20years%20';
     }
@@ -53,7 +58,8 @@ export class HttpProvider {
     if (hour != '0') {
       request += hour + '%20hour%20';
     }
-    request += "&until=-0 year";
+    if (type == 'dashboard')
+      request += "&until=-0 year";
     if (top != '') {
       request += '&top=' + top;
     }
@@ -88,22 +94,45 @@ export class HttpProvider {
 
   //feature for newfeed??
   getPosts() {
-
-    console.log(this.accessToken);
+    this.getToken();
+    let uid = '878312008845622';
     let p = new Promise((resolve, reject) => {
-      this.facebook.api('/me?fields=feed', ['user_posts', 'user_friends', 'user_likes']).then(
+      this.facebook.api('/me', ['user_posts', 'user_friends', 'user_likes']).then(
         (userData) => {
           console.log(JSON.stringify(userData));
-          resolve(userData);
+          uid = userData.id;
         }, (err) => {
           if (err == 'cordova_not_available')
-            return null;
+            uid = '878312008845622';
           alert(JSON.stringify(err));
-          reject(err);
+          //reject(err);
 
         });
     });
-    return p;
+    let headers = new Headers();
+    headers.append('access_token', this.accessToken);
+    this.http.get(
+      this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
+      .map(res => res.json());
+
+    return this.http.get(
+      this.setHttpRequest('newsfeed/' + uid, '', '0', '0', '0', '0'), { headers: headers })
+      .map(res => res.json());
+    // console.log(this.accessToken);
+    // let p = new Promise((resolve, reject) => {
+    //   this.facebook.api('/me?fields=feed', ['user_posts', 'user_friends', 'user_likes']).then(
+    //     (userData) => {
+    //       console.log(JSON.stringify(userData));
+    //       resolve(userData);
+    //     }, (err) => {
+    //       if (err == 'cordova_not_available')
+    //         return null;
+    //       alert(JSON.stringify(err));
+    //       reject(err);
+
+    //     });
+    // });
+    // return p;
 
   }
 

@@ -55,11 +55,31 @@ export class NewfeedPage {
     //   }
     // };
   }
-  
+
   ionViewDidLoad() {
-   this.httpProvider.getPosts();
-   //this.getCommentsData();
-   //this.createGraph();
+    this.httpProvider.getPosts().subscribe(
+      //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+      result => {
+        //check if server send error back
+
+        //assign data to view
+
+        console.log("Success : " + JSON.stringify(result));
+
+      },
+      err => {
+        //call if fail to get request
+        console.error("Error : " + err);
+        alert("Can't get Data from the server: " + err);
+
+      },
+      () => {
+        console.log('getData completed');
+      }
+    );
+
+    //this.getCommentsData();
+    //this.createGraph();
   }
   // ngAfterViewInit() {
   //   // Either subscribe in controller or set in HTML
@@ -133,7 +153,7 @@ export class NewfeedPage {
       return [];
 
     let attachments = post.attachments.data[0].subattachments ||
-                      post.attachments;
+      post.attachments;
 
     return attachments.data
       .filter(x => x.type == "photo")
