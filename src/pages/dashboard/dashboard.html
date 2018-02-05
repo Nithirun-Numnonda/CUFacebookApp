@@ -28,7 +28,7 @@
         </div>
       </div>
       <div *ngIf="pageTriger == 'chart'">
-          <ion-title >Top Comments Users on Your Posts</ion-title>
+          <ion-title >Your Posts Summary</ion-title>
         </div>
     </ion-toolbar>
   </ion-header>
@@ -38,13 +38,13 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <div *ngIf="pageTriger == 'chart'">
+  <div *ngIf="pageTriger == 'chart'" class='dashboardContent'>
     <ion-card>
       <ion-card-header>
-        Bar Chart
+        Top post
       </ion-card-header>
       <ion-card-content>
-        <canvas #barCanvas></canvas>
+        <canvas #barCanvas type></canvas>
       </ion-card-content>
     </ion-card>
   </div>
