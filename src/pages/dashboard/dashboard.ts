@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
 import { Chart } from 'chart.js';
-import { Refresher } from 'ionic-angular/components/refresher/refresher';
+
 
 /**
  * Generated class for the DashboardPage page.
@@ -54,7 +54,7 @@ export class DashboardPage {
   //for controlUI
   typeData: String = 'commentsData'
   pageTriger: String = 'chart'
-  constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider, private loadingController: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider, private loadingController: LoadingController, public modalCtrl: ModalController) {
     //initial default parameter
     this.hourValue = this.hours[0];
     this.dayValue = this.days[0];
@@ -189,6 +189,11 @@ export class DashboardPage {
       this.getFacebookData();
     }
 
+  }
+  presentProfileModal(uid: string, user_name: string) {
+    //console.log(uid);
+    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+    profileModal.present();
   }
 
 }

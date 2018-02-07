@@ -25550,3 +25550,14 @@ page-home #mycards1 swing-card {
   top: 3%;
   height: 90%;
 }
+
+.myCard {
+  position: relative;
+}
+
+.myOverlay {
+  position: absolute;
+  z-index: 99;
+  bottom: 0px;
+  background: #000;
+}

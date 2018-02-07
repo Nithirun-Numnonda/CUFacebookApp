@@ -22,30 +22,33 @@ export class HttpProvider {
 
   constructor(public http: Http, private facebook: Facebook, private platform: Platform) {
     console.log('Hello HttpProvider Provider');
-
+    this.init();
   }
 
   init() {
-    this.facebook.browserInit(this.APP_ID, "v2.11");
+    this.facebook.browserInit(this.APP_ID, "v2.12");
   }
   //get user token from facebook
   getToken() {
-    if (this.platform.is('cordova'))
+    if (this.platform.is('cordova')) {
       this.facebook.getAccessToken().then(value => { this.accessToken = value });
-      else {
-        //for test in computer
-        this.accessToken = 'EAACEdEose0cBANM5JK4PZCRbFNny8ZAyvZCW2TdiFqO8of5iUNkLoC8ZAY5ZCqf0WgjIGmZBWX6bvURWKA582mwTBwwb8YQuaNFq4XAIRGTYI2dtzSLZBISIof4oBAnvtxoIxfWswiLSHxxSfffiiXVPD2cTocvNlWzEUgL2C8ZCLnWko1VSZCRKVMP7O4Er1mzJiHBd5SwGZB3AZDZD';
-      }
+      console.log("access_token:"+this.accessToken);
+    }
+    else {
+      //for test in computer
+      this.accessToken = 'EAACEdEose0cBAOmWa0HUvHe8zn58meY0eevY269bkZA81xpyVYv06bWOSk9A7hae4ZBcOwN9opX2jSuZA57V4omfKF0GJlBJV567muySGfn1ZAEi528muZBFJZAAZCqsFM0DUi4ACYC1modZCyVfr84rZB1ytIRxVdOeijDz5mQpUjUKaik4IOoIYWLwLb56HBrOT9OQdDO2riAZDZD';
+    }
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
-    
-      this.getToken();
-    
-    console.log("token: " + this.accessToken);
-    var request = this.serverIP + type ;
-    if (type == 'dashboard')
+
+    //this.getToken();
+
+    //console.log("token: " + this.accessToken);
+    var request = this.serverIP + type;
+    if (type == 'dashboard') {
       request += "?since=-";
+    }
     if (year != '0') {
       request += year + '%20years%20';
     }
@@ -70,6 +73,7 @@ export class HttpProvider {
 
   getFacebookData(top, hour, day, month, year) {
     //set header to authorize with access token
+    this.getToken();
     let headers = new Headers();
     headers.append('access_token', this.accessToken);
     return this.http.get(
@@ -94,46 +98,59 @@ export class HttpProvider {
 
   //feature for newfeed??
   getPosts() {
-    this.getToken();
+    // let headers = new Headers();
+    // this.getToken();
+    // headers.append('access_token', this.accessToken);
     let uid = '878312008845622';
-    let p = new Promise((resolve, reject) => {
-      this.facebook.api('/me', ['user_posts', 'user_friends', 'user_likes']).then(
-        (userData) => {
-          console.log(JSON.stringify(userData));
-          uid = userData.id;
-        }, (err) => {
-          if (err == 'cordova_not_available')
-            uid = '878312008845622';
-          alert(JSON.stringify(err));
-          //reject(err);
+    // // this.facebook.api('/me', ['user_posts', 'user_friends', 'user_likes']).then(
+    // //   (userData) => {
+    // //     console.log(JSON.stringify(userData));
+    // //     uid = userData.id;
+    // //   }, (err) => {
+    // //     if (err == 'cordova_not_available')
+    // //       uid = '878312008845622';
+    // //     console.log(JSON.stringify(err));
+    // //     //reject(err);
 
-        });
-    });
+    // //   });
+
+    // this.http.get(
+    //   this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
+    //   .map(res => res.json());
     let headers = new Headers();
+    this.getToken();
     headers.append('access_token', this.accessToken);
-    this.http.get(
-      this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
-      .map(res => res.json());
+    // return this.http.get(
+    //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
+    //   .map(res => res.json());
+      return this.http.get(
+        this.setHttpRequest("newsfeed/"+uid.toString(), '', '0', '0', '0', '0'), { headers: headers })
+        .map(res => res.json());
+  }
+  getCover(uid: string) {
+    this.facebook.api('/' + uid + '?field=cover', ['user_posts']).then(
+      (coverData) => {
 
-    return this.http.get(
-      this.setHttpRequest('newsfeed/' + uid, '', '0', '0', '0', '0'), { headers: headers })
-      .map(res => res.json());
-    // console.log(this.accessToken);
-    // let p = new Promise((resolve, reject) => {
-    //   this.facebook.api('/me?fields=feed', ['user_posts', 'user_friends', 'user_likes']).then(
-    //     (userData) => {
-    //       console.log(JSON.stringify(userData));
-    //       resolve(userData);
-    //     }, (err) => {
-    //       if (err == 'cordova_not_available')
-    //         return null;
-    //       alert(JSON.stringify(err));
-    //       reject(err);
+        return coverData.source;
 
-    //     });
-    // });
-    // return p;
+      }, (err) => {
+        console.log(JSON.stringify(err));
+        //reject(err);
 
+      });
+    return null;
+  }
+  getContext(uid: string) {
+    this.facebook.api('/' + uid + '?field=context', ['user_posts']).then(
+      (contextData) => {
+        console.log(JSON.stringify(contextData));
+        return contextData.context;
+      }, (err) => {
+        console.log(JSON.stringify(err));
+        //reject(err);
+
+      });
+    return null;
   }
 
 }
