@@ -60,7 +60,7 @@
                     <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">
                   </td>
                   <td>
-                    <ion-card-header>
+                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)">
                       {{item.name+" : "}}
                     </ion-card-header>
                     <div *ngIf="item.comments" id='subcard'>Comment : {{item.comments}}</div>
@@ -81,7 +81,7 @@
                     <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">
                   </td>
                   <td>
-                    <ion-card-header>
+                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)">
                       {{item.name+" : "}}
                     </ion-card-header>
                     <div *ngIf="item.total" id='subcard'>

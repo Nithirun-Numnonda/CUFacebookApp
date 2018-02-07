@@ -25519,6 +25519,19 @@ page-dashboard .alignme {
 
 page-dashboard .btn-wrapper {
   text-align: center;
+  font: x-small;
+}
+
+.dashboardContent {
+  margin-top: 75px;
+}
+
+#subheader {
+  font-size: 2px;
+}
+
+#subcard {
+  margin-left: 10px;
 }
 
 page-home #myswing1 {
@@ -25536,4 +25549,15 @@ page-home #mycards1 swing-card {
   text-align: center;
   top: 3%;
   height: 90%;
+}
+
+.myCard {
+  position: relative;
+}
+
+.myOverlay {
+  position: absolute;
+  z-index: 99;
+  bottom: 0px;
+  background: #000;
 }
