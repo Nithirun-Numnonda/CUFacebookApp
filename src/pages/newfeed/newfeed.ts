@@ -61,7 +61,7 @@ export class NewfeedPage {
       //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
       result => {
         //check if server send error back
-
+        this.newsData=result;
         //assign data to view
 
         console.log("Success : " + JSON.stringify(result));

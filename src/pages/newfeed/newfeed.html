@@ -13,5 +13,56 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-list *ngFor="let item of newsData">
+
+        
+    
+    <ion-card>
+ 
+        <ion-item>
+          <ion-avatar item-start>
+            <img src={{item.page_picture}}>
+          </ion-avatar>
+          <h2>{{item.page_name}}</h2>
+          <p>{{item.created_time}}</p>
+        </ion-item>
+   
+        <img src={{item.full_picture}} />
+   
+        <ion-card-content>
+          <p>{{item.message}}</p>
+        </ion-card-content>
+        <div>
+        <ion-row>
+            
+          
+          <ion-label>
+            <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon>
+            {{item.reactions_summary}}
+          </ion-label>
+          
+        </ion-row>
+      </div>
+        <ion-row>
+          <ion-col>
+            <button ion-button full icon-center clear small>
+                <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon>
+              <div>Likes</div>
+            </button>
+          </ion-col>
+          <button class="button circle text-center">
+              <i class="ion-crop"></i>
+          </button>
+          <ion-col>
+            <button ion-button full icon-center clear small>
+              <ion-icon name="text"></ion-icon>
+              <div>Comments</div>
+            </button>
+          </ion-col>
+        </ion-row>
+   
+      </ion-card>
+      </ion-list>
+   
   
 </ion-content>
