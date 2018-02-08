@@ -15,6 +15,7 @@ import { HttpProvider } from '../providers/http/http-provider';
 import {HttpModule} from '@angular/http';
 import { Facebook } from '@ionic-native/facebook';
 import { SwingModule } from 'angular2-swing';
+import { TimeProvider } from '../providers/time/time';
 @NgModule({
   declarations: [
     MyApp,
@@ -48,6 +49,7 @@ import { SwingModule } from 'angular2-swing';
     SplashScreen,Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
+    TimeProvider,
     
   ]
 })
