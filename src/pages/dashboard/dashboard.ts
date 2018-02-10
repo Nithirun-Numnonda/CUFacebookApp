@@ -58,7 +58,7 @@ export class DashboardPage {
     //initial default parameter
     this.hourValue = this.hours[0];
     this.dayValue = this.days[0];
-    this.monthValue = this.months[3];
+    this.monthValue = this.months[1];
     this.yearValue = this.years[0];
     this.topValue = this.top[0];
     //for retry
@@ -117,7 +117,7 @@ export class DashboardPage {
             }
 
           this.createGraph();
-          console.log("Success : " + JSON.stringify(result));
+//          console.log("Success : " + JSON.stringify(result));
           loading.dismissAll();
           this.retryTime = 0;
         },
@@ -137,6 +137,7 @@ export class DashboardPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
     this.getFacebookData();
+    this.httpProvider.setLike();
   }
 
 
@@ -151,12 +152,12 @@ export class DashboardPage {
         datasets: [{
           label: 'Total comments',
           data: this.total_comments,
-          backgroundColor: "blue",
+          backgroundColor: "#baffc9",
           borderWidth: 1
         }, {
           label: 'Total reactions',
           data: this.total_reactions,
-          backgroundColor: "red",
+          backgroundColor: "#ffb3ba",
           borderWidth: 1
         }]
       },

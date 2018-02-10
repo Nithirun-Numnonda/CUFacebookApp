@@ -39,31 +39,9 @@ var HomePage = (function () {
         });
     }
     HomePage.prototype.login = function () {
-        var _this = this;
-        var permissions = new Array();
-        //let nav = this.navCtrl;
-        permissions = ["public_profile", "user_posts", "user_friends"];
-        this.facebook.login(permissions).then(function (response) {
-            var userId = response.authResponse.userID;
-            var params = new Array();
-            _this.facebook.api("/me?fields=name,gender", params)
-                .then(function (profile) {
-                profile.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
-            });
-            console.log(permissions);
-            alert('Logged in Successfully!');
-            console.log(JSON.stringify(response.authResponse));
-            _this.authResponse = response.authResponse;
-            _this.isLogged = true;
-            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__tabs_tabs__["a" /* TabsPage */]);
-        }, function (error) {
-            if (error == 'cordova_not_available') {
-                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__tabs_tabs__["a" /* TabsPage */]);
-            }
-            else
-                alert("Error: " + JSON.stringify(error));
-            console.log(error);
-        });
+        if (this.facebookService.login()) {
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__tabs_tabs__["a" /* TabsPage */]);
+        }
     };
     return HomePage;
 }());
@@ -186,7 +164,7 @@ var DashboardPage = (function () {
                         _this.total_reactions.push(data.total_reactions);
                     }
                 _this.createGraph();
-                console.log("Success : " + JSON.stringify(result));
+                //          console.log("Success : " + JSON.stringify(result));
                 loading.dismissAll();
                 _this.retryTime = 0;
             }, function (err) {
@@ -202,6 +180,7 @@ var DashboardPage = (function () {
     DashboardPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad DashboardPage');
         this.getFacebookData();
+        this.httpProvider.setLike();
     };
     //for create graph
     DashboardPage.prototype.createGraph = function () {
@@ -539,10 +518,12 @@ var NewfeedPage = (function () {
         // };
     }
     NewfeedPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
         this.httpProvider.getPosts().subscribe(
         //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
         function (result) {
             //check if server send error back
+            _this.newsData = result;
             //assign data to view
             console.log("Success : " + JSON.stringify(result));
         }, function (err) {
@@ -614,7 +595,7 @@ var NewfeedPage = (function () {
 }());
 NewfeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n  Generated template for the NewfeedPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Newfeed\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
+        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Newfeed\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list *ngFor="let item of newsData">\n\n\n\n        \n\n    \n\n    <ion-card>\n\n \n\n        <ion-item>\n\n          <ion-avatar item-start>\n\n            <img src={{item.page_picture}}>\n\n          </ion-avatar>\n\n          <h2>{{item.page_name}}</h2>\n\n          <p>{{item.created_time}}</p>\n\n        </ion-item>\n\n   \n\n        <img src={{item.full_picture}} />\n\n   \n\n        <ion-card-content>\n\n          <p>{{item.message}}</p>\n\n        </ion-card-content>\n\n        <div>\n\n        <ion-row>\n\n            \n\n          \n\n          <ion-label>\n\n            <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon>\n\n            {{item.reactions_summary}}\n\n          </ion-label>\n\n          \n\n        </ion-row>\n\n      </div>\n\n        <ion-row>\n\n          <ion-col>\n\n            <button ion-button full icon-center clear small>\n\n                <ion-icon style="color:red;margin-left:10px" name="thump-up"></ion-icon>\n\n              <div>Likes</div>\n\n            </button>\n\n          </ion-col>\n\n          <button class="button circle text-center">\n\n              <i class="ion-crop"></i>\n\n          </button>\n\n          <ion-col>\n\n            <button ion-button full icon-center clear small>\n\n              <ion-icon name="text"></ion-icon>\n\n              <div>Comments</div>\n\n            </button>\n\n          </ion-col>\n\n        </ion-row>\n\n   \n\n      </ion-card>\n\n      </ion-list>\n\n   \n\n  \n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
@@ -786,11 +767,11 @@ var map = {
 		4
 	],
 	"../pages/tabs/tabs.module": [
-		774,
+		773,
 		3
 	],
 	"../pages/user-profile/user-profile.module": [
-		773,
+		774,
 		0
 	]
 };
@@ -897,8 +878,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/friends/friends.module#FriendsPageModule', name: 'FriendsPage', segment: 'friends', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/newfeed/newfeed.module#NewfeedPageModule', name: 'NewfeedPage', segment: 'newfeed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/setting/setting.module#SettingPageModule', name: 'SettingPage', segment: 'setting', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/user-profile/user-profile.module#UserProfilePageModule', name: 'UserProfilePage', segment: 'user-profile', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/tabs/tabs.module#TabsPageModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] }
+                    { loadChildren: '../pages/tabs/tabs.module#TabsPageModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/user-profile/user-profile.module#UserProfilePageModule', name: 'UserProfilePage', segment: 'user-profile', priority: 'low', defaultHistory: [] }
                 ]
             })
         ],
@@ -1220,10 +1201,39 @@ var HttpProvider = (function () {
         this.APP_ID = 1894102183937616;
         this.serverIP = 'http://103.233.194.200:8080/';
         console.log('Hello HttpProvider Provider');
-        this.init();
     }
     HttpProvider.prototype.init = function () {
         this.facebook.browserInit(this.APP_ID, "v2.12");
+    };
+    HttpProvider.prototype.login = function () {
+        var _this = this;
+        var permissions = new Array();
+        //let nav = this.navCtrl;
+        permissions = ["public_profile", "user_posts", "user_friends"];
+        this.facebook.login(permissions).then(function (response) {
+            var userId = response.authResponse.userID;
+            var params = new Array();
+            _this.facebook.api("/me?fields=name,gender", params)
+                .then(function (profile) {
+                profile.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+            });
+            console.log(permissions);
+            alert('Logged in Successfully!');
+            console.log(JSON.stringify(response.authResponse));
+            _this.authResponse = response.authResponse;
+            _this.uid = _this.authResponse.userId;
+            _this.isLogged = true;
+        }, function (error) {
+            if (error == 'cordova_not_available') {
+                _this.isLogged = true;
+            }
+            else {
+                alert("Error: " + JSON.stringify(error));
+                console.log(error);
+                _this.isLogged = false;
+            }
+        });
+        return this.isLogged;
     };
     //get user token from facebook
     HttpProvider.prototype.getToken = function () {
@@ -1234,7 +1244,7 @@ var HttpProvider = (function () {
         }
         else {
             //for test in computer
-            this.accessToken = 'EAACEdEose0cBAOmWa0HUvHe8zn58meY0eevY269bkZA81xpyVYv06bWOSk9A7hae4ZBcOwN9opX2jSuZA57V4omfKF0GJlBJV567muySGfn1ZAEi528muZBFJZAAZCqsFM0DUi4ACYC1modZCyVfr84rZB1ytIRxVdOeijDz5mQpUjUKaik4IOoIYWLwLb56HBrOT9OQdDO2riAZDZD';
+            this.accessToken = 'EAACEdEose0cBAMoRWbwopqk9V2CFvDY4zyuljKMwIUKZAR4micqflfGbV38xBLtHvKrXUjN6DpRt5uhxYtiuaoFt0F3GJAZALNz5T6QCEgZC6xVPsGFsm1Pcrd8xn6f2P72uZCIoYemyj2UaYYCW4rjg69ktMkQZBBAo2Mk2rnGUo2IfJ89TnYRyfmzxD6ZCTgpxS5uFLJEQZDZD';
         }
     };
     //set url for http request from python server
@@ -1288,35 +1298,25 @@ var HttpProvider = (function () {
     //     .map(res => res.json());
     // }
     //feature for newfeed??
+    HttpProvider.prototype.setLike = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        this.getToken();
+        headers.append('access_token', this.accessToken);
+        this.http.get(this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
     HttpProvider.prototype.getPosts = function () {
-        // let headers = new Headers();
-        // this.getToken();
-        // headers.append('access_token', this.accessToken);
-        var uid = '878312008845622';
-        // // this.facebook.api('/me', ['user_posts', 'user_friends', 'user_likes']).then(
-        // //   (userData) => {
-        // //     console.log(JSON.stringify(userData));
-        // //     uid = userData.id;
-        // //   }, (err) => {
-        // //     if (err == 'cordova_not_available')
-        // //       uid = '878312008845622';
-        // //     console.log(JSON.stringify(err));
-        // //     //reject(err);
-        // //   });
-        // this.http.get(
-        //   this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
-        //   .map(res => res.json());
         var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
         this.getToken();
         headers.append('access_token', this.accessToken);
         // return this.http.get(
         //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
         //   .map(res => res.json());
-        return this.http.get(this.setHttpRequest("newsfeed/" + uid.toString(), '', '0', '0', '0', '0'), { headers: headers })
+        return this.http.get(this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
             .map(function (res) { return res.json(); });
     };
     HttpProvider.prototype.getCover = function (uid) {
-        this.facebook.api('/' + uid + '?field=cover', ['user_posts']).then(function (coverData) {
+        this.facebook.api('/' + uid.toString() + '?field=cover', ['user_posts']).then(function (coverData) {
             return coverData.source;
         }, function (err) {
             console.log(JSON.stringify(err));
