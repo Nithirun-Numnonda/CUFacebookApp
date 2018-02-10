@@ -12,7 +12,9 @@ import { SettingPage } from '../setting/setting';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name:'tabsPage'
+})
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'

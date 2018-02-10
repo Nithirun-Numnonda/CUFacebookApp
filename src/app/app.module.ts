@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { NewfeedPage } from '../pages/newfeed/newfeed';
 import { FriendsPage } from '../pages/friends/friends';
@@ -19,7 +18,6 @@ import { SwingModule } from 'angular2-swing';
   declarations: [
     MyApp,
     HomePage,
-    TabsPage,
     DashboardPage,
     NewfeedPage,
     FriendsPage,
@@ -37,7 +35,6 @@ import { SwingModule } from 'angular2-swing';
   entryComponents: [
     MyApp,
     HomePage,
-    TabsPage,
     DashboardPage,
     NewfeedPage,
     FriendsPage,
