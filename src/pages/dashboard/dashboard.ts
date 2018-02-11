@@ -152,7 +152,7 @@ export class DashboardPage {
         datasets: [{
           label: 'Total comments',
           data: this.total_comments,
-          backgroundColor: "#baffc9",
+          backgroundColor: "#bae1ff",
           borderWidth: 1
         }, {
           label: 'Total reactions',

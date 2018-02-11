@@ -21,11 +21,11 @@ export class HttpProvider {
   uid: string;
   authResponse: any;
   isLogged: boolean;
-  
+
   // private graphUrl = 'https://graph.facebook.com/';
   // private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
 
-  constructor(public http: Http, private facebook: Facebook, private platform: Platform,public app:App) {
+  constructor(public http: Http, private facebook: Facebook, private platform: Platform, public app: App) {
     console.log('Hello HttpProvider Provider');
 
   }
@@ -35,8 +35,8 @@ export class HttpProvider {
   }
   get navCtrl(): NavController {
     return this.app.getActiveNav();
- }
-  login(){
+  }
+  login() {
     let permissions = new Array<string>();
     //let nav = this.navCtrl;
     permissions = ["public_profile", "user_posts", "user_friends"];
@@ -53,31 +53,37 @@ export class HttpProvider {
       alert('Logged in Successfully!');
       console.log(JSON.stringify(response.authResponse));
       this.authResponse = response.authResponse;
-      this.uid=this.authResponse.userId;
-      this.isLogged=true;
+      this.uid = this.authResponse.userId;
+      this.isLogged = true;
       this.navCtrl.push('tabsPage');
     }, (error) => {
 
       if (error == 'cordova_not_available') {
-        this.isLogged=true;
+        this.isLogged = true;
         this.navCtrl.push('tabsPage');
+        this.uid = "878312008845622";
+        console.log(this.uid);
       } else {
         alert("Error: " + JSON.stringify(error));
         console.log(error);
-        this.isLogged=false;
+        this.isLogged = false;
       }
     });
-    
+
+    //console.log(this.uid);
   }
+
   //get user token from facebook
   getToken() {
     if (this.platform.is('cordova')) {
-      this.facebook.getAccessToken().then(value => { this.accessToken = value });
-      console.log("access_token:" + this.accessToken);
+      this.facebook.getAccessToken().then(value => {
+        this.accessToken = value;
+        console.log(this.accessToken);
+      });
     }
     else {
       //for test in computer
-      this.accessToken = 'EAACEdEose0cBAAnJ1OcrIDmBdklFirgxOZBPgZCwzG3YCP8ls4wMUCL9AEDgcHcSBAS0uPQZBSmcTQUoSrkzaKaXclBJN1ZAyT4cw35jPk1ZCjwXvOqdjUJzqGvYcwp3ZB2xEFcJct94GvsFZCpv0gdGgxNyogMQhoJKoLBwGOYrOtw0E3ZAz8WtRKg2EEWgCUQrzE58VqxfGQZDZD';
+      this.accessToken = 'EAACEdEose0cBAPohbJecxyDWO4otsb3yd9ZC3Nh59q9lHQaxbTUChh13bQD9UruSjuY5mLhhB5Uv4X6ZBR9ZAIXNI1KlLTrEf94PyZCUZCUM9if7DiiwD52u9CRPtTaDx5daZCOgb8Ezri0FL8FX7XCaq7pObZCO6dRatFwrZBZBlXE41BIzcirRo3qnQIZCXzgGZBLAyimM1qOnQZDZD';
     }
   }
   //set url for http request from python server
@@ -139,23 +145,28 @@ export class HttpProvider {
 
   //feature for newfeed??
   setLike() {
-    let headers = new Headers();
     this.getToken();
+    let headers = new Headers();
+    
     headers.append('access_token', this.accessToken);
     this.http.get(
       this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
       .map(res => res.json());
   }
 
+
   getPosts() {
-    let headers = new Headers();
     this.getToken();
+    let headers = new Headers();
+    
+    console.log(this.uid);
+    console.log(this.accessToken);
     headers.append('access_token', this.accessToken);
     // return this.http.get(
     //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
     //   .map(res => res.json());
     return this.http.get(
-      this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
+      this.setHttpRequest("newsfeed/878312008845622", '', '0', '0', '0', '0'), { headers: headers })
       .map(res => res.json());
   }
   getCover(uid: string) {
@@ -169,7 +180,7 @@ export class HttpProvider {
         //reject(err);
 
       });
-    return null;
+
   }
   getContext(uid: string) {
     this.facebook.api('/' + uid + '?field=context', ['user_posts']).then(
@@ -181,7 +192,6 @@ export class HttpProvider {
         //reject(err);
 
       });
-    return null;
   }
 
 }

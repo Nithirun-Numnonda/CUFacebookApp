@@ -39,6 +39,9 @@ export class NewfeedPage {
   recentCard: string = '';
   public posts: Observable<any[]>;
 
+  //for retry getData
+  private retryTime;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private httpProvider: HttpProvider, public loadingController: LoadingController, private http: Http) {
     //for tinder
@@ -56,28 +59,55 @@ export class NewfeedPage {
     // };
   }
 
-  ionViewDidLoad() {
+  //call when refresh
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    
+    //get data again
+    this.getPost()
+    refresher.complete();
+  }
+  getPost() {
+    let loading = this.loadingController.create({ content: "Loading,please wait..." });
+    loading.present();
     this.httpProvider.getPosts().subscribe(
       //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
       result => {
         //check if server send error back
-        this.newsData=result;
-        //assign data to view
+        if (result.error) {
+          //check if token expire?
+          if (result.error.type == "OAuthException") {
+            console.log("Token expired!!!");
+            this.retryTime += 1;
+            if (this.retryTime < 3)
+              return this.getPost();
+            else
+              alert("Access Token expired!!!");
+          }
 
+        }
+        
+        //assign data to view
+        this.newsData = result;
         console.log("Success : " + JSON.stringify(result));
+        loading.dismissAll();
+          this.retryTime = 0;
 
       },
       err => {
         //call if fail to get request
         console.error("Error : " + err);
-        alert("Can't get Data from the server: " + err);
-
+          alert("Can't get Data from the server: " + err);
+          loading.dismissAll();
       },
       () => {
         console.log('getData completed');
       }
     );
-
+  }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad newfeedPage');
+    this.getPost();
     //this.getCommentsData();
     //this.createGraph();
   }
