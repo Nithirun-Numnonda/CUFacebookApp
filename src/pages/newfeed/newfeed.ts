@@ -62,9 +62,9 @@ export class NewfeedPage {
   //call when refresh
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-    
+
     //get data again
-    this.getPost()
+    this.getPost();
     refresher.complete();
   }
   getPost() {
@@ -79,31 +79,42 @@ export class NewfeedPage {
           if (result.error.type == "OAuthException") {
             console.log("Token expired!!!");
             this.retryTime += 1;
-            if (this.retryTime < 3)
+            if (this.retryTime < 20)
               return this.getPost();
             else
-              alert("Access Token expired!!!");
+              console.log("Access Token expired!!!");
+          }
+          else{
+            this.setLike();
+            this.getPost();
           }
 
         }
-        
+
         //assign data to view
         this.newsData = result;
         console.log("Success : " + JSON.stringify(result));
         loading.dismissAll();
-          this.retryTime = 0;
+        this.retryTime = 0;
 
       },
       err => {
         //call if fail to get request
         console.error("Error : " + err);
-          alert("Can't get Data from the server: " + err);
-          loading.dismissAll();
+        alert("Can't get Data from the server: " + err);
+        loading.dismissAll();
       },
       () => {
         console.log('getData completed');
+        loading.dismissAll();
       }
     );
+  }
+  setLike(){
+    this.httpProvider.setLike().subscribe((value)=>{
+      console.log(value);
+    });
+    
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad newfeedPage');

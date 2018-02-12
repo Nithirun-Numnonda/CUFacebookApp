@@ -39,7 +39,7 @@ export class HttpProvider {
   login() {
     let permissions = new Array<string>();
     //let nav = this.navCtrl;
-    permissions = ["public_profile", "user_posts", "user_friends"];
+    permissions = ["public_profile", "user_posts", "user_friends","user_likes"];
 
     this.facebook.login(permissions).then((response) => {
       let userId = response.authResponse.userID;
@@ -57,7 +57,7 @@ export class HttpProvider {
       this.isLogged = true;
       this.navCtrl.push('tabsPage');
     }, (error) => {
-
+      //for test
       if (error == 'cordova_not_available') {
         this.isLogged = true;
         this.navCtrl.push('tabsPage');
@@ -72,7 +72,23 @@ export class HttpProvider {
 
     //console.log(this.uid);
   }
-
+  // set uid
+  setUid(uid){
+    this.uid=uid;
+  }
+  //get uid
+  getUid(){
+    if (this.platform.is('cordova')) {
+      this.facebook.api("/me",[]).then(value => {
+        this.uid = value.id;
+        //alert(this.uid);
+        console.log(value);
+      });
+    }
+    else{
+      this.uid = "878312008845622";
+    }
+  }
   //get user token from facebook
   getToken() {
     if (this.platform.is('cordova')) {
@@ -83,7 +99,7 @@ export class HttpProvider {
     }
     else {
       //for test in computer
-      this.accessToken = 'EAACEdEose0cBAPohbJecxyDWO4otsb3yd9ZC3Nh59q9lHQaxbTUChh13bQD9UruSjuY5mLhhB5Uv4X6ZBR9ZAIXNI1KlLTrEf94PyZCUZCUM9if7DiiwD52u9CRPtTaDx5daZCOgb8Ezri0FL8FX7XCaq7pObZCO6dRatFwrZBZBlXE41BIzcirRo3qnQIZCXzgGZBLAyimM1qOnQZDZD';
+      this.accessToken = 'EAACEdEose0cBAENMoZCdwhdLzU16aTvAdscDD488MLQH8We4lt3M5xOWWebmVIZBAN8ZBdFP1l1AuFwKCJKSDq7hpO9DStlUAGG2NrSGYJQJyJY5YRVMIjZBlTkGdhJVicBXDTcJZCEPYPDZAa25skPiZBOtWxUNdGZBa7Bt4j2bpevldDzilzhKTZBLwiVo3zO1cQbwZAlaIWCQZDZD';
     }
   }
   //set url for http request from python server
@@ -149,13 +165,15 @@ export class HttpProvider {
     let headers = new Headers();
     
     headers.append('access_token', this.accessToken);
-    this.http.get(
+    return this.http.get(
       this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
       .map(res => res.json());
+    
   }
 
 
   getPosts() {
+    this.getUid();
     this.getToken();
     let headers = new Headers();
     
@@ -166,7 +184,7 @@ export class HttpProvider {
     //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
     //   .map(res => res.json());
     return this.http.get(
-      this.setHttpRequest("newsfeed/878312008845622", '', '0', '0', '0', '0'), { headers: headers })
+      this.setHttpRequest("newsfeed/"+this.uid, '', '0', '0', '0', '0'), { headers: headers })
       .map(res => res.json());
   }
   getCover(uid: string) {

@@ -80,8 +80,10 @@ export class DashboardPage {
     this.total_comments = [];
     this.total_reactions = [];
     //get data again
-    this.getFacebookData()
+    this.getFacebookData();
+    this.setLike();
     refresher.complete();
+    
   }
   //get Facebook Data from httpProvider
   getFacebookData() {
@@ -101,7 +103,7 @@ export class DashboardPage {
               if (this.retryTime < 3)
                 return this.getFacebookData();
               else
-                alert("Access Token expired!!!");
+                console.log("Access Token expired!!!");
             }
 
           }
@@ -120,6 +122,7 @@ export class DashboardPage {
 //          console.log("Success : " + JSON.stringify(result));
           loading.dismissAll();
           this.retryTime = 0;
+          this.httpProvider.setUid(result._uid);
         },
         err => {
           //call if fail to get request
@@ -133,11 +136,18 @@ export class DashboardPage {
       );
   }
 
+  setLike(){
+    this.httpProvider.setLike().subscribe((value)=>{
+      console.log(value);
+    });
+    
+  }
+
   //call when view did load
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
     this.getFacebookData();
-    this.httpProvider.setLike();
+    this.setLike();
   }
 
 

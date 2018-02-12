@@ -1,6 +1,6 @@
 webpackJsonp([7],{
 
-/***/ 115:
+/***/ 122:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86,11 +86,11 @@ var map = {
 		6
 	],
 	"../pages/newfeed/newfeed.module": [
-		772,
+		771,
 		5
 	],
 	"../pages/setting/setting.module": [
-		771,
+		772,
 		4
 	],
 	"../pages/tabs/tabs.module": [
@@ -189,6 +189,7 @@ var DashboardPage = (function () {
         this.total_reactions = [];
         //get data again
         this.getFacebookData();
+        this.setLike();
         refresher.complete();
     };
     //get Facebook Data from httpProvider
@@ -228,6 +229,7 @@ var DashboardPage = (function () {
                 //          console.log("Success : " + JSON.stringify(result));
                 loading.dismissAll();
                 _this.retryTime = 0;
+                _this.httpProvider.setUid(result._uid);
             }, function (err) {
                 //call if fail to get request
                 console.error("Error : " + err);
@@ -237,11 +239,16 @@ var DashboardPage = (function () {
                 console.log('getData completed');
             });
     };
+    DashboardPage.prototype.setLike = function () {
+        this.httpProvider.setLike().subscribe(function (value) {
+            console.log(value);
+        });
+    };
     //call when view did load
     DashboardPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad DashboardPage');
         this.getFacebookData();
-        this.httpProvider.setLike();
+        this.setLike();
     };
     //for create graph
     DashboardPage.prototype.createGraph = function () {
@@ -482,7 +489,7 @@ __decorate([
 ], FriendsPage.prototype, "lineCanvas", void 0);
 FriendsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-friends',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n  Generated template for the FriendsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n      <ion-title>friends</ion-title>\n    </ion-navbar>\n  \n  </ion-header>\n\n\n<ion-content padding>\n<ion-card>\n      \n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
+        selector: 'page-friends',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n  Generated template for the FriendsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>friends</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-title>This tab for newfeeds from friends who use our app</ion-card-title>\n    Coming Soon\n  </ion-card>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
@@ -495,72 +502,6 @@ FriendsPage = __decorate([
 /***/ }),
 
 /***/ 394:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_home__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__ = __webpack_require__(75);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/**
- * Generated class for the SettingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var SettingPage = (function () {
-    function SettingPage(navCtrl, navParams, facebook, app) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.facebook = facebook;
-        this.app = app;
-    }
-    SettingPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad SettingPage');
-    };
-    SettingPage.prototype.getAccess = function () {
-        var token = this.facebook.getAccessToken();
-        console.log(token);
-        alert(token);
-    };
-    SettingPage.prototype.logout = function () {
-        this.facebook.logout().then(function (response) {
-            alert(JSON.stringify(response));
-        }, function (error) {
-            alert(error);
-        });
-        var nav = this.app.getRootNav();
-        nav.push(__WEBPACK_IMPORTED_MODULE_0__home_home__["a" /* HomePage */]);
-    };
-    return SettingPage;
-}());
-SettingPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/'<!--\n  Generated template for the SettingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Setting</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <button ion-item (click)=\'logout()\'>LOG OUT</button>\n  <button ion-item (click)=\'getAccess()\'>Token PLS</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/,
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */]])
-], SettingPage);
-
-//# sourceMappingURL=setting.js.map
-
-/***/ }),
-
-/***/ 395:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -664,10 +605,14 @@ var NewfeedPage = (function () {
                 if (result.error.type == "OAuthException") {
                     console.log("Token expired!!!");
                     _this.retryTime += 1;
-                    if (_this.retryTime < 3)
+                    if (_this.retryTime < 20)
                         return _this.getPost();
                     else
                         alert("Access Token expired!!!");
+                }
+                else {
+                    _this.setLike();
+                    _this.getPost();
                 }
             }
             //assign data to view
@@ -682,6 +627,12 @@ var NewfeedPage = (function () {
             loading.dismissAll();
         }, function () {
             console.log('getData completed');
+            loading.dismissAll();
+        });
+    };
+    NewfeedPage.prototype.setLike = function () {
+        this.httpProvider.setLike().subscribe(function (value) {
+            console.log(value);
         });
     };
     NewfeedPage.prototype.ionViewDidLoad = function () {
@@ -760,6 +711,72 @@ NewfeedPage = __decorate([
 
 /***/ }),
 
+/***/ 395:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_home__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__ = __webpack_require__(75);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the SettingPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var SettingPage = (function () {
+    function SettingPage(navCtrl, navParams, facebook, app) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.facebook = facebook;
+        this.app = app;
+    }
+    SettingPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad SettingPage');
+    };
+    SettingPage.prototype.getAccess = function () {
+        var token = this.facebook.getAccessToken();
+        console.log(token);
+        alert(token);
+    };
+    SettingPage.prototype.logout = function () {
+        this.facebook.logout().then(function (response) {
+            alert(JSON.stringify(response));
+        }, function (error) {
+            alert(error);
+        });
+        var nav = this.app.getRootNav();
+        nav.push(__WEBPACK_IMPORTED_MODULE_0__home_home__["a" /* HomePage */]);
+    };
+    return SettingPage;
+}());
+SettingPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
+        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/'<!--\n  Generated template for the SettingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Setting</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <button ion-item (click)=\'logout()\'>LOG OUT</button>\n  <button ion-item (click)=\'getAccess()\'>Token PLS</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */]])
+], SettingPage);
+
+//# sourceMappingURL=setting.js.map
+
+/***/ }),
+
 /***/ 396:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -785,11 +802,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(384);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(385);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(757);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__ = __webpack_require__(392);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_newfeed_newfeed__ = __webpack_require__(395);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_newfeed_newfeed__ = __webpack_require__(394);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_friends_friends__ = __webpack_require__(393);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_setting_setting__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_setting_setting__ = __webpack_require__(395);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_http_http_provider__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_http__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_facebook__ = __webpack_require__(75);
@@ -844,8 +861,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/friends/friends.module#FriendsPageModule', name: 'FriendsPage', segment: 'friends', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/setting/setting.module#SettingPageModule', name: 'SettingPage', segment: 'setting', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/newfeed/newfeed.module#NewfeedPageModule', name: 'NewfeedPage', segment: 'newfeed', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/setting/setting.module#SettingPageModule', name: 'SettingPage', segment: 'setting', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/tabs/tabs.module#TabsPageModule', name: 'tabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/user-profile/user-profile.module#UserProfilePageModule', name: 'UserProfilePage', segment: 'user-profile', priority: 'low', defaultHistory: [] }
                 ]
@@ -1185,7 +1202,7 @@ var HttpProvider = (function () {
         var _this = this;
         var permissions = new Array();
         //let nav = this.navCtrl;
-        permissions = ["public_profile", "user_posts", "user_friends"];
+        permissions = ["public_profile", "user_posts", "user_friends", "user_likes"];
         this.facebook.login(permissions).then(function (response) {
             var userId = response.authResponse.userID;
             var params = new Array();
@@ -1201,6 +1218,7 @@ var HttpProvider = (function () {
             _this.isLogged = true;
             _this.navCtrl.push('tabsPage');
         }, function (error) {
+            //for test
             if (error == 'cordova_not_available') {
                 _this.isLogged = true;
                 _this.navCtrl.push('tabsPage');
@@ -1215,6 +1233,24 @@ var HttpProvider = (function () {
         });
         //console.log(this.uid);
     };
+    // set uid
+    HttpProvider.prototype.setUid = function (uid) {
+        this.uid = uid;
+    };
+    //get uid
+    HttpProvider.prototype.getUid = function () {
+        var _this = this;
+        if (this.platform.is('cordova')) {
+            this.facebook.api("/me", []).then(function (value) {
+                _this.uid = value.id;
+                //alert(this.uid);
+                console.log(value);
+            });
+        }
+        else {
+            this.uid = "878312008845622";
+        }
+    };
     //get user token from facebook
     HttpProvider.prototype.getToken = function () {
         var _this = this;
@@ -1226,7 +1262,7 @@ var HttpProvider = (function () {
         }
         else {
             //for test in computer
-            this.accessToken = 'EAACEdEose0cBAPohbJecxyDWO4otsb3yd9ZC3Nh59q9lHQaxbTUChh13bQD9UruSjuY5mLhhB5Uv4X6ZBR9ZAIXNI1KlLTrEf94PyZCUZCUM9if7DiiwD52u9CRPtTaDx5daZCOgb8Ezri0FL8FX7XCaq7pObZCO6dRatFwrZBZBlXE41BIzcirRo3qnQIZCXzgGZBLAyimM1qOnQZDZD';
+            this.accessToken = 'EAACEdEose0cBAENMoZCdwhdLzU16aTvAdscDD488MLQH8We4lt3M5xOWWebmVIZBAN8ZBdFP1l1AuFwKCJKSDq7hpO9DStlUAGG2NrSGYJQJyJY5YRVMIjZBlTkGdhJVicBXDTcJZCEPYPDZAa25skPiZBOtWxUNdGZBa7Bt4j2bpevldDzilzhKTZBLwiVo3zO1cQbwZAlaIWCQZDZD';
         }
     };
     //set url for http request from python server
@@ -1284,10 +1320,11 @@ var HttpProvider = (function () {
         this.getToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
         headers.append('access_token', this.accessToken);
-        this.http.get(this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
+        return this.http.get(this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
             .map(function (res) { return res.json(); });
     };
     HttpProvider.prototype.getPosts = function () {
+        this.getUid();
         this.getToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
         console.log(this.uid);
@@ -1296,7 +1333,7 @@ var HttpProvider = (function () {
         // return this.http.get(
         //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
         //   .map(res => res.json());
-        return this.http.get(this.setHttpRequest("newsfeed/878312008845622", '', '0', '0', '0', '0'), { headers: headers })
+        return this.http.get(this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
             .map(function (res) { return res.json(); });
     };
     HttpProvider.prototype.getCover = function (uid) {
@@ -1336,7 +1373,7 @@ HttpProvider = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(385);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(384);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular_components_alert_alert_controller__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
