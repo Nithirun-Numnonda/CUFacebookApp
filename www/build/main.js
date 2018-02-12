@@ -162,13 +162,14 @@ var DashboardPage = (function () {
         this.top = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         //advance filter
         this.buttonClicked = false;
+        this.isAll = false;
         //for controlUI
         this.typeData = 'commentsData';
         this.pageTriger = 'chart';
         //initial default parameter
         this.hourValue = this.hours[0];
         this.dayValue = this.days[0];
-        this.monthValue = this.months[1];
+        this.monthValue = this.months[3];
         this.yearValue = this.years[0];
         this.topValue = this.top[0];
         //for retry
@@ -176,7 +177,68 @@ var DashboardPage = (function () {
         this.createTime = [];
         this.total_comments = [];
         this.total_reactions = [];
+        this.sortByTime = 'Last 3 months';
     }
+    DashboardPage.prototype.timeSwitchCase = function () {
+        switch (this.sortByTime) {
+            case "Last 1 week": {
+                this.hourValue = this.hours[0];
+                this.dayValue = this.days[7];
+                this.monthValue = this.months[0];
+                this.yearValue = this.years[0];
+                this.topValue = this.top[0];
+                break;
+            }
+            case "Last 1 month": {
+                this.hourValue = this.hours[0];
+                this.dayValue = this.days[0];
+                this.monthValue = this.months[1];
+                this.yearValue = this.years[0];
+                this.topValue = this.top[0];
+                break;
+            }
+            case "Last 3 months": {
+                this.hourValue = this.hours[0];
+                this.dayValue = this.days[0];
+                this.monthValue = this.months[3];
+                this.yearValue = this.years[0];
+                this.topValue = this.top[0];
+                break;
+            }
+            case "Last 6 months": {
+                this.hourValue = this.hours[0];
+                this.dayValue = this.days[0];
+                this.monthValue = this.months[6];
+                this.yearValue = this.years[0];
+                this.topValue = this.top[0];
+                break;
+            }
+            case "Last 1 year": {
+                this.hourValue = this.hours[0];
+                this.dayValue = this.days[0];
+                this.monthValue = this.months[0];
+                this.yearValue = this.years[1];
+                this.topValue = this.top[0];
+                break;
+            }
+            case "Last 2 years": {
+                this.hourValue = this.hours[0];
+                this.dayValue = this.days[0];
+                this.monthValue = this.months[0];
+                this.yearValue = this.years[2];
+                this.topValue = this.top[0];
+                break;
+            }
+            case "Last 5 years": {
+                this.hourValue = this.hours[0];
+                this.dayValue = this.days[0];
+                this.monthValue = this.months[0];
+                this.yearValue = this.years[5];
+                this.topValue = this.top[0];
+                break;
+            }
+        }
+    };
     //for advance filter
     DashboardPage.prototype.onButtonClick = function () {
         this.buttonClicked = !this.buttonClicked;
@@ -195,6 +257,7 @@ var DashboardPage = (function () {
     //get Facebook Data from httpProvider
     DashboardPage.prototype.getFacebookData = function () {
         var _this = this;
+        this.timeSwitchCase();
         var loading = this.loadingController.create({ content: "Loading,please wait..." });
         loading.present();
         if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
@@ -211,7 +274,7 @@ var DashboardPage = (function () {
                         if (_this.retryTime < 3)
                             return _this.getFacebookData();
                         else
-                            alert("Access Token expired!!!");
+                            console.log("Access Token expired!!!");
                     }
                 }
                 //assign data to view
@@ -225,7 +288,55 @@ var DashboardPage = (function () {
                         _this.total_comments.push(data.total_comments);
                         _this.total_reactions.push(data.total_reactions);
                     }
-                _this.createGraph();
+                if (_this.pageTriger == "chart")
+                    _this.createGraph();
+                //          console.log("Success : " + JSON.stringify(result));
+                loading.dismissAll();
+                _this.retryTime = 0;
+                _this.httpProvider.setUid(result._uid);
+                _this.isAll = true;
+            }, function (err) {
+                //call if fail to get request
+                console.error("Error : " + err);
+                alert("Can't get Data from the server: " + err);
+                loading.dismissAll();
+            }, function () {
+                console.log('getData completed');
+            });
+    };
+    DashboardPage.prototype.getAllTops = function () {
+        var _this = this;
+        var loading = this.loadingController.create({ content: "Loading,please wait..." });
+        loading.present();
+        if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
+            //call method from httpProvider
+            this.httpProvider.getDashboardAllTops().subscribe(
+            //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+            function (result) {
+                //check if server send error back
+                if (result.error) {
+                    //check if token expire?
+                    if (result.error.type == "OAuthException") {
+                        console.log("Token expired!!!");
+                        _this.retryTime += 1;
+                        if (_this.retryTime < 3)
+                            return _this.getAllTops();
+                        else
+                            console.log("Access Token expired!!!");
+                    }
+                }
+                //assign data to view
+                _this.commentsData = result.comments;
+                _this.reactionsData = result.reactions;
+                if (_this.postsSummaryData)
+                    for (var _i = 0, _a = _this.postsSummaryData; _i < _a.length; _i++) {
+                        var data = _a[_i];
+                        _this.createTime.push(data.created_time);
+                        _this.total_comments.push(data.total_comments);
+                        _this.total_reactions.push(data.total_reactions);
+                    }
+                if (_this.pageTriger == "chart")
+                    _this.createGraph();
                 //          console.log("Success : " + JSON.stringify(result));
                 loading.dismissAll();
                 _this.retryTime = 0;
@@ -309,7 +420,7 @@ __decorate([
 ], DashboardPage.prototype, "barCanvas", void 0);
 DashboardPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n\n  Generated template for the DashboardPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Dashboard</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding="">\n\n  <ion-header>\n\n    <ion-toolbar class="btn-wrapper">\n\n      <div [ngSwitch]="typeData" *ngIf="pageTriger == \'list\'">\n\n        <div><ion-title *ngSwitchCase="\'commentsData\'" id="subheader">Top Comments Users on Your Posts</ion-title>\n\n        <ion-title *ngSwitchCase="\'likesData\'" id="subheader">Top Likes Users on Your Posts</ion-title>\n\n\n\n        <ion-segment [(ngModel)]="typeData" color="primary">\n\n          <ion-segment-button value="commentsData">\n\n            Top Comments\n\n          </ion-segment-button>\n\n          <ion-segment-button value="likesData">\n\n            Top Likes\n\n          </ion-segment-button>\n\n        </ion-segment>\n\n        </div>\n\n      </div>\n\n      <div *ngIf="pageTriger == \'chart\'">\n\n          <ion-title >Your Posts Summary</ion-title>\n\n        </div>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <div *ngIf="pageTriger == \'chart\'" class=\'dashboardContent\'>\n\n    <ion-card>\n\n      <ion-card-header>\n\n        Top post\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <canvas #barCanvas type></canvas>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </div>\n\n  <div *ngIf="pageTriger == \'list\'" class=\'dashboardContent\'>\n\n    <div [ngSwitch]="typeData">\n\n      <div *ngSwitchCase="\'commentsData\'">\n\n        <ion-list *ngFor="let item of commentsData">\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <table>\n\n                <tr>\n\n                  <td>\n\n                    <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n\n                  </td>\n\n                  <td>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)">\n\n                      {{item.name+" : "}}\n\n                    </ion-card-header>\n\n                    <div *ngIf="item.comments" id=\'subcard\'>Comment : {{item.comments}}</div>\n\n                  </td>\n\n                </tr>\n\n              </table>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div *ngSwitchCase="\'likesData\'">\n\n        <ion-list *ngFor="let item of reactionsData">\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <table>\n\n                <tr>\n\n                  <td>\n\n                    <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n\n                  </td>\n\n                  <td>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)">\n\n                      {{item.name+" : "}}\n\n                    </ion-card-header>\n\n                    <div *ngIf="item.total" id=\'subcard\'>\n\n                      Like :{{item.like}} Love :{{item.love}} Wow :{{item.wow}} Haha :{{item.haha}} Sad :{{item.sad}} Angry :{{item.angry}} Thanksful\n\n                      :{{item.thankful}} Total :{{item.total}}</div>\n\n                  </td>\n\n                </tr>\n\n              </table>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div *ngIf="buttonClicked">\n\n        <button ion-button full round (click)="onButtonClick()">Advance Filter</button>\n\n        <ion-item>\n\n          <ion-label>Hours</ion-label>\n\n          <ion-select item-left [(ngModel)]="hourValue">\n\n            <ion-option *ngFor=\'let hour of hours\'>{{hour}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n          <ion-label item-right>Days</ion-label>\n\n          <ion-select item-left [(ngModel)]="dayValue">\n\n            <ion-option *ngFor=\'let day of days\'>{{day}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n          <ion-label item-right>Months</ion-label>\n\n          <ion-select item-left [(ngModel)]="monthValue">\n\n            <ion-option *ngFor=\'let month of months\'>{{month}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n          <ion-label item-right>Years</ion-label>\n\n          <ion-select item-left [(ngModel)]="yearValue">\n\n            <ion-option *ngFor=\'let year of years\'>{{year}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n          <ion-label item-right>Top</ion-label>\n\n          <ion-select item-left [(ngModel)]="topValue">\n\n            <ion-option *ngFor=\'let t of top\'>{{t}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </div>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n<ion-footer>\n\n  <div class="btn-wrapper">\n\n    <button ion-button icon-only color="secondary" (click)=\'trigerPage()\'>\n\n      <ion-icon name="arrow-up" *ngIf="pageTriger == \'list\'"></ion-icon>\n\n      <ion-icon name="arrow-down" *ngIf="pageTriger == \'chart\'"></ion-icon>\n\n    </button>\n\n  </div>\n\n</ion-footer>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
+        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n\n  Generated template for the DashboardPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Dashboard</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding="">\n\n  <ion-header>\n\n    <ion-toolbar class="btn-wrapper">\n\n      <div [ngSwitch]="typeData" *ngIf="pageTriger == \'list\'">\n\n        <div>\n\n          <ion-title *ngSwitchCase="\'commentsData\'" id="subheader">Top Comments Users on Your Posts</ion-title>\n\n          <ion-title *ngSwitchCase="\'likesData\'" id="subheader">Top Likes Users on Your Posts</ion-title>\n\n\n\n          <ion-segment [(ngModel)]="typeData" color="primary">\n\n            <ion-segment-button value="commentsData">\n\n              Top Comments\n\n            </ion-segment-button>\n\n            <ion-segment-button value="likesData">\n\n              Top Likes\n\n            </ion-segment-button>\n\n          </ion-segment>\n\n        </div>\n\n      </div>\n\n      <div *ngIf="pageTriger == \'chart\'">\n\n        <ion-title>Your Posts Summary</ion-title>\n\n      </div>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <div *ngIf="pageTriger == \'chart\'" class=\'dashboardContent\'>\n\n    <ion-card>\n\n      <ion-card-header>\n\n        Top post\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <canvas #barCanvas type></canvas>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </div>\n\n  <div *ngIf="pageTriger == \'list\'" class=\'dashboardContent\'>\n\n    <div [ngSwitch]="typeData">\n\n      <div *ngSwitchCase="\'commentsData\'">\n\n        <ion-list *ngFor="let item of commentsData">\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n\n                  </ion-col>\n\n                  <ion-col col-9>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)">\n\n                      <div style="word-wrap: break-word">{{item.name}}</div>\n\n                    </ion-card-header>\n\n                    <div *ngIf="item.comments" id=\'subcard\'>Comments\n\n                      <ion-icon name="text"></ion-icon> {{item.comments}} </div>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div *ngSwitchCase="\'likesData\'">\n\n        <ion-list *ngFor="let item of reactionsData">\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col >\n\n                    <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n\n                  </ion-col>\n\n                  <ion-col col-9>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)">\n\n                      <div style="word-wrap: break-word">{{item.name}}</div>\n\n                      <button ion-button style="padding-left:0px;">\n\n                        <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon> {{item.total}}</button>\n\n                    </ion-card-header>\n\n                    <div *ngIf="item.total" id=\'subcard\'>\n\n                      <ion-grid>\n\n                        <ion-row>\n\n                          <ion-col>\n\n                            <ion-icon style="color:aqua;" name="ios-thumbs-up"></ion-icon>{{item.like}} </ion-col>\n\n                          <ion-col><ion-icon style="color:crimson;" name="ios-heart"></ion-icon>{{item.love}}</ion-col>\n\n                          <ion-col><ion-icon style="color:goldenrod;" name="md-outlet"></ion-icon>{{item.wow}}</ion-col>\n\n                          <ion-col><ion-icon style="color:goldenrod;" name="ios-happy"></ion-icon>{{item.haha}}</ion-col>\n\n                        </ion-row>\n\n                        <ion-row>\n\n                          <ion-col><ion-icon style="color:goldenrod;" name="ios-sad"></ion-icon>{{item.sad}} </ion-col>\n\n                          <ion-col><ion-icon style="color:goldenrod;" name="alert"></ion-icon>{{item.angry}}</ion-col>\n\n                          <ion-col><ion-icon style="color:purple;" name="flower"></ion-icon>{{item.thankful}}</ion-col>\n\n                        </ion-row>\n\n                      </ion-grid>\n\n                    </div>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div>\n\n        <ion-grid no-padding>\n\n          <ion-row>\n\n            <ion-col col-10>\n\n              <ion-select [(ngModel)]="sortByTime" (ionChange)="getFacebookData()">\n\n                <ion-option>Last 1 week</ion-option>\n\n                <ion-option>Last 1 month</ion-option>\n\n                <ion-option>Last 3 months</ion-option>\n\n                <ion-option>Last 6 months</ion-option>\n\n                <ion-option>Last 1 year</ion-option>\n\n                <ion-option>Last 2 years</ion-option>\n\n                <ion-option>Last 5 years</ion-option>\n\n              </ion-select>\n\n            </ion-col>\n\n            <ion-col>\n\n              <label ion-item (click)="getAllTops()">See more ...</label>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </div>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n<ion-footer>\n\n  <div class="btn-wrapper">\n\n    <button ion-button icon-only color="secondary" (click)=\'trigerPage()\'>\n\n      <ion-icon name="arrow-up" *ngIf="pageTriger == \'list\'"></ion-icon>\n\n      <ion-icon name="arrow-down" *ngIf="pageTriger == \'chart\'"></ion-icon>\n\n    </button>\n\n  </div>\n\n</ion-footer>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
@@ -546,6 +657,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  */
 var NewfeedPage = (function () {
     function NewfeedPage(navCtrl, navParams, httpProvider, loadingController, http) {
+        //for tinder
+        //console.log(this.httpProvider.getPosts());
+        // this.stackConfig = {
+        //   throwOutConfidence: (offsetX, offsetY, element) => {
+        //     return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
+        //   },
+        //   transform: (element, x, y, r) => {
+        //     this.onItemMove(element, x, y, r);
+        //   },
+        //   throwOutDistance: (d) => {
+        //     return 800;
+        //   }
+        // };
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -571,19 +695,8 @@ var NewfeedPage = (function () {
                 .filter(function (x) { return x.type == "photo"; })
                 .map(function (x) { return x.media.image; });
         };
-        //for tinder
-        //console.log(this.httpProvider.getPosts());
-        // this.stackConfig = {
-        //   throwOutConfidence: (offsetX, offsetY, element) => {
-        //     return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
-        //   },
-        //   transform: (element, x, y, r) => {
-        //     this.onItemMove(element, x, y, r);
-        //   },
-        //   throwOutDistance: (d) => {
-        //     return 800;
-        //   }
-        // };
+        //for retry
+        this.retryTime = 0;
     }
     //call when refresh
     NewfeedPage.prototype.doRefresh = function (refresher) {
@@ -605,10 +718,10 @@ var NewfeedPage = (function () {
                 if (result.error.type == "OAuthException") {
                     console.log("Token expired!!!");
                     _this.retryTime += 1;
-                    if (_this.retryTime < 20)
+                    if (_this.retryTime < 3)
                         return _this.getPost();
                     else
-                        alert("Access Token expired!!!");
+                        console.log("Access Token expired!!!");
                 }
                 else {
                     _this.setLike();
@@ -627,7 +740,6 @@ var NewfeedPage = (function () {
             loading.dismissAll();
         }, function () {
             console.log('getData completed');
-            loading.dismissAll();
         });
     };
     NewfeedPage.prototype.setLike = function () {
@@ -700,7 +812,7 @@ var NewfeedPage = (function () {
 }());
 NewfeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Newfeed\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-list *ngFor="let item of newsData">\n\n\n\n    <ion-card>\n\n\n\n      <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src={{item.page_picture}}>\n\n        </ion-avatar>\n\n        <h2>{{item.page_name}}</h2>\n\n        <p>{{item.created_time}}</p>\n\n      </ion-item>\n\n\n\n      <img src={{item.full_picture}} />\n\n\n\n      <ion-card-content>\n\n        <p>{{item.message}}</p>\n\n      </ion-card-content>\n\n      <div>\n\n        <ion-row>\n\n\n\n\n\n          <ion-label>\n\n            <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon>\n\n            {{item.reactions_summary}}\n\n          </ion-label>\n\n\n\n        </ion-row>\n\n      </div>\n\n      <ion-row>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <ion-icon style="color:red;margin-left:10px" name="ios-thumbs-up"></ion-icon>\n\n            <div>Likes</div>\n\n          </button>\n\n        </ion-col>\n\n        <button class="button circle text-center">\n\n          <i class="ion-crop"></i>\n\n        </button>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <ion-icon name="text"></ion-icon>\n\n            <div>Comments</div>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n    </ion-card>\n\n  </ion-list>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
+        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Newfeed\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-list *ngFor="let item of newsData">\n\n\n\n    <ion-card>\n\n\n\n      <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src={{item.page_picture}}>\n\n        </ion-avatar>\n\n        <h2>{{item.page_name}}</h2>\n\n        <p>{{item.created_time}}</p>\n\n      </ion-item>\n\n\n\n      <img src={{item.full_picture}} />\n\n\n\n      <ion-card-content>\n\n        <p>{{item.message}}</p>\n\n      </ion-card-content>\n\n      <div>\n\n        <ion-row>\n\n\n\n\n\n          <ion-label>\n\n            <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon>\n\n            {{item.reactions_summary}}\n\n          </ion-label>\n\n\n\n        </ion-row>\n\n      </div>\n\n      <ion-row>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <ion-icon style="color:aqua;margin-left:10px" name="ios-thumbs-up"></ion-icon>\n\n            <div>Likes</div>\n\n          </button>\n\n        </ion-col>\n\n        <button class="button circle text-center">\n\n          <i class="ion-crop"></i>\n\n        </button>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <ion-icon name="text"></ion-icon>\n\n            <div>Comments</div>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n    </ion-card>\n\n  </ion-list>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
@@ -1262,7 +1374,7 @@ var HttpProvider = (function () {
         }
         else {
             //for test in computer
-            this.accessToken = 'EAACEdEose0cBAENMoZCdwhdLzU16aTvAdscDD488MLQH8We4lt3M5xOWWebmVIZBAN8ZBdFP1l1AuFwKCJKSDq7hpO9DStlUAGG2NrSGYJQJyJY5YRVMIjZBlTkGdhJVicBXDTcJZCEPYPDZAa25skPiZBOtWxUNdGZBa7Bt4j2bpevldDzilzhKTZBLwiVo3zO1cQbwZAlaIWCQZDZD';
+            this.accessToken = 'EAACEdEose0cBAO4prvNbZBkg4QgSTyb5EJu4PvTsniPNHKDOZAZBPeGaRItUpdnk2CUHiZA0u0KFr7QZA36TzjqXuXMMYekHM4H2WfOJI2DfOZCelcF6ZCJtFbHafyFJdsmXZA1YzjasXwRZBsIW954s2hBwGfizi6pxIm2uNIZAIr8fQD70FaVZA9A38LwTbZA9IJbpxg6bzoX8lQZDZD';
         }
     };
     //set url for http request from python server
@@ -1301,27 +1413,21 @@ var HttpProvider = (function () {
         return this.http.get(this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers })
             .map(function (res) { return res.json(); });
     };
-    // getCommentsData(top, hour, day, month, year) {
-    //   let headers = new Headers();
-    //   headers.append('access_token', this.accessToken);
-    //   return this.http.get(
-    //     this.setHttpRequest('comments', top, hour, day, month, year), { headers: headers })
-    //     .map(res => res.json());
-    // }
-    // getLikesData(top, hour, day, month, year) {
-    //   let headers = new Headers();
-    //   headers.append('access_token', this.accessToken);
-    //   return this.http.get(
-    //     this.setHttpRequest('reactions', top, hour, day, month, year))
-    //     .map(res => res.json());
-    // }
+    HttpProvider.prototype.getDashboardAllTops = function () {
+        this.getUid();
+        //set header to authorize with access token
+        this.getToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        headers.append('access_token', this.accessToken);
+        return this.http.get(this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
     //feature for newfeed??
     HttpProvider.prototype.setLike = function () {
         this.getToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
         headers.append('access_token', this.accessToken);
-        return this.http.get(this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
-            .map(function (res) { return res.json(); });
+        return this.http.get(this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers });
     };
     HttpProvider.prototype.getPosts = function () {
         this.getUid();
@@ -1337,29 +1443,19 @@ var HttpProvider = (function () {
             .map(function (res) { return res.json(); });
     };
     HttpProvider.prototype.getCover = function (uid) {
-        this.facebook.api('/' + uid.toString() + '?field=cover', ['user_posts']).then(function (coverData) {
-            return coverData.source;
-        }, function (err) {
-            console.log(JSON.stringify(err));
-            //reject(err);
-        });
+        return this.facebook.api('/' + uid.toString() + '?field=cover', ['user_posts']);
     };
     HttpProvider.prototype.getContext = function (uid) {
-        this.facebook.api('/' + uid + '?field=context', ['user_posts']).then(function (contextData) {
-            console.log(JSON.stringify(contextData));
-            return contextData.context;
-        }, function (err) {
-            console.log(JSON.stringify(err));
-            //reject(err);
-        });
+        return this.facebook.api('/' + uid + '?field=context', ['user_posts']);
     };
     return HttpProvider;
 }());
 HttpProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_1__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["a" /* App */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_facebook__["a" /* Facebook */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["j" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["a" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["a" /* App */]) === "function" && _d || Object])
 ], HttpProvider);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=http-provider.js.map
 
 /***/ }),

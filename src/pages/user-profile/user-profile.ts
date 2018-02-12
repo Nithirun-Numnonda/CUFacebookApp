@@ -23,17 +23,39 @@ export class UserProfilePage {
   constructor(private navParams: NavParams, private view: ViewController, public httpProvider:HttpProvider) {
     this.uid = this.navParams.get('userId');
     this.name = this.navParams.get('name');
-    this.cover = this.httpProvider.getCover(this.uid);
-    this.context=this.httpProvider.getContext(this.uid);
     
-      
-    
+  }
+  getCover(){
+    this.cover = this.httpProvider.getCover(this.uid).then(
+      (coverData) => {
+        console.log(JSON.stringify(coverData));
+        this.cover = coverData.source;
+
+      }, (err) => {
+        console.log(JSON.stringify(err));
+        //reject(err);
+
+      });
+  }
+  getContext(){
+    this.context=this.httpProvider.getContext(this.uid).then(
+      (contextData) => {
+        console.log(JSON.stringify(contextData));
+        this.context=contextData.context;
+      }, (err) => {
+        console.log(JSON.stringify(err));
+        //reject(err);
+
+      });
   }
   closeModal() {
     this.view.dismiss();
   }
-  ionViewDidLoad() {
+
+  ionViewWillEnter() {
     console.log('ionViewDidLoad UserProfilePage');
+    this.getCover();
+    this.getContext();
     
     
   }

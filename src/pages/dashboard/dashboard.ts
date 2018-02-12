@@ -45,11 +45,13 @@ export class DashboardPage {
   years: Array<String> = ['0', '1', '2', '3', '4', '5', '6', '7'];
   top: Array<String> = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 
+  sortByTime: String;
   //advance filter
   buttonClicked: boolean = false;
 
   //for retry getData
   private retryTime;
+  isAll: boolean = false;
 
   //for controlUI
   typeData: String = 'commentsData'
@@ -58,7 +60,7 @@ export class DashboardPage {
     //initial default parameter
     this.hourValue = this.hours[0];
     this.dayValue = this.days[0];
-    this.monthValue = this.months[1];
+    this.monthValue = this.months[3];
     this.yearValue = this.years[0];
     this.topValue = this.top[0];
     //for retry
@@ -68,6 +70,70 @@ export class DashboardPage {
     this.total_comments = [];
     this.total_reactions = [];
 
+    this.sortByTime = 'Last 3 months';
+
+
+  }
+  timeSwitchCase() {
+    switch (this.sortByTime) {
+      case "Last 1 week": {
+        this.hourValue = this.hours[0];
+        this.dayValue = this.days[7];
+        this.monthValue = this.months[0];
+        this.yearValue = this.years[0];
+        this.topValue = this.top[0];
+        break;
+      }
+      case "Last 1 month": {
+        this.hourValue = this.hours[0];
+        this.dayValue = this.days[0];
+        this.monthValue = this.months[1];
+        this.yearValue = this.years[0];
+        this.topValue = this.top[0];
+        break;
+      }
+      case "Last 3 months": {
+        this.hourValue = this.hours[0];
+        this.dayValue = this.days[0];
+        this.monthValue = this.months[3];
+        this.yearValue = this.years[0];
+        this.topValue = this.top[0];
+        break;
+      }
+      case "Last 6 months": {
+        this.hourValue = this.hours[0];
+        this.dayValue = this.days[0];
+        this.monthValue = this.months[6];
+        this.yearValue = this.years[0];
+        this.topValue = this.top[0];
+        break;
+      }
+      case "Last 1 year": {
+        this.hourValue = this.hours[0];
+        this.dayValue = this.days[0];
+        this.monthValue = this.months[0];
+        this.yearValue = this.years[1];
+        this.topValue = this.top[0];
+        break;
+      }
+      case "Last 2 years": {
+        this.hourValue = this.hours[0];
+        this.dayValue = this.days[0];
+        this.monthValue = this.months[0];
+        this.yearValue = this.years[2];
+        this.topValue = this.top[0];
+        break;
+      }
+      case "Last 5 years": {
+        this.hourValue = this.hours[0];
+        this.dayValue = this.days[0];
+        this.monthValue = this.months[0];
+        this.yearValue = this.years[5];
+        this.topValue = this.top[0];
+        break;
+      }
+
+    }
   }
   //for advance filter
   onButtonClick() {
@@ -83,10 +149,11 @@ export class DashboardPage {
     this.getFacebookData();
     this.setLike();
     refresher.complete();
-    
+
   }
   //get Facebook Data from httpProvider
   getFacebookData() {
+    this.timeSwitchCase();
     let loading = this.loadingController.create({ content: "Loading,please wait..." });
     loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
@@ -117,9 +184,58 @@ export class DashboardPage {
               this.total_comments.push(data.total_comments);
               this.total_reactions.push(data.total_reactions);
             }
+          if (this.pageTriger == "chart")
+            this.createGraph();
+          //          console.log("Success : " + JSON.stringify(result));
+          loading.dismissAll();
+          this.retryTime = 0;
+          this.httpProvider.setUid(result._uid);
+          this.isAll = true;
+        },
+        err => {
+          //call if fail to get request
+          console.error("Error : " + err);
+          alert("Can't get Data from the server: " + err);
+          loading.dismissAll();
+        },
+        () => {
+          console.log('getData completed');
+        }
+      );
+  }
+  getAllTops() {
+    let loading = this.loadingController.create({ content: "Loading,please wait..." });
+    loading.present();
+    if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
+      //call method from httpProvider
+      this.httpProvider.getDashboardAllTops().subscribe(
+        //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+        result => {
+          //check if server send error back
+          if (result.error) {
+            //check if token expire?
+            if (result.error.type == "OAuthException") {
+              console.log("Token expired!!!");
+              this.retryTime += 1;
+              if (this.retryTime < 3)
+                return this.getAllTops();
+              else
+                console.log("Access Token expired!!!");
+            }
 
-          this.createGraph();
-//          console.log("Success : " + JSON.stringify(result));
+          }
+          //assign data to view
+          this.commentsData = result.comments;
+          this.reactionsData = result.reactions;
+          if (this.postsSummaryData)
+            for (let data of this.postsSummaryData) {
+              this.createTime.push(data.created_time);
+              this.total_comments.push(data.total_comments);
+              this.total_reactions.push(data.total_reactions);
+            }
+          if (this.pageTriger == "chart")
+            this.createGraph();
+          //          console.log("Success : " + JSON.stringify(result));
           loading.dismissAll();
           this.retryTime = 0;
           this.httpProvider.setUid(result._uid);
@@ -135,12 +251,11 @@ export class DashboardPage {
         }
       );
   }
-
-  setLike(){
-    this.httpProvider.setLike().subscribe((value)=>{
+  setLike() {
+    this.httpProvider.setLike().subscribe((value) => {
       console.log(value);
     });
-    
+
   }
 
   //call when view did load

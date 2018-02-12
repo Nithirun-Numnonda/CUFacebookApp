@@ -73,14 +73,34 @@ var UserProfilePage = (function () {
         this.httpProvider = httpProvider;
         this.uid = this.navParams.get('userId');
         this.name = this.navParams.get('name');
-        this.cover = this.httpProvider.getCover(this.uid);
-        this.context = this.httpProvider.getContext(this.uid);
     }
+    UserProfilePage.prototype.getCover = function () {
+        var _this = this;
+        this.cover = this.httpProvider.getCover(this.uid).then(function (coverData) {
+            console.log(JSON.stringify(coverData));
+            _this.cover = coverData.source;
+        }, function (err) {
+            console.log(JSON.stringify(err));
+            //reject(err);
+        });
+    };
+    UserProfilePage.prototype.getContext = function () {
+        var _this = this;
+        this.context = this.httpProvider.getContext(this.uid).then(function (contextData) {
+            console.log(JSON.stringify(contextData));
+            _this.context = contextData.context;
+        }, function (err) {
+            console.log(JSON.stringify(err));
+            //reject(err);
+        });
+    };
     UserProfilePage.prototype.closeModal = function () {
         this.view.dismiss();
     };
-    UserProfilePage.prototype.ionViewDidLoad = function () {
+    UserProfilePage.prototype.ionViewWillEnter = function () {
         console.log('ionViewDidLoad UserProfilePage');
+        this.getCover();
+        this.getContext();
     };
     return UserProfilePage;
 }());

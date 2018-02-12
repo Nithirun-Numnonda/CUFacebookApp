@@ -99,7 +99,7 @@ export class HttpProvider {
     }
     else {
       //for test in computer
-      this.accessToken = 'EAACEdEose0cBAENMoZCdwhdLzU16aTvAdscDD488MLQH8We4lt3M5xOWWebmVIZBAN8ZBdFP1l1AuFwKCJKSDq7hpO9DStlUAGG2NrSGYJQJyJY5YRVMIjZBlTkGdhJVicBXDTcJZCEPYPDZAa25skPiZBOtWxUNdGZBa7Bt4j2bpevldDzilzhKTZBLwiVo3zO1cQbwZAlaIWCQZDZD';
+      this.accessToken = 'EAACEdEose0cBAO4prvNbZBkg4QgSTyb5EJu4PvTsniPNHKDOZAZBPeGaRItUpdnk2CUHiZA0u0KFr7QZA36TzjqXuXMMYekHM4H2WfOJI2DfOZCelcF6ZCJtFbHafyFJdsmXZA1YzjasXwRZBsIW954s2hBwGfizi6pxIm2uNIZAIr8fQD70FaVZA9A38LwTbZA9IJbpxg6bzoX8lQZDZD';
     }
   }
   //set url for http request from python server
@@ -143,21 +143,17 @@ export class HttpProvider {
       this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers })
       .map(res => res.json());
   }
-  // getCommentsData(top, hour, day, month, year) {
-  //   let headers = new Headers();
-  //   headers.append('access_token', this.accessToken);
-  //   return this.http.get(
-  //     this.setHttpRequest('comments', top, hour, day, month, year), { headers: headers })
-  //     .map(res => res.json());
-  // }
-
-  // getLikesData(top, hour, day, month, year) {
-  //   let headers = new Headers();
-  //   headers.append('access_token', this.accessToken);
-  //   return this.http.get(
-  //     this.setHttpRequest('reactions', top, hour, day, month, year))
-  //     .map(res => res.json());
-  // }
+  getDashboardAllTops(){
+    this.getUid();
+    //set header to authorize with access token
+    this.getToken();
+    let headers = new Headers();
+    headers.append('access_token', this.accessToken);
+    return this.http.get(
+      this.setHttpRequest('dashboard/getalltops/'+this.uid, '', '0', '0', '0', '0'), { headers: headers })
+      .map(res => res.json());
+  }
+  
 
   //feature for newfeed??
   setLike() {
@@ -166,8 +162,7 @@ export class HttpProvider {
     
     headers.append('access_token', this.accessToken);
     return this.http.get(
-      this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers })
-      .map(res => res.json());
+      this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers });
     
   }
 
@@ -188,28 +183,11 @@ export class HttpProvider {
       .map(res => res.json());
   }
   getCover(uid: string) {
-    this.facebook.api('/' + uid.toString() + '?field=cover', ['user_posts']).then(
-      (coverData) => {
-
-        return coverData.source;
-
-      }, (err) => {
-        console.log(JSON.stringify(err));
-        //reject(err);
-
-      });
+    return this.facebook.api('/' + uid.toString() + '?field=cover', ['user_posts']);
 
   }
   getContext(uid: string) {
-    this.facebook.api('/' + uid + '?field=context', ['user_posts']).then(
-      (contextData) => {
-        console.log(JSON.stringify(contextData));
-        return contextData.context;
-      }, (err) => {
-        console.log(JSON.stringify(err));
-        //reject(err);
-
-      });
+    return this.facebook.api('/' + uid + '?field=context', ['user_posts']);
   }
 
 }

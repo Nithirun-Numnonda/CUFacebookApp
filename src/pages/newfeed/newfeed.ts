@@ -57,6 +57,10 @@ export class NewfeedPage {
     //     return 800;
     //   }
     // };
+
+    //for retry
+    this.retryTime = 0;
+
   }
 
   //call when refresh
@@ -79,7 +83,7 @@ export class NewfeedPage {
           if (result.error.type == "OAuthException") {
             console.log("Token expired!!!");
             this.retryTime += 1;
-            if (this.retryTime < 20)
+            if (this.retryTime < 3)
               return this.getPost();
             else
               console.log("Access Token expired!!!");
@@ -106,7 +110,6 @@ export class NewfeedPage {
       },
       () => {
         console.log('getData completed');
-        loading.dismissAll();
       }
     );
   }
@@ -116,7 +119,7 @@ export class NewfeedPage {
     });
     
   }
-  ionViewDidLoad() {
+  ionViewDidLoad(){
     console.log('ionViewDidLoad newfeedPage');
     this.getPost();
     //this.getCommentsData();
