@@ -46,7 +46,7 @@ import { TimeProvider } from '../providers/time/time';
     SplashScreen,Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
-    TimeProvider,
+    TimeProvider
     
   ]
 })

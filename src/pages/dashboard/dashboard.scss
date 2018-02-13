@@ -21,3 +21,15 @@ page-dashboard {
 #subcard{
     margin-left: 10px;
 }
+.alert-radio-label {
+    white-space: normal!important;
+}
+.card {
+    height: 100%;
+  }
+  .ion-select{
+    width: 100%;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    
+  }

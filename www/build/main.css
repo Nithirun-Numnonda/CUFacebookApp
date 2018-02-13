@@ -25534,6 +25534,20 @@ page-dashboard .btn-wrapper {
   margin-left: 10px;
 }
 
+.alert-radio-label {
+  white-space: normal !important;
+}
+
+.card {
+  height: 100%;
+}
+
+.ion-select {
+  width: 100%;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
 page-home #myswing1 {
   width: 90%;
   height: 200px;

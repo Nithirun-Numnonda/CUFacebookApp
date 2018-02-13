@@ -13,7 +13,7 @@
 <ion-content padding="">
   <ion-header>
     <ion-toolbar class="btn-wrapper">
-      <div [ngSwitch]="typeData" *ngIf="pageTriger == 'list'">
+      <div [ngSwitch]="typeData" *ngIf="pageTriger.match('list')">
         <div>
           <ion-title *ngSwitchCase="'commentsData'" id="subheader">Top Comments Users on Your Posts</ion-title>
           <ion-title *ngSwitchCase="'likesData'" id="subheader">Top Likes Users on Your Posts</ion-title>
@@ -28,7 +28,7 @@
           </ion-segment>
         </div>
       </div>
-      <div *ngIf="pageTriger == 'chart'">
+      <div *ngIf="pageTriger.match('chart')">
         <ion-title>Your Posts Summary</ion-title>
       </div>
     </ion-toolbar>
@@ -39,17 +39,47 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <div *ngIf="pageTriger == 'chart'" class='dashboardContent'>
-    <ion-card>
+  <div *ngIf="pageTriger.match('chart')" class='dashboardContent'>
+      <ion-card>
       <ion-card-header>
-        Top post
+        Top posts in {{sortByTime}}
       </ion-card-header>
       <ion-card-content>
         <canvas #barCanvas type></canvas>
       </ion-card-content>
     </ion-card>
+    <ion-card *ngIf="maxCommentsPost">
+        <ion-card-content>
+            <ion-label id="cardHeader">
+                Top Post by Comments in {{sortByTime}}
+                </ion-label>
+          <ion-row>
+          <ion-col col-8>
+              {{maxCommentsPost.created_time}}
+          </ion-col>
+          <ion-col>
+              <ion-icon name="text"></ion-icon>{{maxCommentsPost.total_comments}}
+          </ion-col></ion-row>
+          <ion-item>{{maxCommentsPost.id}}</ion-item>
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="maxReactionsPost">
+        <ion-card-content>
+            <ion-label id="cardHeader">
+                Top Post by Posts in {{sortByTime}}
+                </ion-label>
+          <ion-row>
+          <ion-col col-8>
+              {{maxReactionsPost.created_time}}
+          </ion-col>
+          <ion-col>
+              <ion-icon style="color:red" name="md-flame"></ion-icon>{{maxReactionsPost.total_reactions}}
+          </ion-col></ion-row>
+          <ion-item>{{maxReactionsPost.id}}</ion-item>
+        </ion-card-content>
+    </ion-card>
   </div>
-  <div *ngIf="pageTriger == 'list'" class='dashboardContent'>
+  <div *ngIf="pageTriger.match('list')" class='dashboardContent'>
     <div [ngSwitch]="typeData">
       <div *ngSwitchCase="'commentsData'">
         <ion-list *ngFor="let item of commentsData">
@@ -85,8 +115,8 @@
                   <ion-col col-9>
                     <ion-card-header (click)="presentProfileModal(item._uid,item.name)">
                       <div style="word-wrap: break-word">{{item.name}}</div>
-                      <button ion-button style="padding-left:0px;">
-                        <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon> {{item.total}}</button>
+                      <button ion-button >
+                        <ion-icon style="color:red;" name="md-flame"></ion-icon> {{item.total}}</button>
                     </ion-card-header>
                     <div *ngIf="item.total" id='subcard'>
                       <ion-grid>
@@ -112,10 +142,11 @@
         </ion-list>
       </div>
       <div>
-        <ion-grid no-padding>
-          <ion-row>
-            <ion-col col-10>
-              <ion-select [(ngModel)]="sortByTime" (ionChange)="getFacebookData()">
+          <ion-col>
+              <label ion-item (click)="getAllTops()">See more ...</label>
+            </ion-col>
+            <ion-col>
+              <ion-select [(ngModel)]="sortByTime" (ionChange)="getFacebookData()" >
                 <ion-option>Last 1 week</ion-option>
                 <ion-option>Last 1 month</ion-option>
                 <ion-option>Last 3 months</ion-option>
@@ -125,11 +156,8 @@
                 <ion-option>Last 5 years</ion-option>
               </ion-select>
             </ion-col>
-            <ion-col>
-              <label ion-item (click)="getAllTops()">See more ...</label>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+            
+         
       </div>
     </div>
   </div>
@@ -137,8 +165,8 @@
 <ion-footer>
   <div class="btn-wrapper">
     <button ion-button icon-only color="secondary" (click)='trigerPage()'>
-      <ion-icon name="arrow-up" *ngIf="pageTriger == 'list'"></ion-icon>
-      <ion-icon name="arrow-down" *ngIf="pageTriger == 'chart'"></ion-icon>
+      <ion-icon name="arrow-up" *ngIf="pageTriger.match('list')"></ion-icon>
+      <ion-icon name="arrow-down" *ngIf="pageTriger.match('chart')"></ion-icon>
     </button>
   </div>
 </ion-footer>

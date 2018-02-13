@@ -25,6 +25,8 @@ export class DashboardPage {
   total_reactions: Array<string>;
   total_comments: Array<string>;
   nativeEle: any;
+  maxReactionsPost: any;
+  maxCommentsPost: any;
 
   //for Data facebook
   commentsData: any;
@@ -65,10 +67,11 @@ export class DashboardPage {
     this.topValue = this.top[0];
     //for retry
     this.retryTime = 0;
-
+    //for graph
     this.createTime = [];
     this.total_comments = [];
     this.total_reactions = [];
+
 
     this.sortByTime = 'Last 3 months';
 
@@ -178,12 +181,29 @@ export class DashboardPage {
           this.commentsData = result.comments;
           this.reactionsData = result.reactions;
           this.postsSummaryData = result.post_summary;
-          if (this.postsSummaryData)
+          if (this.postsSummaryData){
+            var maxReactions=0;
+            var maxComments=0;
             for (let data of this.postsSummaryData) {
-              this.createTime.push(data.created_time);
-              this.total_comments.push(data.total_comments);
-              this.total_reactions.push(data.total_reactions);
+              if (data.total_comments != 0 || data.total_reactions != 0){
+                var newDate = new Date(data.created_time);
+                //console.log(newDate.toDateString());
+                this.createTime.push(newDate.toDateString());
+                this.total_comments.push(data.total_comments);
+                this.total_reactions.push(data.total_reactions);
+              }
+              if(data.total_comments>maxComments){
+                maxComments=data.total_comments
+                this.maxCommentsPost=data;
+                //console.log(maxComments);
+              }
+              if(data.total_reactions>maxReactions){
+                maxReactions=data.total_reactions
+                data.created_time=new Date(data.created_time).toDateString();
+                this.maxReactionsPost=data;
+              }
             }
+          }
           if (this.pageTriger == "chart")
             this.createGraph();
           //          console.log("Success : " + JSON.stringify(result));
@@ -227,12 +247,13 @@ export class DashboardPage {
           //assign data to view
           this.commentsData = result.comments;
           this.reactionsData = result.reactions;
-          if (this.postsSummaryData)
+          if (this.postsSummaryData) {
             for (let data of this.postsSummaryData) {
               this.createTime.push(data.created_time);
               this.total_comments.push(data.total_comments);
               this.total_reactions.push(data.total_reactions);
             }
+          }
           if (this.pageTriger == "chart")
             this.createGraph();
           //          console.log("Success : " + JSON.stringify(result));
