@@ -315,8 +315,9 @@ export class DashboardPage {
             }
           }],
           xAxes: [{
-            ticks: {
-              minRotation: 90
+            ticks: { 
+              minRotation: 90,
+              fontSize:10
             }
           }]
         }
