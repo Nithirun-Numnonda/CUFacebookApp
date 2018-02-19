@@ -29,7 +29,14 @@
             "APP_ID": "1894102183937616",
             "APP_NAME": "CUAnalysisApp",
             "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-screen-orientation": {
+            "PACKAGE_NAME": "io.ionic.starter"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "es6-promise-plugin": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        }
+    }
 }

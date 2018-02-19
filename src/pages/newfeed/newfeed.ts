@@ -1,6 +1,6 @@
 import { HttpProvider } from './../../providers/http/http-provider';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController, Content } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
@@ -31,7 +31,7 @@ import 'rxjs/add/operator/map';
 export class NewfeedPage {
   // @ViewChild('myswing1') swingStack: SwingStackComponent;
   // @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>; 
-
+  @ViewChild(Content) content: Content;
   newsData: any;
   loading: any;
   cards: Array<any>;
@@ -60,6 +60,7 @@ export class NewfeedPage {
 
     //for retry
     this.retryTime = 0;
+    this.getPost(true);
 
   }
 
@@ -68,12 +69,14 @@ export class NewfeedPage {
     console.log('Begin async operation', refresher);
 
     //get data again
-    this.getPost();
+    this.getPost(true);
     refresher.complete();
   }
-  getPost() {
+  getPost(getLoading) {
     let loading = this.loadingController.create({ content: "Loading,please wait..." });
-    loading.present();
+    if (getLoading) {
+      loading.present();
+    }
     this.httpProvider.getPosts().subscribe(
       //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
       result => {
@@ -84,21 +87,29 @@ export class NewfeedPage {
             console.log("Token expired!!!");
             this.retryTime += 1;
             if (this.retryTime < 3)
-              return this.getPost();
+              return this.getPost(true);
             else
               console.log("Access Token expired!!!");
           }
-          else{
+          else {
             this.setLike();
-            this.getPost();
+            this.getPost(true);
           }
 
         }
 
         //assign data to view
-        this.newsData = result;
+          this.newsData = result;
+          if (this.newsData) {
+            for (let data of this.newsData) {
+              var newDate = new Date(data.created_time);
+              data.created_time=newDate.toDateString();
+          }
+        }
+        //alert(typeof (this.newsData));
         console.log("Success : " + JSON.stringify(result));
-        loading.dismissAll();
+        if (getLoading)
+          loading.dismissAll();
         this.retryTime = 0;
 
       },
@@ -106,25 +117,38 @@ export class NewfeedPage {
         //call if fail to get request
         console.error("Error : " + err);
         alert("Can't get Data from the server: " + err);
-        loading.dismissAll();
+        if (getLoading)
+          loading.dismissAll();
       },
       () => {
         console.log('getData completed');
       }
     );
   }
-  setLike(){
-    this.httpProvider.setLike().subscribe((value)=>{
+  setLike() {
+    this.httpProvider.setLike().subscribe((value) => {
       console.log(value);
     });
-    
+
   }
-  ionViewDidLoad(){
+  merge( dest,src) {
+    for (let kvp of src) {
+      dest[kvp.key] = kvp.value;
+    }
+ }
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 1000);
+  }
+  ionViewDidLoad() {
     console.log('ionViewDidLoad newfeedPage');
-    this.getPost();
+
     //this.getCommentsData();
     //this.createGraph();
   }
+
   // ngAfterViewInit() {
   //   // Either subscribe in controller or set in HTML
   //   this.swingStack.throwin.subscribe((event: DragEvent) => {

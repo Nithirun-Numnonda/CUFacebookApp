@@ -1,0 +1,685 @@
+.icon-tongue-out {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf302;');
+}
+.icon-surprised2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf307;');
+}
+.icon-in-love2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf30b;');
+}
+.icon-unhappy {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf30f;');
+}
+.icon-angry2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf314;');
+}
+.icon-happy2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf31c;');
+}
+.icon-stats {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf320;');
+}
+.icon-like {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf34e;');
+}
+.icon-afro {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe900;');
+}
+.icon-afro-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe90f;');
+}
+.icon-agent {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe933;');
+}
+.icon-alien {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe958;');
+}
+.icon-alien-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe966;');
+}
+.icon-angel {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe972;');
+}
+.icon-angry {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe977;');
+}
+.icon-angry-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe989;');
+}
+.icon-angry-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe99e;');
+}
+.icon-angry-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9a6;');
+}
+.icon-angry-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9aa;');
+}
+.icon-angry-5 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9b3;');
+}
+.icon-arguing {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9bf;');
+}
+.icon-arrogant {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9c5;');
+}
+.icon-asian {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9de;');
+}
+.icon-asian-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9e5;');
+}
+.icon-avatar {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9eb;');
+}
+.icon-baby {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9f4;');
+}
+.icon-baby-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9ff;');
+}
+.icon-baby-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea05;');
+}
+.icon-bully {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea0d;');
+}
+.icon-burglar {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea19;');
+}
+.icon-businessman {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea2d;');
+}
+.icon-cheeky {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea36;');
+}
+.icon-cheeky-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea45;');
+}
+.icon-clown {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea5a;');
+}
+.icon-confused {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea6d;');
+}
+.icon-confused-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea7b;');
+}
+.icon-confused-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea8d;');
+}
+.icon-confused-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea95;');
+}
+.icon-creepy {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea99;');
+}
+.icon-crying {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeaa3;');
+}
+.icon-crying-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeaad;');
+}
+.icon-crying-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeab4;');
+}
+.icon-crying-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeac5;');
+}
+.icon-dazed {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeacc;');
+}
+.icon-dazed-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xead1;');
+}
+.icon-dazed-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xead8;');
+}
+.icon-dazed-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeadc;');
+}
+.icon-dead {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeae2;');
+}
+.icon-dead-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeae9;');
+}
+.icon-dead-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeaf2;');
+}
+.icon-dead-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb04;');
+}
+.icon-dead-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb0e;');
+}
+.icon-dead-5 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb16;');
+}
+.icon-dead-6 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb1d;');
+}
+.icon-desperate {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb24;');
+}
+.icon-desperate-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb37;');
+}
+.icon-detective {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb3c;');
+}
+.icon-dissapointment {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb49;');
+}
+.icon-doctor {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb59;');
+}
+.icon-drunk {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb64;');
+}
+.icon-dumb {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb6b;');
+}
+.icon-emo {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb73;');
+}
+.icon-emo-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb79;');
+}
+.icon-emo-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb8a;');
+}
+.icon-emoticon {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeb9b;');
+}
+.icon-evil {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xebaa;');
+}
+.icon-faint {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xebb4;');
+}
+.icon-faint-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xebc3;');
+}
+.icon-flirt {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xebd2;');
+}
+.icon-flirt-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xebe2;');
+}
+.icon-flirt-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xebf2;');
+}
+.icon-flirty {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xebfb;');
+}
+.icon-gangster {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec02;');
+}
+.icon-geek {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec0a;');
+}
+.icon-geek-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec18;');
+}
+.icon-gentleman {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec25;');
+}
+.icon-gentleman-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec2f;');
+}
+.icon-gentleman-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec38;');
+}
+.icon-gentleman-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec44;');
+}
+.icon-gentleman-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec4b;');
+}
+.icon-ginger {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec54;');
+}
+.icon-girl {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec63;');
+}
+.icon-girl-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec70;');
+}
+.icon-goofy {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec7d;');
+}
+.icon-goofy-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec8e;');
+}
+.icon-goofy-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xec96;');
+}
+.icon-goofy-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeca8;');
+}
+.icon-goofy-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xecb9;');
+}
+.icon-grubby {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xecbf;');
+}
+.icon-grubby-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xecef;');
+}
+.icon-happy {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed0b;');
+}
+.icon-happy-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed10;');
+}
+.icon-happy-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed1b;');
+}
+.icon-happy-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed2c;');
+}
+.icon-happy-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed3e;');
+}
+.icon-happy-5 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed51;');
+}
+.icon-happy-6 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed59;');
+}
+.icon-happy-7 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed5f;');
+}
+.icon-happy-8 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed67;');
+}
+.icon-happy-9 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed6b;');
+}
+.icon-happy-10 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed6f;');
+}
+.icon-happy-11 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed75;');
+}
+.icon-happy-12 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed7b;');
+}
+.icon-happy-13 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed81;');
+}
+.icon-happy-14 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed87;');
+}
+.icon-happy-15 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed8f;');
+}
+.icon-happy-16 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed95;');
+}
+.icon-harry-potter {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xed9b;');
+}
+.icon-heisenberg {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeda5;');
+}
+.icon-hipster {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xedb6;');
+}
+.icon-hipster-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xedbc;');
+}
+.icon-hipster-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeddf;');
+}
+.icon-in-love {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xede5;');
+}
+.icon-in-love-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xedec;');
+}
+.icon-in-love-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xedf3;');
+}
+.icon-in-love-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xedf7;');
+}
+.icon-in-love-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xedfd;');
+}
+.icon-in-love-5 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee01;');
+}
+.icon-in-love-6 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee06;');
+}
+.icon-japan {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee0c;');
+}
+.icon-jew {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee1b;');
+}
+.icon-joyful {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee2d;');
+}
+.icon-joyful-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee32;');
+}
+.icon-joyful-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee43;');
+}
+.icon-kiss {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee4a;');
+}
+.icon-kiss-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee51;');
+}
+.icon-kiss-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee55;');
+}
+.icon-kiss-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee5b;');
+}
+.icon-kiss-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee60;');
+}
+.icon-laughing {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee66;');
+}
+.icon-laughing-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee6c;');
+}
+.icon-laughing-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee72;');
+}
+.icon-laughing-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee7d;');
+}
+.icon-listening {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee83;');
+}
+.icon-love {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee8b;');
+}
+.icon-manly {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xee99;');
+}
+.icon-miserly {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeeab;');
+}
+.icon-miserly-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeebe;');
+}
+.icon-nerd {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeed3;');
+}
+.icon-nerd-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeee8;');
+}
+.icon-nerd-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeefd;');
+}
+.icon-nerd-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xef10;');
+}
+.icon-nerd-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xef1b;');
+}
+.icon-ninja {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xef29;');
+}
+.icon-pirate {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xef2e;');
+}
+.icon-pirate-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xef67;');
+}
+.icon-pirate-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xef7d;');
+}
+.icon-punk {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xef84;');
+}
+.icon-punk-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xef95;');
+}
+.icon-punk-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xefbc;');
+}
+.icon-rapper {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xefe4;');
+}
+.icon-relieved {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xefeb;');
+}
+.icon-rich {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeff2;');
+}
+.icon-rich-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeff8;');
+}
+.icon-rich-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xeffe;');
+}
+.icon-rockstar {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf005;');
+}
+.icon-sad {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf02a;');
+}
+.icon-sad-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf02f;');
+}
+.icon-sad-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf033;');
+}
+.icon-sad-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf038;');
+}
+.icon-sad-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf03d;');
+}
+.icon-sad-5 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf043;');
+}
+.icon-sad-6 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf047;');
+}
+.icon-scared {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf04b;');
+}
+.icon-scared-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf050;');
+}
+.icon-scared-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf062;');
+}
+.icon-scared-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf06a;');
+}
+.icon-sceptic {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf071;');
+}
+.icon-sceptic-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf077;');
+}
+.icon-sceptic-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf07f;');
+}
+.icon-sceptic-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf093;');
+}
+.icon-sceptic-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf09d;');
+}
+.icon-sceptic-5 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0a3;');
+}
+.icon-sceptic-6 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0a7;');
+}
+.icon-sceptic-7 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0ab;');
+}
+.icon-secret {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0b2;');
+}
+.icon-shocked {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0b8;');
+}
+.icon-shocked-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0bd;');
+}
+.icon-shocked-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0cd;');
+}
+.icon-shocked-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0d3;');
+}
+.icon-sick {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0d9;');
+}
+.icon-sick-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0e0;');
+}
+.icon-sick-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0e8;');
+}
+.icon-sick-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0ec;');
+}
+.icon-sick-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0f4;');
+}
+.icon-silent {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0fd;');
+}
+.icon-skeleton {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf102;');
+}
+.icon-smile {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf10f;');
+}
+.icon-smiling {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf113;');
+}
+.icon-smiling-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf124;');
+}
+.icon-smoked {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf12a;');
+}
+.icon-smug {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf153;');
+}
+.icon-smug-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf16a;');
+}
+.icon-smug-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf177;');
+}
+.icon-smug-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf186;');
+}
+.icon-smug-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf191;');
+}
+.icon-smug-5 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf196;');
+}
+.icon-smug-6 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1a2;');
+}
+.icon-sporty {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1b0;');
+}
+.icon-stunned {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1bf;');
+}
+.icon-superhero {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1cf;');
+}
+.icon-superhero-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1d4;');
+}
+.icon-superhero-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1dc;');
+}
+.icon-superhero-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1e2;');
+}
+.icon-superhero-4 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1e7;');
+}
+.icon-surprised {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1ee;');
+}
+.icon-surprised-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1f7;');
+}
+.icon-thinking {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1fe;');
+}
+.icon-tired {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf203;');
+}
+.icon-tired-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf217;');
+}
+.icon-tired-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf22b;');
+}
+.icon-tired-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf237;');
+}
+.icon-tough {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf242;');
+}
+.icon-tough-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf272;');
+}
+.icon-trendy {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf27e;');
+}
+.icon-vampire {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf285;');
+}
+.icon-vampire-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf28f;');
+}
+.icon-wink {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf297;');
+}
+.icon-wink-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2a8;');
+}
+.icon-wink-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2b0;');
+}
+.icon-winking {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2b9;');
+}
+.icon-winking-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2bd;');
+}
+.icon-yawning {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2c2;');
+}
+.icon-yawning-1 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2d1;');
+}
+.icon-yawning-2 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2d8;');
+}
+.icon-yawning-3 {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2dd;');
+}
+.icon-yelling {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2e3;');
+}
+.icon-zombie {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2f7;');
+}
+

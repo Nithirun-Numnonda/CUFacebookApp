@@ -43,6 +43,7 @@
 		E00D50CB938E4E5BAF0CACA6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010AE60929F45ED85D218DA /* FBSDKCoreKit.framework */; };
 		1BCE1CCBE72540D4B718597B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11F8C9859A847C68578220D /* FBSDKLoginKit.framework */; };
 		E00C1FF498D84F97A649BEFD /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A10B16063F4971B2F40F3D /* FBSDKShareKit.framework */; };
+		23B8283957F842A58D6D1771 /* CDVOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D076993F6F01417AADB244F1 /* CDVOrientation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,8 @@
 		A010AE60929F45ED85D218DA /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; name = "FBSDKCoreKit.framework"; path = "MyApp/Plugins/cordova-plugin-facebook4/FBSDKCoreKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		C11F8C9859A847C68578220D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; name = "FBSDKLoginKit.framework"; path = "MyApp/Plugins/cordova-plugin-facebook4/FBSDKLoginKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		78A10B16063F4971B2F40F3D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; name = "FBSDKShareKit.framework"; path = "MyApp/Plugins/cordova-plugin-facebook4/FBSDKShareKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		D076993F6F01417AADB244F1 /* CDVOrientation.m */ = {isa = PBXFileReference; name = "CDVOrientation.m"; path = "cordova-plugin-screen-orientation/CDVOrientation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		80B01A8FEA2C4AA59395EF34 /* CDVOrientation.h */ = {isa = PBXFileReference; name = "CDVOrientation.h"; path = "cordova-plugin-screen-orientation/CDVOrientation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +295,8 @@
 				7CD2FCC892164169A8F269DF /* CDVViewController+SplashScreen.h */,
 				2EB0A2202AD840EEAB245062 /* FacebookConnectPlugin.m */,
 				25976812A8C04E93B7B39086 /* FacebookConnectPlugin.h */,
+				D076993F6F01417AADB244F1 /* CDVOrientation.m */,
+				80B01A8FEA2C4AA59395EF34 /* CDVOrientation.h */,
 			);
 			name = Plugins;
 			path = "MyApp/Plugins";
@@ -425,6 +430,7 @@
 				1AF0F06A3353455CB2CACB48 /* CDVSplashScreen.m in Sources */,
 				F0E043880B8F4980A355C740 /* CDVViewController+SplashScreen.m in Sources */,
 				8DF986C44F884442AD465115 /* FacebookConnectPlugin.m in Sources */,
+				23B8283957F842A58D6D1771 /* CDVOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

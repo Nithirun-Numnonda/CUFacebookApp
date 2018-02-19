@@ -1,3 +1,4 @@
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Platform, NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
@@ -25,9 +26,14 @@ export class HttpProvider {
   // private graphUrl = 'https://graph.facebook.com/';
   // private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
 
-  constructor(public http: Http, private facebook: Facebook, private platform: Platform, public app: App) {
+  constructor(
+    public http: Http,
+    private facebook: Facebook,
+    private platform: Platform,
+    public app: App,
+    private screenOrientation: ScreenOrientation
+  ) {
     console.log('Hello HttpProvider Provider');
-
   }
 
   init() {
@@ -39,7 +45,7 @@ export class HttpProvider {
   login() {
     let permissions = new Array<string>();
     //let nav = this.navCtrl;
-    permissions = ["public_profile", "user_posts", "user_friends","user_likes"];
+    permissions = ["public_profile", "user_posts", "user_friends", "user_likes"];
 
     this.facebook.login(permissions).then((response) => {
       let userId = response.authResponse.userID;
@@ -50,11 +56,13 @@ export class HttpProvider {
           profile.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
         })
       console.log(permissions);
-      alert('Logged in Successfully!');
+      //alert('Logged in Successfully!');
       console.log(JSON.stringify(response.authResponse));
       this.authResponse = response.authResponse;
       this.uid = this.authResponse.userId;
       this.isLogged = true;
+      if (this.platform.is('cordova'))
+        this.screenOrientation.unlock();
       this.navCtrl.push('tabsPage');
     }, (error) => {
       //for test
@@ -64,7 +72,7 @@ export class HttpProvider {
         this.uid = "878312008845622";
         console.log(this.uid);
       } else {
-        alert("Error: " + JSON.stringify(error));
+        //alert("Error: " + JSON.stringify(error));
         console.log(error);
         this.isLogged = false;
       }
@@ -73,19 +81,19 @@ export class HttpProvider {
     //console.log(this.uid);
   }
   // set uid
-  setUid(uid){
-    this.uid=uid;
+  setUid(uid) {
+    this.uid = uid;
   }
   //get uid
-  getUid(){
+  getUid() {
     if (this.platform.is('cordova')) {
-      this.facebook.api("/me",[]).then(value => {
+      this.facebook.api("/me", []).then(value => {
         this.uid = value.id;
         //alert(this.uid);
         console.log(value);
       });
     }
-    else{
+    else {
       this.uid = "878312008845622";
     }
   }
@@ -99,7 +107,7 @@ export class HttpProvider {
     }
     else {
       //for test in computer
-      this.accessToken = 'EAACEdEose0cBAF4PZCS0gi9HgrV0tJt6zyXdbmeaiHSfPtrZCJy6hjKHihHe9WntHVRLKLLP8hMzoPbagVFF9ZBB9ZANZCswLxUQAQstg6HtukYqRhcBTYlh5gbZAFadTSwEnf4mBXEZBZAlJnFt8AeIYtTOJgUyrrmskgDv3vYpQcrzJMyaPFvBDVZCmizq953xvNW4dfpgmvQZDZD';
+      this.accessToken = 'EAACEdEose0cBAMDWvHZBPUF4RF7QKbIvTniXidzBA6YAQhZCy44YKtDvsOUlN4aYkxqrLx6zxfcWKUDczQLnBxmS0CZAs20QfqagIO6n7xrlxChHCbSc8pEaS1LjTgvcSq9sMgxnMiTs0ylGy016NLksi4vgncZBoAj5VkTOJ8nnQfPZA05RM4wz1jyOSDKap6aU7rbOhDQZDZD';
     }
   }
   //set url for http request from python server
@@ -143,27 +151,27 @@ export class HttpProvider {
       this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers })
       .map(res => res.json());
   }
-  getDashboardAllTops(){
+  getDashboardAllTops() {
     this.getUid();
     //set header to authorize with access token
     this.getToken();
     let headers = new Headers();
     headers.append('access_token', this.accessToken);
     return this.http.get(
-      this.setHttpRequest('dashboard/getalltops/'+this.uid, '', '0', '0', '0', '0'), { headers: headers })
+      this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers })
       .map(res => res.json());
   }
-  
+
 
   //feature for newfeed??
   setLike() {
     this.getToken();
     let headers = new Headers();
-    
+
     headers.append('access_token', this.accessToken);
     return this.http.get(
       this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers });
-    
+
   }
 
 
@@ -171,7 +179,7 @@ export class HttpProvider {
     this.getUid();
     this.getToken();
     let headers = new Headers();
-    
+
     console.log(this.uid);
     console.log(this.accessToken);
     headers.append('access_token', this.accessToken);
@@ -179,15 +187,21 @@ export class HttpProvider {
     //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
     //   .map(res => res.json());
     return this.http.get(
-      this.setHttpRequest("newsfeed/"+this.uid, '', '0', '0', '0', '0'), { headers: headers })
+      this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
       .map(res => res.json());
   }
-  getCover(uid: string) {
+  getCover(uid: String) {
     return this.facebook.api('/' + uid.toString() + '?field=cover', ['user_posts']);
 
   }
-  getContext(uid: string) {
+  getContext(uid: String) {
     return this.facebook.api('/' + uid + '?field=context', ['user_posts']);
+  }
+  getMessage(postID: String) {
+    return this.facebook.api('/' + postID, ['user_posts']);
+  }
+  getFriends() {
+    return this.facebook.api('/me/friends', ['user_friends'])
   }
 
 }

@@ -59,6 +59,10 @@
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"CDVOrientation\"><param name=\"ios-package\" value=\"CDVOrientation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -119,6 +123,9 @@
             "APP_ID": "1894102183937616",
             "APP_NAME": "CUAnalysisApp",
             "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-screen-orientation": {
+            "PACKAGE_NAME": "io.ionic.starter"
         }
     },
     "dependent_plugins": {},
@@ -163,6 +170,14 @@
             "clobbers": [
                 "facebookConnectPlugin"
             ]
+        },
+        {
+            "id": "cordova-plugin-screen-orientation.screenorientation",
+            "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+            "pluginId": "cordova-plugin-screen-orientation",
+            "clobbers": [
+                "cordova.plugins.screenorientation"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -171,6 +186,7 @@
         "cordova-plugin-whitelist": "1.3.1",
         "ionic-plugin-keyboard": "2.2.1",
         "cordova-plugin-splashscreen": "4.0.3",
-        "cordova-plugin-facebook4": "1.7.4"
+        "cordova-plugin-facebook4": "1.7.4",
+        "cordova-plugin-screen-orientation": "3.0.1"
     }
 }

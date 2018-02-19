@@ -27,6 +27,9 @@
     <access origin="https://api.facebook.com" />
     <access origin="https://*.fbcdn.net" />
     <access origin="https://*.akamaihd.net" />
+    <feature name="CDVOrientation">
+        <param name="android-package" value="cordova.plugins.screenorientation.CDVOrientation" />
+    </feature>
     <name>Fanalyze</name>
     <description>A Facebook Analyzer</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>

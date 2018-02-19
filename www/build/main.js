@@ -1,14 +1,14 @@
 webpackJsonp([7],{
 
-/***/ 122:
+/***/ 123:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_http_http_provider__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__ = __webpack_require__(113);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,21 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 // import {NativeStorage} from '@ionic-native/NativeStorage'
 
 
 
+
 var HomePage = (function () {
-    function HomePage(navCtrl, facebook, facebookService, platform) {
+    function HomePage(navCtrl, facebookService, platform, screenOrientation) {
         var _this = this;
         this.navCtrl = navCtrl;
-        this.facebook = facebook;
         this.facebookService = facebookService;
         this.platform = platform;
+        this.screenOrientation = screenOrientation;
         this.platform.ready().then(function () {
             _this.isLogged = false;
             _this.facebookService.init();
+            if (_this.platform.is('cordova'))
+                _this.screenOrientation.lock(_this.screenOrientation.ORIENTATIONS.PORTRAIT);
         });
     }
     HomePage.prototype.login = function () {
@@ -41,18 +43,18 @@ var HomePage = (function () {
     return HomePage;
 }());
 HomePage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/'\n\n\n\n<ion-content style="background-color: #B6E3E0;text-align:center;" >\n\n    <div style="height:30%;text-align: center;" >\n\n        <img src="assets/imgs/testLogo.png" style="margin-top:2%;height:60%"/>\n\n    </div>\n\n    <div>\n\n          \n\n            <button ion-button icon-start  style="margin: 0 auto;text-align: center;" (click)="login()">\n\n                <ion-icon name="logo-facebook"></ion-icon>\n\n                Login with Facebook</button>\n\n      \n\n        \n\n        \n\n          \n\n        \n\n      \n\n       </div>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/,
-        providers: [__WEBPACK_IMPORTED_MODULE_3__providers_http_http_provider__["a" /* HttpProvider */]]
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/'\n\n\n\n<ion-content style="background:url(assets/imgs/background.jpg);text-align: center" scroll="false" >\n\n    <div style="height:30%;" >\n\n        <img src="assets/imgs/homeLogo.png" style="margin-left:-2%;height:120%;margin-top:40%;"/>\n\n    </div>\n\n    <div >\n\n          \n\n            <button ion-button icon-start  style="margin: 0 auto;text-align: center;margin-top:40%;" color="facebook" (click)="login()">\n\n                <ion-icon name="logo-facebook"></ion-icon>\n\n                Login with Facebook</button>\n\n       </div>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/,
+        providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_3__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* Platform */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__["a" /* ScreenOrientation */]])
 ], HomePage);
 
 //# sourceMappingURL=home.js.map
 
 /***/ }),
 
-/***/ 156:
+/***/ 157:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -65,40 +67,40 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 156;
+webpackEmptyAsyncContext.id = 157;
 
 /***/ }),
 
-/***/ 198:
+/***/ 199:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/about/about.module": [
-		768,
+		769,
 		2
 	],
 	"../pages/dashboard/dashboard.module": [
-		769,
+		770,
 		3
 	],
 	"../pages/friends/friends.module": [
-		770,
+		771,
 		6
 	],
 	"../pages/newfeed/newfeed.module": [
-		771,
+		772,
 		5
 	],
 	"../pages/setting/setting.module": [
-		772,
+		773,
 		4
 	],
 	"../pages/tabs/tabs.module": [
-		773,
+		774,
 		1
 	],
 	"../pages/user-profile/user-profile.module": [
-		774,
+		775,
 		0
 	]
 };
@@ -113,12 +115,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 198;
+webpackAsyncContext.id = 199;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 392:
+/***/ 393:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -126,7 +128,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_chart_js__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -148,12 +150,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var DashboardPage = (function () {
-    function DashboardPage(navCtrl, navParams, httpProvider, loadingController, modalCtrl) {
+    function DashboardPage(navCtrl, navParams, httpProvider, loadingController, modalCtrl, platform) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.httpProvider = httpProvider;
         this.loadingController = loadingController;
         this.modalCtrl = modalCtrl;
+        this.platform = platform;
         //for advance filter
         this.hours = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
         this.days = ['0', '1', '2', '3', '4', '5', '6', '7'];
@@ -252,7 +255,6 @@ var DashboardPage = (function () {
         this.total_reactions = [];
         //get data again
         this.getFacebookData();
-        this.setLike();
         refresher.complete();
     };
     //get Facebook Data from httpProvider
@@ -296,6 +298,7 @@ var DashboardPage = (function () {
                         }
                         if (data.total_comments > maxComments) {
                             maxComments = data.total_comments;
+                            data.created_time = new Date(data.created_time).toDateString();
                             _this.maxCommentsPost = data;
                             //console.log(maxComments);
                         }
@@ -309,6 +312,8 @@ var DashboardPage = (function () {
                 if (_this.pageTriger == "chart")
                     _this.createGraph();
                 //          console.log("Success : " + JSON.stringify(result));
+                _this.getMessage(_this.maxCommentsPost.id, "comments");
+                _this.getMessage(_this.maxReactionsPost.id, "reactions");
                 loading.dismissAll();
                 _this.retryTime = 0;
                 _this.httpProvider.setUid(result._uid);
@@ -349,7 +354,8 @@ var DashboardPage = (function () {
                 if (_this.postsSummaryData) {
                     for (var _i = 0, _a = _this.postsSummaryData; _i < _a.length; _i++) {
                         var data = _a[_i];
-                        _this.createTime.push(data.created_time);
+                        var newDate = new Date(data.created_time);
+                        _this.createTime.push(newDate.toDateString());
                         _this.total_comments.push(data.total_comments);
                         _this.total_reactions.push(data.total_reactions);
                     }
@@ -380,6 +386,26 @@ var DashboardPage = (function () {
         this.getFacebookData();
         this.setLike();
     };
+    //get message
+    DashboardPage.prototype.getMessage = function (uid, option) {
+        var _this = this;
+        if (this.platform.is('cordova')) {
+            this.httpProvider.getMessage(uid).then(function (result) {
+                if (option == "comments") {
+                    _this.maxCommentsMsg = result.message;
+                }
+                else if (option == "reactions") {
+                    _this.maxReactionsMsg = result.message;
+                }
+            }, function (error) {
+                console.log(error);
+            });
+        }
+        else {
+            this.maxCommentsMsg = "Message";
+            this.maxReactionsMsg = "Message2";
+        }
+    };
     //for create graph
     DashboardPage.prototype.createGraph = function () {
         this.barChart = new __WEBPACK_IMPORTED_MODULE_3_chart_js__["Chart"](this.barCanvas.nativeElement, {
@@ -399,6 +425,7 @@ var DashboardPage = (function () {
                     }]
             },
             options: {
+                responsive: false,
                 scales: {
                     yAxes: [{
                             ticks: {
@@ -411,6 +438,14 @@ var DashboardPage = (function () {
                                 fontSize: 10
                             }
                         }]
+                },
+                layout: {
+                    padding: {
+                        left: 2,
+                        right: 2,
+                        top: 0,
+                        bottom: 2
+                    }
                 }
             }
         });
@@ -436,22 +471,26 @@ var DashboardPage = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('barCanvas'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
 ], DashboardPage.prototype, "barCanvas", void 0);
 DashboardPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n\n  Generated template for the DashboardPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Dashboard</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding="">\n\n  <ion-header>\n\n    <ion-toolbar class="btn-wrapper">\n\n      <div [ngSwitch]="typeData" *ngIf="pageTriger.match(\'list\')">\n\n        <div>\n\n          <ion-title *ngSwitchCase="\'commentsData\'" id="subheader">Top Comments Users on Your Posts</ion-title>\n\n          <ion-title *ngSwitchCase="\'likesData\'" id="subheader">Top Likes Users on Your Posts</ion-title>\n\n\n\n          <ion-segment [(ngModel)]="typeData" color="primary">\n\n            <ion-segment-button value="commentsData">\n\n              Top Comments\n\n            </ion-segment-button>\n\n            <ion-segment-button value="likesData">\n\n              Top Likes\n\n            </ion-segment-button>\n\n          </ion-segment>\n\n        </div>\n\n      </div>\n\n      <div *ngIf="pageTriger.match(\'chart\')">\n\n        <ion-title>Your Posts Summary</ion-title>\n\n      </div>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <div *ngIf="pageTriger.match(\'chart\')" class=\'dashboardContent\'>\n\n      <ion-card has-header="true" >\n\n      <ion-card-header>\n\n        Top posts in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <canvas #barCanvas type></canvas>\n\n      </ion-card-content>\n\n    </ion-card>\n\n    <ion-card *ngIf="maxCommentsPost">\n\n        <ion-card-content>\n\n            <ion-label id="cardHeader">\n\n                Top Post by Comments in {{sortByTime}}\n\n                </ion-label>\n\n          <ion-row>\n\n          <ion-col col-8>\n\n              {{maxCommentsPost.created_time}}\n\n          </ion-col>\n\n          <ion-col>\n\n              <ion-icon name="text"></ion-icon>{{maxCommentsPost.total_comments}}\n\n          </ion-col></ion-row>\n\n          <ion-item>{{maxCommentsPost.id}}</ion-item>\n\n        </ion-card-content>\n\n    </ion-card>\n\n    <ion-card *ngIf="maxReactionsPost">\n\n        <ion-card-content>\n\n            <ion-label id="cardHeader">\n\n                Top Post by Posts in {{sortByTime}}\n\n                </ion-label>\n\n          <ion-row>\n\n          <ion-col col-8>\n\n              {{maxReactionsPost.created_time}}\n\n          </ion-col>\n\n          <ion-col>\n\n              <ion-icon style="color:red" name="md-flame"></ion-icon>{{maxReactionsPost.total_reactions}}\n\n          </ion-col></ion-row>\n\n          <ion-item>{{maxReactionsPost.id}}</ion-item>\n\n        </ion-card-content>\n\n    </ion-card>\n\n  </div>\n\n  <div *ngIf="pageTriger.match(\'list\')" class=\'dashboardContent\'>\n\n    <div [ngSwitch]="typeData">\n\n      <div *ngSwitchCase="\'commentsData\'">\n\n        <ion-list *ngFor="let item of commentsData">\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n\n                  </ion-col>\n\n                  <ion-col col-9>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)">\n\n                      <div style="word-wrap: break-word">{{item.name}}</div>\n\n                    </ion-card-header>\n\n                    <div *ngIf="item.comments" id=\'subcard\'>Comments\n\n                      <ion-icon name="text"></ion-icon> {{item.comments}} </div>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div *ngSwitchCase="\'likesData\'">\n\n        <ion-list *ngFor="let item of reactionsData">\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col >\n\n                    <img src="http://graph.facebook.com/{{item._uid}}/picture?type=square" style="height: 75px;width: 75px;">\n\n                  </ion-col>\n\n                  <ion-col col-9>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)">\n\n                      <div style="word-wrap: break-word">{{item.name}}</div>\n\n                      <button ion-button >\n\n                        <ion-icon style="color:red;" name="md-flame"></ion-icon> {{item.total}}</button>\n\n                    </ion-card-header>\n\n                    <div *ngIf="item.total" id=\'subcard\'>\n\n                      <ion-grid>\n\n                        <ion-row>\n\n                          <ion-col>\n\n                            <ion-icon style="color:aqua;" name="ios-thumbs-up"></ion-icon>{{item.like}} </ion-col>\n\n                          <ion-col><ion-icon style="color:crimson;" name="ios-heart"></ion-icon>{{item.love}}</ion-col>\n\n                          <ion-col><ion-icon style="color:goldenrod;" name="md-outlet"></ion-icon>{{item.wow}}</ion-col>\n\n                          <ion-col><ion-icon style="color:goldenrod;" name="ios-happy"></ion-icon>{{item.haha}}</ion-col>\n\n                        </ion-row>\n\n                        <ion-row>\n\n                          <ion-col><ion-icon style="color:goldenrod;" name="ios-sad"></ion-icon>{{item.sad}} </ion-col>\n\n                          <ion-col><ion-icon style="color:goldenrod;" name="alert"></ion-icon>{{item.angry}}</ion-col>\n\n                          <ion-col><ion-icon style="color:purple;" name="flower"></ion-icon>{{item.thankful}}</ion-col>\n\n                        </ion-row>\n\n                      </ion-grid>\n\n                    </div>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div>\n\n          <ion-col>\n\n              <label ion-item (click)="getAllTops()">See more ...</label>\n\n            </ion-col>\n\n            <ion-col>\n\n              <ion-select [(ngModel)]="sortByTime" (ionChange)="getFacebookData()" >\n\n                <ion-option>Last 1 week</ion-option>\n\n                <ion-option>Last 1 month</ion-option>\n\n                <ion-option>Last 3 months</ion-option>\n\n                <ion-option>Last 6 months</ion-option>\n\n                <ion-option>Last 1 year</ion-option>\n\n                <ion-option>Last 2 years</ion-option>\n\n                <ion-option>Last 5 years</ion-option>\n\n              </ion-select>\n\n            </ion-col>\n\n            \n\n         \n\n      </div>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n<ion-footer>\n\n  <div class="btn-wrapper">\n\n    <button ion-button icon-only color="secondary" (click)=\'trigerPage()\'>\n\n      <ion-icon name="arrow-up" *ngIf="pageTriger.match(\'list\')"></ion-icon>\n\n      <ion-icon name="arrow-down" *ngIf="pageTriger.match(\'chart\')"></ion-icon>\n\n    </button>\n\n  </div>\n\n</ion-footer>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
+        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n\n  Generated template for the DashboardPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n\n\n<ion-content padding="" style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-header>\n\n    <ion-toolbar class="btn-wrapper">\n\n      <div [ngSwitch]="typeData" *ngIf="pageTriger.match(\'list\')">\n\n        <div>\n\n          <ion-title *ngSwitchCase="\'commentsData\'" id="subheader">Top Comments Users on Your Posts</ion-title>\n\n          <ion-title *ngSwitchCase="\'likesData\'" id="subheader">Top Likes Users on Your Posts</ion-title>\n\n\n\n          <ion-segment [(ngModel)]="typeData" color="primary">\n\n            <ion-segment-button value="commentsData">\n\n              Top Commenters\n\n            </ion-segment-button>\n\n            <ion-segment-button value="likesData">\n\n              Top Reactioners\n\n            </ion-segment-button>\n\n          </ion-segment>\n\n        </div>\n\n      </div>\n\n      <div *ngIf="pageTriger.match(\'chart\')">\n\n        <ion-title>Your Posts Summary</ion-title>\n\n      </div>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <div *ngIf="pageTriger.match(\'chart\')" class=\'dashboardContent\'>\n\n    <ion-card has-header="true">\n\n      <ion-card-header id="ion-card-header2">\n\n        Top posts in {{sortByTime}}\n\n      </ion-card-header>\n\n\n\n      <canvas height="350" item-content #barCanvas type></canvas>\n\n\n\n    </ion-card>\n\n\n\n    <ion-card *ngIf="maxCommentsPost" has-header="true">\n\n      <ion-card-header text-wrap id="ion-card-header2">\n\n        Top Post by Comments in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-8>\n\n            {{maxCommentsPost.created_time}}\n\n          </ion-col>\n\n          <ion-col>\n\n            <ion-icon color="facebook" name="text" style="margin-right:8px;"></ion-icon>{{maxCommentsPost.total_comments}}\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-item text-wrap>{{maxCommentsMsg}}</ion-item>\n\n      </ion-card-content>\n\n    </ion-card>\n\n    <ion-card *ngIf="maxReactionsPost">\n\n      <ion-card-header text-wrap id="ion-card-header3">\n\n        Top Post by Reactions in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-8>\n\n            {{maxReactionsPost.created_time}}\n\n          </ion-col>\n\n          <ion-col>\n\n            <ion-icon style="color:red;margin-right:8px;" name="md-flame"></ion-icon>{{maxReactionsPost.total_reactions}}\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-item text-wrap>{{maxReactionsMsg}}</ion-item>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </div>\n\n  <div *ngIf="pageTriger.match(\'list\')" class=\'dashboardContent\'>\n\n    <div [ngSwitch]="typeData">\n\n      <div *ngSwitchCase="\'commentsData\'">\n\n        <ion-list *ngFor="let item of commentsData">\n\n          <ion-card no-padding>\n\n            <ion-card-content no-padding>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <ion-item>\n\n                      <ion-avatar>\n\n                        <img id="item-avatar" src="http://graph.facebook.com/{{item._uid}}/picture?type=square">\n\n                      </ion-avatar>\n\n                    </ion-item>\n\n                  </ion-col>\n\n                  <ion-col col-8>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">\n\n                      <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>\n\n                    </ion-card-header>\n\n                    <ion-item style="margin-top:-30px">Comments\n\n                      <ion-icon color="facebook" name="text"></ion-icon> {{item.comments}} </ion-item>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div *ngSwitchCase="\'likesData\'">\n\n        <ion-list *ngFor="let item of reactionsData">\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <ion-item>\n\n                      <ion-avatar>\n\n                        <img id="item-avatar" src="http://graph.facebook.com/{{item._uid}}/picture?type=square">\n\n                      </ion-avatar>\n\n                    </ion-item>\n\n                  </ion-col>\n\n                  <ion-col col-8>\n\n                    <ion-card-header text-wrap (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">\n\n                      <ion-item style="word-wrap: break-word">{{item.name}}</ion-item><ion-item style="margin-top:-15px;">\n\n                        <ion-icon style="color:red;margin-right:8px;" name="md-flame"></ion-icon> {{item.total}}</ion-item>\n\n                    </ion-card-header>\n\n                  </ion-col>\n\n                </ion-row>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <ion-icon style="color:primary;margin-:" name="ios-thumbs-up"></ion-icon>{{item.like}} </ion-col>\n\n                  <ion-col>\n\n                    <ion-icon style="color:crimson;" name="ios-heart"></ion-icon>{{item.love}}</ion-col>\n\n                  <ion-col>\n\n                    <ion-icon style="color:goldenrod;" name="md-outlet"></ion-icon>{{item.wow}}</ion-col>\n\n                  <ion-col>\n\n                    <ion-icon style="color:goldenrod;" name="ios-happy"></ion-icon>{{item.haha}}</ion-col>\n\n                  <ion-col>\n\n                    <ion-icon style="color:goldenrod;" name="ios-sad"></ion-icon>{{item.sad}} </ion-col>\n\n                  <ion-col>\n\n                    <ion-icon style="color:goldenrod;" name="alert"></ion-icon>{{item.angry}}</ion-col>\n\n                  <ion-col>\n\n                    <ion-icon style="color:purple;" name="flower"></ion-icon>{{item.thankful}}</ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div>\n\n        <ion-col>\n\n          <button ion-button (click)="getAllTops()" color="facebook">See more ...</button>\n\n        </ion-col>\n\n        <ion-col>\n\n          <ion-select [(ngModel)]="sortByTime" (ionChange)="getFacebookData()">\n\n            <ion-option>Last 1 week</ion-option>\n\n            <ion-option>Last 1 month</ion-option>\n\n            <ion-option>Last 3 months</ion-option>\n\n            <ion-option>Last 6 months</ion-option>\n\n            <ion-option>Last 1 year</ion-option>\n\n            <ion-option>Last 2 years</ion-option>\n\n            <ion-option>Last 5 years</ion-option>\n\n          </ion-select>\n\n        </ion-col>\n\n\n\n\n\n      </div>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n<ion-footer>\n\n  <div class="btn-wrapper">\n\n    <button ion-button icon-only color="soft" (click)=\'trigerPage()\'>\n\n      <ion-icon name="arrow-up" *ngIf="pageTriger.match(\'list\')"></ion-icon>\n\n      <ion-icon name="arrow-down" *ngIf="pageTriger.match(\'chart\')"></ion-icon>\n\n    </button>\n\n  </div>\n\n</ion-footer>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */]])
 ], DashboardPage);
 
-var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=dashboard.js.map
 
 /***/ }),
 
-/***/ 393:
+/***/ 394:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -459,7 +498,7 @@ var _a, _b, _c, _d, _e, _f;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_chart_js__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -621,19 +660,19 @@ __decorate([
 ], FriendsPage.prototype, "lineCanvas", void 0);
 FriendsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-friends',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n  Generated template for the FriendsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>friends</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-title>This tab for newfeeds from friends who use our app</ion-card-title>\n    Coming Soon\n  </ion-card>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
+        selector: 'page-friends',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n  Generated template for the FriendsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-title>This tab for newfeeds from friends who use our app</ion-card-title>\n    Coming Soon\n  </ion-card>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
 ], FriendsPage);
 
 //# sourceMappingURL=friends.js.map
 
 /***/ }),
 
-/***/ 394:
+/***/ 395:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -642,7 +681,7 @@ FriendsPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(474);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
@@ -718,18 +757,21 @@ var NewfeedPage = (function () {
         };
         //for retry
         this.retryTime = 0;
+        this.getPost(true);
     }
     //call when refresh
     NewfeedPage.prototype.doRefresh = function (refresher) {
         console.log('Begin async operation', refresher);
         //get data again
-        this.getPost();
+        this.getPost(true);
         refresher.complete();
     };
-    NewfeedPage.prototype.getPost = function () {
+    NewfeedPage.prototype.getPost = function (getLoading) {
         var _this = this;
         var loading = this.loadingController.create({ content: "Loading,please wait..." });
-        loading.present();
+        if (getLoading) {
+            loading.present();
+        }
         this.httpProvider.getPosts().subscribe(
         //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
         function (result) {
@@ -740,25 +782,35 @@ var NewfeedPage = (function () {
                     console.log("Token expired!!!");
                     _this.retryTime += 1;
                     if (_this.retryTime < 3)
-                        return _this.getPost();
+                        return _this.getPost(true);
                     else
                         console.log("Access Token expired!!!");
                 }
                 else {
                     _this.setLike();
-                    _this.getPost();
+                    _this.getPost(true);
                 }
             }
             //assign data to view
             _this.newsData = result;
+            if (_this.newsData) {
+                for (var _i = 0, _a = _this.newsData; _i < _a.length; _i++) {
+                    var data = _a[_i];
+                    var newDate = new Date(data.created_time);
+                    data.created_time = newDate.toDateString();
+                }
+            }
+            //alert(typeof (this.newsData));
             console.log("Success : " + JSON.stringify(result));
-            loading.dismissAll();
+            if (getLoading)
+                loading.dismissAll();
             _this.retryTime = 0;
         }, function (err) {
             //call if fail to get request
             console.error("Error : " + err);
             alert("Can't get Data from the server: " + err);
-            loading.dismissAll();
+            if (getLoading)
+                loading.dismissAll();
         }, function () {
             console.log('getData completed');
         });
@@ -768,9 +820,20 @@ var NewfeedPage = (function () {
             console.log(value);
         });
     };
+    NewfeedPage.prototype.merge = function (dest, src) {
+        for (var _i = 0, src_1 = src; _i < src_1.length; _i++) {
+            var kvp = src_1[_i];
+            dest[kvp.key] = kvp.value;
+        }
+    };
+    NewfeedPage.prototype.doInfinite = function (infiniteScroll) {
+        setTimeout(function () {
+            console.log('Async operation has ended');
+            infiniteScroll.complete();
+        }, 1000);
+    };
     NewfeedPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad newfeedPage');
-        this.getPost();
         //this.getCommentsData();
         //this.createGraph();
     };
@@ -831,28 +894,32 @@ var NewfeedPage = (function () {
     };
     return NewfeedPage;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* Content */]),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* Content */])
+], NewfeedPage.prototype, "content", void 0);
 NewfeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Newfeed\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-list *ngFor="let item of newsData">\n\n\n\n    <ion-card>\n\n\n\n      <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src={{item.page_picture}}>\n\n        </ion-avatar>\n\n        <h2>{{item.page_name}}</h2>\n\n        <p>{{item.created_time}}</p>\n\n      </ion-item>\n\n\n\n      <img src={{item.full_picture}} />\n\n\n\n      <ion-card-content>\n\n        <p>{{item.message}}</p>\n\n      </ion-card-content>\n\n      <div>\n\n        <ion-row>\n\n\n\n\n\n          <ion-label>\n\n            <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon>\n\n            {{item.reactions_summary}}\n\n          </ion-label>\n\n\n\n        </ion-row>\n\n      </div>\n\n      <ion-row>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <ion-icon style="color:aqua;margin-left:10px" name="ios-thumbs-up"></ion-icon>\n\n            <div>Likes</div>\n\n          </button>\n\n        </ion-col>\n\n        <button class="button circle text-center">\n\n          <i class="ion-crop"></i>\n\n        </button>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <ion-icon name="text"></ion-icon>\n\n            <div>Comments</div>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n    </ion-card>\n\n  </ion-list>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
+        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n\n\n<ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  \n\n  <ion-list *ngFor="let item of newsData">\n\n\n\n    <ion-card>\n\n\n\n      <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src={{item.page_picture}}>\n\n        </ion-avatar>\n\n        <h2>{{item.page_name}}</h2>\n\n        <p>{{item.created_time}}</p>\n\n      </ion-item>\n\n\n\n      <img src={{item.full_picture}} />\n\n\n\n      <ion-card-content>\n\n        <p>{{item.message}}</p>\n\n      </ion-card-content>\n\n      <div>\n\n        <ion-row>\n\n\n\n\n\n          <ion-label>\n\n            <ion-icon style="color:red;margin-left:10px;margin-right:5px;" name="md-flame"></ion-icon>\n\n            {{item.reactions_summary}}\n\n          </ion-label>\n\n          <ion-label>\n\n            <ion-icon color="facebook" style="margin-right:5px;" name="text"></ion-icon>\n\n            {{item.comments_summary}}\n\n          </ion-label>\n\n\n\n        </ion-row>\n\n      </div>\n\n      <ion-row>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <ion-icon color="facebook" style="margin-left:10px;margin-right:5px;" name="ios-thumbs-up"></ion-icon>\n\n            <div>Likes</div>\n\n          </button>\n\n        </ion-col>\n\n       <!-- <button class="button circle text-center">\n\n          <i class="ion-crop"></i>\n\n        </button>!-->\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <ion-icon color="facebook" style="margin-right:5px;" name="text"></ion-icon>\n\n            <div>Comments</div>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n    </ion-card>\n\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n\n    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more feed..."></ion-infinite-scroll-content>\n\n  </ion-infinite-scroll>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_0__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]])
 ], NewfeedPage);
 
 //# sourceMappingURL=newfeed.js.map
 
 /***/ }),
 
-/***/ 395:
+/***/ 396:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_home__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_home__ = __webpack_require__(123);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__ = __webpack_require__(115);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -901,22 +968,22 @@ var SettingPage = (function () {
 }());
 SettingPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/'<!--\n  Generated template for the SettingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Setting</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <button ion-item (click)=\'logout()\'>LOG OUT</button>\n  <button ion-item (click)=\'getAccess()\'>Token PLS</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/,
+        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/'<!--\n  Generated template for the SettingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n\n\n<ion-content padding>\n  <button ion-button (click)=\'logout()\'>LOG OUT</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */]])
 ], SettingPage);
 
 //# sourceMappingURL=setting.js.map
 
 /***/ }),
 
-/***/ 396:
+/***/ 397:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(397);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(401);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(398);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(402);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -924,7 +991,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 401:
+/***/ 402:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -932,26 +999,28 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(384);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(385);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(757);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__ = __webpack_require__(392);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_newfeed_newfeed__ = __webpack_require__(394);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_friends_friends__ = __webpack_require__(393);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_setting_setting__ = __webpack_require__(395);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(386);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(758);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__ = __webpack_require__(393);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_newfeed_newfeed__ = __webpack_require__(395);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_friends_friends__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_setting_setting__ = __webpack_require__(396);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_http_http_provider__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_http__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_facebook__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angular2_swing__ = __webpack_require__(758);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_facebook__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angular2_swing__ = __webpack_require__(759);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angular2_swing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_angular2_swing__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_time_time__ = __webpack_require__(767);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_time_time__ = __webpack_require__(768);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_screen_orientation__ = __webpack_require__(113);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -987,7 +1056,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_12__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_14_angular2_swing__["SwingModule"],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {
                 tabsPlacement: 'top'
             }, {
                 links: [
@@ -1001,7 +1070,7 @@ AppModule = __decorate([
                 ]
             })
         ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicApp */]],
         entryComponents: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */],
             __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */],
@@ -1012,8 +1081,10 @@ AppModule = __decorate([
         ],
         providers: [
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_13__ionic_native_facebook__["a" /* Facebook */],
-            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_13__ionic_native_facebook__["a" /* Facebook */],
+            __WEBPACK_IMPORTED_MODULE_16__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
+            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicErrorHandler */] },
             __WEBPACK_IMPORTED_MODULE_11__providers_http_http_provider__["a" /* HttpProvider */],
             __WEBPACK_IMPORTED_MODULE_15__providers_time_time__["a" /* TimeProvider */]
         ]
@@ -1024,240 +1095,240 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 455:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 209,
-	"./af.js": 209,
-	"./ar": 210,
-	"./ar-dz": 211,
-	"./ar-dz.js": 211,
-	"./ar-kw": 212,
-	"./ar-kw.js": 212,
-	"./ar-ly": 213,
-	"./ar-ly.js": 213,
-	"./ar-ma": 214,
-	"./ar-ma.js": 214,
-	"./ar-sa": 215,
-	"./ar-sa.js": 215,
-	"./ar-tn": 216,
-	"./ar-tn.js": 216,
-	"./ar.js": 210,
-	"./az": 217,
-	"./az.js": 217,
-	"./be": 218,
-	"./be.js": 218,
-	"./bg": 219,
-	"./bg.js": 219,
-	"./bn": 220,
-	"./bn.js": 220,
-	"./bo": 221,
-	"./bo.js": 221,
-	"./br": 222,
-	"./br.js": 222,
-	"./bs": 223,
-	"./bs.js": 223,
-	"./ca": 224,
-	"./ca.js": 224,
-	"./cs": 225,
-	"./cs.js": 225,
-	"./cv": 226,
-	"./cv.js": 226,
-	"./cy": 227,
-	"./cy.js": 227,
-	"./da": 228,
-	"./da.js": 228,
-	"./de": 229,
-	"./de-at": 230,
-	"./de-at.js": 230,
-	"./de-ch": 231,
-	"./de-ch.js": 231,
-	"./de.js": 229,
-	"./dv": 232,
-	"./dv.js": 232,
-	"./el": 233,
-	"./el.js": 233,
-	"./en-au": 234,
-	"./en-au.js": 234,
-	"./en-ca": 235,
-	"./en-ca.js": 235,
-	"./en-gb": 236,
-	"./en-gb.js": 236,
-	"./en-ie": 237,
-	"./en-ie.js": 237,
-	"./en-nz": 238,
-	"./en-nz.js": 238,
-	"./eo": 239,
-	"./eo.js": 239,
-	"./es": 240,
-	"./es-do": 241,
-	"./es-do.js": 241,
-	"./es.js": 240,
-	"./et": 242,
-	"./et.js": 242,
-	"./eu": 243,
-	"./eu.js": 243,
-	"./fa": 244,
-	"./fa.js": 244,
-	"./fi": 245,
-	"./fi.js": 245,
-	"./fo": 246,
-	"./fo.js": 246,
-	"./fr": 247,
-	"./fr-ca": 248,
-	"./fr-ca.js": 248,
-	"./fr-ch": 249,
-	"./fr-ch.js": 249,
-	"./fr.js": 247,
-	"./fy": 250,
-	"./fy.js": 250,
-	"./gd": 251,
-	"./gd.js": 251,
-	"./gl": 252,
-	"./gl.js": 252,
-	"./gom-latn": 253,
-	"./gom-latn.js": 253,
-	"./he": 254,
-	"./he.js": 254,
-	"./hi": 255,
-	"./hi.js": 255,
-	"./hr": 256,
-	"./hr.js": 256,
-	"./hu": 257,
-	"./hu.js": 257,
-	"./hy-am": 258,
-	"./hy-am.js": 258,
-	"./id": 259,
-	"./id.js": 259,
-	"./is": 260,
-	"./is.js": 260,
-	"./it": 261,
-	"./it.js": 261,
-	"./ja": 262,
-	"./ja.js": 262,
-	"./jv": 263,
-	"./jv.js": 263,
-	"./ka": 264,
-	"./ka.js": 264,
-	"./kk": 265,
-	"./kk.js": 265,
-	"./km": 266,
-	"./km.js": 266,
-	"./kn": 267,
-	"./kn.js": 267,
-	"./ko": 268,
-	"./ko.js": 268,
-	"./ky": 269,
-	"./ky.js": 269,
-	"./lb": 270,
-	"./lb.js": 270,
-	"./lo": 271,
-	"./lo.js": 271,
-	"./lt": 272,
-	"./lt.js": 272,
-	"./lv": 273,
-	"./lv.js": 273,
-	"./me": 274,
-	"./me.js": 274,
-	"./mi": 275,
-	"./mi.js": 275,
-	"./mk": 276,
-	"./mk.js": 276,
-	"./ml": 277,
-	"./ml.js": 277,
-	"./mr": 278,
-	"./mr.js": 278,
-	"./ms": 279,
-	"./ms-my": 280,
-	"./ms-my.js": 280,
-	"./ms.js": 279,
-	"./my": 281,
-	"./my.js": 281,
-	"./nb": 282,
-	"./nb.js": 282,
-	"./ne": 283,
-	"./ne.js": 283,
-	"./nl": 284,
-	"./nl-be": 285,
-	"./nl-be.js": 285,
-	"./nl.js": 284,
-	"./nn": 286,
-	"./nn.js": 286,
-	"./pa-in": 287,
-	"./pa-in.js": 287,
-	"./pl": 288,
-	"./pl.js": 288,
-	"./pt": 289,
-	"./pt-br": 290,
-	"./pt-br.js": 290,
-	"./pt.js": 289,
-	"./ro": 291,
-	"./ro.js": 291,
-	"./ru": 292,
-	"./ru.js": 292,
-	"./sd": 293,
-	"./sd.js": 293,
-	"./se": 294,
-	"./se.js": 294,
-	"./si": 295,
-	"./si.js": 295,
-	"./sk": 296,
-	"./sk.js": 296,
-	"./sl": 297,
-	"./sl.js": 297,
-	"./sq": 298,
-	"./sq.js": 298,
-	"./sr": 299,
-	"./sr-cyrl": 300,
-	"./sr-cyrl.js": 300,
-	"./sr.js": 299,
-	"./ss": 301,
-	"./ss.js": 301,
-	"./sv": 302,
-	"./sv.js": 302,
-	"./sw": 303,
-	"./sw.js": 303,
-	"./ta": 304,
-	"./ta.js": 304,
-	"./te": 305,
-	"./te.js": 305,
-	"./tet": 306,
-	"./tet.js": 306,
-	"./th": 307,
-	"./th.js": 307,
-	"./tl-ph": 308,
-	"./tl-ph.js": 308,
-	"./tlh": 309,
-	"./tlh.js": 309,
-	"./tr": 310,
-	"./tr.js": 310,
-	"./tzl": 311,
-	"./tzl.js": 311,
-	"./tzm": 312,
-	"./tzm-latn": 313,
-	"./tzm-latn.js": 313,
-	"./tzm.js": 312,
-	"./uk": 314,
-	"./uk.js": 314,
-	"./ur": 315,
-	"./ur.js": 315,
-	"./uz": 316,
-	"./uz-latn": 317,
-	"./uz-latn.js": 317,
-	"./uz.js": 316,
-	"./vi": 318,
-	"./vi.js": 318,
-	"./x-pseudo": 319,
-	"./x-pseudo.js": 319,
-	"./yo": 320,
-	"./yo.js": 320,
-	"./zh-cn": 321,
-	"./zh-cn.js": 321,
-	"./zh-hk": 322,
-	"./zh-hk.js": 322,
-	"./zh-tw": 323,
-	"./zh-tw.js": 323
+	"./af": 210,
+	"./af.js": 210,
+	"./ar": 211,
+	"./ar-dz": 212,
+	"./ar-dz.js": 212,
+	"./ar-kw": 213,
+	"./ar-kw.js": 213,
+	"./ar-ly": 214,
+	"./ar-ly.js": 214,
+	"./ar-ma": 215,
+	"./ar-ma.js": 215,
+	"./ar-sa": 216,
+	"./ar-sa.js": 216,
+	"./ar-tn": 217,
+	"./ar-tn.js": 217,
+	"./ar.js": 211,
+	"./az": 218,
+	"./az.js": 218,
+	"./be": 219,
+	"./be.js": 219,
+	"./bg": 220,
+	"./bg.js": 220,
+	"./bn": 221,
+	"./bn.js": 221,
+	"./bo": 222,
+	"./bo.js": 222,
+	"./br": 223,
+	"./br.js": 223,
+	"./bs": 224,
+	"./bs.js": 224,
+	"./ca": 225,
+	"./ca.js": 225,
+	"./cs": 226,
+	"./cs.js": 226,
+	"./cv": 227,
+	"./cv.js": 227,
+	"./cy": 228,
+	"./cy.js": 228,
+	"./da": 229,
+	"./da.js": 229,
+	"./de": 230,
+	"./de-at": 231,
+	"./de-at.js": 231,
+	"./de-ch": 232,
+	"./de-ch.js": 232,
+	"./de.js": 230,
+	"./dv": 233,
+	"./dv.js": 233,
+	"./el": 234,
+	"./el.js": 234,
+	"./en-au": 235,
+	"./en-au.js": 235,
+	"./en-ca": 236,
+	"./en-ca.js": 236,
+	"./en-gb": 237,
+	"./en-gb.js": 237,
+	"./en-ie": 238,
+	"./en-ie.js": 238,
+	"./en-nz": 239,
+	"./en-nz.js": 239,
+	"./eo": 240,
+	"./eo.js": 240,
+	"./es": 241,
+	"./es-do": 242,
+	"./es-do.js": 242,
+	"./es.js": 241,
+	"./et": 243,
+	"./et.js": 243,
+	"./eu": 244,
+	"./eu.js": 244,
+	"./fa": 245,
+	"./fa.js": 245,
+	"./fi": 246,
+	"./fi.js": 246,
+	"./fo": 247,
+	"./fo.js": 247,
+	"./fr": 248,
+	"./fr-ca": 249,
+	"./fr-ca.js": 249,
+	"./fr-ch": 250,
+	"./fr-ch.js": 250,
+	"./fr.js": 248,
+	"./fy": 251,
+	"./fy.js": 251,
+	"./gd": 252,
+	"./gd.js": 252,
+	"./gl": 253,
+	"./gl.js": 253,
+	"./gom-latn": 254,
+	"./gom-latn.js": 254,
+	"./he": 255,
+	"./he.js": 255,
+	"./hi": 256,
+	"./hi.js": 256,
+	"./hr": 257,
+	"./hr.js": 257,
+	"./hu": 258,
+	"./hu.js": 258,
+	"./hy-am": 259,
+	"./hy-am.js": 259,
+	"./id": 260,
+	"./id.js": 260,
+	"./is": 261,
+	"./is.js": 261,
+	"./it": 262,
+	"./it.js": 262,
+	"./ja": 263,
+	"./ja.js": 263,
+	"./jv": 264,
+	"./jv.js": 264,
+	"./ka": 265,
+	"./ka.js": 265,
+	"./kk": 266,
+	"./kk.js": 266,
+	"./km": 267,
+	"./km.js": 267,
+	"./kn": 268,
+	"./kn.js": 268,
+	"./ko": 269,
+	"./ko.js": 269,
+	"./ky": 270,
+	"./ky.js": 270,
+	"./lb": 271,
+	"./lb.js": 271,
+	"./lo": 272,
+	"./lo.js": 272,
+	"./lt": 273,
+	"./lt.js": 273,
+	"./lv": 274,
+	"./lv.js": 274,
+	"./me": 275,
+	"./me.js": 275,
+	"./mi": 276,
+	"./mi.js": 276,
+	"./mk": 277,
+	"./mk.js": 277,
+	"./ml": 278,
+	"./ml.js": 278,
+	"./mr": 279,
+	"./mr.js": 279,
+	"./ms": 280,
+	"./ms-my": 281,
+	"./ms-my.js": 281,
+	"./ms.js": 280,
+	"./my": 282,
+	"./my.js": 282,
+	"./nb": 283,
+	"./nb.js": 283,
+	"./ne": 284,
+	"./ne.js": 284,
+	"./nl": 285,
+	"./nl-be": 286,
+	"./nl-be.js": 286,
+	"./nl.js": 285,
+	"./nn": 287,
+	"./nn.js": 287,
+	"./pa-in": 288,
+	"./pa-in.js": 288,
+	"./pl": 289,
+	"./pl.js": 289,
+	"./pt": 290,
+	"./pt-br": 291,
+	"./pt-br.js": 291,
+	"./pt.js": 290,
+	"./ro": 292,
+	"./ro.js": 292,
+	"./ru": 293,
+	"./ru.js": 293,
+	"./sd": 294,
+	"./sd.js": 294,
+	"./se": 295,
+	"./se.js": 295,
+	"./si": 296,
+	"./si.js": 296,
+	"./sk": 297,
+	"./sk.js": 297,
+	"./sl": 298,
+	"./sl.js": 298,
+	"./sq": 299,
+	"./sq.js": 299,
+	"./sr": 300,
+	"./sr-cyrl": 301,
+	"./sr-cyrl.js": 301,
+	"./sr.js": 300,
+	"./ss": 302,
+	"./ss.js": 302,
+	"./sv": 303,
+	"./sv.js": 303,
+	"./sw": 304,
+	"./sw.js": 304,
+	"./ta": 305,
+	"./ta.js": 305,
+	"./te": 306,
+	"./te.js": 306,
+	"./tet": 307,
+	"./tet.js": 307,
+	"./th": 308,
+	"./th.js": 308,
+	"./tl-ph": 309,
+	"./tl-ph.js": 309,
+	"./tlh": 310,
+	"./tlh.js": 310,
+	"./tr": 311,
+	"./tr.js": 311,
+	"./tzl": 312,
+	"./tzl.js": 312,
+	"./tzm": 313,
+	"./tzm-latn": 314,
+	"./tzm-latn.js": 314,
+	"./tzm.js": 313,
+	"./uk": 315,
+	"./uk.js": 315,
+	"./ur": 316,
+	"./ur.js": 316,
+	"./uz": 317,
+	"./uz-latn": 318,
+	"./uz-latn.js": 318,
+	"./uz.js": 317,
+	"./vi": 319,
+	"./vi.js": 319,
+	"./x-pseudo": 320,
+	"./x-pseudo.js": 320,
+	"./yo": 321,
+	"./yo.js": 321,
+	"./zh-cn": 322,
+	"./zh-cn.js": 322,
+	"./zh-hk": 323,
+	"./zh-hk.js": 323,
+	"./zh-tw": 324,
+	"./zh-tw.js": 324
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1273,7 +1344,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 455;
+webpackContext.id = 456;
 
 /***/ }),
 
@@ -1282,12 +1353,13 @@ webpackContext.id = 455;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_facebook__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_screen_orientation__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1302,6 +1374,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /*
   Generated class for the HttpProvider provider.
 
@@ -1311,11 +1384,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var HttpProvider = (function () {
     // private graphUrl = 'https://graph.facebook.com/';
     // private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
-    function HttpProvider(http, facebook, platform, app) {
+    function HttpProvider(http, facebook, platform, app, screenOrientation) {
         this.http = http;
         this.facebook = facebook;
         this.platform = platform;
         this.app = app;
+        this.screenOrientation = screenOrientation;
         //initial
         this.APP_ID = 1894102183937616;
         this.serverIP = 'http://103.233.194.200:8080/';
@@ -1344,11 +1418,13 @@ var HttpProvider = (function () {
                 profile.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
             });
             console.log(permissions);
-            alert('Logged in Successfully!');
+            //alert('Logged in Successfully!');
             console.log(JSON.stringify(response.authResponse));
             _this.authResponse = response.authResponse;
             _this.uid = _this.authResponse.userId;
             _this.isLogged = true;
+            if (_this.platform.is('cordova'))
+                _this.screenOrientation.unlock();
             _this.navCtrl.push('tabsPage');
         }, function (error) {
             //for test
@@ -1359,7 +1435,7 @@ var HttpProvider = (function () {
                 console.log(_this.uid);
             }
             else {
-                alert("Error: " + JSON.stringify(error));
+                //alert("Error: " + JSON.stringify(error));
                 console.log(error);
                 _this.isLogged = false;
             }
@@ -1395,7 +1471,7 @@ var HttpProvider = (function () {
         }
         else {
             //for test in computer
-            this.accessToken = 'EAACEdEose0cBAF4PZCS0gi9HgrV0tJt6zyXdbmeaiHSfPtrZCJy6hjKHihHe9WntHVRLKLLP8hMzoPbagVFF9ZBB9ZANZCswLxUQAQstg6HtukYqRhcBTYlh5gbZAFadTSwEnf4mBXEZBZAlJnFt8AeIYtTOJgUyrrmskgDv3vYpQcrzJMyaPFvBDVZCmizq953xvNW4dfpgmvQZDZD';
+            this.accessToken = 'EAACEdEose0cBAMDWvHZBPUF4RF7QKbIvTniXidzBA6YAQhZCy44YKtDvsOUlN4aYkxqrLx6zxfcWKUDczQLnBxmS0CZAs20QfqagIO6n7xrlxChHCbSc8pEaS1LjTgvcSq9sMgxnMiTs0ylGy016NLksi4vgncZBoAj5VkTOJ8nnQfPZA05RM4wz1jyOSDKap6aU7rbOhDQZDZD';
         }
     };
     //set url for http request from python server
@@ -1429,7 +1505,7 @@ var HttpProvider = (function () {
     HttpProvider.prototype.getFacebookData = function (top, hour, day, month, year) {
         //set header to authorize with access token
         this.getToken();
-        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        var headers = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Headers */]();
         headers.append('access_token', this.accessToken);
         return this.http.get(this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers })
             .map(function (res) { return res.json(); });
@@ -1438,7 +1514,7 @@ var HttpProvider = (function () {
         this.getUid();
         //set header to authorize with access token
         this.getToken();
-        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        var headers = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Headers */]();
         headers.append('access_token', this.accessToken);
         return this.http.get(this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers })
             .map(function (res) { return res.json(); });
@@ -1446,14 +1522,14 @@ var HttpProvider = (function () {
     //feature for newfeed??
     HttpProvider.prototype.setLike = function () {
         this.getToken();
-        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        var headers = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Headers */]();
         headers.append('access_token', this.accessToken);
         return this.http.get(this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers });
     };
     HttpProvider.prototype.getPosts = function () {
         this.getUid();
         this.getToken();
-        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        var headers = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Headers */]();
         console.log(this.uid);
         console.log(this.accessToken);
         headers.append('access_token', this.accessToken);
@@ -1469,27 +1545,34 @@ var HttpProvider = (function () {
     HttpProvider.prototype.getContext = function (uid) {
         return this.facebook.api('/' + uid + '?field=context', ['user_posts']);
     };
+    HttpProvider.prototype.getMessage = function (postID) {
+        return this.facebook.api('/' + postID, ['user_posts']);
+    };
+    HttpProvider.prototype.getFriends = function () {
+        return this.facebook.api('/me/friends', ['user_friends']);
+    };
     return HttpProvider;
 }());
 HttpProvider = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_1__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["a" /* App */]])
+    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__ionic_native_screen_orientation__["a" /* ScreenOrientation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__ionic_native_screen_orientation__["a" /* ScreenOrientation */]) === "function" && _e || Object])
 ], HttpProvider);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=http-provider.js.map
 
 /***/ }),
 
-/***/ 757:
+/***/ 758:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(385);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(384);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(386);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(123);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular_components_alert_alert_controller__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1568,14 +1651,14 @@ var MyApp = (function () {
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\app\app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_5_ionic_angular_components_alert_alert_controller__["a" /* AlertController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_5_ionic_angular_components_alert_alert_controller__["a" /* AlertController */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
-/***/ 767:
+/***/ 768:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1618,5 +1701,5 @@ TimeProvider = __decorate([
 
 /***/ })
 
-},[396]);
+},[397]);
 //# sourceMappingURL=main.js.map

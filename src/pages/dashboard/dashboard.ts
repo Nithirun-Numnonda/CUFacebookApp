@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
 import { Chart } from 'chart.js';
 
@@ -26,7 +26,9 @@ export class DashboardPage {
   total_comments: Array<string>;
   nativeEle: any;
   maxReactionsPost: any;
+  maxReactionsMsg:any;
   maxCommentsPost: any;
+  maxCommentsMsg:any;
 
   //for Data facebook
   commentsData: any;
@@ -58,7 +60,14 @@ export class DashboardPage {
   //for controlUI
   typeData: String = 'commentsData'
   pageTriger: String = 'chart'
-  constructor(public navCtrl: NavController, public navParams: NavParams, private httpProvider: HttpProvider, private loadingController: LoadingController, public modalCtrl: ModalController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private httpProvider: HttpProvider,
+    private loadingController: LoadingController,
+    public modalCtrl: ModalController,
+    private platform: Platform
+  ) {
     //initial default parameter
     this.hourValue = this.hours[0];
     this.dayValue = this.days[0];
@@ -150,7 +159,6 @@ export class DashboardPage {
     this.total_reactions = [];
     //get data again
     this.getFacebookData();
-    this.setLike();
     refresher.complete();
 
   }
@@ -181,32 +189,35 @@ export class DashboardPage {
           this.commentsData = result.comments;
           this.reactionsData = result.reactions;
           this.postsSummaryData = result.post_summary;
-          if (this.postsSummaryData){
-            var maxReactions=0;
-            var maxComments=0;
+          if (this.postsSummaryData) {
+            var maxReactions = 0;
+            var maxComments = 0;
             for (let data of this.postsSummaryData) {
-              if (data.total_comments != 0 || data.total_reactions != 0){
+              if (data.total_comments != 0 || data.total_reactions != 0) {
                 var newDate = new Date(data.created_time);
                 //console.log(newDate.toDateString());
                 this.createTime.push(newDate.toDateString());
                 this.total_comments.push(data.total_comments);
                 this.total_reactions.push(data.total_reactions);
               }
-              if(data.total_comments>maxComments){
-                maxComments=data.total_comments
-                this.maxCommentsPost=data;
+              if (data.total_comments > maxComments) {
+                maxComments = data.total_comments
+                data.created_time = new Date(data.created_time).toDateString();
+                this.maxCommentsPost = data;
                 //console.log(maxComments);
               }
-              if(data.total_reactions>maxReactions){
-                maxReactions=data.total_reactions
-                data.created_time=new Date(data.created_time).toDateString();
-                this.maxReactionsPost=data;
+              if (data.total_reactions > maxReactions) {
+                maxReactions = data.total_reactions
+                data.created_time = new Date(data.created_time).toDateString();
+                this.maxReactionsPost = data;
               }
             }
           }
           if (this.pageTriger == "chart")
             this.createGraph();
           //          console.log("Success : " + JSON.stringify(result));
+          this.getMessage(this.maxCommentsPost.id,this.maxReactionsPost.id);
+         
           loading.dismissAll();
           this.retryTime = 0;
           this.httpProvider.setUid(result._uid);
@@ -249,7 +260,8 @@ export class DashboardPage {
           this.reactionsData = result.reactions;
           if (this.postsSummaryData) {
             for (let data of this.postsSummaryData) {
-              this.createTime.push(data.created_time);
+              var newDate = new Date(data.created_time);
+              this.createTime.push(newDate.toDateString());
               this.total_comments.push(data.total_comments);
               this.total_reactions.push(data.total_reactions);
             }
@@ -285,7 +297,33 @@ export class DashboardPage {
     this.getFacebookData();
     this.setLike();
   }
+  //get message
+  getMessage(uid,uid2) {
+    if (this.platform.is('cordova')) {
+      this.httpProvider.getMessage(uid).then((result) => {
+        console.log(JSON.stringify(result));
+        this.maxCommentsMsg=result.message;
+        this.httpProvider.getMessage(uid2).then((result2) => {
+          console.log(JSON.stringify(result2));
+          this.maxReactionsMsg=result2.message;
+          
+        }, (error) => {
+  
+          console.log(error);
+  
+        });
+      }, (error) => {
 
+        console.log(error);
+
+      });
+      
+    }else{
+      this.maxCommentsMsg="Message"
+      this.maxReactionsMsg="Message2"
+    }
+  }
+  
 
   //for create graph
   createGraph() {
@@ -308,6 +346,7 @@ export class DashboardPage {
         }]
       },
       options: {
+        responsive: false,
         scales: {
           yAxes: [{
             ticks: {
@@ -315,11 +354,19 @@ export class DashboardPage {
             }
           }],
           xAxes: [{
-            ticks: { 
+            ticks: {
               minRotation: 90,
-              fontSize:10
+              fontSize: 10
             }
           }]
+        },
+        layout: {
+          padding: {
+            left: 2,
+            right: 2,
+            top: 0,
+            bottom: 2
+          }
         }
       }
 

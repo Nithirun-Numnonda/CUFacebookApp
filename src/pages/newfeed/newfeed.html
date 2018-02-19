@@ -4,19 +4,14 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Newfeed
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
+
+<ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
+  
   <ion-list *ngFor="let item of newsData">
 
     <ion-card>
@@ -39,8 +34,12 @@
 
 
           <ion-label>
-            <ion-icon style="color:red;margin-left:10px" name="md-flame"></ion-icon>
+            <ion-icon style="color:red;margin-left:10px;margin-right:5px;" name="md-flame"></ion-icon>
             {{item.reactions_summary}}
+          </ion-label>
+          <ion-label>
+            <ion-icon color="facebook" style="margin-right:5px;" name="text"></ion-icon>
+            {{item.comments_summary}}
           </ion-label>
 
         </ion-row>
@@ -48,16 +47,16 @@
       <ion-row>
         <ion-col>
           <button ion-button full icon-center clear small>
-            <ion-icon style="color:aqua;margin-left:10px" name="ios-thumbs-up"></ion-icon>
+            <ion-icon color="facebook" style="margin-left:10px;margin-right:5px;" name="ios-thumbs-up"></ion-icon>
             <div>Likes</div>
           </button>
         </ion-col>
-        <button class="button circle text-center">
+       <!-- <button class="button circle text-center">
           <i class="ion-crop"></i>
-        </button>
+        </button>!-->
         <ion-col>
           <button ion-button full icon-center clear small>
-            <ion-icon name="text"></ion-icon>
+            <ion-icon color="facebook" style="margin-right:5px;" name="text"></ion-icon>
             <div>Comments</div>
           </button>
         </ion-col>
@@ -65,6 +64,8 @@
 
     </ion-card>
   </ion-list>
-
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more feed..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

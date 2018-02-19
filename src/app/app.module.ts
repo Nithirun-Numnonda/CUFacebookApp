@@ -11,10 +11,11 @@ import { NewfeedPage } from '../pages/newfeed/newfeed';
 import { FriendsPage } from '../pages/friends/friends';
 import { SettingPage } from '../pages/setting/setting';
 import { HttpProvider } from '../providers/http/http-provider';
-import {HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { Facebook } from '@ionic-native/facebook';
 import { SwingModule } from 'angular2-swing';
 import { TimeProvider } from '../providers/time/time';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +29,7 @@ import { TimeProvider } from '../providers/time/time';
     BrowserModule,
     HttpModule,
     SwingModule,
-    IonicModule.forRoot(MyApp,{
+    IonicModule.forRoot(MyApp, {
       tabsPlacement: 'top'
     })
   ],
@@ -43,11 +44,13 @@ import { TimeProvider } from '../providers/time/time';
   ],
   providers: [
     StatusBar,
-    SplashScreen,Facebook,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SplashScreen,
+    Facebook,
+    ScreenOrientation,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpProvider,
     TimeProvider
-    
+
   ]
 })
-export class AppModule {}
+export class AppModule { }

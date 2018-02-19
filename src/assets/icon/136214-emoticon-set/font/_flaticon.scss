@@ -1,0 +1,479 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 22/06/2016 15:37
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-afro:before { content: "\f100"; }
+.flaticon-afro-1:before { content: "\f101"; }
+.flaticon-agent:before { content: "\f102"; }
+.flaticon-alien:before { content: "\f103"; }
+.flaticon-alien-1:before { content: "\f104"; }
+.flaticon-angel:before { content: "\f105"; }
+.flaticon-angry:before { content: "\f106"; }
+.flaticon-angry-1:before { content: "\f107"; }
+.flaticon-angry-2:before { content: "\f108"; }
+.flaticon-angry-3:before { content: "\f109"; }
+.flaticon-angry-4:before { content: "\f10a"; }
+.flaticon-angry-5:before { content: "\f10b"; }
+.flaticon-arguing:before { content: "\f10c"; }
+.flaticon-arrogant:before { content: "\f10d"; }
+.flaticon-asian:before { content: "\f10e"; }
+.flaticon-asian-1:before { content: "\f10f"; }
+.flaticon-avatar:before { content: "\f110"; }
+.flaticon-baby:before { content: "\f111"; }
+.flaticon-baby-1:before { content: "\f112"; }
+.flaticon-baby-2:before { content: "\f113"; }
+.flaticon-bully:before { content: "\f114"; }
+.flaticon-burglar:before { content: "\f115"; }
+.flaticon-businessman:before { content: "\f116"; }
+.flaticon-cheeky:before { content: "\f117"; }
+.flaticon-cheeky-1:before { content: "\f118"; }
+.flaticon-clown:before { content: "\f119"; }
+.flaticon-confused:before { content: "\f11a"; }
+.flaticon-confused-1:before { content: "\f11b"; }
+.flaticon-confused-2:before { content: "\f11c"; }
+.flaticon-confused-3:before { content: "\f11d"; }
+.flaticon-creepy:before { content: "\f11e"; }
+.flaticon-crying:before { content: "\f11f"; }
+.flaticon-crying-1:before { content: "\f120"; }
+.flaticon-crying-2:before { content: "\f121"; }
+.flaticon-crying-3:before { content: "\f122"; }
+.flaticon-dazed:before { content: "\f123"; }
+.flaticon-dazed-1:before { content: "\f124"; }
+.flaticon-dazed-2:before { content: "\f125"; }
+.flaticon-dazed-3:before { content: "\f126"; }
+.flaticon-dead:before { content: "\f127"; }
+.flaticon-dead-1:before { content: "\f128"; }
+.flaticon-dead-2:before { content: "\f129"; }
+.flaticon-dead-3:before { content: "\f12a"; }
+.flaticon-dead-4:before { content: "\f12b"; }
+.flaticon-dead-5:before { content: "\f12c"; }
+.flaticon-dead-6:before { content: "\f12d"; }
+.flaticon-desperate:before { content: "\f12e"; }
+.flaticon-desperate-1:before { content: "\f12f"; }
+.flaticon-detective:before { content: "\f130"; }
+.flaticon-dissapointment:before { content: "\f131"; }
+.flaticon-doctor:before { content: "\f132"; }
+.flaticon-drunk:before { content: "\f133"; }
+.flaticon-dumb:before { content: "\f134"; }
+.flaticon-emo:before { content: "\f135"; }
+.flaticon-emo-1:before { content: "\f136"; }
+.flaticon-emo-2:before { content: "\f137"; }
+.flaticon-emoticon:before { content: "\f138"; }
+.flaticon-evil:before { content: "\f139"; }
+.flaticon-faint:before { content: "\f13a"; }
+.flaticon-faint-1:before { content: "\f13b"; }
+.flaticon-flirt:before { content: "\f13c"; }
+.flaticon-flirt-1:before { content: "\f13d"; }
+.flaticon-flirt-2:before { content: "\f13e"; }
+.flaticon-flirty:before { content: "\f13f"; }
+.flaticon-gangster:before { content: "\f140"; }
+.flaticon-geek:before { content: "\f141"; }
+.flaticon-geek-1:before { content: "\f142"; }
+.flaticon-gentleman:before { content: "\f143"; }
+.flaticon-gentleman-1:before { content: "\f144"; }
+.flaticon-gentleman-2:before { content: "\f145"; }
+.flaticon-gentleman-3:before { content: "\f146"; }
+.flaticon-gentleman-4:before { content: "\f147"; }
+.flaticon-ginger:before { content: "\f148"; }
+.flaticon-girl:before { content: "\f149"; }
+.flaticon-girl-1:before { content: "\f14a"; }
+.flaticon-goofy:before { content: "\f14b"; }
+.flaticon-goofy-1:before { content: "\f14c"; }
+.flaticon-goofy-2:before { content: "\f14d"; }
+.flaticon-goofy-3:before { content: "\f14e"; }
+.flaticon-goofy-4:before { content: "\f14f"; }
+.flaticon-grubby:before { content: "\f150"; }
+.flaticon-grubby-1:before { content: "\f151"; }
+.flaticon-happy:before { content: "\f152"; }
+.flaticon-happy-1:before { content: "\f153"; }
+.flaticon-happy-10:before { content: "\f154"; }
+.flaticon-happy-11:before { content: "\f155"; }
+.flaticon-happy-12:before { content: "\f156"; }
+.flaticon-happy-13:before { content: "\f157"; }
+.flaticon-happy-14:before { content: "\f158"; }
+.flaticon-happy-15:before { content: "\f159"; }
+.flaticon-happy-16:before { content: "\f15a"; }
+.flaticon-happy-2:before { content: "\f15b"; }
+.flaticon-happy-3:before { content: "\f15c"; }
+.flaticon-happy-4:before { content: "\f15d"; }
+.flaticon-happy-5:before { content: "\f15e"; }
+.flaticon-happy-6:before { content: "\f15f"; }
+.flaticon-happy-7:before { content: "\f160"; }
+.flaticon-happy-8:before { content: "\f161"; }
+.flaticon-happy-9:before { content: "\f162"; }
+.flaticon-harry-potter:before { content: "\f163"; }
+.flaticon-heisenberg:before { content: "\f164"; }
+.flaticon-hipster:before { content: "\f165"; }
+.flaticon-hipster-1:before { content: "\f166"; }
+.flaticon-hipster-2:before { content: "\f167"; }
+.flaticon-in-love:before { content: "\f168"; }
+.flaticon-in-love-1:before { content: "\f169"; }
+.flaticon-in-love-2:before { content: "\f16a"; }
+.flaticon-in-love-3:before { content: "\f16b"; }
+.flaticon-in-love-4:before { content: "\f16c"; }
+.flaticon-in-love-5:before { content: "\f16d"; }
+.flaticon-in-love-6:before { content: "\f16e"; }
+.flaticon-japan:before { content: "\f16f"; }
+.flaticon-jew:before { content: "\f170"; }
+.flaticon-joyful:before { content: "\f171"; }
+.flaticon-joyful-1:before { content: "\f172"; }
+.flaticon-joyful-2:before { content: "\f173"; }
+.flaticon-kiss:before { content: "\f174"; }
+.flaticon-kiss-1:before { content: "\f175"; }
+.flaticon-kiss-2:before { content: "\f176"; }
+.flaticon-kiss-3:before { content: "\f177"; }
+.flaticon-kiss-4:before { content: "\f178"; }
+.flaticon-laughing:before { content: "\f179"; }
+.flaticon-laughing-1:before { content: "\f17a"; }
+.flaticon-laughing-2:before { content: "\f17b"; }
+.flaticon-laughing-3:before { content: "\f17c"; }
+.flaticon-listening:before { content: "\f17d"; }
+.flaticon-love:before { content: "\f17e"; }
+.flaticon-manly:before { content: "\f17f"; }
+.flaticon-miserly:before { content: "\f180"; }
+.flaticon-miserly-1:before { content: "\f181"; }
+.flaticon-nerd:before { content: "\f182"; }
+.flaticon-nerd-1:before { content: "\f183"; }
+.flaticon-nerd-2:before { content: "\f184"; }
+.flaticon-nerd-3:before { content: "\f185"; }
+.flaticon-nerd-4:before { content: "\f186"; }
+.flaticon-ninja:before { content: "\f187"; }
+.flaticon-pirate:before { content: "\f188"; }
+.flaticon-pirate-1:before { content: "\f189"; }
+.flaticon-pirate-2:before { content: "\f18a"; }
+.flaticon-punk:before { content: "\f18b"; }
+.flaticon-punk-1:before { content: "\f18c"; }
+.flaticon-punk-2:before { content: "\f18d"; }
+.flaticon-rapper:before { content: "\f18e"; }
+.flaticon-relieved:before { content: "\f18f"; }
+.flaticon-rich:before { content: "\f190"; }
+.flaticon-rich-1:before { content: "\f191"; }
+.flaticon-rich-2:before { content: "\f192"; }
+.flaticon-rockstar:before { content: "\f193"; }
+.flaticon-sad:before { content: "\f194"; }
+.flaticon-sad-1:before { content: "\f195"; }
+.flaticon-sad-2:before { content: "\f196"; }
+.flaticon-sad-3:before { content: "\f197"; }
+.flaticon-sad-4:before { content: "\f198"; }
+.flaticon-sad-5:before { content: "\f199"; }
+.flaticon-sad-6:before { content: "\f19a"; }
+.flaticon-scared:before { content: "\f19b"; }
+.flaticon-scared-1:before { content: "\f19c"; }
+.flaticon-scared-2:before { content: "\f19d"; }
+.flaticon-scared-3:before { content: "\f19e"; }
+.flaticon-sceptic:before { content: "\f19f"; }
+.flaticon-sceptic-1:before { content: "\f1a0"; }
+.flaticon-sceptic-2:before { content: "\f1a1"; }
+.flaticon-sceptic-3:before { content: "\f1a2"; }
+.flaticon-sceptic-4:before { content: "\f1a3"; }
+.flaticon-sceptic-5:before { content: "\f1a4"; }
+.flaticon-sceptic-6:before { content: "\f1a5"; }
+.flaticon-sceptic-7:before { content: "\f1a6"; }
+.flaticon-secret:before { content: "\f1a7"; }
+.flaticon-shocked:before { content: "\f1a8"; }
+.flaticon-shocked-1:before { content: "\f1a9"; }
+.flaticon-shocked-2:before { content: "\f1aa"; }
+.flaticon-shocked-3:before { content: "\f1ab"; }
+.flaticon-sick:before { content: "\f1ac"; }
+.flaticon-sick-1:before { content: "\f1ad"; }
+.flaticon-sick-2:before { content: "\f1ae"; }
+.flaticon-sick-3:before { content: "\f1af"; }
+.flaticon-sick-4:before { content: "\f1b0"; }
+.flaticon-silent:before { content: "\f1b1"; }
+.flaticon-skeleton:before { content: "\f1b2"; }
+.flaticon-smile:before { content: "\f1b3"; }
+.flaticon-smiling:before { content: "\f1b4"; }
+.flaticon-smiling-1:before { content: "\f1b5"; }
+.flaticon-smoked:before { content: "\f1b6"; }
+.flaticon-smug:before { content: "\f1b7"; }
+.flaticon-smug-1:before { content: "\f1b8"; }
+.flaticon-smug-2:before { content: "\f1b9"; }
+.flaticon-smug-3:before { content: "\f1ba"; }
+.flaticon-smug-4:before { content: "\f1bb"; }
+.flaticon-smug-5:before { content: "\f1bc"; }
+.flaticon-smug-6:before { content: "\f1bd"; }
+.flaticon-sporty:before { content: "\f1be"; }
+.flaticon-stunned:before { content: "\f1bf"; }
+.flaticon-superhero:before { content: "\f1c0"; }
+.flaticon-superhero-1:before { content: "\f1c1"; }
+.flaticon-superhero-2:before { content: "\f1c2"; }
+.flaticon-superhero-3:before { content: "\f1c3"; }
+.flaticon-superhero-4:before { content: "\f1c4"; }
+.flaticon-surprised:before { content: "\f1c5"; }
+.flaticon-surprised-1:before { content: "\f1c6"; }
+.flaticon-thinking:before { content: "\f1c7"; }
+.flaticon-tired:before { content: "\f1c8"; }
+.flaticon-tired-1:before { content: "\f1c9"; }
+.flaticon-tired-2:before { content: "\f1ca"; }
+.flaticon-tired-3:before { content: "\f1cb"; }
+.flaticon-tough:before { content: "\f1cc"; }
+.flaticon-tough-1:before { content: "\f1cd"; }
+.flaticon-trendy:before { content: "\f1ce"; }
+.flaticon-vampire:before { content: "\f1cf"; }
+.flaticon-vampire-1:before { content: "\f1d0"; }
+.flaticon-wink:before { content: "\f1d1"; }
+.flaticon-wink-1:before { content: "\f1d2"; }
+.flaticon-wink-2:before { content: "\f1d3"; }
+.flaticon-winking:before { content: "\f1d4"; }
+.flaticon-winking-1:before { content: "\f1d5"; }
+.flaticon-yawning:before { content: "\f1d6"; }
+.flaticon-yawning-1:before { content: "\f1d7"; }
+.flaticon-yawning-2:before { content: "\f1d8"; }
+.flaticon-yawning-3:before { content: "\f1d9"; }
+.flaticon-yelling:before { content: "\f1da"; }
+.flaticon-zombie:before { content: "\f1db"; }
+    
+    $font-Flaticon-afro: "\f100";
+    $font-Flaticon-afro-1: "\f101";
+    $font-Flaticon-agent: "\f102";
+    $font-Flaticon-alien: "\f103";
+    $font-Flaticon-alien-1: "\f104";
+    $font-Flaticon-angel: "\f105";
+    $font-Flaticon-angry: "\f106";
+    $font-Flaticon-angry-1: "\f107";
+    $font-Flaticon-angry-2: "\f108";
+    $font-Flaticon-angry-3: "\f109";
+    $font-Flaticon-angry-4: "\f10a";
+    $font-Flaticon-angry-5: "\f10b";
+    $font-Flaticon-arguing: "\f10c";
+    $font-Flaticon-arrogant: "\f10d";
+    $font-Flaticon-asian: "\f10e";
+    $font-Flaticon-asian-1: "\f10f";
+    $font-Flaticon-avatar: "\f110";
+    $font-Flaticon-baby: "\f111";
+    $font-Flaticon-baby-1: "\f112";
+    $font-Flaticon-baby-2: "\f113";
+    $font-Flaticon-bully: "\f114";
+    $font-Flaticon-burglar: "\f115";
+    $font-Flaticon-businessman: "\f116";
+    $font-Flaticon-cheeky: "\f117";
+    $font-Flaticon-cheeky-1: "\f118";
+    $font-Flaticon-clown: "\f119";
+    $font-Flaticon-confused: "\f11a";
+    $font-Flaticon-confused-1: "\f11b";
+    $font-Flaticon-confused-2: "\f11c";
+    $font-Flaticon-confused-3: "\f11d";
+    $font-Flaticon-creepy: "\f11e";
+    $font-Flaticon-crying: "\f11f";
+    $font-Flaticon-crying-1: "\f120";
+    $font-Flaticon-crying-2: "\f121";
+    $font-Flaticon-crying-3: "\f122";
+    $font-Flaticon-dazed: "\f123";
+    $font-Flaticon-dazed-1: "\f124";
+    $font-Flaticon-dazed-2: "\f125";
+    $font-Flaticon-dazed-3: "\f126";
+    $font-Flaticon-dead: "\f127";
+    $font-Flaticon-dead-1: "\f128";
+    $font-Flaticon-dead-2: "\f129";
+    $font-Flaticon-dead-3: "\f12a";
+    $font-Flaticon-dead-4: "\f12b";
+    $font-Flaticon-dead-5: "\f12c";
+    $font-Flaticon-dead-6: "\f12d";
+    $font-Flaticon-desperate: "\f12e";
+    $font-Flaticon-desperate-1: "\f12f";
+    $font-Flaticon-detective: "\f130";
+    $font-Flaticon-dissapointment: "\f131";
+    $font-Flaticon-doctor: "\f132";
+    $font-Flaticon-drunk: "\f133";
+    $font-Flaticon-dumb: "\f134";
+    $font-Flaticon-emo: "\f135";
+    $font-Flaticon-emo-1: "\f136";
+    $font-Flaticon-emo-2: "\f137";
+    $font-Flaticon-emoticon: "\f138";
+    $font-Flaticon-evil: "\f139";
+    $font-Flaticon-faint: "\f13a";
+    $font-Flaticon-faint-1: "\f13b";
+    $font-Flaticon-flirt: "\f13c";
+    $font-Flaticon-flirt-1: "\f13d";
+    $font-Flaticon-flirt-2: "\f13e";
+    $font-Flaticon-flirty: "\f13f";
+    $font-Flaticon-gangster: "\f140";
+    $font-Flaticon-geek: "\f141";
+    $font-Flaticon-geek-1: "\f142";
+    $font-Flaticon-gentleman: "\f143";
+    $font-Flaticon-gentleman-1: "\f144";
+    $font-Flaticon-gentleman-2: "\f145";
+    $font-Flaticon-gentleman-3: "\f146";
+    $font-Flaticon-gentleman-4: "\f147";
+    $font-Flaticon-ginger: "\f148";
+    $font-Flaticon-girl: "\f149";
+    $font-Flaticon-girl-1: "\f14a";
+    $font-Flaticon-goofy: "\f14b";
+    $font-Flaticon-goofy-1: "\f14c";
+    $font-Flaticon-goofy-2: "\f14d";
+    $font-Flaticon-goofy-3: "\f14e";
+    $font-Flaticon-goofy-4: "\f14f";
+    $font-Flaticon-grubby: "\f150";
+    $font-Flaticon-grubby-1: "\f151";
+    $font-Flaticon-happy: "\f152";
+    $font-Flaticon-happy-1: "\f153";
+    $font-Flaticon-happy-10: "\f154";
+    $font-Flaticon-happy-11: "\f155";
+    $font-Flaticon-happy-12: "\f156";
+    $font-Flaticon-happy-13: "\f157";
+    $font-Flaticon-happy-14: "\f158";
+    $font-Flaticon-happy-15: "\f159";
+    $font-Flaticon-happy-16: "\f15a";
+    $font-Flaticon-happy-2: "\f15b";
+    $font-Flaticon-happy-3: "\f15c";
+    $font-Flaticon-happy-4: "\f15d";
+    $font-Flaticon-happy-5: "\f15e";
+    $font-Flaticon-happy-6: "\f15f";
+    $font-Flaticon-happy-7: "\f160";
+    $font-Flaticon-happy-8: "\f161";
+    $font-Flaticon-happy-9: "\f162";
+    $font-Flaticon-harry-potter: "\f163";
+    $font-Flaticon-heisenberg: "\f164";
+    $font-Flaticon-hipster: "\f165";
+    $font-Flaticon-hipster-1: "\f166";
+    $font-Flaticon-hipster-2: "\f167";
+    $font-Flaticon-in-love: "\f168";
+    $font-Flaticon-in-love-1: "\f169";
+    $font-Flaticon-in-love-2: "\f16a";
+    $font-Flaticon-in-love-3: "\f16b";
+    $font-Flaticon-in-love-4: "\f16c";
+    $font-Flaticon-in-love-5: "\f16d";
+    $font-Flaticon-in-love-6: "\f16e";
+    $font-Flaticon-japan: "\f16f";
+    $font-Flaticon-jew: "\f170";
+    $font-Flaticon-joyful: "\f171";
+    $font-Flaticon-joyful-1: "\f172";
+    $font-Flaticon-joyful-2: "\f173";
+    $font-Flaticon-kiss: "\f174";
+    $font-Flaticon-kiss-1: "\f175";
+    $font-Flaticon-kiss-2: "\f176";
+    $font-Flaticon-kiss-3: "\f177";
+    $font-Flaticon-kiss-4: "\f178";
+    $font-Flaticon-laughing: "\f179";
+    $font-Flaticon-laughing-1: "\f17a";
+    $font-Flaticon-laughing-2: "\f17b";
+    $font-Flaticon-laughing-3: "\f17c";
+    $font-Flaticon-listening: "\f17d";
+    $font-Flaticon-love: "\f17e";
+    $font-Flaticon-manly: "\f17f";
+    $font-Flaticon-miserly: "\f180";
+    $font-Flaticon-miserly-1: "\f181";
+    $font-Flaticon-nerd: "\f182";
+    $font-Flaticon-nerd-1: "\f183";
+    $font-Flaticon-nerd-2: "\f184";
+    $font-Flaticon-nerd-3: "\f185";
+    $font-Flaticon-nerd-4: "\f186";
+    $font-Flaticon-ninja: "\f187";
+    $font-Flaticon-pirate: "\f188";
+    $font-Flaticon-pirate-1: "\f189";
+    $font-Flaticon-pirate-2: "\f18a";
+    $font-Flaticon-punk: "\f18b";
+    $font-Flaticon-punk-1: "\f18c";
+    $font-Flaticon-punk-2: "\f18d";
+    $font-Flaticon-rapper: "\f18e";
+    $font-Flaticon-relieved: "\f18f";
+    $font-Flaticon-rich: "\f190";
+    $font-Flaticon-rich-1: "\f191";
+    $font-Flaticon-rich-2: "\f192";
+    $font-Flaticon-rockstar: "\f193";
+    $font-Flaticon-sad: "\f194";
+    $font-Flaticon-sad-1: "\f195";
+    $font-Flaticon-sad-2: "\f196";
+    $font-Flaticon-sad-3: "\f197";
+    $font-Flaticon-sad-4: "\f198";
+    $font-Flaticon-sad-5: "\f199";
+    $font-Flaticon-sad-6: "\f19a";
+    $font-Flaticon-scared: "\f19b";
+    $font-Flaticon-scared-1: "\f19c";
+    $font-Flaticon-scared-2: "\f19d";
+    $font-Flaticon-scared-3: "\f19e";
+    $font-Flaticon-sceptic: "\f19f";
+    $font-Flaticon-sceptic-1: "\f1a0";
+    $font-Flaticon-sceptic-2: "\f1a1";
+    $font-Flaticon-sceptic-3: "\f1a2";
+    $font-Flaticon-sceptic-4: "\f1a3";
+    $font-Flaticon-sceptic-5: "\f1a4";
+    $font-Flaticon-sceptic-6: "\f1a5";
+    $font-Flaticon-sceptic-7: "\f1a6";
+    $font-Flaticon-secret: "\f1a7";
+    $font-Flaticon-shocked: "\f1a8";
+    $font-Flaticon-shocked-1: "\f1a9";
+    $font-Flaticon-shocked-2: "\f1aa";
+    $font-Flaticon-shocked-3: "\f1ab";
+    $font-Flaticon-sick: "\f1ac";
+    $font-Flaticon-sick-1: "\f1ad";
+    $font-Flaticon-sick-2: "\f1ae";
+    $font-Flaticon-sick-3: "\f1af";
+    $font-Flaticon-sick-4: "\f1b0";
+    $font-Flaticon-silent: "\f1b1";
+    $font-Flaticon-skeleton: "\f1b2";
+    $font-Flaticon-smile: "\f1b3";
+    $font-Flaticon-smiling: "\f1b4";
+    $font-Flaticon-smiling-1: "\f1b5";
+    $font-Flaticon-smoked: "\f1b6";
+    $font-Flaticon-smug: "\f1b7";
+    $font-Flaticon-smug-1: "\f1b8";
+    $font-Flaticon-smug-2: "\f1b9";
+    $font-Flaticon-smug-3: "\f1ba";
+    $font-Flaticon-smug-4: "\f1bb";
+    $font-Flaticon-smug-5: "\f1bc";
+    $font-Flaticon-smug-6: "\f1bd";
+    $font-Flaticon-sporty: "\f1be";
+    $font-Flaticon-stunned: "\f1bf";
+    $font-Flaticon-superhero: "\f1c0";
+    $font-Flaticon-superhero-1: "\f1c1";
+    $font-Flaticon-superhero-2: "\f1c2";
+    $font-Flaticon-superhero-3: "\f1c3";
+    $font-Flaticon-superhero-4: "\f1c4";
+    $font-Flaticon-surprised: "\f1c5";
+    $font-Flaticon-surprised-1: "\f1c6";
+    $font-Flaticon-thinking: "\f1c7";
+    $font-Flaticon-tired: "\f1c8";
+    $font-Flaticon-tired-1: "\f1c9";
+    $font-Flaticon-tired-2: "\f1ca";
+    $font-Flaticon-tired-3: "\f1cb";
+    $font-Flaticon-tough: "\f1cc";
+    $font-Flaticon-tough-1: "\f1cd";
+    $font-Flaticon-trendy: "\f1ce";
+    $font-Flaticon-vampire: "\f1cf";
+    $font-Flaticon-vampire-1: "\f1d0";
+    $font-Flaticon-wink: "\f1d1";
+    $font-Flaticon-wink-1: "\f1d2";
+    $font-Flaticon-wink-2: "\f1d3";
+    $font-Flaticon-winking: "\f1d4";
+    $font-Flaticon-winking-1: "\f1d5";
+    $font-Flaticon-yawning: "\f1d6";
+    $font-Flaticon-yawning-1: "\f1d7";
+    $font-Flaticon-yawning-2: "\f1d8";
+    $font-Flaticon-yawning-3: "\f1d9";
+    $font-Flaticon-yelling: "\f1da";
+    $font-Flaticon-zombie: "\f1db";
