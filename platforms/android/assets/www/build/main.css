@@ -30379,6 +30379,26 @@ page-dashboard #ion-card-header2 {
   font-weight: bold;
 }
 
+page-dashboard #ion-card-header3 {
+  color: #836953;
+  font-weight: bold;
+  font-size: 0.99em;
+}
+
+page-dashboard #item-avatar {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
+}
+
+page-dashboard #item-avatar2 {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
+}
+
 .dashboardContent {
   margin-top: 75px;
 }

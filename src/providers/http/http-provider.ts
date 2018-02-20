@@ -107,7 +107,7 @@ export class HttpProvider {
     }
     else {
       //for test in computer
-      this.accessToken = 'EAACEdEose0cBAMDWvHZBPUF4RF7QKbIvTniXidzBA6YAQhZCy44YKtDvsOUlN4aYkxqrLx6zxfcWKUDczQLnBxmS0CZAs20QfqagIO6n7xrlxChHCbSc8pEaS1LjTgvcSq9sMgxnMiTs0ylGy016NLksi4vgncZBoAj5VkTOJ8nnQfPZA05RM4wz1jyOSDKap6aU7rbOhDQZDZD';
+      this.accessToken = 'EAACEdEose0cBALNfrSNWU34cJ8QF62bSvqU4eyZAOo0r8g1e1gQKxak8tUIC7ijEGXOJSZA73BvIgZCB4ubZB7fCILWXW7esJGyOb6ZAfcu0qq9vbUMQsyKJ0q0M0V7MhDU84HDczJP11uLAZBdOmaM37rZChJGeXw6oeQZBwZBhP3R2sXqnojjU8C2tCdKxgTKgi4zZCgo5GB1gZDZD';
     }
   }
   //set url for http request from python server

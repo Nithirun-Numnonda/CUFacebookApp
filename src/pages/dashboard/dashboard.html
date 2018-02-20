@@ -41,16 +41,24 @@
     </ion-card>
 
     <ion-card *ngIf="maxCommentsPost" has-header="true">
-      <ion-card-header text-wrap id="ion-card-header2">
+      <ion-card-header text-wrap id="ion-card-header3">
         Top Post by Comments in {{sortByTime}}
       </ion-card-header>
       <ion-card-content>
         <ion-row>
-          <ion-col col-8>
+          <ion-col col-6>
             {{maxCommentsPost.created_time}}
           </ion-col>
           <ion-col>
-            <ion-icon color="facebook" name="text" style="margin-right:8px;"></ion-icon>{{maxCommentsPost.total_comments}}
+            <ion-grid style="margin-top:-10px;">
+              <ion-row>
+                <ion-col >
+                  <img src="assets/imgs/icon/chat.png" style="width:24px;">
+                </ion-col>
+                <ion-col>
+                  {{maxCommentsPost.total_comments}}</ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-col>
         </ion-row>
         <ion-item text-wrap>{{maxCommentsMsg}}</ion-item>
@@ -62,11 +70,19 @@
       </ion-card-header>
       <ion-card-content>
         <ion-row>
-          <ion-col col-8>
+          <ion-col col-6>
             {{maxReactionsPost.created_time}}
           </ion-col>
           <ion-col>
-            <ion-icon style="color:red;margin-right:8px;" name="md-flame"></ion-icon>{{maxReactionsPost.total_reactions}}
+            <ion-grid style="margin-top:-10px;">
+              <ion-row>
+                <ion-col >
+                  <img src="assets/imgs/icon/flame.png" style="width:24px;">
+                </ion-col>
+                <ion-col>
+                  {{maxReactionsPost.total_reactions}}</ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-col>
         </ion-row>
         <ion-item text-wrap>{{maxReactionsMsg}}</ion-item>
@@ -92,8 +108,21 @@
                     <ion-card-header (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">
                       <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>
                     </ion-card-header>
-                    <ion-item style="margin-top:-30px">Comments
-                      <ion-icon color="facebook" name="text"></ion-icon> {{item.comments}} </ion-item>
+                    <ion-item style="margin-top:-30px">
+                      <ion-grid style="margin-top:-10px;">
+                        <ion-row>
+                          <ion-col>
+                            <label style="margin-right:5px">Comments</label>
+                          </ion-col>
+                          <ion-col>
+                            <img src="assets/imgs/icon/chat.png" style="width:24px;">
+                          </ion-col>
+                          <ion-col>
+                            <label>{{item.comments}}</label>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-item>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -103,39 +132,120 @@
       </div>
       <div *ngSwitchCase="'likesData'">
         <ion-list *ngFor="let item of reactionsData">
-          <ion-card>
-            <ion-card-content>
+          <ion-card no-padding>
+            <ion-card-content no-padding>
               <ion-grid no-padding>
                 <ion-row>
                   <ion-col>
                     <ion-item>
                       <ion-avatar>
-                        <img id="item-avatar" src="http://graph.facebook.com/{{item._uid}}/picture?type=square">
+                        <img id="item-avatar2" src="http://graph.facebook.com/{{item._uid}}/picture?type=square">
                       </ion-avatar>
                     </ion-item>
                   </ion-col>
                   <ion-col col-8>
                     <ion-card-header text-wrap (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">
-                      <ion-item style="word-wrap: break-word">{{item.name}}</ion-item><ion-item style="margin-top:-15px;">
-                        <ion-icon style="color:red;margin-right:8px;" name="md-flame"></ion-icon> {{item.total}}</ion-item>
+                      <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>
+                      <ion-col>
+                        <ion-grid style="margin-top:-10px;">
+                          <ion-row>
+                            <ion-col >
+                              <img src="assets/imgs/icon/flame.png" style="width:24px;">
+                            </ion-col>
+                            <ion-col>
+                              <label>{{item.total}}</label>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                      </ion-col>
                     </ion-card-header>
                   </ion-col>
                 </ion-row>
-                <ion-row>
-                  <ion-col>
-                    <ion-icon style="color:primary;margin-:" name="ios-thumbs-up"></ion-icon>{{item.like}} </ion-col>
-                  <ion-col>
-                    <ion-icon style="color:crimson;" name="ios-heart"></ion-icon>{{item.love}}</ion-col>
-                  <ion-col>
-                    <ion-icon style="color:goldenrod;" name="md-outlet"></ion-icon>{{item.wow}}</ion-col>
-                  <ion-col>
-                    <ion-icon style="color:goldenrod;" name="ios-happy"></ion-icon>{{item.haha}}</ion-col>
-                  <ion-col>
-                    <ion-icon style="color:goldenrod;" name="ios-sad"></ion-icon>{{item.sad}} </ion-col>
-                  <ion-col>
-                    <ion-icon style="color:goldenrod;" name="alert"></ion-icon>{{item.angry}}</ion-col>
-                  <ion-col>
-                    <ion-icon style="color:purple;" name="flower"></ion-icon>{{item.thankful}}</ion-col>
+                <ion-row style="text-align: center;">
+                  <ion-col *ngIf="item.like>0">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col >
+                          <img src="assets/imgs/icon/like.png" style="width:24px;">
+                        </ion-col>
+                        <ion-col>
+                          <label>{{item.like}}</label>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-col>
+                  <ion-col *ngIf="item.love>0">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col >
+                          <img src="assets/imgs/icon/heart.png" style="width:24px;">
+                        </ion-col>
+                        <ion-col>
+                          <label style="margin-left:-5px;">{{item.love}}</label>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-col>
+                  <ion-col *ngIf="item.wow>0">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col >
+                          <img src="assets/imgs/icon/surprised.png" style="width:24px;">
+                        </ion-col>
+                        <ion-col>
+                          <label style="margin-left:-10px;">{{item.wow}}</label>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-col>
+                  <ion-col *ngIf="item.haha>0">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col >
+                          <img src="assets/imgs/icon/laughing.png" style="width:24px;">
+                        </ion-col>
+                        <ion-col>
+                          <label>{{item.haha}}</label>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-col>
+                  <ion-col *ngIf="item.sad>0">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col >
+                          <img src="assets/imgs/icon/crying.png" style="width:24px;">
+                        </ion-col>
+                        <ion-col>
+                          <label style="margin-left:-10px;">{{item.sad}}</label>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-col>
+                  <ion-col *ngIf="item.angry>0">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                          <img src="assets/imgs/icon/angry.png" style="width:24px;">
+                        </ion-col>
+                        <ion-col>
+                          <label style="margin-left:-10px;">{{item.angry}}</label>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-col>
+                  <ion-col *ngIf="item.thankful>0">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                          <img src="assets/imgs/icon/flower.png" style="width:24px;">
+                        </ion-col>
+                        <ion-col>
+                          <label style="margin-left:-10px;">{{item.thankful}}</label>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-col>
                 </ion-row>
               </ion-grid>
             </ion-card-content>

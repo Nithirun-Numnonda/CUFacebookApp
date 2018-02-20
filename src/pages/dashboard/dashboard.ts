@@ -26,9 +26,9 @@ export class DashboardPage {
   total_comments: Array<string>;
   nativeEle: any;
   maxReactionsPost: any;
-  maxReactionsMsg:any;
+  maxReactionsMsg: any;
   maxCommentsPost: any;
-  maxCommentsMsg:any;
+  maxCommentsMsg: any;
 
   //for Data facebook
   commentsData: any;
@@ -165,7 +165,9 @@ export class DashboardPage {
   //get Facebook Data from httpProvider
   getFacebookData() {
     this.timeSwitchCase();
-    let loading = this.loadingController.create({ content: "Loading,please wait..." });
+    let loading = this.loadingController.create({
+      content: "LOADING, Please wait..."
+    });
     loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
       //call method from httpProvider
@@ -178,8 +180,10 @@ export class DashboardPage {
             if (result.error.type == "OAuthException") {
               console.log("Token expired!!!");
               this.retryTime += 1;
-              if (this.retryTime < 3)
+              if (this.retryTime < 3){
+                loading.dismissAll();
                 return this.getFacebookData();
+              }
               else
                 console.log("Access Token expired!!!");
             }
@@ -216,12 +220,14 @@ export class DashboardPage {
           if (this.pageTriger == "chart")
             this.createGraph();
           //          console.log("Success : " + JSON.stringify(result));
-          this.getMessage(this.maxCommentsPost.id,this.maxReactionsPost.id);
-         
-          loading.dismissAll();
+          if (this.platform.is('cordova'))
+            this.getMessage(this.maxCommentsPost.id, this.maxReactionsPost.id);
+
+
           this.retryTime = 0;
           this.httpProvider.setUid(result._uid);
           this.isAll = true;
+          loading.dismissAll();
         },
         err => {
           //call if fail to get request
@@ -235,7 +241,7 @@ export class DashboardPage {
       );
   }
   getAllTops() {
-    let loading = this.loadingController.create({ content: "Loading,please wait..." });
+    let loading = this.loadingController.create({ content: "LOADING, Please wait..." });
     loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
       //call method from httpProvider
@@ -269,7 +275,7 @@ export class DashboardPage {
           if (this.pageTriger == "chart")
             this.createGraph();
           //          console.log("Success : " + JSON.stringify(result));
-          loading.dismissAll();
+
           this.retryTime = 0;
           this.httpProvider.setUid(result._uid);
         },
@@ -277,10 +283,11 @@ export class DashboardPage {
           //call if fail to get request
           console.error("Error : " + err);
           alert("Can't get Data from the server: " + err);
-          loading.dismissAll();
+
         },
         () => {
           console.log('getData completed');
+          loading.dismissAll();
         }
       );
   }
@@ -298,32 +305,32 @@ export class DashboardPage {
     this.setLike();
   }
   //get message
-  getMessage(uid,uid2) {
+  getMessage(uid, uid2) {
     if (this.platform.is('cordova')) {
       this.httpProvider.getMessage(uid).then((result) => {
         console.log(JSON.stringify(result));
-        this.maxCommentsMsg=result.message;
+        this.maxCommentsMsg = result.message;
         this.httpProvider.getMessage(uid2).then((result2) => {
           console.log(JSON.stringify(result2));
-          this.maxReactionsMsg=result2.message;
-          
+          this.maxReactionsMsg = result2.message;
+
         }, (error) => {
-  
+
           console.log(error);
-  
+
         });
       }, (error) => {
 
         console.log(error);
 
       });
-      
-    }else{
-      this.maxCommentsMsg="Message"
-      this.maxReactionsMsg="Message2"
+
+    } else {
+      this.maxCommentsMsg = "Message"
+      this.maxReactionsMsg = "Message2"
     }
   }
-  
+
 
   //for create graph
   createGraph() {
