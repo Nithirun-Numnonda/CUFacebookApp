@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Platform, NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
@@ -97,6 +98,12 @@ export class HttpProvider {
       this.uid = "878312008845622";
     }
   }
+  getUid2() {
+    return this.facebook.api("/me", []);
+  }
+  getToken2() {
+    return this.facebook.getAccessToken();
+  }
   //get user token from facebook
   getToken() {
     if (this.platform.is('cordova')) {
@@ -107,7 +114,7 @@ export class HttpProvider {
     }
     else {
       //for test in computer
-      this.accessToken = 'EAACEdEose0cBALNfrSNWU34cJ8QF62bSvqU4eyZAOo0r8g1e1gQKxak8tUIC7ijEGXOJSZA73BvIgZCB4ubZB7fCILWXW7esJGyOb6ZAfcu0qq9vbUMQsyKJ0q0M0V7MhDU84HDczJP11uLAZBdOmaM37rZChJGeXw6oeQZBwZBhP3R2sXqnojjU8C2tCdKxgTKgi4zZCgo5GB1gZDZD';
+      this.accessToken = 'EAACEdEose0cBAFZCLnjcZB3kM0qhPw07V4rMtNnVbUU0mY2ZAZAGc7J4FIBoulf80xtfIAY9z3ZBxY9ZAwmGxhMPP8UjcbwZB0ryuUGzqKY5MdClEjTc0yqzX90pFkMMT3kP3oFU3vaZCMu7ZBbz88XkTb5ZCsxNponuB1fX93dq6CanawP1RgLYZCZBCwAmzWEXiPs3LcqPuPgVgAZDZD';
     }
   }
   //set url for http request from python server
@@ -151,6 +158,7 @@ export class HttpProvider {
       this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers })
       .map(res => res.json());
   }
+
   getDashboardAllTops() {
     this.getUid();
     //set header to authorize with access token
@@ -175,7 +183,7 @@ export class HttpProvider {
   }
 
 
-  getPosts() {
+  getPostForTest() {
     this.getUid();
     this.getToken();
     let headers = new Headers();
@@ -189,6 +197,24 @@ export class HttpProvider {
     return this.http.get(
       this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
       .map(res => res.json());
+  }
+  getPosts(): Observable<any> {
+
+
+    return Observable.fromPromise(this.getUid2()).mergeMap(obj => {
+      this.uid = obj.id;
+      return Observable.fromPromise(this.getToken2()).mergeMap(token => {
+        this.accessToken = token;
+
+        let headers = new Headers();
+        console.log(this.uid);
+        console.log(this.accessToken);
+        headers.append('access_token', this.accessToken);
+        return this.http.get(
+          this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
+          .map(res => res.json());
+      })
+    });
   }
   getCover(uid: String) {
     return this.facebook.api('/' + uid.toString() + '?field=cover', ['user_posts']);

@@ -1,6 +1,6 @@
 import { HttpProvider } from './../../providers/http/http-provider';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
@@ -40,23 +40,15 @@ export class NewfeedPage {
   public posts: Observable<any[]>;
 
   //for retry getData
-  private retryTime;
+  private retryTime = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private httpProvider: HttpProvider, public loadingController: LoadingController, private http: Http) {
-    //for tinder
-    //console.log(this.httpProvider.getPosts());
-    // this.stackConfig = {
-    //   throwOutConfidence: (offsetX, offsetY, element) => {
-    //     return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
-    //   },
-    //   transform: (element, x, y, r) => {
-    //     this.onItemMove(element, x, y, r);
-    //   },
-    //   throwOutDistance: (d) => {
-    //     return 800;
-    //   }
-    // };
+  constructor(public navCtrl: NavController,
+     public navParams: NavParams,
+    private httpProvider: HttpProvider,
+     public loadingController: LoadingController,
+      private http: Http,
+      private platform:Platform
+    ) {
 
     //for retry
     this.retryTime = 0;
@@ -67,44 +59,87 @@ export class NewfeedPage {
   //call when refresh
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-
+    this.retryTime = 0;
     //get data again
-    this.getPost();
+    if (this.platform.is('cordova')) {
+      this.getPosts();
+    }else{
+      this.getPostForTest()
+    }
     refresher.complete();
   }
-  getPost() {
+  getPostForTest() {
+    let loading = this.loadingController.create({ content: "Loading,please wait..." });
+    loading.present();
+    this.httpProvider.getPostForTest().subscribe(
+      //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+      result => {
+        //check if server send error back
+        //assign data to view
+
+        this.newsData = result;
+        console.log(this.newsData);
+        try {
+          for (let data of this.newsData) {
+            var newDate = new Date(data.created_time);
+            data.created_time = newDate.toDateString();
+          }
+
+        } catch (error) {
+
+        }
+        console.log("Success : " + JSON.stringify(result));
+        loading.dismissAll();
+        this.retryTime = 0;
+
+      },
+      err => {
+        //call if fail to get request
+        console.error("Error : " + err);
+        alert("Can't get Data from the server: " + err);
+        loading.dismissAll();
+      },
+      () => {
+        console.log('getData completed');
+      }
+    );
+  }
+  getPosts() {
     let loading = this.loadingController.create({ content: "Loading,please wait..." });
     loading.present();
     this.httpProvider.getPosts().subscribe(
       //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
       result => {
+        loading.dismissAll();
+        console.log(result);
         //check if server send error back
-        if (result.error) {
+        if (result.__proto__ === Object) {
           //check if token expire?
-          if (result.error.type == "OAuthException") {
-            console.log("Token expired!!!");
-            this.retryTime += 1;
-            if (this.retryTime < 3)
-              return this.getPost();
-            else
-              console.log("Access Token expired!!!");
-          }
-          else {
-            this.setLike();
-            this.getPost();
-          }
+          console.log("error!!!");
+          this.retryTime += 1;
+          if (this.retryTime < 3)
+            return this.getPosts();
+          else
+            console.log("Access Token expired!!!");
 
         }
+
         //assign data to view
+
+
         this.newsData = result;
-        if (this.newsData!=null) {
+
+        try {
           for (let data of this.newsData) {
             var newDate = new Date(data.created_time);
             data.created_time = newDate.toDateString();
           }
+
+        } catch (error) {
+
         }
         console.log("Success : " + JSON.stringify(result));
-        loading.dismissAll();
+
         this.retryTime = 0;
 
       },
@@ -139,9 +174,11 @@ export class NewfeedPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad newfeedPage');
-
-    this.getPost();
-
+    if (this.platform.is('cordova')) {
+      this.getPosts();
+    }else{
+      this.getPostForTest()
+    }
     //this.getCommentsData();
     //this.createGraph();
   }

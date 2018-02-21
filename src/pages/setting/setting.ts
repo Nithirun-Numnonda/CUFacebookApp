@@ -1,6 +1,6 @@
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { App } from 'ionic-angular';
 
@@ -17,8 +17,9 @@ import { App } from 'ionic-angular';
   templateUrl: 'setting.html',
 })
 export class SettingPage {
-  homePage:HomePage
-  constructor(public navCtrl: NavController, public navParams: NavParams,private facebook:Facebook,private app:App) {
+  homePage:HomePage;
+  isShowCredit:boolean=false;
+  constructor(public navCtrl: NavController, public navParams: NavParams,private facebook:Facebook,private app:App,private loadingController:LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -30,15 +31,18 @@ export class SettingPage {
     alert(token);
   }
   logout() {
+    let loading = this.loadingController.create({ content: "Logging Out" });
+    loading.present();
     this.facebook.logout().then((response) =>{
-      alert(JSON.stringify(response));
-      
+      loading.dismissAll();
+      this.app.getRootNav().pop()
     }, (error) => {
-      alert(error);
+      console.log(error);
     })
-    let nav = this.app.getRootNav();
-    nav.push(HomePage);
     
+  }
+  showCredit(){
+    this.isShowCredit=!this.isShowCredit
   }
 
 }

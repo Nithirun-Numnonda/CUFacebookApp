@@ -30399,6 +30399,10 @@ page-dashboard #item-avatar2 {
   max-height: 100px !important;
 }
 
+page-dashboard #newLine {
+  white-space: pre-line !important;
+}
+
 .dashboardContent {
   margin-top: 75px;
 }
@@ -30440,6 +30444,10 @@ page-home #mycards1 swing-card {
   text-align: center;
   top: 3%;
   height: 90%;
+}
+
+page-home #newLine {
+  white-space: pre-line !important;
 }
 
 .myCard {

@@ -27,40 +27,45 @@
       <img src={{item.full_picture}} />
 
       <ion-card-content>
-        <p>{{item.message}}</p>
+        <div *ngFor="let str of item.message.split('\n')">
+          {{ str }}
+    </div>
       </ion-card-content>
       <div>
-        <ion-row>
+        <ion-row style="border-bottom: 1px solid gray;">
 
-
+          <ion-col col-2>
           <ion-label style="margin-left:10px;">
             <img src="assets/imgs/icon/flame.png" style="width:24px;">
-            {{item.reactions_summary}}
           </ion-label>
-          <ion-label style="margin-left:-100px;">
+          </ion-col>
+          <ion-col col-3>
+          <ion-label>{{item.reactions_summary}}</ion-label>
+        </ion-col>
+        <ion-col col-2>
+          <ion-label>
             <img src="assets/imgs/icon/chat.png" style="width:24px;">
-            {{item.comments_summary}}
           </ion-label>
+        </ion-col>
+        <ion-col col-5>
+          <ion-label>{{item.comments_summary}}</ion-label>
+        </ion-col>
 
         </ion-row>
       </div>
       <ion-row>
         <ion-col>
           <button ion-button full icon-center clear small>
-            <span class="icon-like fs1">
-              <span class="path1"></span>
-              <span class="path2"></span>
-            </span>
-            <span class="mls"></span>
+            <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:5px">
             <div>Likes</div>
           </button>
         </ion-col>
-        <!-- <button class="button circle text-center">
+        <button class="button circle text-center">
           <i class="ion-crop"></i>
-        </button>!-->
+        </button>
         <ion-col>
           <button ion-button full icon-center clear small>
-            <img src="assets/imgs/icon/chat.png" style="width:24px;">
+            <img src="assets/imgs/icon/chat.png" style="width:24px;margin-right:5px">
             <div>Comments</div>
           </button>
         </ion-col>
