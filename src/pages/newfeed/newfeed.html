@@ -24,7 +24,7 @@
         <p>{{item.created_time}}</p>
       </ion-item>
 
-      <img src={{item.full_picture}} />
+      <img  (click)='playVideo(item.permalink_url)' src={{item.full_picture}} />
 
       <ion-card-content>
         <div *ngFor="let str of item.message.split('\n')">

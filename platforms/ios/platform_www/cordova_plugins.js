@@ -48,6 +48,14 @@ module.exports = [
         "clobbers": [
             "cordova.plugins.screenorientation"
         ]
+    },
+    {
+        "id": "com.hutchind.cordova.plugins.streamingmedia.StreamingMedia",
+        "file": "plugins/com.hutchind.cordova.plugins.streamingmedia/www/StreamingMedia.js",
+        "pluginId": "com.hutchind.cordova.plugins.streamingmedia",
+        "clobbers": [
+            "streamingMedia"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -59,7 +67,8 @@ module.exports.metadata =
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-splashscreen": "4.0.3",
     "cordova-plugin-facebook4": "1.7.4",
-    "cordova-plugin-screen-orientation": "3.0.1"
+    "cordova-plugin-screen-orientation": "3.0.1",
+    "com.hutchind.cordova.plugins.streamingmedia": "0.1.4"
 };
 // BOTTOM OF METADATA
 });

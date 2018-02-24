@@ -32,6 +32,9 @@
         },
         "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "com.hutchind.cordova.plugins.streamingmedia": {
+            "PACKAGE_NAME": "io.ionic.starter"
         }
     },
     "dependent_plugins": {

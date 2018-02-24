@@ -44,6 +44,8 @@
 		1BCE1CCBE72540D4B718597B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11F8C9859A847C68578220D /* FBSDKLoginKit.framework */; };
 		E00C1FF498D84F97A649BEFD /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A10B16063F4971B2F40F3D /* FBSDKShareKit.framework */; };
 		23B8283957F842A58D6D1771 /* CDVOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D076993F6F01417AADB244F1 /* CDVOrientation.m */; };
+		51DCB4AB62654DDC9191F24C /* StreamingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D59870FDFB4E04AD5288E4 /* StreamingMedia.m */; };
+		EFE7A439527F48FE9901913E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8F95FC66FE4892B52B14BD /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +138,9 @@
 		78A10B16063F4971B2F40F3D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; name = "FBSDKShareKit.framework"; path = "MyApp/Plugins/cordova-plugin-facebook4/FBSDKShareKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		D076993F6F01417AADB244F1 /* CDVOrientation.m */ = {isa = PBXFileReference; name = "CDVOrientation.m"; path = "cordova-plugin-screen-orientation/CDVOrientation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		80B01A8FEA2C4AA59395EF34 /* CDVOrientation.h */ = {isa = PBXFileReference; name = "CDVOrientation.h"; path = "cordova-plugin-screen-orientation/CDVOrientation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		04D59870FDFB4E04AD5288E4 /* StreamingMedia.m */ = {isa = PBXFileReference; name = "StreamingMedia.m"; path = "com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		4A34FFFE59934640A1F3768C /* StreamingMedia.h */ = {isa = PBXFileReference; name = "StreamingMedia.h"; path = "com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		BB8F95FC66FE4892B52B14BD /* MediaPlayer.framework */ = {isa = PBXFileReference; name = "MediaPlayer.framework"; path = "System/Library/Frameworks/MediaPlayer.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +155,7 @@
 				E00D50CB938E4E5BAF0CACA6 /* FBSDKCoreKit.framework in Frameworks */,
 				1BCE1CCBE72540D4B718597B /* FBSDKLoginKit.framework in Frameworks */,
 				E00C1FF498D84F97A649BEFD /* FBSDKShareKit.framework in Frameworks */,
+				EFE7A439527F48FE9901913E /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +232,7 @@
 				A010AE60929F45ED85D218DA /* FBSDKCoreKit.framework */,
 				C11F8C9859A847C68578220D /* FBSDKLoginKit.framework */,
 				78A10B16063F4971B2F40F3D /* FBSDKShareKit.framework */,
+				BB8F95FC66FE4892B52B14BD /* MediaPlayer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -297,6 +304,8 @@
 				25976812A8C04E93B7B39086 /* FacebookConnectPlugin.h */,
 				D076993F6F01417AADB244F1 /* CDVOrientation.m */,
 				80B01A8FEA2C4AA59395EF34 /* CDVOrientation.h */,
+				04D59870FDFB4E04AD5288E4 /* StreamingMedia.m */,
+				4A34FFFE59934640A1F3768C /* StreamingMedia.h */,
 			);
 			name = Plugins;
 			path = "MyApp/Plugins";
@@ -431,6 +440,7 @@
 				F0E043880B8F4980A355C740 /* CDVViewController+SplashScreen.m in Sources */,
 				8DF986C44F884442AD465115 /* FacebookConnectPlugin.m in Sources */,
 				23B8283957F842A58D6D1771 /* CDVOrientation.m in Sources */,
+				51DCB4AB62654DDC9191F24C /* StreamingMedia.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

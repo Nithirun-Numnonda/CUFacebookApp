@@ -1,3 +1,4 @@
+import { StreamingMedia } from '@ionic-native/streaming-media';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -47,6 +48,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     SplashScreen,
     Facebook,
     ScreenOrientation,
+    StreamingMedia,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpProvider,
     TimeProvider

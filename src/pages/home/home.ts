@@ -19,12 +19,15 @@ export class HomePage {
     this.platform.ready().then(() => {
       this.isLogged = false;
       this.facebookService.init();
-      if (this.platform.is('cordova'))
-        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     });
   }
   login() {
     this.facebookService.login();
   }
+  ionViewDidEnter(){
+    if (this.platform.is('cordova'))
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+  }
+
 
 }

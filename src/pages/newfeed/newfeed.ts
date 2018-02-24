@@ -1,4 +1,5 @@
 import { HttpProvider } from './../../providers/http/http-provider';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
@@ -42,17 +43,24 @@ export class NewfeedPage {
   //for retry getData
   private retryTime = 0;
 
+  videoOptions :StreamingVideoOptions;
+
   constructor(public navCtrl: NavController,
-     public navParams: NavParams,
+    public navParams: NavParams,
     private httpProvider: HttpProvider,
-     public loadingController: LoadingController,
-      private http: Http,
-      private platform:Platform
-    ) {
+    public loadingController: LoadingController,
+    private http: Http,
+    private platform: Platform,
+    private streamingMedia: StreamingMedia,
+  ) {
 
     //for retry
     this.retryTime = 0;
-
+    this.videoOptions  = {
+      successCallback: () => { console.log('Video played') },
+      errorCallback: (e) => { console.log('Error streaming:'+JSON.stringify(e)) },
+      orientation: 'portrait'
+    };
 
   }
 
@@ -63,7 +71,7 @@ export class NewfeedPage {
     //get data again
     if (this.platform.is('cordova')) {
       this.getPosts();
-    }else{
+    } else {
       this.getPostForTest()
     }
     refresher.complete();
@@ -77,7 +85,7 @@ export class NewfeedPage {
         //check if server send error back
         //assign data to view
 
-        this.newsData = result;
+        this.newsData = result.newsfeed.data;
         console.log(this.newsData);
         try {
           for (let data of this.newsData) {
@@ -127,7 +135,7 @@ export class NewfeedPage {
         //assign data to view
 
 
-        this.newsData = result;
+        this.newsData = result.newsfeed.data;
 
         try {
           for (let data of this.newsData) {
@@ -154,29 +162,75 @@ export class NewfeedPage {
       }
     );
   }
+  getPostsNext() {
+    this.httpProvider.getPostsNext().subscribe(
+      //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+      result => {
 
+        console.log(result);
+        //check if server send error back
+        if (result.__proto__ === Object) {
+          //check if token expire?
+          console.log("error!!!");
+          this.retryTime += 1;
+          if (this.retryTime < 3)
+            return this.getPosts();
+          else
+            console.log("Access Token expired!!!");
+
+        }
+
+        //assign data to view
+
+        try {
+          for (let data of result.newsfeed.data) {
+            var newDate = new Date(data.created_time);
+            data.created_time = newDate.toDateString();
+            this.newsData.push(data);
+          }
+
+        } catch (error) {
+
+        }
+
+
+
+        console.log("Success : " + JSON.stringify(result));
+
+        this.retryTime = 0;
+
+      },
+      err => {
+        //call if fail to get request
+        console.error("Error : " + err);
+        alert("Can't get Data from the server: " + err);
+      },
+      () => {
+        console.log('getData completed');
+      }
+    );
+  }
   setLike() {
     this.httpProvider.setLike().subscribe((value) => {
       console.log(value);
     });
 
   }
-  merge(dest, src) {
-    for (let kvp of src) {
-      dest[kvp.key] = kvp.value;
-    }
+  playVideo(url) {
+    this.streamingMedia.playVideo(url, this.videoOptions);
   }
   doInfinite(infiniteScroll) {
     setTimeout(() => {
       console.log('Async operation has ended');
-      infiniteScroll.complete();
+      this.getPostsNext();
     }, 1000);
+    infiniteScroll.complete();
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad newfeedPage');
     if (this.platform.is('cordova')) {
       this.getPosts();
-    }else{
+    } else {
       this.getPostForTest()
     }
     //this.getCommentsData();

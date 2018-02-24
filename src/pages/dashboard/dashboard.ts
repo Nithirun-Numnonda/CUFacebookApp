@@ -88,6 +88,14 @@ export class DashboardPage {
   }
   timeSwitchCase() {
     switch (this.sortByTime) {
+      case "Last 1 day": {
+        this.hourValue = this.hours[0];
+        this.dayValue = this.days[1];
+        this.monthValue = this.months[0];
+        this.yearValue = this.years[0];
+        this.topValue = this.top[0];
+        break;
+      }
       case "Last 1 week": {
         this.hourValue = this.hours[0];
         this.dayValue = this.days[7];
@@ -136,14 +144,6 @@ export class DashboardPage {
         this.topValue = this.top[0];
         break;
       }
-      case "Last 5 years": {
-        this.hourValue = this.hours[0];
-        this.dayValue = this.days[0];
-        this.monthValue = this.months[0];
-        this.yearValue = this.years[5];
-        this.topValue = this.top[0];
-        break;
-      }
 
     }
   }
@@ -180,7 +180,7 @@ export class DashboardPage {
             if (result.error.type == "OAuthException") {
               console.log("Token expired!!!");
               this.retryTime += 1;
-              if (this.retryTime < 3){
+              if (this.retryTime < 3) {
                 loading.dismissAll();
                 return this.getFacebookData();
               }
@@ -189,10 +189,14 @@ export class DashboardPage {
             }
 
           }
+          if(result.id){
+            loading.dismissAll();
+            return null;
+          }else{
           //assign data to view
-          this.commentsData = result.comments;
-          this.reactionsData = result.reactions;
-          this.postsSummaryData = result.post_summary;
+          this.commentsData = result.comments.data;
+          this.reactionsData = result.reactions.data;
+          this.postsSummaryData = result.post_summary.data;
           if (this.postsSummaryData) {
             var maxReactions = 0;
             var maxComments = 0;
@@ -220,14 +224,16 @@ export class DashboardPage {
           if (this.pageTriger == "chart")
             this.createGraph();
           //          console.log("Success : " + JSON.stringify(result));
-          if (this.platform.is('cordova'))
-            this.getMessage(this.maxCommentsPost.id, this.maxReactionsPost.id);
-
+          if (this.platform.is('cordova')) {
+            if (this.postsSummaryData)
+              this.getMessage(this.maxCommentsPost.id, this.maxReactionsPost.id);
+          }
 
           this.retryTime = 0;
           this.httpProvider.setUid(result._uid);
           this.isAll = true;
           loading.dismissAll();
+          }
         },
         err => {
           //call if fail to get request
@@ -262,8 +268,8 @@ export class DashboardPage {
 
           }
           //assign data to view
-          this.commentsData = result.comments;
-          this.reactionsData = result.reactions;
+          this.commentsData = result.comments.data;
+          this.reactionsData = result.reactions.data;
           if (this.postsSummaryData) {
             for (let data of this.postsSummaryData) {
               var newDate = new Date(data.created_time);

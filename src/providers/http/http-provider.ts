@@ -172,13 +172,15 @@ export class HttpProvider {
 
 
   //feature for newfeed??
-  setLike() {
-    this.getToken();
-    let headers = new Headers();
+  setLike(): Observable<any> {
+    return Observable.fromPromise(this.getToken2()).mergeMap((token) => {
+      let headers = new Headers();
 
-    headers.append('access_token', this.accessToken);
-    return this.http.get(
-      this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers });
+      headers.append('access_token', token);
+      return this.http.get(
+        this.setHttpRequest('likes', '', '0', '0', '0', '0'), { headers: headers });
+    });
+
 
   }
 
@@ -212,6 +214,24 @@ export class HttpProvider {
         headers.append('access_token', this.accessToken);
         return this.http.get(
           this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
+          .map(res => res.json());
+      })
+    });
+  }
+  getPostsNext(): Observable<any> {
+
+
+    return Observable.fromPromise(this.getUid2()).mergeMap(obj => {
+      this.uid = obj.id;
+      return Observable.fromPromise(this.getToken2()).mergeMap(token => {
+        this.accessToken = token;
+
+        let headers = new Headers();
+        console.log(this.uid);
+        console.log(this.accessToken);
+        headers.append('access_token', this.accessToken);
+        return this.http.get(
+          this.setHttpRequest("newsfeed/next/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
           .map(res => res.json());
       })
     });

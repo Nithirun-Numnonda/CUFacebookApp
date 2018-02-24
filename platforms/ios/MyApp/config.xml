@@ -108,4 +108,7 @@
     <feature name="CDVOrientation">
         <param name="ios-package" value="CDVOrientation" />
     </feature>
+    <feature name="StreamingMedia">
+        <param name="ios-package" value="StreamingMedia" />
+    </feature>
 </widget>
