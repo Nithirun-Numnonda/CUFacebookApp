@@ -111,4 +111,7 @@
     <feature name="StreamingMedia">
         <param name="ios-package" value="StreamingMedia" />
     </feature>
+    <feature name="NativePageTransitions">
+        <param name="ios-package" value="NativePageTransitions" />
+    </feature>
 </widget>

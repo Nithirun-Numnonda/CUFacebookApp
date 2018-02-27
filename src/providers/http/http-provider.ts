@@ -38,7 +38,7 @@ export class HttpProvider {
   }
 
   init() {
-    this.facebook.browserInit(this.APP_ID, "v2.12");
+    this.facebook.browserInit(this.APP_ID, "v2.11");
   }
   get navCtrl(): NavController {
     return this.app.getActiveNav();
@@ -86,7 +86,7 @@ export class HttpProvider {
     this.uid = uid;
   }
   //get uid
-  getUid() {
+  getUidForTest() {
     if (this.platform.is('cordova')) {
       this.facebook.api("/me", []).then(value => {
         this.uid = value.id;
@@ -98,30 +98,19 @@ export class HttpProvider {
       this.uid = "878312008845622";
     }
   }
-  getUid2() {
+  getUid() {
     return this.facebook.api("/me", []);
   }
-  getToken2() {
+  getToken() {
     return this.facebook.getAccessToken();
   }
   //get user token from facebook
-  getToken() {
-    if (this.platform.is('cordova')) {
-      this.facebook.getAccessToken().then(value => {
-        this.accessToken = value;
-        console.log(this.accessToken);
-      });
-    }
-    else {
-      //for test in computer
-      this.accessToken = 'EAACEdEose0cBAFZCLnjcZB3kM0qhPw07V4rMtNnVbUU0mY2ZAZAGc7J4FIBoulf80xtfIAY9z3ZBxY9ZAwmGxhMPP8UjcbwZB0ryuUGzqKY5MdClEjTc0yqzX90pFkMMT3kP3oFU3vaZCMu7ZBbz88XkTb5ZCsxNponuB1fX93dq6CanawP1RgLYZCZBCwAmzWEXiPs3LcqPuPgVgAZDZD';
-    }
+  getTokenForTest() {
+    //for test in computer
+    this.accessToken = 'EAACEdEose0cBACR0QyqI0sYfoFkZCnH2scHoyCbaIhZC40nLD6j5livGiK8chEQwImhJXwWkkIiqQWrtDGSW1ZBSD2y1olZAyddyzTuGprQ9m50FCCWJA2hNnXqKCFWjhaZBygoVecSjZCQQMxmRH1lLjhpqmSDNHcIGJkppYTa61ZA29rtpQ0b7Tvv8KE1mTHQxzhuVMONKgZDZD';
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
-
-    //this.getToken();
-
     //console.log("token: " + this.accessToken);
     var request = this.serverIP + type;
     if (type == 'dashboard') {
@@ -149,31 +138,56 @@ export class HttpProvider {
     return request;
   }
 
-  getFacebookData(top, hour, day, month, year) {
+  getDashboard(top, hour, day, month, year): Observable<any> {
     //set header to authorize with access token
-    this.getToken();
+    return Observable.fromPromise(this.getToken()).mergeMap((token) => {
+      let headers = new Headers();
+      headers.append('access_token', token);
+      return this.http.get(
+        this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(180000)
+        .map(res => res.json());
+    });
+  }
+  getDashboardForTest(top, hour, day, month, year): Observable<any> {
+    //set header to authorize with access token
+    this.getTokenForTest();
     let headers = new Headers();
     headers.append('access_token', this.accessToken);
     return this.http.get(
-      this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers })
+      this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(180000)
       .map(res => res.json());
+
   }
 
   getDashboardAllTops() {
-    this.getUid();
-    //set header to authorize with access token
-    this.getToken();
+    return Observable.fromPromise(this.getUid()).mergeMap(obj => {
+      this.uid = obj.id;
+      return Observable.fromPromise(this.getToken()).mergeMap(token => {
+        this.accessToken = token;
+        let headers = new Headers();
+        headers.append('access_token', this.accessToken);
+        return this.http.get(
+          this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
+          .map(res => res.json());
+      });
+    });
+  }
+
+  getDashboardAllTopsFortest() {
+    this.getUidForTest();
+    this.getTokenForTest();
     let headers = new Headers();
     headers.append('access_token', this.accessToken);
     return this.http.get(
-      this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers })
+      this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
       .map(res => res.json());
+
   }
 
 
   //feature for newfeed??
   setLike(): Observable<any> {
-    return Observable.fromPromise(this.getToken2()).mergeMap((token) => {
+    return Observable.fromPromise(this.getToken()).mergeMap((token) => {
       let headers = new Headers();
 
       headers.append('access_token', token);
@@ -186,8 +200,8 @@ export class HttpProvider {
 
 
   getPostForTest() {
-    this.getUid();
-    this.getToken();
+    this.getUidForTest();
+    this.getTokenForTest();
     let headers = new Headers();
 
     console.log(this.uid);
@@ -197,15 +211,13 @@ export class HttpProvider {
     //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
     //   .map(res => res.json());
     return this.http.get(
-      this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
+      this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
       .map(res => res.json());
   }
   getPosts(): Observable<any> {
-
-
-    return Observable.fromPromise(this.getUid2()).mergeMap(obj => {
+    return Observable.fromPromise(this.getUid()).mergeMap(obj => {
       this.uid = obj.id;
-      return Observable.fromPromise(this.getToken2()).mergeMap(token => {
+      return Observable.fromPromise(this.getToken()).mergeMap(token => {
         this.accessToken = token;
 
         let headers = new Headers();
@@ -213,17 +225,15 @@ export class HttpProvider {
         console.log(this.accessToken);
         headers.append('access_token', this.accessToken);
         return this.http.get(
-          this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
+          this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
           .map(res => res.json());
       })
     });
   }
   getPostsNext(): Observable<any> {
-
-
-    return Observable.fromPromise(this.getUid2()).mergeMap(obj => {
+    return Observable.fromPromise(this.getUid()).mergeMap(obj => {
       this.uid = obj.id;
-      return Observable.fromPromise(this.getToken2()).mergeMap(token => {
+      return Observable.fromPromise(this.getToken()).mergeMap(token => {
         this.accessToken = token;
 
         let headers = new Headers();
@@ -231,17 +241,22 @@ export class HttpProvider {
         console.log(this.accessToken);
         headers.append('access_token', this.accessToken);
         return this.http.get(
-          this.setHttpRequest("newsfeed/next/" + this.uid, '', '0', '0', '0', '0'), { headers: headers })
+          this.setHttpRequest("newsfeed/next/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
           .map(res => res.json());
       })
     });
   }
-  getCover(uid: String) {
-    return this.facebook.api('/' + uid.toString() + '?field=cover', ['user_posts']);
-
+  getCover(uid: String): Observable<any> {
+    return Observable.fromPromise(this.getToken()).mergeMap((token)=>{
+      return Observable.fromPromise(this.facebook.api('/'+uid+'?fields=cover', ['user_posts']));
+    });
+    
   }
-  getContext(uid: String) {
-    return this.facebook.api('/' + uid + '?field=context', ['user_posts']);
+  getSource(uid){
+    return this.facebook.api('/' + uid + '?fields=source', ['user_posts']);
+  }
+  getContext(uid: String): Observable<any> {
+    return Observable.fromPromise(this.facebook.api('/' + uid + '?fields=context', ['user_posts']));
   }
   getMessage(postID: String) {
     return this.facebook.api('/' + postID, ['user_posts']);

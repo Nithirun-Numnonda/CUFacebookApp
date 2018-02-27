@@ -43,7 +43,11 @@ export class NewfeedPage {
   //for retry getData
   private retryTime = 0;
 
-  videoOptions :StreamingVideoOptions;
+
+
+  videoOptions: StreamingVideoOptions;
+
+  nextData = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -56,10 +60,9 @@ export class NewfeedPage {
 
     //for retry
     this.retryTime = 0;
-    this.videoOptions  = {
+    this.videoOptions = {
       successCallback: () => { console.log('Video played') },
-      errorCallback: (e) => { console.log('Error streaming:'+JSON.stringify(e)) },
-      orientation: 'portrait'
+      errorCallback: (e) => { console.log('Error streaming:' + JSON.stringify(e)) }
     };
 
   }
@@ -149,6 +152,11 @@ export class NewfeedPage {
         console.log("Success : " + JSON.stringify(result));
 
         this.retryTime = 0;
+        if (result.next) {
+          this.nextData = true;
+        } else {
+          this.nextData = false;
+        }
 
       },
       err => {
@@ -162,53 +170,111 @@ export class NewfeedPage {
       }
     );
   }
-  getPostsNext() {
-    this.httpProvider.getPostsNext().subscribe(
-      //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
-      result => {
+  getPostsNext(infiniteScroll) {
+    if (this.nextData) {
+      this.httpProvider.getPostsNext().subscribe(
+        //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+        result => {
 
-        console.log(result);
-        //check if server send error back
-        if (result.__proto__ === Object) {
-          //check if token expire?
-          console.log("error!!!");
-          this.retryTime += 1;
-          if (this.retryTime < 3)
-            return this.getPosts();
-          else
-            console.log("Access Token expired!!!");
+          console.log(result);
+          //check if server send error back
+          if (result.__proto__ === Object) {
+            //check if token expire?
+            console.log("error!!!");
+            this.retryTime += 1;
+            if (this.retryTime < 3)
+              return this.getPostsNext(infiniteScroll);
+            else
+              console.log("Access Token expired!!!");
 
-        }
-
-        //assign data to view
-
-        try {
-          for (let data of result.newsfeed.data) {
-            var newDate = new Date(data.created_time);
-            data.created_time = newDate.toDateString();
-            this.newsData.push(data);
           }
 
-        } catch (error) {
+          //assign data to view
 
+          try {
+            for (let data of result.newsfeed.data) {
+              var newDate = new Date(data.created_time);
+              data.created_time = newDate.toDateString();
+              this.newsData.push(data);
+            }
+
+          } catch (error) {
+
+          }
+
+
+          if (result.next) {
+            this.nextData = true;
+          } else {
+            this.nextData = false;
+          }
+          console.log("Success : " + JSON.stringify(result));
+
+          this.retryTime = 0;
+          infiniteScroll.complete();
+
+        },
+        err => {
+          //call if fail to get request
+          console.error("Error : " + err);
+          alert("Can't get Data from the server: " + err);
+        },
+        () => {
+          console.log('getData completed');
         }
+      );
+    } else {
+      this.httpProvider.getPosts().subscribe(
+        //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+        result => {
+
+          console.log(result);
+          //check if server send error back
+          if (result.__proto__ === Object) {
+            //check if token expire?
+            console.log("error!!!");
+            this.retryTime += 1;
+            if (this.retryTime < 3)
+              return this.getPosts();
+            else
+              console.log("Access Token expired!!!");
+
+          }
+
+          //assign data to view
+
+          try {
+            for (let data of result.newsfeed.data) {
+              var newDate = new Date(data.created_time);
+              data.created_time = newDate.toDateString();
+              this.newsData.push(data);
+            }
+
+          } catch (error) {
+
+          }
 
 
+          if (result.next) {
+            this.nextData = true;
+          } else {
+            this.nextData = false;
+          }
+          console.log("Success : " + JSON.stringify(result));
 
-        console.log("Success : " + JSON.stringify(result));
+          this.retryTime = 0;
 
-        this.retryTime = 0;
-
-      },
-      err => {
-        //call if fail to get request
-        console.error("Error : " + err);
-        alert("Can't get Data from the server: " + err);
-      },
-      () => {
-        console.log('getData completed');
-      }
-    );
+        },
+        err => {
+          //call if fail to get request
+          console.error("Error : " + err);
+          alert("Can't get Data from the server: " + err);
+        },
+        () => {
+          console.log('getData completed');
+        }
+      );
+    }
   }
   setLike() {
     this.httpProvider.setLike().subscribe((value) => {
@@ -216,16 +282,23 @@ export class NewfeedPage {
     });
 
   }
-  playVideo(url) {
-    this.streamingMedia.playVideo(url, this.videoOptions);
+  playVideo(uid) {
+    this.httpProvider.getSource(uid).then((result) => {
+      //alert(JSON.stringify(result));
+      this.streamingMedia.playVideo(result.source, this.videoOptions);
+    })
+
   }
   doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
     setTimeout(() => {
+      this.getPostsNext(infiniteScroll);
       console.log('Async operation has ended');
-      this.getPostsNext();
-    }, 1000);
-    infiniteScroll.complete();
+    }, 500);
+
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad newfeedPage');
     if (this.platform.is('cordova')) {

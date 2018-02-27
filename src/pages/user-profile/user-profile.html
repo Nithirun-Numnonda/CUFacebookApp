@@ -21,16 +21,64 @@
 
 
 <ion-content padding>
-  <img src="{{cover}}">
+  <img [src]="cover" [style.top]="offset_y" id="myOverlay">
 
-  <img src="http://graph.facebook.com/{{uid}}/picture?type=square">
+
+  <img src="http://graph.facebook.com/{{uid}}/picture?type=square" id="myOverlay2">
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-card>
-          <ion-card-header>Mutual Friend:{{this.context}}</ion-card-header>
-        </ion-card>
+        <ion-label *ngIf="mutual_friends">Mutual Friends Who use this app</ion-label>
+        <ion-list *ngFor="let item of mutual_friends">
+          <ion-card no-padding>
+            <ion-card-content no-padding>
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col>
+                    <ion-item>
+                      <ion-avatar>
+                        <img id="item-avatar" src="http://graph.facebook.com/{{item.id}}/picture?type=square">
+                      </ion-avatar>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-8>
+                    <ion-card-header (click)="presentProfileModal(item.id,item.name)" id="ion-card-header2">
+                      <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>
+                    </ion-card-header>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
       </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-label *ngIf="mutual_likes">Mutual Likes</ion-label>
+            <ion-list *ngFor="let item of mutual_likes">
+              <ion-card no-padding>
+                <ion-card-content no-padding>
+                  <ion-grid no-padding>
+                    <ion-row>
+                      <ion-col>
+                        <ion-item>
+                          <ion-avatar>
+                            <img id="item-avatar" src="http://graph.facebook.com/{{item.id}}/picture?type=square">
+                          </ion-avatar>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col col-8>
+                        <ion-card-header (click)="presentProfileModal(item.id,item.name)" id="ion-card-header2">
+                          <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>
+                        </ion-card-header>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-content>
+              </ion-card>
+            </ion-list>
+          </ion-col>
     </ion-row>
   </ion-grid>
 

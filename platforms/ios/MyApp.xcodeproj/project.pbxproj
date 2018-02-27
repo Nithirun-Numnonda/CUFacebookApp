@@ -46,6 +46,8 @@
 		23B8283957F842A58D6D1771 /* CDVOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D076993F6F01417AADB244F1 /* CDVOrientation.m */; };
 		51DCB4AB62654DDC9191F24C /* StreamingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D59870FDFB4E04AD5288E4 /* StreamingMedia.m */; };
 		EFE7A439527F48FE9901913E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8F95FC66FE4892B52B14BD /* MediaPlayer.framework */; };
+		29F14465CD6E4EF6B3891032 /* NativePageTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = D0561CD08BDE487C8308D97C /* NativePageTransitions.m */; };
+		54DC6ECD7B694D92B7CFF79B /* AppDelegate+nativepagetransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = B216C4CCF43A44C0AC0E5068 /* AppDelegate+nativepagetransitions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +143,10 @@
 		04D59870FDFB4E04AD5288E4 /* StreamingMedia.m */ = {isa = PBXFileReference; name = "StreamingMedia.m"; path = "com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		4A34FFFE59934640A1F3768C /* StreamingMedia.h */ = {isa = PBXFileReference; name = "StreamingMedia.h"; path = "com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		BB8F95FC66FE4892B52B14BD /* MediaPlayer.framework */ = {isa = PBXFileReference; name = "MediaPlayer.framework"; path = "System/Library/Frameworks/MediaPlayer.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		D0561CD08BDE487C8308D97C /* NativePageTransitions.m */ = {isa = PBXFileReference; name = "NativePageTransitions.m"; path = "com.telerik.plugins.nativepagetransitions/NativePageTransitions.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		B216C4CCF43A44C0AC0E5068 /* AppDelegate+nativepagetransitions.m */ = {isa = PBXFileReference; name = "AppDelegate+nativepagetransitions.m"; path = "com.telerik.plugins.nativepagetransitions/AppDelegate+nativepagetransitions.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		AAC11E0480FB42C0B7D5F079 /* NativePageTransitions.h */ = {isa = PBXFileReference; name = "NativePageTransitions.h"; path = "com.telerik.plugins.nativepagetransitions/NativePageTransitions.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		958264F683474B609C97BFA8 /* AppDelegate+nativepagetransitions.h */ = {isa = PBXFileReference; name = "AppDelegate+nativepagetransitions.h"; path = "com.telerik.plugins.nativepagetransitions/AppDelegate+nativepagetransitions.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +312,10 @@
 				80B01A8FEA2C4AA59395EF34 /* CDVOrientation.h */,
 				04D59870FDFB4E04AD5288E4 /* StreamingMedia.m */,
 				4A34FFFE59934640A1F3768C /* StreamingMedia.h */,
+				D0561CD08BDE487C8308D97C /* NativePageTransitions.m */,
+				B216C4CCF43A44C0AC0E5068 /* AppDelegate+nativepagetransitions.m */,
+				AAC11E0480FB42C0B7D5F079 /* NativePageTransitions.h */,
+				958264F683474B609C97BFA8 /* AppDelegate+nativepagetransitions.h */,
 			);
 			name = Plugins;
 			path = "MyApp/Plugins";
@@ -441,6 +451,8 @@
 				8DF986C44F884442AD465115 /* FacebookConnectPlugin.m in Sources */,
 				23B8283957F842A58D6D1771 /* CDVOrientation.m in Sources */,
 				51DCB4AB62654DDC9191F24C /* StreamingMedia.m in Sources */,
+				29F14465CD6E4EF6B3891032 /* NativePageTransitions.m in Sources */,
+				54DC6ECD7B694D92B7CFF79B /* AppDelegate+nativepagetransitions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

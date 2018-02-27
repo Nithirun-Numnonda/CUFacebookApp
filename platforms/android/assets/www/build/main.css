@@ -30450,13 +30450,38 @@ page-home #newLine {
   white-space: pre-line !important;
 }
 
-.myCard {
+page-user-profile .myCard {
   position: relative;
 }
 
-.myOverlay {
-  position: absolute;
-  z-index: 99;
-  bottom: 0px;
-  background: #000;
+page-user-profile #myOverlay {
+  position: fixed;
+  z-index: 10;
+  left: 0px;
+}
+
+page-user-profile #myOverlay2 {
+  position: fixed;
+  z-index: 20;
+  top: 30%;
+  left: 10%;
+}
+
+page-user-profile #ion-card-header2 {
+  color: #836953;
+  font-weight: bold;
+}
+
+page-user-profile #item-avatar {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
+}
+
+page-user-profile #item-avatar2 {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
 }

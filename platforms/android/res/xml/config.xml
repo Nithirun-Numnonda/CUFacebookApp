@@ -33,6 +33,10 @@
     <feature name="StreamingMedia">
         <param name="android-package" value="com.hutchind.cordova.plugins.streamingmedia.StreamingMedia" />
     </feature>
+    <feature name="NativePageTransitions">
+        <param name="android-package" value="com.telerik.plugins.nativepagetransitions.NativePageTransitions" />
+        <param name="onload" value="true" />
+    </feature>
     <name>Fanalyze</name>
     <description>A Facebook Analyzer</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>

@@ -1,12 +1,33 @@
+page-user-profile {
 .myCard{
     position:relative;
   
   }
-  
-  .myOverlay{
-      position: absolute;
-      z-index: 99;
-      bottom: 0px;
-      background: #000;
-  
+ 
+  #myOverlay{
+      position: fixed;
+      z-index: 10;
+      left:0px;
   }
+  #myOverlay2{
+    position: fixed;
+    z-index: 20;
+    top: 30%;
+    left:10%;
+}
+#ion-card-header2 {
+    color: #836953;
+    font-weight: bold;
+}
+
+#item-avatar  {     
+    width:100% !important;  
+    height : 100% !important;  
+    max-width: 100px !important;  //any size
+    max-height: 100px !important; //any size 
+}#item-avatar2  {     
+    width:100% !important;  
+    height : 100% !important;  
+    max-width: 100px !important;  //any size
+    max-height: 100px !important; //any size 
+}}

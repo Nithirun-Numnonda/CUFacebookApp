@@ -145,64 +145,62 @@
                   </ion-col>
                   <ion-col col-8>
                     <ion-card-header text-wrap (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">
-                      <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>
-                      <ion-col>
                         <ion-grid style="margin-top:-10px;">
                           <ion-row>
-                            <ion-col>
+                              <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>
+                            <ion-col col-4>
+                                <button ion-button clear small>
                               <img src="assets/imgs/icon/flame.png" style="width:24px;">
-                            </ion-col>
-                            <ion-col>
                               <label>{{item.total}}</label>
+                              </button>
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                      </ion-col>
                     </ion-card-header>
                   </ion-col>
                 </ion-row>
                 <ion-row style="text-align: center;">
-                  <ion-col *ngIf="item.like>0">
+                  <ion-col *ngIf="item.like>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:3px;">
                       <label>{{item.like}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.love>0">
+                  <ion-col *ngIf="item.love>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/heart.png" style="width:24px;margin-right:3px;">
                       <label>{{item.love}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.wow>0">
+                  <ion-col *ngIf="item.wow>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/surprised.png" style="width:24px;margin-right:3px;">
 
                       <label>{{item.wow}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.haha>0">
+                  <ion-col *ngIf="item.haha>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/laughing.png" style="width:24px;margin-right:3px;">
 
                       <label>{{item.haha}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.sad>0">
+                  <ion-col *ngIf="item.sad>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/crying.png" style="width:24px;margin-right:3px;">
 
                       <label>{{item.sad}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.angry>0">
+                  <ion-col *ngIf="item.angry>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/angry.png" style="width:24px;margin-right:3px;">
 
                       <label>{{item.angry}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.thankful>0">
+                  <ion-col *ngIf="item.thankful>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/flower.png" style="width:24px;margin-right:3px;">
 
@@ -252,10 +250,10 @@
       </div>
       <div>
         <ion-col>
-          <button ion-button (click)="getAllTops()" color="facebook">See more ...</button>
+          <button ion-button *ngIf="!isAll" (click)="getAllTops()" color="facebook">See more ...</button>
         </ion-col>
         <ion-col>
-          <ion-select [(ngModel)]="sortByTime" (ionChange)="getFacebookData()">
+          <ion-select [(ngModel)]="sortByTime" (ionChange)="getDashboard()">
             <ion-option>Last 1 day</ion-option>
             <ion-option>Last 1 week</ion-option>
             <ion-option>Last 1 month</ion-option>

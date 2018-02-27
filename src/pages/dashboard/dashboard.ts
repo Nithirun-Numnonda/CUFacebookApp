@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform ,Content} from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
 import { Chart } from 'chart.js';
+
 
 
 /**
@@ -35,7 +36,7 @@ export class DashboardPage {
   reactionsData: any;
   postsSummaryData: any;
 
-  //for parameter to getFacebookData()
+  //for parameter to getDashboard()
   hourValue: String;
   dayValue: String;
   monthValue: String;
@@ -58,8 +59,9 @@ export class DashboardPage {
   isAll: boolean = false;
 
   //for controlUI
-  typeData: String = 'commentsData'
-  pageTriger: String = 'chart'
+  typeData: String = 'commentsData';
+  pageTriger: String = 'chart';
+  @ViewChild(Content) content: Content;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -80,9 +82,9 @@ export class DashboardPage {
     this.createTime = [];
     this.total_comments = [];
     this.total_reactions = [];
-
-
     this.sortByTime = 'Last 3 months';
+    //for scroll
+    
 
 
   }
@@ -152,18 +154,18 @@ export class DashboardPage {
     this.buttonClicked = !this.buttonClicked;
   }
   //call when refresh
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-    this.createTime = [];
-    this.total_comments = [];
-    this.total_reactions = [];
-    //get data again
-    this.getFacebookData();
-    refresher.complete();
+  // doRefresh(refresher) {
+  //   console.log('Begin async operation', refresher);
+  //   this.createTime = [];
+  //   this.total_comments = [];
+  //   this.total_reactions = [];
+  //   //get data again
+  //   this.getDashboard();
+  //   refresher.complete();
 
-  }
+  // }
   //get Facebook Data from httpProvider
-  getFacebookData() {
+  getDashboard() {
     this.timeSwitchCase();
     let loading = this.loadingController.create({
       content: "LOADING, Please wait..."
@@ -171,7 +173,7 @@ export class DashboardPage {
     loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
       //call method from httpProvider
-      this.httpProvider.getFacebookData(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
+      this.httpProvider.getDashboard(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
         //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
         result => {
           //check if server send error back
@@ -182,57 +184,60 @@ export class DashboardPage {
               this.retryTime += 1;
               if (this.retryTime < 3) {
                 loading.dismissAll();
-                return this.getFacebookData();
+                return this.getDashboard();
               }
               else
                 console.log("Access Token expired!!!");
             }
 
           }
-          if(result.id){
+          if (result.id) {
             loading.dismissAll();
             return null;
-          }else{
-          //assign data to view
-          this.commentsData = result.comments.data;
-          this.reactionsData = result.reactions.data;
-          this.postsSummaryData = result.post_summary.data;
-          if (this.postsSummaryData) {
-            var maxReactions = 0;
-            var maxComments = 0;
-            for (let data of this.postsSummaryData) {
-              if (data.total_comments != 0 || data.total_reactions != 0) {
-                var newDate = new Date(data.created_time);
-                //console.log(newDate.toDateString());
-                this.createTime.push(newDate.toDateString());
-                this.total_comments.push(data.total_comments);
-                this.total_reactions.push(data.total_reactions);
-              }
-              if (data.total_comments > maxComments) {
-                maxComments = data.total_comments
-                data.created_time = new Date(data.created_time).toDateString();
-                this.maxCommentsPost = data;
-                //console.log(maxComments);
-              }
-              if (data.total_reactions > maxReactions) {
-                maxReactions = data.total_reactions
-                data.created_time = new Date(data.created_time).toDateString();
-                this.maxReactionsPost = data;
+          } else {
+            //assign data to view
+            this.commentsData = result.comments.data;
+            this.reactionsData = result.reactions.data;
+            this.postsSummaryData = result.post_summary.data;
+            if (this.postsSummaryData) {
+              var maxReactions = 0;
+              var maxComments = 0;
+              for (let data of this.postsSummaryData) {
+                if (data.total_comments != 0 || data.total_reactions != 0) {
+                  var newDate = new Date(data.created_time);
+                  //console.log(newDate.toDateString());
+                  this.createTime.push(newDate.toDateString());
+                  this.total_comments.push(data.total_comments);
+                  this.total_reactions.push(data.total_reactions);
+                }
+                if (data.total_comments > maxComments) {
+                  maxComments = data.total_comments
+                  data.created_time = new Date(data.created_time).toDateString();
+                  this.maxCommentsPost = data;
+                  //console.log(maxComments);
+                }
+                if (data.total_reactions > maxReactions) {
+                  maxReactions = data.total_reactions
+                  data.created_time = new Date(data.created_time).toDateString();
+                  this.maxReactionsPost = data;
+                }
               }
             }
-          }
-          if (this.pageTriger == "chart")
-            this.createGraph();
-          //          console.log("Success : " + JSON.stringify(result));
-          if (this.platform.is('cordova')) {
-            if (this.postsSummaryData)
-              this.getMessage(this.maxCommentsPost.id, this.maxReactionsPost.id);
-          }
+            if (this.pageTriger == "chart")
+              this.createGraph();
+            //          console.log("Success : " + JSON.stringify(result));
+            if (this.platform.is('cordova')) {
+              if (this.postsSummaryData)
+                this.getMessage(this.maxCommentsPost.id, this.maxReactionsPost.id);
+            }
 
-          this.retryTime = 0;
-          this.httpProvider.setUid(result._uid);
-          this.isAll = true;
-          loading.dismissAll();
+            this.retryTime = 0;
+            this.httpProvider.setUid(result._uid);
+            if(result.comments.next||result.reactions.next)
+              this.isAll = false;
+            else
+              this.isAll = true;
+            loading.dismissAll();
           }
         },
         err => {
@@ -247,6 +252,7 @@ export class DashboardPage {
       );
   }
   getAllTops() {
+    this.isAll=true;
     let loading = this.loadingController.create({ content: "LOADING, Please wait..." });
     loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
@@ -304,10 +310,101 @@ export class DashboardPage {
 
   }
 
+  getDashboardForTest() {
+    this.timeSwitchCase();
+    let loading = this.loadingController.create({
+      content: "LOADING, Please wait..."
+    });
+    loading.present();
+    if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
+      //call method from httpProvider
+      this.httpProvider.getDashboardForTest(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
+        //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
+        result => {
+          //check if server send error back
+          if (result.error) {
+            //check if token expire?
+            if (result.error.type == "OAuthException") {
+              console.log("Token expired!!!");
+              this.retryTime += 1;
+              if (this.retryTime < 3) {
+                loading.dismissAll();
+                return this.getDashboardForTest();
+              }
+              else
+                console.log("Access Token expired!!!");
+            }
+
+          }
+          if (result.id) {
+            loading.dismissAll();
+            return null;
+          } else {
+            //assign data to view
+            this.commentsData = result.comments.data;
+            this.reactionsData = result.reactions.data;
+            this.postsSummaryData = result.post_summary.data;
+            if (this.postsSummaryData) {
+              var maxReactions = 0;
+              var maxComments = 0;
+              for (let data of this.postsSummaryData) {
+                if (data.total_comments != 0 || data.total_reactions != 0) {
+                  var newDate = new Date(data.created_time);
+                  //console.log(newDate.toDateString());
+                  this.createTime.push(newDate.toDateString());
+                  this.total_comments.push(data.total_comments);
+                  this.total_reactions.push(data.total_reactions);
+                }
+                if (data.total_comments > maxComments) {
+                  maxComments = data.total_comments
+                  data.created_time = new Date(data.created_time).toDateString();
+                  this.maxCommentsPost = data;
+                  //console.log(maxComments);
+                }
+                if (data.total_reactions > maxReactions) {
+                  maxReactions = data.total_reactions
+                  data.created_time = new Date(data.created_time).toDateString();
+                  this.maxReactionsPost = data;
+                }
+              }
+            }
+            if (this.pageTriger == "chart")
+              this.createGraph();
+            //          console.log("Success : " + JSON.stringify(result));
+            if (this.platform.is('cordova')) {
+              if (this.postsSummaryData)
+                this.getMessage(this.maxCommentsPost.id, this.maxReactionsPost.id);
+            }
+
+            this.retryTime = 0;
+            this.httpProvider.setUid(result._uid);
+            if(result.comments.next||result.reactions.next)
+              this.isAll = false;
+            else
+              this.isAll = true;
+
+            loading.dismissAll();
+          }
+        },
+        err => {
+          //call if fail to get request
+          console.error("Error : " + err);
+          alert("Can't get Data from the server: " + err);
+          loading.dismissAll();
+        },
+        () => {
+          console.log('getData completed');
+        }
+      );
+  }
   //call when view did load
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
-    this.getFacebookData();
+    if (this.platform.is('cordova')) {
+      this.getDashboard();
+    } else {
+      this.getDashboardForTest();
+    }
     this.setLike();
   }
   //get message
@@ -389,12 +486,15 @@ export class DashboardPage {
   trigerPage() {
     if (this.pageTriger == 'chart') {
       this.pageTriger = 'list';
+      this.content.scrollToTop();
     } else if (this.pageTriger == 'list') {
       this.pageTriger = 'chart';
       this.createTime = [];
       this.total_comments = [];
       this.total_reactions = [];
-      this.getFacebookData();
+      this.content.scrollToTop();
+      this.getDashboard();
+      
     }
 
   }
