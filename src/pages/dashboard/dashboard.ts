@@ -28,8 +28,10 @@ export class DashboardPage {
   nativeEle: any;
   maxReactionsPost: any;
   maxReactionsMsg: any;
+  maxReactionsPic:any;
   maxCommentsPost: any;
   maxCommentsMsg: any;
+  maxCommentsPic:any;
 
   //for Data facebook
   commentsData: any;

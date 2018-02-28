@@ -252,6 +252,12 @@ export class HttpProvider {
     });
     
   }
+  getPostsById(uid: String): Observable<any> {
+    return Observable.fromPromise(this.getToken()).mergeMap((token)=>{
+      return Observable.fromPromise(this.facebook.api('/'+uid+'?fields=posts{created_time,message,full_picture,reactions.summary(true),comments.summary(true),id}', ['user_posts','user_friends']));
+    });
+    
+  }
   getSource(uid){
     return this.facebook.api('/' + uid + '?fields=source', ['user_posts']);
   }

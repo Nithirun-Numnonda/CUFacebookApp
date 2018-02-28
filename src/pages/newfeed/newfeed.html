@@ -16,7 +16,7 @@
 
     <ion-card>
 
-      <ion-item>
+      <ion-item (click)="presentProfileModal(item.page_id,item.page_name)">
         <ion-avatar item-start>
           <img src={{item.page_picture}}>
         </ion-avatar>

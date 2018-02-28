@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Platform, ModalController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
 
 
@@ -24,7 +24,8 @@ export class FriendsPage {
         public navParams: NavParams,
         private httpProvider: HttpProvider,
         private loadingController: LoadingController,
-        private platform:Platform
+        private platform:Platform,
+        private modalCtrl:ModalController
     ) {
     }
     ionViewDidLoad() {
@@ -53,5 +54,10 @@ export class FriendsPage {
                 }
             );
     }
+    presentProfileModal(uid: string, user_name: string) {
+        //console.log(uid);
+        let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+        profileModal.present();
+      }
     
 }
