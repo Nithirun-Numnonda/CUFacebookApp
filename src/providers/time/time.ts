@@ -27,10 +27,21 @@ export class TimeProvider {
 
     var end = Date.now();
     var start = new Date(date).getTime();
-    var diff = new Date(end-start);
-    var diff_hours = diff.getHours();
-    var diff_mins = diff.getMinutes();
-    var diff_days = diff.getDay();
+    var diff = end-start;
+    var diff_hours = Math.floor(diff / 3600000); // 1 Hour = 36000 Milliseconds
+    var diff_mins = Math.floor((diff % 3600000) / 60000); // 1 Minutes = 60000 Milliseconds
+    var diff_days = Math.floor(diff_hours/24);
+    console.log('diff ='+new Date(diff));
+    console.log('end ='+new Date(end));
+    console.log('start ='+new Date(start));
+
+    // console.log(diff);
+    // console.log(diff.getFullYear);
+    // console.log(diff_days);
+    // console.log(diff_mins);
+    // console.log(diff_hours);
+
+
     if(diff_days >= 1){
       return new Date(date).toDateString();
     }
