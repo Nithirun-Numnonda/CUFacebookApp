@@ -24,7 +24,7 @@ export class TimeProvider {
     return Date.now();
   }
   getDiffTime (date:Date){
-
+    var time;
     var end = Date.now();
     var start = new Date(date).getTime();
     var diff = end-start;
@@ -46,23 +46,23 @@ export class TimeProvider {
       return new Date(date).toDateString();
     }
     else if(diff_hours>=2){
-      var time = String(diff_hours) +' hrs';
+      time = String(diff_hours) +' hrs';
       return time;
     }
     else if(diff_hours == 1) {
-      var time = String(diff_hours) +' hr';
+      time = String(diff_hours) +' hr';
       return time;
     }
     else if(diff_mins>=2){
-      var time = String(diff_mins) +' mins';
+      time = String(diff_mins) +' mins';
       return time;
     }
     else if(diff_mins==1){
-      var time = String(diff_mins) +' min';
+      time = String(diff_mins) +' min';
       return time;
     }
     else if(diff_mins<1){
-      var time = 'Just now';
+      time = 'Just now';
       return time;
     }
 
