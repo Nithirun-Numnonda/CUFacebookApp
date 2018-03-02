@@ -1,3 +1,4 @@
+import { TimeProvider } from './../../providers/time/time';
 import { HttpProvider } from './../../providers/http/http-provider';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { Component, ViewChild } from '@angular/core';
@@ -56,7 +57,8 @@ export class NewfeedPage {
     private http: Http,
     private platform: Platform,
     private streamingMedia: StreamingMedia,
-    private modalCtrl:ModalController
+    private modalCtrl:ModalController,
+    private timeProvider:TimeProvider
   ) {
 
     //for retry
@@ -93,12 +95,11 @@ export class NewfeedPage {
         console.log(this.newsData);
         try {
           for (let data of this.newsData) {
-            var newDate = new Date(data.created_time);
-            data.created_time = newDate.toDateString();
+            data.created_time = this.timeProvider.getDiffTime(data.created_time);
           }
 
         } catch (error) {
-
+          alert(error);
         }
         console.log("Success : " + JSON.stringify(result));
         loading.dismissAll();
@@ -143,8 +144,8 @@ export class NewfeedPage {
 
         try {
           for (let data of this.newsData) {
-            var newDate = new Date(data.created_time);
-            data.created_time = newDate.toDateString();
+            
+            data.created_time = this.timeProvider.getDiffTime(data.created_time);
           }
 
         } catch (error) {
@@ -194,8 +195,8 @@ export class NewfeedPage {
 
           try {
             for (let data of result.newsfeed.data) {
-              var newDate = new Date(data.created_time);
-              data.created_time = newDate.toDateString();
+              
+              data.created_time = this.timeProvider.getDiffTime(data.created_time);
               this.newsData.push(data);
             }
 
@@ -246,8 +247,8 @@ export class NewfeedPage {
 
           try {
             for (let data of result.newsfeed.data) {
-              var newDate = new Date(data.created_time);
-              data.created_time = newDate.toDateString();
+              
+              data.created_time = this.timeProvider.getDiffTime(data.created_time);
               this.newsData.push(data);
             }
 

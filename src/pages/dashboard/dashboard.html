@@ -86,8 +86,18 @@
           </ion-col>
         </ion-row>
         <ion-item text-wrap>{{maxReactionsMsg}}</ion-item>
+
       </ion-card-content>
     </ion-card>
+    <ion-card>
+      <ion-card-header text-wrap id="ion-card-header3">
+        Word Cloud in {{sortByTime}}
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]='wordCloud'>
+      </ion-card-content>
+    </ion-card>
+
   </div>
   <div *ngIf="pageTriger.match('list')" class='dashboardContent'>
     <div [ngSwitch]="typeData">
@@ -145,17 +155,17 @@
                   </ion-col>
                   <ion-col col-8>
                     <ion-card-header text-wrap (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">
-                        <ion-grid style="margin-top:-10px;">
-                          <ion-row>
-                              <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>
-                            <ion-col col-4>
-                                <button ion-button clear small>
+                      <ion-grid style="margin-top:-10px;">
+                        <ion-row>
+                          <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>
+                          <ion-col col-4>
+                            <button ion-button clear small>
                               <img src="assets/imgs/icon/flame.png" style="width:24px;">
                               <label>{{item.total}}</label>
-                              </button>
-                            </ion-col>
-                          </ion-row>
-                        </ion-grid>
+                            </button>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
                     </ion-card-header>
                   </ion-col>
                 </ion-row>
