@@ -3,8 +3,9 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Platform, NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers ,Response} from '@angular/http';
 import 'rxjs/add/operator/map';
+
 
 
 
@@ -107,7 +108,11 @@ export class HttpProvider {
   //get user token from facebook
   getTokenForTest() {
     //for test in computer
+<<<<<<< HEAD
     this.accessToken = 'EAACEdEose0cBAJuGOuXkrySLZCgtl6vDT5xDfaIUZCigAjALXA5wDKfRFF3ePTenkmlfLZCsp3DlV9tG18P699lWphXEkV26HcuIxQhZANQSnZBdz58At7ng1LCiO5JkfQekeZBhgPB1NDMNFZCaWZB1GHMjul97u0sfdkylOEs49kW2rmHfA4Jebto4rjqWZAKQZD';
+=======
+    this.accessToken = 'EAACEdEose0cBACdsVaM6Meq7Ia5izkmg47Uls5JnVNxfmKyEOzs00YXrh67KYiKIdjDI4FLCZBhL0DB8YjwqpWB23Nn8nwAKYiQn2tUhCoC0NO350SZCOmPMCO3BskG3uPrT8zzrMmZBkDkDn4BAUVCkyP3O8kdwWUUm8k8gqXZAszrmLlR0dgDgA49l2Sygr6IZCYCpAegZDZD';
+>>>>>>> c587fca3fbcc93069c25a3b8b0fe6fc98f9562a5
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
@@ -144,7 +149,7 @@ export class HttpProvider {
       let headers = new Headers();
       headers.append('access_token', token);
       return this.http.get(
-        this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(180000)
+        this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(90000)
         .map(res => res.json());
     });
   }
@@ -154,7 +159,7 @@ export class HttpProvider {
     let headers = new Headers();
     headers.append('access_token', this.accessToken);
     return this.http.get(
-      this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(180000)
+      this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(90000)
       .map(res => res.json());
 
   }
@@ -167,7 +172,7 @@ export class HttpProvider {
         let headers = new Headers();
         headers.append('access_token', this.accessToken);
         return this.http.get(
-          this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
+          this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
           .map(res => res.json());
       });
     });
@@ -179,7 +184,7 @@ export class HttpProvider {
     let headers = new Headers();
     headers.append('access_token', this.accessToken);
     return this.http.get(
-      this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
+      this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
       .map(res => res.json());
 
   }
@@ -211,7 +216,7 @@ export class HttpProvider {
     //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
     //   .map(res => res.json());
     return this.http.get(
-      this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
+      this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
       .map(res => res.json());
   }
   getPosts(): Observable<any> {
@@ -225,7 +230,7 @@ export class HttpProvider {
         console.log(this.accessToken);
         headers.append('access_token', this.accessToken);
         return this.http.get(
-          this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
+          this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
           .map(res => res.json());
       })
     });
@@ -241,18 +246,24 @@ export class HttpProvider {
         console.log(this.accessToken);
         headers.append('access_token', this.accessToken);
         return this.http.get(
-          this.setHttpRequest("newsfeed/next/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(180000)
+          this.setHttpRequest("newsfeed/next/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
           .map(res => res.json());
       })
     });
   }
   getCover(uid: String): Observable<any> {
-    return Observable.fromPromise(this.getToken()).mergeMap((token)=>{
-      return Observable.fromPromise(this.facebook.api('/'+uid+'?fields=cover', ['user_posts']));
+    return Observable.fromPromise(this.getToken()).mergeMap((token) => {
+      return Observable.fromPromise(this.facebook.api('/' + uid + '?fields=cover', ['user_posts']));
     });
-    
+
   }
-  getSource(uid){
+  getPostsById(uid: String): Observable<any> {
+    return Observable.fromPromise(this.getToken()).mergeMap((token) => {
+      return Observable.fromPromise(this.facebook.api('/' + uid + '?fields=posts{created_time,message,full_picture,reactions.summary(true),comments.summary(true),id}', ['user_posts', 'user_friends']));
+    });
+
+  }
+  getSource(uid) {
     return this.facebook.api('/' + uid + '?fields=source', ['user_posts']);
   }
   getContext(uid: String): Observable<any> {
@@ -263,6 +274,22 @@ export class HttpProvider {
   }
   getFriends() {
     return this.facebook.api('/me/friends', ['user_friends'])
+  }
+  getWordCloudForTest() {
+    this.getUidForTest();
+    
+    // return this.http.get(
+    //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
+    //   .map(res => res.json());
+    return this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
+
+  }
+  getWordCloud() {
+    this.getUid().then(obj => {
+      this.uid = obj.id;
+        return this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
+      });
+    
   }
 
 }

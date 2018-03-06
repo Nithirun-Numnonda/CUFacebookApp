@@ -1,7 +1,7 @@
 import { HttpProvider } from './../../providers/http/http-provider';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, Platform, ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
@@ -58,7 +58,8 @@ export class NewfeedPage {
     private http: Http,
     private platform: Platform,
     private streamingMedia: StreamingMedia,
-    private providerTime : TimeProvider,
+    private modalCtrl:ModalController,
+    private timeProvider:TimeProvider
   ) {
 
     //for retry
@@ -95,12 +96,12 @@ export class NewfeedPage {
         console.log(this.newsData);
         try {
           for (let data of this.newsData) {
-            data.created_time = this.providerTime.getDiffTime(data.created_time);
-            var x = this.providerTime.getDiffTime(data.created_time);
+            data.created_time = this.timeProvider.getDiffTime(data.created_time);
+            var x = this.timeProvider.getDiffTime(data.created_time);
           }
 
         } catch (error) {
-
+          alert(error);
         }
         console.log("Success : " + JSON.stringify(result));
         loading.dismissAll();
@@ -145,8 +146,8 @@ export class NewfeedPage {
 
         try {
           for (let data of this.newsData) {
-            var newDate = new Date(data.created_time);
-            data.created_time = newDate.toDateString();
+            
+            data.created_time = this.timeProvider.getDiffTime(data.created_time);
           }
 
         } catch (error) {
@@ -196,8 +197,8 @@ export class NewfeedPage {
 
           try {
             for (let data of result.newsfeed.data) {
-              var newDate = new Date(data.created_time);
-              data.created_time = newDate.toDateString();
+              
+              data.created_time = this.timeProvider.getDiffTime(data.created_time);
               this.newsData.push(data);
             }
 
@@ -248,8 +249,8 @@ export class NewfeedPage {
 
           try {
             for (let data of result.newsfeed.data) {
-              var newDate = new Date(data.created_time);
-              data.created_time = newDate.toDateString();
+              
+              data.created_time = this.timeProvider.getDiffTime(data.created_time);
               this.newsData.push(data);
             }
 
@@ -311,6 +312,11 @@ export class NewfeedPage {
     }
     //this.getCommentsData();
     //this.createGraph();
+  }
+  presentProfileModal(uid: string, user_name: string) {
+    //console.log(uid);
+    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+    profileModal.present();
   }
 
   // ngAfterViewInit() {

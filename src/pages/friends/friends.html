@@ -16,16 +16,16 @@
     <ion-card no-padding>
       <ion-card-content no-padding>
         <ion-grid no-padding>
-          <ion-row>
+          <ion-row (click)="presentProfileModal(item.id,item.name)">
             <ion-col>
               <ion-item>
                 <ion-avatar>
-                  <img id="item-avatar2" src="http://graph.facebook.com/{{item.id}}/picture?type=square">
+                  <img id="item-avatar2" src="http://graph.facebook.com/{{item.id}}/picture?type=large">
                 </ion-avatar>
               </ion-item>
             </ion-col>
             <ion-col col-8>
-              <ion-card-header text-wrap id="ion-card-header2">
+              <ion-card-header text-wrap id="ion-card-header2" >
                 <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>
               </ion-card-header>
             </ion-col>

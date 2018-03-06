@@ -1,3 +1,21 @@
 page-friends {
-
+    #ion-card-header2 {
+        color: #836953;
+        font-weight: bold;
+    }
+    
+    #item-avatar2  {     
+        width:100% !important;  
+        height : 100% !important;  
+        max-width: 100px !important;  //any size
+        max-height: 100px !important; //any size
+    }#item-avatar2  {     
+        width:100% !important;  
+        height : 100% !important;  
+        max-width: 200px !important;  //any size
+        max-height: 200px !important; //any size 
+        position:absolute;
+        top:20%;
+        left:10%;
+    }
 }

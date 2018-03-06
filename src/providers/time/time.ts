@@ -42,6 +42,7 @@ export class TimeProvider {
 
 
     if(diff_days >= 1){
+      console.log("timestamp: "+new Date(date).toDateString()+"\ndiff: "+diff.getHours());
       return new Date(date).toDateString();
     }
     else if(diff_hours>=2){

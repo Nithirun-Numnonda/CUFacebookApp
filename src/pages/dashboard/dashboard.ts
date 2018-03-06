@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController, ModalController
 import { HttpProvider } from '../../providers/http/http-provider';
 import { Chart } from 'chart.js';
 
+import {DomSanitizer} from '@angular/platform-browser';
+
 
 
 /**
@@ -28,8 +30,10 @@ export class DashboardPage {
   nativeEle: any;
   maxReactionsPost: any;
   maxReactionsMsg: any;
+  maxReactionsPic:any;
   maxCommentsPost: any;
   maxCommentsMsg: any;
+  maxCommentsPic:any;
 
   //for Data facebook
   commentsData: any;
@@ -58,6 +62,8 @@ export class DashboardPage {
   private retryTime;
   isAll: boolean = false;
 
+  wordCloud:any;
+
   //for controlUI
   typeData: String = 'commentsData';
   pageTriger: String = 'chart';
@@ -68,7 +74,8 @@ export class DashboardPage {
     private httpProvider: HttpProvider,
     private loadingController: LoadingController,
     public modalCtrl: ModalController,
-    private platform: Platform
+    private platform: Platform,
+    public _DomSanitizer: DomSanitizer
   ) {
     //initial default parameter
     this.hourValue = this.hours[0];
@@ -85,7 +92,7 @@ export class DashboardPage {
     this.sortByTime = 'Last 3 months';
     //for scroll
     
-
+    
 
   }
   timeSwitchCase() {
@@ -237,6 +244,7 @@ export class DashboardPage {
               this.isAll = false;
             else
               this.isAll = true;
+            this.getWordCloud()
             loading.dismissAll();
           }
         },
@@ -382,8 +390,9 @@ export class DashboardPage {
               this.isAll = false;
             else
               this.isAll = true;
-
+            this.getWordCloudForTest();
             loading.dismissAll();
+            
           }
         },
         err => {
@@ -396,6 +405,13 @@ export class DashboardPage {
           console.log('getData completed');
         }
       );
+  }
+  getWordCloud(){
+    this.wordCloud=this.httpProvider.getWordCloud()
+  }
+  getWordCloudForTest(){
+    
+    this.wordCloud=this.httpProvider.getWordCloudForTest()
   }
   //call when view did load
   ionViewDidLoad() {

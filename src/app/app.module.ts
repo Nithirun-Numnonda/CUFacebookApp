@@ -17,6 +17,8 @@ import { Facebook } from '@ionic-native/facebook';
 import { SwingModule } from 'angular2-swing';
 import { TimeProvider } from '../providers/time/time';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions'
+
 @NgModule({
   declarations: [
     MyApp,
@@ -51,7 +53,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     StreamingMedia,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpProvider,
-    TimeProvider
+    TimeProvider,
+    NativePageTransitions
 
   ]
 })
