@@ -109,10 +109,14 @@ export class HttpProvider {
   getTokenForTest() {
     //for test in computer
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.accessToken = 'EAACEdEose0cBAJuGOuXkrySLZCgtl6vDT5xDfaIUZCigAjALXA5wDKfRFF3ePTenkmlfLZCsp3DlV9tG18P699lWphXEkV26HcuIxQhZANQSnZBdz58At7ng1LCiO5JkfQekeZBhgPB1NDMNFZCaWZB1GHMjul97u0sfdkylOEs49kW2rmHfA4Jebto4rjqWZAKQZD';
 =======
     this.accessToken = 'EAACEdEose0cBACdsVaM6Meq7Ia5izkmg47Uls5JnVNxfmKyEOzs00YXrh67KYiKIdjDI4FLCZBhL0DB8YjwqpWB23Nn8nwAKYiQn2tUhCoC0NO350SZCOmPMCO3BskG3uPrT8zzrMmZBkDkDn4BAUVCkyP3O8kdwWUUm8k8gqXZAszrmLlR0dgDgA49l2Sygr6IZCYCpAegZDZD';
 >>>>>>> c587fca3fbcc93069c25a3b8b0fe6fc98f9562a5
+=======
+    this.accessToken = 'EAACEdEose0cBAMCrSmBrdZBAjgE30h6ZBb6cMkojS6U8Y3CkkPLSf2zap5FeEKroVtZCEQ15ch6bZCHG8MZCGUCplJxNmWwVenjC8EpSe3ZBWVWnKHAXe7cyJ2rSDZAvnpiDssT7vWQyewgNlREglM0MDJHbjBy9IUGDen2ZB2PLdak0TuIvBc1f747BI2YzVwQZD';
+>>>>>>> 7615a8094517f2fbd639faeed4893b43771c2abc
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
@@ -270,10 +274,10 @@ export class HttpProvider {
     return Observable.fromPromise(this.facebook.api('/' + uid + '?fields=context', ['user_posts']));
   }
   getMessage(postID: String) {
-    return this.facebook.api('/' + postID, ['user_posts']);
+    return this.facebook.api('/' + postID+'?fields=message,created_time,full_picture', ['user_posts']);
   }
   getFriends() {
-    return this.facebook.api('/me/friends', ['user_friends'])
+    return this.facebook.api('/me/friends', ['user_friends']);
   }
   getWordCloudForTest() {
     this.getUidForTest();
@@ -284,10 +288,10 @@ export class HttpProvider {
     return this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
 
   }
-  getWordCloud() {
-    this.getUid().then(obj => {
+  getWordCloud(): Observable<any> {
+    return Observable.fromPromise(this.getUid()).mergeMap(obj => {
       this.uid = obj.id;
-        return this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
+        return  this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
       });
     
   }

@@ -104,8 +104,8 @@ var TabsPage = (function () {
             slidePixels: 0,
             iosdelay: 20,
             androiddelay: 0,
-            fixedPixelsTop: 0,
-            fixedPixelsBottom: 48
+            fixedPixelsTop: 30,
+            fixedPixelsBottom: 0
         };
         if (!this.loaded) {
             this.loaded = true;
@@ -118,10 +118,14 @@ var TabsPage = (function () {
 TabsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
 <<<<<<< HEAD
+<<<<<<< HEAD
         selector: 'page-tabs',template:/*ion-inline-start:"C:\Users\Computer\Desktop\J\Work\Project\CUFacebookApp\src\pages\tabs\tabs.html"*/'<ion-tabs padding class="tabs">\n\n    <ion-tab [root]="dashboardRoot" tabTitle="Dashboard" tabIcon="stats"></ion-tab>\n\n    <ion-tab [root]="newfeedRoot" tabTitle="PagesFeed" tabIcon="paper"></ion-tab>\n\n    <ion-tab [root]="friendsRoot" tabTitle="Friends" tabIcon="contacts"></ion-tab>\n\n    <ion-tab [root]="settingRoot" tabTitle="Setting" tabIcon="settings"></ion-tab>\n\n</ion-tabs>'/*ion-inline-end:"C:\Users\Computer\Desktop\J\Work\Project\CUFacebookApp\src\pages\tabs\tabs.html"*/
 =======
         selector: 'page-tabs',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\tabs\tabs.html"*/'<ion-tabs padding class="tabs" (ionChange)="transition($event)">\n\n    <ion-tab [root]="dashboardRoot" tabTitle="Dashboard" tabIcon="stats"></ion-tab>\n\n    <ion-tab [root]="newfeedRoot" tabTitle="PagesFeed" tabIcon="paper"></ion-tab>\n\n    <ion-tab [root]="friendsRoot" tabTitle="Friends" tabIcon="contacts"></ion-tab>\n\n    <ion-tab [root]="settingRoot" tabTitle="Setting" tabIcon="settings"></ion-tab>\n\n</ion-tabs>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\tabs\tabs.html"*/
 >>>>>>> c587fca3fbcc93069c25a3b8b0fe6fc98f9562a5
+=======
+        selector: 'page-tabs',template:/*ion-inline-start:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\tabs\tabs.html"*/'<ion-tabs padding class="tabs" (ionChange)="transition($event)">\n\n    <ion-tab [root]="dashboardRoot" tabTitle="Dashboard" tabIcon="stats"></ion-tab>\n\n    <ion-tab [root]="newfeedRoot" tabTitle="PagesFeed" tabIcon="paper"></ion-tab>\n\n    <ion-tab [root]="friendsRoot" tabTitle="Friends" tabIcon="contacts"></ion-tab>\n\n    <ion-tab [root]="settingRoot" tabTitle="Setting" tabIcon="settings"></ion-tab>\n\n</ion-tabs>'/*ion-inline-end:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\tabs\tabs.html"*/
+>>>>>>> 7615a8094517f2fbd639faeed4893b43771c2abc
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_native_page_transitions__["a" /* NativePageTransitions */]])
 ], TabsPage);

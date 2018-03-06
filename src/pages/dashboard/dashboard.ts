@@ -244,7 +244,7 @@ export class DashboardPage {
               this.isAll = false;
             else
               this.isAll = true;
-            this.getWordCloud()
+            
             loading.dismissAll();
           }
         },
@@ -407,11 +407,17 @@ export class DashboardPage {
       );
   }
   getWordCloud(){
-    this.wordCloud=this.httpProvider.getWordCloud()
+    this.wordCloud="";
+    this.httpProvider.getWordCloud().subscribe((result)=>{
+      
+      this.wordCloud+=result;
+      //alert(this.wordCloud);
+    });
+    
   }
   getWordCloudForTest(){
     
-    this.wordCloud=this.httpProvider.getWordCloudForTest()
+    this.wordCloud=this.httpProvider.getWordCloudForTest();
   }
   //call when view did load
   ionViewDidLoad() {
@@ -429,10 +435,12 @@ export class DashboardPage {
       this.httpProvider.getMessage(uid).then((result) => {
         console.log(JSON.stringify(result));
         this.maxCommentsMsg = result.message;
+        this.maxCommentsPic = result.full_picture;
         this.httpProvider.getMessage(uid2).then((result2) => {
           console.log(JSON.stringify(result2));
           this.maxReactionsMsg = result2.message;
-
+          this.maxReactionsPic = result2.full_picture;
+          this.getWordCloud();
         }, (error) => {
 
           console.log(error);
@@ -516,7 +524,7 @@ export class DashboardPage {
   }
   presentProfileModal(uid: string, user_name: string) {
     //console.log(uid);
-    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name ,type:"friends"});
     profileModal.present();
   }
 
