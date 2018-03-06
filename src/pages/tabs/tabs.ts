@@ -48,13 +48,13 @@ export class TabsPage {
   public transition(e): void {
     let options: NativeTransitionOptions = {
       direction: this.getAnimationDirection(e.index),
-      duration: 250,
+      duration: 100,
       slowdownfactor: -1,
       slidePixels: 0,
       iosdelay: 20,
       androiddelay: 0,
       fixedPixelsTop: 0,
-      fixedPixelsBottom: 48
+      fixedPixelsBottom: 0
     };
 
     if (!this.loaded) {

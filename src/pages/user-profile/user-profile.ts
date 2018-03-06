@@ -1,3 +1,4 @@
+import { TimeProvider } from './../../providers/time/time';
 import { HttpProvider } from './../../providers/http/http-provider';
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ModalController } from 'ionic-angular';
@@ -18,6 +19,7 @@ import { ViewController } from 'ionic-angular/navigation/view-controller';
 export class UserProfilePage {
   uid: string;
   name: string;
+  type:string
   cover: any;
   mutual_friends: any;
   mutual_friends_count:any;
@@ -25,11 +27,10 @@ export class UserProfilePage {
   mutual_likes_count:any;
   offset_y:any;
   postsData:any;
-  constructor(private navParams: NavParams, private view: ViewController, public httpProvider:HttpProvider,public modalCtrl: ModalController) {
+  constructor(private navParams: NavParams, private view: ViewController, public httpProvider:HttpProvider,public modalCtrl: ModalController,private timeProvider:TimeProvider) {
     this.uid = this.navParams.get('userId');
     this.name = this.navParams.get('name');
-    
-    
+    this.type=this.navParams.get('type');
   }
   getCover(){
     //alert(this.uid);
@@ -52,11 +53,20 @@ export class UserProfilePage {
     //alert(this.uid);
     this.httpProvider.getPostsById(this.uid).subscribe(
       (postsData) => {
-        console.log(JSON.stringify(postsData));
-        this.postsData = postsData.data;
-        //alert(JSON.stringify(coverData));
+        //alert(JSON.stringify(postsData));
+        this.postsData = postsData.posts.data;
+        console.log(this.postsData);
+        try {
+          for (let data of this.postsData) {
+            
+            data.created_time = this.timeProvider.getDiffTime(data.created_time);
+          }
+
+        } catch (error) {
+
+        }
       }, (err) => {
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
         //reject(err);
         //alert(JSON.stringify(err));
 
@@ -66,10 +76,15 @@ export class UserProfilePage {
     this.httpProvider.getContext(this.uid).subscribe(
       (contextData) => {
         console.log(JSON.stringify(contextData));
+        if(this.type == "friends")
+        {
         this.mutual_friends=contextData.context.mutual_friends.data;
         this.mutual_friends_count=contextData.context.mutual_friends.summary.total_count;
         this.mutual_likes=contextData.context.mutual_likes.data;
         this.mutual_likes_count=contextData.context.mutual_likes.summary.total_count;
+        }else{
+          
+        }
         this.getPosts();
         //alert(JSON.stringify(this.mutual_likes));
       }, (err) => {

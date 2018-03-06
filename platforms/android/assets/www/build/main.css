@@ -30444,11 +30444,8 @@ page-friends #item-avatar2 {
 page-friends #item-avatar2 {
   width: 100% !important;
   height: 100% !important;
-  max-width: 200px !important;
-  max-height: 200px !important;
-  position: absolute;
-  top: 20%;
-  left: 10%;
+  max-width: 100px !important;
+  max-height: 100px !important;
 }
 
 page-home #myswing1 {

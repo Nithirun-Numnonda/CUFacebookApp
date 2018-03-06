@@ -61,7 +61,9 @@
             </ion-grid>
           </ion-col>
         </ion-row>
-        <ion-item text-wrap>{{maxCommentsMsg}}</ion-item>
+        <ion-item text-wrap>{{maxCommentsMsg}}
+          <img *ngIf="maxCommentsPic" src={{maxCommentsPic}}>
+        </ion-item>
       </ion-card-content>
     </ion-card>
     <ion-card *ngIf="maxReactionsPost">
@@ -85,7 +87,9 @@
             </ion-grid>
           </ion-col>
         </ion-row>
-        <ion-item text-wrap>{{maxReactionsMsg}}</ion-item>
+        <ion-item text-wrap>{{maxReactionsMsg}}
+          <img *ngIf="maxReactionsPic" src={{maxReactionsPic}}>
+        </ion-item>
 
       </ion-card-content>
     </ion-card>

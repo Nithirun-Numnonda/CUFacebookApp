@@ -56,7 +56,7 @@ export class FriendsPage {
     }
     presentProfileModal(uid: string, user_name: string) {
         //console.log(uid);
-        let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+        let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name,type:"friends"});
         profileModal.present();
       }
     

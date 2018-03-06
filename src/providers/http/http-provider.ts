@@ -108,7 +108,7 @@ export class HttpProvider {
   //get user token from facebook
   getTokenForTest() {
     //for test in computer
-    this.accessToken = 'EAACEdEose0cBACdsVaM6Meq7Ia5izkmg47Uls5JnVNxfmKyEOzs00YXrh67KYiKIdjDI4FLCZBhL0DB8YjwqpWB23Nn8nwAKYiQn2tUhCoC0NO350SZCOmPMCO3BskG3uPrT8zzrMmZBkDkDn4BAUVCkyP3O8kdwWUUm8k8gqXZAszrmLlR0dgDgA49l2Sygr6IZCYCpAegZDZD';
+    this.accessToken = 'EAACEdEose0cBAMCrSmBrdZBAjgE30h6ZBb6cMkojS6U8Y3CkkPLSf2zap5FeEKroVtZCEQ15ch6bZCHG8MZCGUCplJxNmWwVenjC8EpSe3ZBWVWnKHAXe7cyJ2rSDZAvnpiDssT7vWQyewgNlREglM0MDJHbjBy9IUGDen2ZB2PLdak0TuIvBc1f747BI2YzVwQZD';
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
@@ -266,10 +266,10 @@ export class HttpProvider {
     return Observable.fromPromise(this.facebook.api('/' + uid + '?fields=context', ['user_posts']));
   }
   getMessage(postID: String) {
-    return this.facebook.api('/' + postID, ['user_posts']);
+    return this.facebook.api('/' + postID+'?fields=message,created_time,full_picture', ['user_posts']);
   }
   getFriends() {
-    return this.facebook.api('/me/friends', ['user_friends'])
+    return this.facebook.api('/me/friends', ['user_friends']);
   }
   getWordCloudForTest() {
     this.getUidForTest();
@@ -280,10 +280,10 @@ export class HttpProvider {
     return this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
 
   }
-  getWordCloud() {
-    this.getUid().then(obj => {
+  getWordCloud(): Observable<any> {
+    return Observable.fromPromise(this.getUid()).mergeMap(obj => {
       this.uid = obj.id;
-        return this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
+        return  this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
       });
     
   }
