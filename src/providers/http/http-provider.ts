@@ -107,7 +107,7 @@ export class HttpProvider {
   //get user token from facebook
   getTokenForTest() {
     //for test in computer
-    this.accessToken = 'EAACEdEose0cBACR0QyqI0sYfoFkZCnH2scHoyCbaIhZC40nLD6j5livGiK8chEQwImhJXwWkkIiqQWrtDGSW1ZBSD2y1olZAyddyzTuGprQ9m50FCCWJA2hNnXqKCFWjhaZBygoVecSjZCQQMxmRH1lLjhpqmSDNHcIGJkppYTa61ZA29rtpQ0b7Tvv8KE1mTHQxzhuVMONKgZDZD';
+    this.accessToken = 'EAACEdEose0cBAJuGOuXkrySLZCgtl6vDT5xDfaIUZCigAjALXA5wDKfRFF3ePTenkmlfLZCsp3DlV9tG18P699lWphXEkV26HcuIxQhZANQSnZBdz58At7ng1LCiO5JkfQekeZBhgPB1NDMNFZCaWZB1GHMjul97u0sfdkylOEs49kW2rmHfA4Jebto4rjqWZAKQZD';
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {

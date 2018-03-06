@@ -6,6 +6,8 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { TimeProvider } from '../../providers/time/time';
+
 // import {
 //   StackConfig,
 //   Stack,
@@ -56,6 +58,7 @@ export class NewfeedPage {
     private http: Http,
     private platform: Platform,
     private streamingMedia: StreamingMedia,
+    private providerTime : TimeProvider,
   ) {
 
     //for retry
@@ -92,8 +95,8 @@ export class NewfeedPage {
         console.log(this.newsData);
         try {
           for (let data of this.newsData) {
-            var newDate = new Date(data.created_time);
-            data.created_time = newDate.toDateString();
+            data.created_time = this.providerTime.getDiffTime(data.created_time);
+            var x = this.providerTime.getDiffTime(data.created_time);
           }
 
         } catch (error) {
@@ -304,7 +307,7 @@ export class NewfeedPage {
     if (this.platform.is('cordova')) {
       this.getPosts();
     } else {
-      this.getPostForTest()
+      this.getPostForTest();
     }
     //this.getCommentsData();
     //this.createGraph();
