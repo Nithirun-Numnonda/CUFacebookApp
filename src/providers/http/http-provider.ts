@@ -3,7 +3,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Platform, NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
-import { Http, Headers ,Response} from '@angular/http';
+import { Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
@@ -108,7 +108,7 @@ export class HttpProvider {
   //get user token from facebook
   getTokenForTest() {
     //for test in computer
-    this.accessToken = 'EAACEdEose0cBAMCrSmBrdZBAjgE30h6ZBb6cMkojS6U8Y3CkkPLSf2zap5FeEKroVtZCEQ15ch6bZCHG8MZCGUCplJxNmWwVenjC8EpSe3ZBWVWnKHAXe7cyJ2rSDZAvnpiDssT7vWQyewgNlREglM0MDJHbjBy9IUGDen2ZB2PLdak0TuIvBc1f747BI2YzVwQZD';
+    this.accessToken = 'EAAa6rQfXhlABAKNe3M8K97s2WwxEvDAtR2iNnDYZAOVvS9xTvfOOYzccszhddczVtEJ0lpdgwEa7Bg2zG5SIcgedTifyIeVTnUmw5ZBMFIvmkp1OJI7DtrGsG4LofeUhnesWqKmu4ZB2ps1UTsWKzTGhCZAAudJvFLOQoLz4tlmkBfSvZAMzddXPHdGv0GzlFfQx14KdW1gZDZD';
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {

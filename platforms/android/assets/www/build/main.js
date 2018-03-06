@@ -683,7 +683,7 @@ var DashboardPage = (function () {
     };
     DashboardPage.prototype.presentProfileModal = function (uid, user_name) {
         //console.log(uid);
-        var profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+        var profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "friends" });
         profileModal.present();
     };
     return DashboardPage;
@@ -773,7 +773,7 @@ var FriendsPage = (function () {
     };
     FriendsPage.prototype.presentProfileModal = function (uid, user_name) {
         //console.log(uid);
-        var profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+        var profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "friends" });
         profileModal.present();
     };
     return FriendsPage;
@@ -1092,7 +1092,7 @@ var NewfeedPage = (function () {
     };
     NewfeedPage.prototype.presentProfileModal = function (uid, user_name) {
         //console.log(uid);
-        var profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+        var profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "pages" });
         profileModal.present();
     };
     // ngAfterViewInit() {
@@ -1495,7 +1495,7 @@ var HttpProvider = (function () {
     //get user token from facebook
     HttpProvider.prototype.getTokenForTest = function () {
         //for test in computer
-        this.accessToken = 'EAACEdEose0cBAMCrSmBrdZBAjgE30h6ZBb6cMkojS6U8Y3CkkPLSf2zap5FeEKroVtZCEQ15ch6bZCHG8MZCGUCplJxNmWwVenjC8EpSe3ZBWVWnKHAXe7cyJ2rSDZAvnpiDssT7vWQyewgNlREglM0MDJHbjBy9IUGDen2ZB2PLdak0TuIvBc1f747BI2YzVwQZD';
+        this.accessToken = 'EAAa6rQfXhlABAKNe3M8K97s2WwxEvDAtR2iNnDYZAOVvS9xTvfOOYzccszhddczVtEJ0lpdgwEa7Bg2zG5SIcgedTifyIeVTnUmw5ZBMFIvmkp1OJI7DtrGsG4LofeUhnesWqKmu4ZB2ps1UTsWKzTGhCZAAudJvFLOQoLz4tlmkBfSvZAMzddXPHdGv0GzlFfQx14KdW1gZDZD';
     };
     //set url for http request from python server
     HttpProvider.prototype.setHttpRequest = function (type, top, hour, day, month, year) {

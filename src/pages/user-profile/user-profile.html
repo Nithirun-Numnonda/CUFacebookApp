@@ -44,7 +44,7 @@
                     </ion-item>
                   </ion-col>
                   <ion-col col-8>
-                    <ion-card-header (click)="presentProfileModal(item.id,item.name)" id="ion-card-header2">
+                    <ion-card-header (click)="presentProfileModal(item.id,item.name,'friends')" id="ion-card-header2">
                       <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>
                     </ion-card-header>
                   </ion-col>
@@ -72,7 +72,7 @@
                     </ion-item>
                   </ion-col>
                   <ion-col col-8>
-                    <ion-card-header (click)="presentProfileModal(item.id,item.name)" id="ion-card-header2">
+                    <ion-card-header (click)="presentProfileModal(item.id,item.name,'pages')" id="ion-card-header2">
                       <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>
                     </ion-card-header>
                   </ion-col>
@@ -85,7 +85,34 @@
     </ion-row>
     <ion-row>
         <ion-col>
-            <ion-label *ngIf="postsData != []&&postsData != null">My Posts</ion-label>
+          <ion-label *ngIf="friends_who_like_count != null"><label style="font-weight: bold;"> {{friends_who_like_count}} </label>of your friends like this.</ion-label>
+          <ion-list *ngFor="let item of friends_who_like">
+            <ion-card no-padding>
+              <ion-card-content no-padding>
+                <ion-grid no-padding>
+                  <ion-row>
+                    <ion-col>
+                      <ion-item>
+                        <ion-avatar>
+                          <img id="item-avatar" src="http://graph.facebook.com/{{item.id}}/picture?type=square">
+                        </ion-avatar>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-8>
+                      <ion-card-header (click)="presentProfileModal(item.id,item.name,'friends')" id="ion-card-header2">
+                        <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>
+                      </ion-card-header>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-label *ngIf="postsData != []&&postsData != null">{{name}}'s' Posts</ion-label>
         <ion-list *ngFor="let item of postsData">
 
             <ion-card>

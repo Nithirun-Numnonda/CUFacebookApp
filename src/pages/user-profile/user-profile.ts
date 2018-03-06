@@ -25,6 +25,8 @@ export class UserProfilePage {
   mutual_friends_count:any;
   mutual_likes: any;
   mutual_likes_count:any;
+  friends_who_like:any;
+  friends_who_like_count:any;
   offset_y:any;
   postsData:any;
   constructor(private navParams: NavParams, private view: ViewController, public httpProvider:HttpProvider,public modalCtrl: ModalController,private timeProvider:TimeProvider) {
@@ -83,7 +85,8 @@ export class UserProfilePage {
         this.mutual_likes=contextData.context.mutual_likes.data;
         this.mutual_likes_count=contextData.context.mutual_likes.summary.total_count;
         }else{
-          
+          this.friends_who_like=contextData.context.friends_who_like.data;
+          this.friends_who_like_count=contextData.context.friends_who_like.summary.total_count;
         }
         this.getPosts();
         //alert(JSON.stringify(this.mutual_likes));
@@ -96,9 +99,9 @@ export class UserProfilePage {
   closeModal() {
     this.view.dismiss();
   }
-  presentProfileModal(uid: string, user_name: string) {
+  presentProfileModal(uid: string, user_name: string,typeID:string) {
     //console.log(uid);
-    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name });
+    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name ,type:typeID});
     profileModal.present();
   }
   ionViewWillEnter() {
