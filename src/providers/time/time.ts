@@ -23,16 +23,6 @@ export class TimeProvider {
   getCurrentTime() {
     return Date.now();
   }
-<<<<<<< HEAD
-  getDiffTime (date:Date){
-    var time;
-    var end = Date.now();
-    var start = new Date(date).getTime();
-    var diff = end-start;
-    var diff_hours = Math.floor(diff / 3600000); 
-    var diff_mins = Math.floor((diff % 3600000) / 60000);
-    var diff_days = Math.floor(diff_hours/24);
-=======
   getDiffTime(date: Date) {
     var time;
     var end = Date.now();
@@ -41,7 +31,6 @@ export class TimeProvider {
     var diff_hours = Math.floor(diff / 3600000);
     var diff_mins = Math.floor((diff % 3600000) / 60000);
     var diff_days = Math.floor(diff_hours / 24);
->>>>>>> 7615a8094517f2fbd639faeed4893b43771c2abc
     // console.log('diff ='+new Date(diff));
     // console.log('end ='+new Date(end));
     // console.log('start ='+new Date(start));
@@ -52,29 +41,6 @@ export class TimeProvider {
     // console.log(diff_hours);
 
 
-<<<<<<< HEAD
-    if(diff_days >= 1){
-      console.log("timestamp: "+new Date(date).toDateString()+"\ndiff: "+diff.getHours());
-      return new Date(date).toDateString();
-    }
-    else if(diff_hours>=2){
-      time = String(diff_hours) +' hrs';
-      return time;
-    }
-    else if(diff_hours == 1) {
-      time = String(diff_hours) +' hr';
-      return time;
-    }
-    else if(diff_mins>=2){
-      time = String(diff_mins) +' mins';
-      return time;
-    }
-    else if(diff_mins==1){
-      time = String(diff_mins) +' min';
-      return time;
-    }
-    else if(diff_mins<1){
-=======
     if (diff_days >= 1) {
       return new Date(date).toDateString();
     }
@@ -95,7 +61,6 @@ export class TimeProvider {
       return time;
     }
     else if (diff_mins < 1) {
->>>>>>> 7615a8094517f2fbd639faeed4893b43771c2abc
       time = 'Just now';
       return time;
     }
