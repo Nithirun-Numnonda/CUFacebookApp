@@ -99,12 +99,12 @@ var TabsPage = (function () {
     TabsPage.prototype.transition = function (e) {
         var options = {
             direction: this.getAnimationDirection(e.index),
-            duration: 250,
+            duration: 100,
             slowdownfactor: -1,
             slidePixels: 0,
             iosdelay: 20,
             androiddelay: 0,
-            fixedPixelsTop: 30,
+            fixedPixelsTop: 0,
             fixedPixelsBottom: 0
         };
         if (!this.loaded) {
