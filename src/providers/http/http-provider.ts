@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 
 /*
   Generated class for the HttpProvider provider.
+
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
@@ -26,6 +27,7 @@ export class HttpProvider {
 
   // private graphUrl = 'https://graph.facebook.com/';
   // private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
+
   constructor(
     public http: Http,
     private facebook: Facebook,
@@ -106,7 +108,7 @@ export class HttpProvider {
   //get user token from facebook
   getTokenForTest() {
     //for test in computer
-    this.accessToken = 'EAACEdEose0cBAFkTzAOBMWGmZASPNl1AyMWUqZBpsLtfEKYLfVCJEjuPYJuMI6f6ZCgLTFQMghroEMrFcxYZBZBoLnxrg5pZA0EhLx8ZBltpoKuuj36fh3mqUNCBk37JlZAZAdQoFg8VUy4pBjmiC6P8zi8ghAedTMLO2obXjrG3Oy4fPz92i7V2xC9gSbV9lrRgZD';
+    this.accessToken = 'EAAa6rQfXhlABAKNe3M8K97s2WwxEvDAtR2iNnDYZAOVvS9xTvfOOYzccszhddczVtEJ0lpdgwEa7Bg2zG5SIcgedTifyIeVTnUmw5ZBMFIvmkp1OJI7DtrGsG4LofeUhnesWqKmu4ZB2ps1UTsWKzTGhCZAAudJvFLOQoLz4tlmkBfSvZAMzddXPHdGv0GzlFfQx14KdW1gZDZD';
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
