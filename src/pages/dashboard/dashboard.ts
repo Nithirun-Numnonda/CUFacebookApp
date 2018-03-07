@@ -1,9 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform ,Content} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform, Content } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
 import { Chart } from 'chart.js';
 
-import {DomSanitizer} from '@angular/platform-browser';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -30,10 +30,10 @@ export class DashboardPage {
   nativeEle: any;
   maxReactionsPost: any;
   maxReactionsMsg: any;
-  maxReactionsPic:any;
+  maxReactionsPic: any;
   maxCommentsPost: any;
   maxCommentsMsg: any;
-  maxCommentsPic:any;
+  maxCommentsPic: any;
 
   //for Data facebook
   commentsData: any;
@@ -61,8 +61,9 @@ export class DashboardPage {
   //for retry getData
   private retryTime;
   isAll: boolean = false;
-
-  wordCloud:any;
+  //word cloud
+  wordCloud: any;
+  hasData: boolean;
 
   //for controlUI
   typeData: String = 'commentsData';
@@ -75,8 +76,16 @@ export class DashboardPage {
     private loadingController: LoadingController,
     public modalCtrl: ModalController,
     private platform: Platform,
-    public _DomSanitizer: DomSanitizer
+    private storage: Storage
   ) {
+    this.storage.get('hasDashboardData').then((val) => {
+      if (val != null) {
+        this.hasData = val;
+      }
+      else {
+        this.hasData = false;
+      }
+    });
     //initial default parameter
     this.hourValue = this.hours[0];
     this.dayValue = this.days[0];
@@ -89,12 +98,21 @@ export class DashboardPage {
     this.createTime = [];
     this.total_comments = [];
     this.total_reactions = [];
-    this.sortByTime = 'Last 3 months';
-    //for scroll
-    
-    
 
+    this.sortByTime = 'Last 3 months';
   }
+  //call when view did load
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad DashboardPage');
+    this.getSaveStorage();
+    if (this.platform.is('cordova')) {
+      this.getDashboard();
+      this.setLike();
+    } else {
+      this.getDashboardForTest();
+    }
+  }
+
   timeSwitchCase() {
     switch (this.sortByTime) {
       case "Last 1 day": {
@@ -160,24 +178,15 @@ export class DashboardPage {
   onButtonClick() {
     this.buttonClicked = !this.buttonClicked;
   }
-  //call when refresh
-  // doRefresh(refresher) {
-  //   console.log('Begin async operation', refresher);
-  //   this.createTime = [];
-  //   this.total_comments = [];
-  //   this.total_reactions = [];
-  //   //get data again
-  //   this.getDashboard();
-  //   refresher.complete();
-
-  // }
   //get Facebook Data from httpProvider
   getDashboard() {
     this.timeSwitchCase();
     let loading = this.loadingController.create({
       content: "LOADING, Please wait..."
     });
-    loading.present();
+    // if (!this.hasData) {
+    //   loading.present();
+    // }
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
       //call method from httpProvider
       this.httpProvider.getDashboard(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
@@ -190,7 +199,8 @@ export class DashboardPage {
               console.log("Token expired!!!");
               this.retryTime += 1;
               if (this.retryTime < 3) {
-                loading.dismissAll();
+                // if (!this.hasData)
+                //   loading.dismissAll();
                 return this.getDashboard();
               }
               else
@@ -199,13 +209,17 @@ export class DashboardPage {
 
           }
           if (result.id) {
-            loading.dismissAll();
+            // if (!this.hasData)
+            //   loading.dismissAll();
             return null;
           } else {
             //assign data to view
             this.commentsData = result.comments.data;
             this.reactionsData = result.reactions.data;
             this.postsSummaryData = result.post_summary.data;
+            this.createTime = [];
+            this.total_comments = [];
+            this.total_reactions = [];
             if (this.postsSummaryData) {
               var maxReactions = 0;
               var maxComments = 0;
@@ -232,27 +246,34 @@ export class DashboardPage {
             }
             if (this.pageTriger == "chart")
               this.createGraph();
-            //          console.log("Success : " + JSON.stringify(result));
+            this.storage.set('commentsData', this.commentsData);
+            this.storage.set('reactionsData', this.reactionsData);
+            this.storage.set('postsSummaryData', this.postsSummaryData);
+            this.storage.set('createTime', this.createTime);
+            this.storage.set('total_comments', this.total_comments);
+            this.storage.set('total_reactions', this.total_reactions);
+            this.storage.set('hasDashboardData', true);
             if (this.platform.is('cordova')) {
               if (this.postsSummaryData)
                 this.getMessage(this.maxCommentsPost.id, this.maxReactionsPost.id);
             }
-
             this.retryTime = 0;
             this.httpProvider.setUid(result._uid);
-            if(result.comments.next||result.reactions.next)
+            if (result.comments.next || result.reactions.next)
               this.isAll = false;
             else
               this.isAll = true;
-            
-            loading.dismissAll();
+            // if (!this.hasData)
+            //   loading.dismissAll();
+            this.hasData = true;
           }
         },
         err => {
           //call if fail to get request
           console.error("Error : " + err);
           alert("Can't get Data from the server: " + err);
-          loading.dismissAll();
+          // if (!this.hasData)
+          //   loading.dismissAll();
         },
         () => {
           console.log('getData completed');
@@ -260,7 +281,7 @@ export class DashboardPage {
       );
   }
   getAllTops() {
-    this.isAll=true;
+    this.isAll = true;
     let loading = this.loadingController.create({ content: "LOADING, Please wait..." });
     loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
@@ -294,8 +315,6 @@ export class DashboardPage {
           }
           if (this.pageTriger == "chart")
             this.createGraph();
-          //          console.log("Success : " + JSON.stringify(result));
-
           this.retryTime = 0;
           this.httpProvider.setUid(result._uid);
         },
@@ -303,7 +322,6 @@ export class DashboardPage {
           //call if fail to get request
           console.error("Error : " + err);
           alert("Can't get Data from the server: " + err);
-
         },
         () => {
           console.log('getData completed');
@@ -386,13 +404,13 @@ export class DashboardPage {
 
             this.retryTime = 0;
             this.httpProvider.setUid(result._uid);
-            if(result.comments.next||result.reactions.next)
+            if (result.comments.next || result.reactions.next)
               this.isAll = false;
             else
               this.isAll = true;
             this.getWordCloudForTest();
             loading.dismissAll();
-            
+
           }
         },
         err => {
@@ -406,29 +424,20 @@ export class DashboardPage {
         }
       );
   }
-  getWordCloud(){
-    this.wordCloud="";
-    this.httpProvider.getWordCloud().subscribe((result)=>{
-      
-      this.wordCloud+=result;
-      //alert(this.wordCloud);
+  getWordCloud() {
+    this.wordCloud = "";
+    this.httpProvider.getWordCloud().subscribe((result) => {
+
+      this.wordCloud += result;
+      this.storage.set('wordCloud', this.wordCloud);
     });
-    
+
   }
-  getWordCloudForTest(){
-    
-    this.wordCloud=this.httpProvider.getWordCloudForTest();
+  getWordCloudForTest() {
+
+    this.wordCloud = this.httpProvider.getWordCloudForTest();
   }
-  //call when view did load
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
-    if (this.platform.is('cordova')) {
-      this.getDashboard();
-    } else {
-      this.getDashboardForTest();
-    }
-    this.setLike();
-  }
+
   //get message
   getMessage(uid, uid2) {
     if (this.platform.is('cordova')) {
@@ -440,6 +449,12 @@ export class DashboardPage {
           console.log(JSON.stringify(result2));
           this.maxReactionsMsg = result2.message;
           this.maxReactionsPic = result2.full_picture;
+          this.storage.set('maxCommentsMsg', this.maxCommentsMsg);
+          this.storage.set('maxCommentsPic', this.maxCommentsPic);
+          this.storage.set('maxCommentsPost', this.maxCommentsPost);
+          this.storage.set('maReactionsMsg', this.maxReactionsMsg);
+          this.storage.set('maxReactionsPic', this.maxReactionsPic);
+          this.storage.set('maxReactionsPost', this.maxReactionsPost);
           this.getWordCloud();
         }, (error) => {
 
@@ -457,11 +472,81 @@ export class DashboardPage {
       this.maxReactionsMsg = "Message2"
     }
   }
+  getSaveStorage() {
 
+    this.storage.get('commentsData').then((val) => {
+      if (val != null) {
+        this.commentsData = val;
+      }
+    });
+    this.storage.get('reactionsData').then((val) => {
+      if (val != null) {
+        this.reactionsData = val;
+      }
+    });
+    this.storage.get('postsSummaryData').then((val) => {
+      if (val != null) {
+        this.postsSummaryData = val;
+      }
+    });
+    this.storage.get('createTime').then((val) => {
+      if (val != null) {
+        this.createTime = val;
+      }
+    });
+    this.storage.get('total_comments').then((val) => {
+      if (val != null) {
+        this.total_comments = val;
+      }
+    });
+    this.storage.get('total_reactions').then((val) => {
+      if (val != null) {
+        this.total_reactions = val;
+        this.createGraph();
+      }
+    });
+    this.storage.get('wordCloud').then((val) => {
+      if (val != null) {
+        this.wordCloud = val;
+      }
+    });
+    this.storage.get('maxCommentsMsg').then((val) => {
+      if (val != null) {
+        this.maxCommentsMsg = val;
+      }
+    });
+    this.storage.get('maxCommentsPic').then((val) => {
+      if (val != null) {
+        this.maxCommentsPic = val;
+      }
+    });
+    this.storage.get('maxCommentsPost').then((val) => {
+      if (val != null) {
+        this.maxCommentsPost = val;
+      }
+    });
+    this.storage.get('maxReactionsMsg').then((val) => {
+      if (val != null) {
+        this.maxReactionsMsg = val;
+      }
+    });
+    this.storage.get('maxReactionsPic').then((val) => {
+      if (val != null) {
+        this.maxReactionsPic = val;
+      }
+    });
+    this.storage.get('maxReactionsPost').then((val) => {
+      if (val != null) {
+        this.maxReactionsPost = val;
+      }
+    });
+  }
 
   //for create graph
   createGraph() {
-
+    if (typeof this.barChart != 'undefined') {
+      this.barChart.destroy();
+    }
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
       type: 'bar',
@@ -506,7 +591,7 @@ export class DashboardPage {
 
     });
   }
-
+  //for switch UI
   trigerPage() {
     if (this.pageTriger == 'chart') {
       this.pageTriger = 'list';
@@ -518,13 +603,12 @@ export class DashboardPage {
       this.total_reactions = [];
       this.content.scrollToTop();
       this.getDashboard();
-      
     }
 
   }
+  //for open profile user
   presentProfileModal(uid: string, user_name: string) {
-    //console.log(uid);
-    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name ,type:"friends"});
+    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "friends" });
     profileModal.present();
   }
 

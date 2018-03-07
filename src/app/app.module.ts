@@ -18,6 +18,7 @@ import { SwingModule } from 'angular2-swing';
 import { TimeProvider } from '../providers/time/time';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions'
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions'
     BrowserModule,
     HttpModule,
     SwingModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp, {
       tabsPlacement: 'top'
     })

@@ -26,9 +26,6 @@ export class MyApp {
         let activeView = nav.getActive();
 
         if (activeView.name === "TabsPage") {
-          // if (nav.canGoBack()) { //Can we go back?
-          //   nav.pop();
-          // } else {
           const alert = alertCtrl.create({
             title: 'App termination',
             message: 'Do you want to Log out from the app?',
@@ -75,6 +72,10 @@ export class MyApp {
             }]
           });
           alert.present();
+        }
+        else{
+          let nav = app.getActiveNav();
+          nav.pop();
         }
       });
     });

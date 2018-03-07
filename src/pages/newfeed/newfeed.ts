@@ -5,6 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, Platform, ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import { Storage } from '@ionic/storage';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 // import {
@@ -50,6 +51,8 @@ export class NewfeedPage {
 
   nextData = false;
 
+  hasData:boolean;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private httpProvider: HttpProvider,
@@ -57,10 +60,18 @@ export class NewfeedPage {
     private http: Http,
     private platform: Platform,
     private streamingMedia: StreamingMedia,
-    private modalCtrl:ModalController,
-    private timeProvider:TimeProvider
+    private modalCtrl: ModalController,
+    private timeProvider: TimeProvider,
+    private storage: Storage
   ) {
-
+    this.storage.get('hasPagesFeedData').then((val) => {
+      if (val != null) {
+        this.hasData = val;
+      }
+      else{
+        this.hasData=false;
+      }
+    });
     //for retry
     this.retryTime = 0;
     this.videoOptions = {
@@ -69,7 +80,17 @@ export class NewfeedPage {
     };
 
   }
-
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad newfeedPage');
+    this.getSaveStorage();
+    if (this.platform.is('cordova')) {
+      this.getPosts();
+    } else {
+      this.getPostForTest()
+    }
+    //this.getCommentsData();
+    //this.createGraph();
+  }
   //call when refresh
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
@@ -81,6 +102,14 @@ export class NewfeedPage {
       this.getPostForTest()
     }
     refresher.complete();
+  }
+  getSaveStorage(){
+    
+    this.storage.get('pagesFeed').then((val) => {
+      if (val != null) {
+        this.newsData = val;
+      }
+    });
   }
   getPostForTest() {
     let loading = this.loadingController.create({ content: "Loading,please wait..." });
@@ -119,11 +148,13 @@ export class NewfeedPage {
   }
   getPosts() {
     let loading = this.loadingController.create({ content: "Loading,please wait..." });
-    loading.present();
+    // if(!this.hasData)
+    // loading.present();
     this.httpProvider.getPosts().subscribe(
       //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
       result => {
-        loading.dismissAll();
+        // if(!this.hasData)
+        // loading.dismissAll();
         console.log(result);
         //check if server send error back
         if (result.__proto__ === Object) {
@@ -138,19 +169,18 @@ export class NewfeedPage {
         }
 
         //assign data to view
-
-
         this.newsData = result.newsfeed.data;
 
         try {
           for (let data of this.newsData) {
-            
             data.created_time = this.timeProvider.getDiffTime(data.created_time);
           }
 
         } catch (error) {
 
         }
+        this.storage.set('pagesFeed',this.newsData);
+        this.storage.set('hasData',true);
         console.log("Success : " + JSON.stringify(result));
 
         this.retryTime = 0;
@@ -165,7 +195,7 @@ export class NewfeedPage {
         //call if fail to get request
         console.error("Error : " + err);
         alert("Can't get Data from the server: " + err);
-        loading.dismissAll();
+        // loading.dismissAll();
       },
       () => {
         console.log('getData completed');
@@ -195,7 +225,7 @@ export class NewfeedPage {
 
           try {
             for (let data of result.newsfeed.data) {
-              
+
               data.created_time = this.timeProvider.getDiffTime(data.created_time);
               this.newsData.push(data);
             }
@@ -247,7 +277,7 @@ export class NewfeedPage {
 
           try {
             for (let data of result.newsfeed.data) {
-              
+
               data.created_time = this.timeProvider.getDiffTime(data.created_time);
               this.newsData.push(data);
             }
@@ -301,19 +331,10 @@ export class NewfeedPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad newfeedPage');
-    if (this.platform.is('cordova')) {
-      this.getPosts();
-    } else {
-      this.getPostForTest()
-    }
-    //this.getCommentsData();
-    //this.createGraph();
-  }
+
   presentProfileModal(uid: string, user_name: string) {
     //console.log(uid);
-    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name ,type:"pages"});
+    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "pages" });
     profileModal.present();
   }
 

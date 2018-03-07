@@ -1,6 +1,6 @@
 webpackJsonp([7],{
 
-/***/ 146:
+/***/ 147:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -90,7 +90,7 @@ TimeProvider = __decorate([
 
 /***/ }),
 
-/***/ 157:
+/***/ 158:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -103,40 +103,40 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 157;
+webpackEmptyAsyncContext.id = 158;
 
 /***/ }),
 
-/***/ 203:
+/***/ 204:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/about/about.module": [
-		771,
+		775,
 		2
 	],
 	"../pages/dashboard/dashboard.module": [
-		772,
+		776,
 		3
 	],
 	"../pages/friends/friends.module": [
-		773,
+		777,
 		6
 	],
 	"../pages/newfeed/newfeed.module": [
-		774,
+		778,
 		5
 	],
 	"../pages/setting/setting.module": [
-		775,
+		779,
 		4
 	],
 	"../pages/tabs/tabs.module": [
-		776,
+		780,
 		1
 	],
 	"../pages/user-profile/user-profile.module": [
-		777,
+		781,
 		0
 	]
 };
@@ -151,12 +151,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 203;
+webpackAsyncContext.id = 204;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 388:
+/***/ 389:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -202,7 +202,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/'\n\n\n\n<ion-content style="background:url(assets/imgs/background.jpg);text-align: center" scroll="false" >\n\n    <div style="height:30%;" >\n\n        <img src="assets/imgs/homeLogo.png" style="margin-left:-2%;height:120%;margin-top:40%;"/>\n\n    </div>\n\n    <div >\n\n          \n\n            <button ion-button icon-start  style="margin: 0 auto;text-align: center;margin-top:40%;" color="facebook" (click)="login()">\n\n                <ion-icon name="logo-facebook"></ion-icon>\n\n                Login with Facebook</button>\n\n       </div>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/,
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/'\n\n\n\n<ion-content style="background:url(assets/imgs/background.jpg);text-align: center" scroll="false" >\n\n    <div style="height:30%;" >\n\n        <img src="assets/imgs/homeLogo.png" style="margin-left:-2%;height:120%;margin-top:40%;"/>\n\n    </div>\n\n    <div >\n\n          \n\n            <button ion-button icon-start  style="margin: 0 auto;text-align: center;margin-top:40%;" color="facebook" (click)="login()">\n\n                <ion-icon name="logo-facebook"></ion-icon>\n\n                Login with Facebook</button>\n\n       </div>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__["a" /* ScreenOrientation */]])
@@ -212,7 +212,7 @@ HomePage = __decorate([
 
 /***/ }),
 
-/***/ 395:
+/***/ 396:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -220,9 +220,9 @@ HomePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js__ = __webpack_require__(697);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js__ = __webpack_require__(698);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_chart_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(123);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -244,14 +244,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var DashboardPage = (function () {
-    function DashboardPage(navCtrl, navParams, httpProvider, loadingController, modalCtrl, platform, _DomSanitizer) {
+    function DashboardPage(navCtrl, navParams, httpProvider, loadingController, modalCtrl, platform, storage) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.httpProvider = httpProvider;
         this.loadingController = loadingController;
         this.modalCtrl = modalCtrl;
         this.platform = platform;
-        this._DomSanitizer = _DomSanitizer;
+        this.storage = storage;
         //for advance filter
         this.hours = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
         this.days = ['0', '1', '2', '3', '4', '5', '6', '7'];
@@ -264,6 +265,14 @@ var DashboardPage = (function () {
         //for controlUI
         this.typeData = 'commentsData';
         this.pageTriger = 'chart';
+        this.storage.get('hasDashboardData').then(function (val) {
+            if (val != null) {
+                _this.hasData = val;
+            }
+            else {
+                _this.hasData = false;
+            }
+        });
         //initial default parameter
         this.hourValue = this.hours[0];
         this.dayValue = this.days[0];
@@ -277,8 +286,19 @@ var DashboardPage = (function () {
         this.total_comments = [];
         this.total_reactions = [];
         this.sortByTime = 'Last 3 months';
-        //for scroll
     }
+    //call when view did load
+    DashboardPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad DashboardPage');
+        this.getSaveStorage();
+        if (this.platform.is('cordova')) {
+            this.getDashboard();
+            this.setLike();
+        }
+        else {
+            this.getDashboardForTest();
+        }
+    };
     DashboardPage.prototype.timeSwitchCase = function () {
         switch (this.sortByTime) {
             case "Last 1 day": {
@@ -343,16 +363,6 @@ var DashboardPage = (function () {
     DashboardPage.prototype.onButtonClick = function () {
         this.buttonClicked = !this.buttonClicked;
     };
-    //call when refresh
-    // doRefresh(refresher) {
-    //   console.log('Begin async operation', refresher);
-    //   this.createTime = [];
-    //   this.total_comments = [];
-    //   this.total_reactions = [];
-    //   //get data again
-    //   this.getDashboard();
-    //   refresher.complete();
-    // }
     //get Facebook Data from httpProvider
     DashboardPage.prototype.getDashboard = function () {
         var _this = this;
@@ -360,7 +370,9 @@ var DashboardPage = (function () {
         var loading = this.loadingController.create({
             content: "LOADING, Please wait..."
         });
-        loading.present();
+        // if (!this.hasData) {
+        //   loading.present();
+        // }
         if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
             //call method from httpProvider
             this.httpProvider.getDashboard(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
@@ -373,7 +385,8 @@ var DashboardPage = (function () {
                         console.log("Token expired!!!");
                         _this.retryTime += 1;
                         if (_this.retryTime < 3) {
-                            loading.dismissAll();
+                            // if (!this.hasData)
+                            //   loading.dismissAll();
                             return _this.getDashboard();
                         }
                         else
@@ -381,7 +394,8 @@ var DashboardPage = (function () {
                     }
                 }
                 if (result.id) {
-                    loading.dismissAll();
+                    // if (!this.hasData)
+                    //   loading.dismissAll();
                     return null;
                 }
                 else {
@@ -389,6 +403,9 @@ var DashboardPage = (function () {
                     _this.commentsData = result.comments.data;
                     _this.reactionsData = result.reactions.data;
                     _this.postsSummaryData = result.post_summary.data;
+                    _this.createTime = [];
+                    _this.total_comments = [];
+                    _this.total_reactions = [];
                     if (_this.postsSummaryData) {
                         var maxReactions = 0;
                         var maxComments = 0;
@@ -416,7 +433,13 @@ var DashboardPage = (function () {
                     }
                     if (_this.pageTriger == "chart")
                         _this.createGraph();
-                    //          console.log("Success : " + JSON.stringify(result));
+                    _this.storage.set('commentsData', _this.commentsData);
+                    _this.storage.set('reactionsData', _this.reactionsData);
+                    _this.storage.set('postsSummaryData', _this.postsSummaryData);
+                    _this.storage.set('createTime', _this.createTime);
+                    _this.storage.set('total_comments', _this.total_comments);
+                    _this.storage.set('total_reactions', _this.total_reactions);
+                    _this.storage.set('hasDashboardData', true);
                     if (_this.platform.is('cordova')) {
                         if (_this.postsSummaryData)
                             _this.getMessage(_this.maxCommentsPost.id, _this.maxReactionsPost.id);
@@ -427,13 +450,16 @@ var DashboardPage = (function () {
                         _this.isAll = false;
                     else
                         _this.isAll = true;
-                    loading.dismissAll();
+                    // if (!this.hasData)
+                    //   loading.dismissAll();
+                    _this.hasData = true;
                 }
             }, function (err) {
                 //call if fail to get request
                 console.error("Error : " + err);
                 alert("Can't get Data from the server: " + err);
-                loading.dismissAll();
+                // if (!this.hasData)
+                //   loading.dismissAll();
             }, function () {
                 console.log('getData completed');
             });
@@ -474,7 +500,6 @@ var DashboardPage = (function () {
                 }
                 if (_this.pageTriger == "chart")
                     _this.createGraph();
-                //          console.log("Success : " + JSON.stringify(result));
                 _this.retryTime = 0;
                 _this.httpProvider.setUid(result._uid);
             }, function (err) {
@@ -581,22 +606,11 @@ var DashboardPage = (function () {
         this.wordCloud = "";
         this.httpProvider.getWordCloud().subscribe(function (result) {
             _this.wordCloud += result;
-            //alert(this.wordCloud);
+            _this.storage.set('wordCloud', _this.wordCloud);
         });
     };
     DashboardPage.prototype.getWordCloudForTest = function () {
         this.wordCloud = this.httpProvider.getWordCloudForTest();
-    };
-    //call when view did load
-    DashboardPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad DashboardPage');
-        if (this.platform.is('cordova')) {
-            this.getDashboard();
-        }
-        else {
-            this.getDashboardForTest();
-        }
-        this.setLike();
     };
     //get message
     DashboardPage.prototype.getMessage = function (uid, uid2) {
@@ -610,6 +624,12 @@ var DashboardPage = (function () {
                     console.log(JSON.stringify(result2));
                     _this.maxReactionsMsg = result2.message;
                     _this.maxReactionsPic = result2.full_picture;
+                    _this.storage.set('maxCommentsMsg', _this.maxCommentsMsg);
+                    _this.storage.set('maxCommentsPic', _this.maxCommentsPic);
+                    _this.storage.set('maxCommentsPost', _this.maxCommentsPost);
+                    _this.storage.set('maReactionsMsg', _this.maxReactionsMsg);
+                    _this.storage.set('maxReactionsPic', _this.maxReactionsPic);
+                    _this.storage.set('maxReactionsPost', _this.maxReactionsPost);
                     _this.getWordCloud();
                 }, function (error) {
                     console.log(error);
@@ -623,8 +643,80 @@ var DashboardPage = (function () {
             this.maxReactionsMsg = "Message2";
         }
     };
+    DashboardPage.prototype.getSaveStorage = function () {
+        var _this = this;
+        this.storage.get('commentsData').then(function (val) {
+            if (val != null) {
+                _this.commentsData = val;
+            }
+        });
+        this.storage.get('reactionsData').then(function (val) {
+            if (val != null) {
+                _this.reactionsData = val;
+            }
+        });
+        this.storage.get('postsSummaryData').then(function (val) {
+            if (val != null) {
+                _this.postsSummaryData = val;
+            }
+        });
+        this.storage.get('createTime').then(function (val) {
+            if (val != null) {
+                _this.createTime = val;
+            }
+        });
+        this.storage.get('total_comments').then(function (val) {
+            if (val != null) {
+                _this.total_comments = val;
+            }
+        });
+        this.storage.get('total_reactions').then(function (val) {
+            if (val != null) {
+                _this.total_reactions = val;
+                _this.createGraph();
+            }
+        });
+        this.storage.get('wordCloud').then(function (val) {
+            if (val != null) {
+                _this.wordCloud = val;
+            }
+        });
+        this.storage.get('maxCommentsMsg').then(function (val) {
+            if (val != null) {
+                _this.maxCommentsMsg = val;
+            }
+        });
+        this.storage.get('maxCommentsPic').then(function (val) {
+            if (val != null) {
+                _this.maxCommentsPic = val;
+            }
+        });
+        this.storage.get('maxCommentsPost').then(function (val) {
+            if (val != null) {
+                _this.maxCommentsPost = val;
+            }
+        });
+        this.storage.get('maxReactionsMsg').then(function (val) {
+            if (val != null) {
+                _this.maxReactionsMsg = val;
+            }
+        });
+        this.storage.get('maxReactionsPic').then(function (val) {
+            if (val != null) {
+                _this.maxReactionsPic = val;
+            }
+        });
+        this.storage.get('maxReactionsPost').then(function (val) {
+            if (val != null) {
+                _this.maxReactionsPost = val;
+            }
+        });
+    };
     //for create graph
     DashboardPage.prototype.createGraph = function () {
+        if (typeof this.barChart != 'undefined') {
+            this.barChart.destroy();
+        }
         this.barChart = new __WEBPACK_IMPORTED_MODULE_3_chart_js__["Chart"](this.barCanvas.nativeElement, {
             type: 'bar',
             data: {
@@ -667,6 +759,7 @@ var DashboardPage = (function () {
             }
         });
     };
+    //for switch UI
     DashboardPage.prototype.trigerPage = function () {
         if (this.pageTriger == 'chart') {
             this.pageTriger = 'list';
@@ -681,8 +774,8 @@ var DashboardPage = (function () {
             this.getDashboard();
         }
     };
+    //for open profile user
     DashboardPage.prototype.presentProfileModal = function (uid, user_name) {
-        //console.log(uid);
         var profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "friends" });
         profileModal.present();
     };
@@ -698,7 +791,7 @@ __decorate([
 ], DashboardPage.prototype, "content", void 0);
 DashboardPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-dashboard',template:/*ion-inline-start:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n\n  Generated template for the DashboardPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n\n\n<ion-content padding="" style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-header>\n\n    <ion-toolbar class="btn-wrapper">\n\n      <div [ngSwitch]="typeData" *ngIf="pageTriger.match(\'list\')">\n\n        <div>\n\n          <ion-title *ngSwitchCase="\'commentsData\'" id="subheader">Top Comments Users on Your Posts</ion-title>\n\n          <ion-title *ngSwitchCase="\'likesData\'" id="subheader">Top Likes Users on Your Posts</ion-title>\n\n\n\n          <ion-segment [(ngModel)]="typeData" color="primary">\n\n            <ion-segment-button value="commentsData">\n\n              Top Commenters\n\n            </ion-segment-button>\n\n            <ion-segment-button value="likesData">\n\n              Top Reactioners\n\n            </ion-segment-button>\n\n          </ion-segment>\n\n        </div>\n\n      </div>\n\n      <div *ngIf="pageTriger.match(\'chart\')">\n\n        <ion-title>Your Posts Summary</ion-title>\n\n      </div>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <div *ngIf="pageTriger.match(\'chart\')" class=\'dashboardContent\'>\n\n    <ion-card has-header="true">\n\n      <ion-card-header id="ion-card-header2">\n\n        Top posts in {{sortByTime}}\n\n      </ion-card-header>\n\n\n\n      <canvas height="350" item-content #barCanvas type></canvas>\n\n\n\n    </ion-card>\n\n\n\n    <ion-card *ngIf="maxCommentsPost" has-header="true">\n\n      <ion-card-header text-wrap id="ion-card-header3">\n\n        Top Post by Comments in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-6>\n\n            {{maxCommentsPost.created_time}}\n\n          </ion-col>\n\n          <ion-col>\n\n            <ion-grid style="margin-top:-10px;">\n\n              <ion-row>\n\n                <ion-col>\n\n                  <img src="assets/imgs/icon/chat.png" style="width:24px;">\n\n                </ion-col>\n\n                <ion-col>\n\n                  {{maxCommentsPost.total_comments}}</ion-col>\n\n              </ion-row>\n\n            </ion-grid>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-item text-wrap>{{maxCommentsMsg}}\n\n          <img *ngIf="maxCommentsPic" src={{maxCommentsPic}}>\n\n        </ion-item>\n\n      </ion-card-content>\n\n    </ion-card>\n\n    <ion-card *ngIf="maxReactionsPost">\n\n      <ion-card-header text-wrap id="ion-card-header3">\n\n        Top Post by Reactions in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-6>\n\n            {{maxReactionsPost.created_time}}\n\n          </ion-col>\n\n          <ion-col>\n\n            <ion-grid style="margin-top:-10px;">\n\n              <ion-row>\n\n                <ion-col>\n\n                  <img src="assets/imgs/icon/flame.png" style="width:24px;">\n\n                </ion-col>\n\n                <ion-col>\n\n                  {{maxReactionsPost.total_reactions}}</ion-col>\n\n              </ion-row>\n\n            </ion-grid>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-item text-wrap>{{maxReactionsMsg}}\n\n          <img *ngIf="maxReactionsPic" src={{maxReactionsPic}}>\n\n        </ion-item>\n\n\n\n      </ion-card-content>\n\n    </ion-card>\n\n    <ion-card>\n\n      <ion-card-header text-wrap id="ion-card-header3">\n\n        Word Cloud in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <img [src]=\'wordCloud\'>\n\n      </ion-card-content>\n\n    </ion-card>\n\n\n\n  </div>\n\n  <div *ngIf="pageTriger.match(\'list\')" class=\'dashboardContent\'>\n\n    <div [ngSwitch]="typeData">\n\n      <div *ngSwitchCase="\'commentsData\'">\n\n        <ion-list *ngFor="let item of commentsData">\n\n          <ion-card no-padding>\n\n            <ion-card-content no-padding>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <ion-item>\n\n                      <ion-avatar>\n\n                        <img id="item-avatar" src="http://graph.facebook.com/{{item._uid}}/picture?type=large">\n\n                      </ion-avatar>\n\n                    </ion-item>\n\n                  </ion-col>\n\n                  <ion-col col-8>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">\n\n                      <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>\n\n                    </ion-card-header>\n\n                    <ion-item style="margin-top:-30px">\n\n                      <ion-grid style="margin-top:-10px;">\n\n                        <ion-row>\n\n                          <ion-col>\n\n                            <label style="margin-right:5px">Comments</label>\n\n                          </ion-col>\n\n                          <ion-col>\n\n                            <img src="assets/imgs/icon/chat.png" style="width:24px;">\n\n                          </ion-col>\n\n                          <ion-col>\n\n                            <label>{{item.comments}}</label>\n\n                          </ion-col>\n\n                        </ion-row>\n\n                      </ion-grid>\n\n                    </ion-item>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div *ngSwitchCase="\'likesData\'">\n\n        <ion-list *ngFor="let item of reactionsData">\n\n          <ion-card no-padding>\n\n            <ion-card-content no-padding>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <ion-item>\n\n                      <ion-avatar>\n\n                        <img id="item-avatar2" src="http://graph.facebook.com/{{item._uid}}/picture?type=large">\n\n                      </ion-avatar>\n\n                    </ion-item>\n\n                  </ion-col>\n\n                  <ion-col col-8>\n\n                    <ion-card-header text-wrap (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">\n\n                      <ion-grid style="margin-top:-10px;">\n\n                        <ion-row>\n\n                          <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>\n\n                          <ion-col col-4>\n\n                            <button ion-button clear small>\n\n                              <img src="assets/imgs/icon/flame.png" style="width:24px;">\n\n                              <label>{{item.total}}</label>\n\n                            </button>\n\n                          </ion-col>\n\n                        </ion-row>\n\n                      </ion-grid>\n\n                    </ion-card-header>\n\n                  </ion-col>\n\n                </ion-row>\n\n                <ion-row style="text-align: center;">\n\n                  <ion-col *ngIf="item.like>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:3px;">\n\n                      <label>{{item.like}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.love>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/heart.png" style="width:24px;margin-right:3px;">\n\n                      <label>{{item.love}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.wow>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/surprised.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label>{{item.wow}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.haha>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/laughing.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label>{{item.haha}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.sad>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/crying.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label>{{item.sad}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.angry>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/angry.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label>{{item.angry}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.thankful>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/flower.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label style="margin-left:-10px;">{{item.thankful}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.like==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/like.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.love==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/heart.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.wow==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/surprised.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.haha==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/laughing.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.sad==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/crying.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.angry==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/angry.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.thankful>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/flower.png" style="width:24px;">\n\n                    </button>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div>\n\n        <ion-col>\n\n          <button ion-button *ngIf="!isAll" (click)="getAllTops()" color="facebook">See more ...</button>\n\n        </ion-col>\n\n        <ion-col>\n\n          <ion-select [(ngModel)]="sortByTime" (ionChange)="getDashboard()">\n\n            <ion-option>Last 1 day</ion-option>\n\n            <ion-option>Last 1 week</ion-option>\n\n            <ion-option>Last 1 month</ion-option>\n\n            <ion-option>Last 3 months</ion-option>\n\n            <ion-option>Last 6 months</ion-option>\n\n            <ion-option>Last 1 year</ion-option>\n\n            <ion-option>Last 2 years</ion-option>\n\n          </ion-select>\n\n        </ion-col>\n\n\n\n\n\n      </div>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n<ion-footer>\n\n  <div class="btn-wrapper">\n\n    <button ion-button icon-only color="soft" (click)=\'trigerPage()\'>\n\n      <ion-icon name="arrow-up" *ngIf="pageTriger.match(\'list\')"></ion-icon>\n\n      <ion-icon name="arrow-down" *ngIf="pageTriger.match(\'chart\')"></ion-icon>\n\n    </button>\n\n  </div>\n\n</ion-footer>'/*ion-inline-end:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
+        selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/'<!--\n\n  Generated template for the DashboardPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n\n\n<ion-content padding="" style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-header>\n\n    <ion-toolbar class="btn-wrapper">\n\n      <div [ngSwitch]="typeData" *ngIf="pageTriger.match(\'list\')">\n\n        <div>\n\n          <ion-title *ngSwitchCase="\'commentsData\'" id="subheader">Top Comments Users on Your Posts</ion-title>\n\n          <ion-title *ngSwitchCase="\'likesData\'" id="subheader">Top Likes Users on Your Posts</ion-title>\n\n\n\n          <ion-segment [(ngModel)]="typeData" color="primary">\n\n            <ion-segment-button value="commentsData">\n\n              Top Commenters\n\n            </ion-segment-button>\n\n            <ion-segment-button value="likesData">\n\n              Top Reactioners\n\n            </ion-segment-button>\n\n          </ion-segment>\n\n        </div>\n\n      </div>\n\n      <div *ngIf="pageTriger.match(\'chart\')">\n\n        <ion-title>Your Posts Summary</ion-title>\n\n      </div>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <div *ngIf="pageTriger.match(\'chart\')" class=\'dashboardContent\'>\n\n    <ion-card has-header="true">\n\n      <ion-card-header id="ion-card-header2">\n\n        Top posts in {{sortByTime}}\n\n      </ion-card-header>\n\n\n\n      <canvas height="350" item-content #barCanvas type></canvas>\n\n\n\n    </ion-card>\n\n\n\n    <ion-card *ngIf="maxCommentsPost" has-header="true">\n\n      <ion-card-header text-wrap id="ion-card-header3">\n\n        Top Post by Comments in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-6>\n\n            {{maxCommentsPost.created_time}}\n\n          </ion-col>\n\n          <ion-col>\n\n            <ion-grid style="margin-top:-10px;">\n\n              <ion-row>\n\n                <ion-col>\n\n                  <img src="assets/imgs/icon/chat.png" style="width:24px;">\n\n                </ion-col>\n\n                <ion-col>\n\n                  {{maxCommentsPost.total_comments}}</ion-col>\n\n              </ion-row>\n\n            </ion-grid>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-item text-wrap>{{maxCommentsMsg}}\n\n          <img *ngIf="maxCommentsPic" src={{maxCommentsPic}}>\n\n        </ion-item>\n\n      </ion-card-content>\n\n    </ion-card>\n\n    <ion-card *ngIf="maxReactionsPost">\n\n      <ion-card-header text-wrap id="ion-card-header3">\n\n        Top Post by Reactions in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-6>\n\n            {{maxReactionsPost.created_time}}\n\n          </ion-col>\n\n          <ion-col>\n\n            <ion-grid style="margin-top:-10px;">\n\n              <ion-row>\n\n                <ion-col>\n\n                  <img src="assets/imgs/icon/flame.png" style="width:24px;">\n\n                </ion-col>\n\n                <ion-col>\n\n                  {{maxReactionsPost.total_reactions}}</ion-col>\n\n              </ion-row>\n\n            </ion-grid>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-item text-wrap>{{maxReactionsMsg}}\n\n          <img *ngIf="maxReactionsPic" src={{maxReactionsPic}}>\n\n        </ion-item>\n\n\n\n      </ion-card-content>\n\n    </ion-card>\n\n    <ion-card>\n\n      <ion-card-header text-wrap id="ion-card-header3">\n\n        Word Cloud in {{sortByTime}}\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <img [src]=\'wordCloud\'>\n\n      </ion-card-content>\n\n    </ion-card>\n\n\n\n  </div>\n\n  <div *ngIf="pageTriger.match(\'list\')" class=\'dashboardContent\'>\n\n    <div [ngSwitch]="typeData">\n\n      <div *ngSwitchCase="\'commentsData\'">\n\n        <ion-list *ngFor="let item of commentsData">\n\n          <ion-card no-padding>\n\n            <ion-card-content no-padding>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <ion-item>\n\n                      <ion-avatar>\n\n                        <img id="item-avatar" src="http://graph.facebook.com/{{item._uid}}/picture?type=large">\n\n                      </ion-avatar>\n\n                    </ion-item>\n\n                  </ion-col>\n\n                  <ion-col col-8>\n\n                    <ion-card-header (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">\n\n                      <ion-label text-wrap style="word-wrap: break-word">{{item.name}}</ion-label>\n\n                    </ion-card-header>\n\n                    <ion-item style="margin-top:-30px">\n\n                      <ion-grid style="margin-top:-10px;">\n\n                        <ion-row>\n\n                          <ion-col>\n\n                            <label style="margin-right:5px">Comments</label>\n\n                          </ion-col>\n\n                          <ion-col>\n\n                            <img src="assets/imgs/icon/chat.png" style="width:24px;">\n\n                          </ion-col>\n\n                          <ion-col>\n\n                            <label>{{item.comments}}</label>\n\n                          </ion-col>\n\n                        </ion-row>\n\n                      </ion-grid>\n\n                    </ion-item>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div *ngSwitchCase="\'likesData\'">\n\n        <ion-list *ngFor="let item of reactionsData">\n\n          <ion-card no-padding>\n\n            <ion-card-content no-padding>\n\n              <ion-grid no-padding>\n\n                <ion-row>\n\n                  <ion-col>\n\n                    <ion-item>\n\n                      <ion-avatar>\n\n                        <img id="item-avatar2" src="http://graph.facebook.com/{{item._uid}}/picture?type=large">\n\n                      </ion-avatar>\n\n                    </ion-item>\n\n                  </ion-col>\n\n                  <ion-col col-8>\n\n                    <ion-card-header text-wrap (click)="presentProfileModal(item._uid,item.name)" id="ion-card-header2">\n\n                      <ion-grid style="margin-top:-10px;">\n\n                        <ion-row>\n\n                          <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>\n\n                          <ion-col col-4>\n\n                            <button ion-button clear small>\n\n                              <img src="assets/imgs/icon/flame.png" style="width:24px;">\n\n                              <label>{{item.total}}</label>\n\n                            </button>\n\n                          </ion-col>\n\n                        </ion-row>\n\n                      </ion-grid>\n\n                    </ion-card-header>\n\n                  </ion-col>\n\n                </ion-row>\n\n                <ion-row style="text-align: center;">\n\n                  <ion-col *ngIf="item.like>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:3px;">\n\n                      <label>{{item.like}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.love>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/heart.png" style="width:24px;margin-right:3px;">\n\n                      <label>{{item.love}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.wow>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/surprised.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label>{{item.wow}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.haha>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/laughing.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label>{{item.haha}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.sad>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/crying.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label>{{item.sad}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.angry>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/angry.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label>{{item.angry}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.thankful>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/flower.png" style="width:24px;margin-right:3px;">\n\n\n\n                      <label style="margin-left:-10px;">{{item.thankful}}</label>\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.like==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/like.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.love==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/heart.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.wow==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/surprised.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.haha==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/laughing.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.sad==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/crying.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.angry==0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/angry.png" style="width:24px;opacity: 0.5;">\n\n                    </button>\n\n                  </ion-col>\n\n                  <ion-col *ngIf="item.thankful>0" col-2>\n\n                    <button ion-button clear small>\n\n                      <img src="assets/imgs/icon/flower.png" style="width:24px;">\n\n                    </button>\n\n                  </ion-col>\n\n                </ion-row>\n\n              </ion-grid>\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-list>\n\n      </div>\n\n      <div>\n\n        <ion-col>\n\n          <button ion-button *ngIf="!isAll" (click)="getAllTops()" color="facebook">See more ...</button>\n\n        </ion-col>\n\n        <ion-col>\n\n          <ion-select [(ngModel)]="sortByTime" (ionChange)="getDashboard()">\n\n            <ion-option>Last 1 day</ion-option>\n\n            <ion-option>Last 1 week</ion-option>\n\n            <ion-option>Last 1 month</ion-option>\n\n            <ion-option>Last 3 months</ion-option>\n\n            <ion-option>Last 6 months</ion-option>\n\n            <ion-option>Last 1 year</ion-option>\n\n            <ion-option>Last 2 years</ion-option>\n\n          </ion-select>\n\n        </ion-col>\n\n\n\n\n\n      </div>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n<ion-footer>\n\n  <div class="btn-wrapper">\n\n    <button ion-button icon-only color="soft" (click)=\'trigerPage()\'>\n\n      <ion-icon name="arrow-up" *ngIf="pageTriger.match(\'list\')"></ion-icon>\n\n      <ion-icon name="arrow-down" *ngIf="pageTriger.match(\'chart\')"></ion-icon>\n\n    </button>\n\n  </div>\n\n</ion-footer>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\dashboard\dashboard.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
@@ -707,14 +800,14 @@ DashboardPage = __decorate([
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
-        __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["c" /* DomSanitizer */]])
+        __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]])
 ], DashboardPage);
 
 //# sourceMappingURL=dashboard.js.map
 
 /***/ }),
 
-/***/ 396:
+/***/ 397:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -780,7 +873,7 @@ var FriendsPage = (function () {
 }());
 FriendsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-friends',template:/*ion-inline-start:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n  Generated template for the FriendsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-content style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n  <ion-header>\n      <ion-toolbar class="btn-wrapper">\n          <ion-title>Your Friends Who Use this app</ion-title>\n      </ion-toolbar>\n    </ion-header>\n<div style="margin-top: 75px;">\n  <ion-list *ngFor="let item of newsData">\n    <ion-card no-padding>\n      <ion-card-content no-padding>\n        <ion-grid no-padding>\n          <ion-row (click)="presentProfileModal(item.id,item.name)">\n            <ion-col>\n              <ion-item>\n                <ion-avatar>\n                  <img id="item-avatar2" src="http://graph.facebook.com/{{item.id}}/picture?type=large">\n                </ion-avatar>\n              </ion-item>\n            </ion-col>\n            <ion-col col-8>\n              <ion-card-header text-wrap id="ion-card-header2" >\n                <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>\n              </ion-card-header>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n</div>'/*ion-inline-end:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
+        selector: 'page-friends',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n  Generated template for the FriendsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-content style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n  <ion-header>\n      <ion-toolbar class="btn-wrapper">\n          <ion-title>Your Friends Who Use this app</ion-title>\n      </ion-toolbar>\n    </ion-header>\n<div style="margin-top: 75px;">\n  <ion-list *ngFor="let item of newsData">\n    <ion-card no-padding>\n      <ion-card-content no-padding>\n        <ion-grid no-padding>\n          <ion-row (click)="presentProfileModal(item.id,item.name)">\n            <ion-col>\n              <ion-item>\n                <ion-avatar>\n                  <img id="item-avatar2" src="http://graph.facebook.com/{{item.id}}/picture?type=large">\n                </ion-avatar>\n              </ion-item>\n            </ion-col>\n            <ion-col col-8>\n              <ion-card-header text-wrap id="ion-card-header2" >\n                <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>\n              </ion-card-header>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n</div>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
@@ -794,21 +887,22 @@ FriendsPage = __decorate([
 
 /***/ }),
 
-/***/ 397:
+/***/ 398:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewfeedPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_time_time__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_time_time__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_http_http_provider__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_streaming_media__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_streaming_media__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Rx__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Rx__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_map__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Rx__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_add_operator_map__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -818,6 +912,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -842,7 +937,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var NewfeedPage = (function () {
-    function NewfeedPage(navCtrl, navParams, httpProvider, loadingController, http, platform, streamingMedia, modalCtrl, timeProvider) {
+    function NewfeedPage(navCtrl, navParams, httpProvider, loadingController, http, platform, streamingMedia, modalCtrl, timeProvider, storage) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -853,6 +948,7 @@ var NewfeedPage = (function () {
         this.streamingMedia = streamingMedia;
         this.modalCtrl = modalCtrl;
         this.timeProvider = timeProvider;
+        this.storage = storage;
         // stackConfig: StackConfig;
         this.recentCard = '';
         //for retry getData
@@ -875,6 +971,14 @@ var NewfeedPage = (function () {
                 .filter(function (x) { return x.type == "photo"; })
                 .map(function (x) { return x.media.image; });
         };
+        this.storage.get('hasPagesFeedData').then(function (val) {
+            if (val != null) {
+                _this.hasData = val;
+            }
+            else {
+                _this.hasData = false;
+            }
+        });
         //for retry
         this.retryTime = 0;
         this.videoOptions = {
@@ -882,6 +986,18 @@ var NewfeedPage = (function () {
             errorCallback: function (e) { console.log('Error streaming:' + JSON.stringify(e)); }
         };
     }
+    NewfeedPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad newfeedPage');
+        this.getSaveStorage();
+        if (this.platform.is('cordova')) {
+            this.getPosts();
+        }
+        else {
+            this.getPostForTest();
+        }
+        //this.getCommentsData();
+        //this.createGraph();
+    };
     //call when refresh
     NewfeedPage.prototype.doRefresh = function (refresher) {
         console.log('Begin async operation', refresher);
@@ -894,6 +1010,14 @@ var NewfeedPage = (function () {
             this.getPostForTest();
         }
         refresher.complete();
+    };
+    NewfeedPage.prototype.getSaveStorage = function () {
+        var _this = this;
+        this.storage.get('pagesFeed').then(function (val) {
+            if (val != null) {
+                _this.newsData = val;
+            }
+        });
     };
     NewfeedPage.prototype.getPostForTest = function () {
         var _this = this;
@@ -930,11 +1054,13 @@ var NewfeedPage = (function () {
     NewfeedPage.prototype.getPosts = function () {
         var _this = this;
         var loading = this.loadingController.create({ content: "Loading,please wait..." });
-        loading.present();
+        // if(!this.hasData)
+        // loading.present();
         this.httpProvider.getPosts().subscribe(
         //call if get httpRequest success (But not error from getData from facebook such as access token expired!!)
         function (result) {
-            loading.dismissAll();
+            // if(!this.hasData)
+            // loading.dismissAll();
             console.log(result);
             //check if server send error back
             if (result.__proto__ === Object) {
@@ -956,6 +1082,8 @@ var NewfeedPage = (function () {
             }
             catch (error) {
             }
+            _this.storage.set('pagesFeed', _this.newsData);
+            _this.storage.set('hasData', true);
             console.log("Success : " + JSON.stringify(result));
             _this.retryTime = 0;
             if (result.next) {
@@ -968,7 +1096,7 @@ var NewfeedPage = (function () {
             //call if fail to get request
             console.error("Error : " + err);
             alert("Can't get Data from the server: " + err);
-            loading.dismissAll();
+            // loading.dismissAll();
         }, function () {
             console.log('getData completed');
         });
@@ -1079,17 +1207,6 @@ var NewfeedPage = (function () {
             console.log('Async operation has ended');
         }, 500);
     };
-    NewfeedPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad newfeedPage');
-        if (this.platform.is('cordova')) {
-            this.getPosts();
-        }
-        else {
-            this.getPostForTest();
-        }
-        //this.getCommentsData();
-        //this.createGraph();
-    };
     NewfeedPage.prototype.presentProfileModal = function (uid, user_name) {
         //console.log(uid);
         var profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "pages" });
@@ -1158,7 +1275,7 @@ __decorate([
 ], NewfeedPage.prototype, "content", void 0);
 NewfeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["Component"])({
-        selector: 'page-newfeed',template:/*ion-inline-start:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n\n\n<ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n\n\n  <ion-list *ngFor="let item of newsData">\n\n\n\n    <ion-card>\n\n\n\n      <ion-item (click)="presentProfileModal(item.page_id,item.page_name)">\n\n        <ion-avatar item-start>\n\n          <img src={{item.page_picture}}>\n\n        </ion-avatar>\n\n        <h2>{{item.page_name}}</h2>\n\n        <p>{{item.created_time}}</p>\n\n      </ion-item>\n\n\n\n      <img  (click)=\'playVideo(item.id)\' src={{item.full_picture}} />\n\n\n\n      <ion-card-content>\n\n        <div *ngFor="let str of item.message.split(\'\n\')">\n\n          {{ str }}\n\n    </div>\n\n      </ion-card-content>\n\n      <div>\n\n        <ion-row style="border-bottom: 1px solid gray;">\n\n\n\n          <ion-col col-2>\n\n          <ion-label style="margin-left:10px;">\n\n            <img src="assets/imgs/icon/flame.png" style="width:24px;">\n\n          </ion-label>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n          <ion-label>{{item.reactions_summary}}</ion-label>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label>\n\n            <img src="assets/imgs/icon/chat.png" style="width:24px;">\n\n          </ion-label>\n\n        </ion-col>\n\n        <ion-col col-5>\n\n          <ion-label>{{item.comments_summary}}</ion-label>\n\n        </ion-col>\n\n\n\n        </ion-row>\n\n      </div>\n\n      <ion-row>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:5px">\n\n            <div>Likes</div>\n\n          </button>\n\n        </ion-col>\n\n        <button class="button circle text-center">\n\n          <i class="ion-crop"></i>\n\n        </button>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <img src="assets/imgs/icon/chat.png" style="width:24px;margin-right:5px">\n\n            <div>Comments</div>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n    </ion-card>\n\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n\n    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more feed..."></ion-infinite-scroll-content>\n\n  </ion-infinite-scroll>\n\n\n\n</ion-content>'/*ion-inline-end:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
+        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n\n\n<ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n\n\n  <ion-list *ngFor="let item of newsData">\n\n\n\n    <ion-card>\n\n\n\n      <ion-item (click)="presentProfileModal(item.page_id,item.page_name)">\n\n        <ion-avatar item-start>\n\n          <img src={{item.page_picture}}>\n\n        </ion-avatar>\n\n        <h2>{{item.page_name}}</h2>\n\n        <p>{{item.created_time}}</p>\n\n      </ion-item>\n\n\n\n      <img  (click)=\'playVideo(item.id)\' src={{item.full_picture}} />\n\n\n\n      <ion-card-content>\n\n        <div *ngFor="let str of item.message.split(\'\n\')">\n\n          {{ str }}\n\n    </div>\n\n      </ion-card-content>\n\n      <div>\n\n        <ion-row style="border-bottom: 1px solid gray;">\n\n\n\n          <ion-col col-2>\n\n          <ion-label style="margin-left:10px;">\n\n            <img src="assets/imgs/icon/flame.png" style="width:24px;">\n\n          </ion-label>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n          <ion-label>{{item.reactions_summary}}</ion-label>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label>\n\n            <img src="assets/imgs/icon/chat.png" style="width:24px;">\n\n          </ion-label>\n\n        </ion-col>\n\n        <ion-col col-5>\n\n          <ion-label>{{item.comments_summary}}</ion-label>\n\n        </ion-col>\n\n\n\n        </ion-row>\n\n      </div>\n\n      <ion-row>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:5px">\n\n            <div>Likes</div>\n\n          </button>\n\n        </ion-col>\n\n        <button class="button circle text-center">\n\n          <i class="ion-crop"></i>\n\n        </button>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <img src="assets/imgs/icon/chat.png" style="width:24px;margin-right:5px">\n\n            <div>Comments</div>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n    </ion-card>\n\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n\n    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more feed..."></ion-infinite-scroll-content>\n\n  </ion-infinite-scroll>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_1__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavController */],
@@ -1169,14 +1286,15 @@ NewfeedPage = __decorate([
         __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* Platform */],
         __WEBPACK_IMPORTED_MODULE_2__ionic_native_streaming_media__["a" /* StreamingMedia */],
         __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* ModalController */],
-        __WEBPACK_IMPORTED_MODULE_0__providers_time_time__["a" /* TimeProvider */]])
+        __WEBPACK_IMPORTED_MODULE_0__providers_time_time__["a" /* TimeProvider */],
+        __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]])
 ], NewfeedPage);
 
 //# sourceMappingURL=newfeed.js.map
 
 /***/ }),
 
-/***/ 398:
+/***/ 399:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1238,7 +1356,7 @@ var SettingPage = (function () {
 }());
 SettingPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-setting',template:/*ion-inline-start:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/'<!--\n  Generated template for the SettingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n\n\n<ion-content padding>\n  <ion-list>\n    <button ion-button full clear (click)=\'logout()\'>Log Out</button>\n    <button ion-button *ngIf=\'!isShowCredit\' (click)=\'showCredit()\'>Show Credit</button>\n    <button ion-button *ngIf=\'isShowCredit\' (click)=\'showCredit()\'>Hide Credit</button>\n    <ion-card *ngIf=\'isShowCredit\'>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="http://www.freepik.com" title="Freepik">Freepik</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n    </ion-card>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/,
+        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/'<!--\n  Generated template for the SettingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n\n\n<ion-content padding>\n  <ion-list>\n    <button ion-button full clear (click)=\'logout()\'>Log Out</button>\n    <button ion-button *ngIf=\'!isShowCredit\' (click)=\'showCredit()\'>Show Credit</button>\n    <button ion-button *ngIf=\'isShowCredit\' (click)=\'showCredit()\'>Hide Credit</button>\n    <ion-card *ngIf=\'isShowCredit\'>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="http://www.freepik.com" title="Freepik">Freepik</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n    </ion-card>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
 ], SettingPage);
@@ -1247,13 +1365,13 @@ SettingPage = __decorate([
 
 /***/ }),
 
-/***/ 400:
+/***/ 401:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(401);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(405);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(402);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(406);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1261,37 +1379,39 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 405:
+/***/ 406:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_streaming_media__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_streaming_media__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(386);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(387);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(761);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(388);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_dashboard_dashboard__ = __webpack_require__(395);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_newfeed_newfeed__ = __webpack_require__(397);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_friends_friends__ = __webpack_require__(396);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_setting_setting__ = __webpack_require__(398);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(765);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_dashboard_dashboard__ = __webpack_require__(396);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_newfeed_newfeed__ = __webpack_require__(398);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_friends_friends__ = __webpack_require__(397);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_setting_setting__ = __webpack_require__(399);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_http_http_provider__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_http__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_facebook__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angular2_swing__ = __webpack_require__(762);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angular2_swing__ = __webpack_require__(766);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angular2_swing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_angular2_swing__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_time_time__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_time_time__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_screen_orientation__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(399);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(400);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_storage__ = __webpack_require__(123);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1330,6 +1450,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_13__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_15_angular2_swing__["SwingModule"],
+            __WEBPACK_IMPORTED_MODULE_19__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */], {
                 tabsPlacement: 'top'
             }, {
@@ -1376,7 +1497,7 @@ AppModule = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_screen_orientation__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
@@ -1668,240 +1789,240 @@ HttpProvider = __decorate([
 
 /***/ }),
 
-/***/ 726:
+/***/ 727:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 232,
-	"./af.js": 232,
-	"./ar": 233,
-	"./ar-dz": 234,
-	"./ar-dz.js": 234,
-	"./ar-kw": 235,
-	"./ar-kw.js": 235,
-	"./ar-ly": 236,
-	"./ar-ly.js": 236,
-	"./ar-ma": 237,
-	"./ar-ma.js": 237,
-	"./ar-sa": 238,
-	"./ar-sa.js": 238,
-	"./ar-tn": 239,
-	"./ar-tn.js": 239,
-	"./ar.js": 233,
-	"./az": 240,
-	"./az.js": 240,
-	"./be": 241,
-	"./be.js": 241,
-	"./bg": 242,
-	"./bg.js": 242,
-	"./bn": 243,
-	"./bn.js": 243,
-	"./bo": 244,
-	"./bo.js": 244,
-	"./br": 245,
-	"./br.js": 245,
-	"./bs": 246,
-	"./bs.js": 246,
-	"./ca": 247,
-	"./ca.js": 247,
-	"./cs": 248,
-	"./cs.js": 248,
-	"./cv": 249,
-	"./cv.js": 249,
-	"./cy": 250,
-	"./cy.js": 250,
-	"./da": 251,
-	"./da.js": 251,
-	"./de": 252,
-	"./de-at": 253,
-	"./de-at.js": 253,
-	"./de-ch": 254,
-	"./de-ch.js": 254,
-	"./de.js": 252,
-	"./dv": 255,
-	"./dv.js": 255,
-	"./el": 256,
-	"./el.js": 256,
-	"./en-au": 257,
-	"./en-au.js": 257,
-	"./en-ca": 258,
-	"./en-ca.js": 258,
-	"./en-gb": 259,
-	"./en-gb.js": 259,
-	"./en-ie": 260,
-	"./en-ie.js": 260,
-	"./en-nz": 261,
-	"./en-nz.js": 261,
-	"./eo": 262,
-	"./eo.js": 262,
-	"./es": 263,
-	"./es-do": 264,
-	"./es-do.js": 264,
-	"./es.js": 263,
-	"./et": 265,
-	"./et.js": 265,
-	"./eu": 266,
-	"./eu.js": 266,
-	"./fa": 267,
-	"./fa.js": 267,
-	"./fi": 268,
-	"./fi.js": 268,
-	"./fo": 269,
-	"./fo.js": 269,
-	"./fr": 270,
-	"./fr-ca": 271,
-	"./fr-ca.js": 271,
-	"./fr-ch": 272,
-	"./fr-ch.js": 272,
-	"./fr.js": 270,
-	"./fy": 273,
-	"./fy.js": 273,
-	"./gd": 274,
-	"./gd.js": 274,
-	"./gl": 275,
-	"./gl.js": 275,
-	"./gom-latn": 276,
-	"./gom-latn.js": 276,
-	"./he": 277,
-	"./he.js": 277,
-	"./hi": 278,
-	"./hi.js": 278,
-	"./hr": 279,
-	"./hr.js": 279,
-	"./hu": 280,
-	"./hu.js": 280,
-	"./hy-am": 281,
-	"./hy-am.js": 281,
-	"./id": 282,
-	"./id.js": 282,
-	"./is": 283,
-	"./is.js": 283,
-	"./it": 284,
-	"./it.js": 284,
-	"./ja": 285,
-	"./ja.js": 285,
-	"./jv": 286,
-	"./jv.js": 286,
-	"./ka": 287,
-	"./ka.js": 287,
-	"./kk": 288,
-	"./kk.js": 288,
-	"./km": 289,
-	"./km.js": 289,
-	"./kn": 290,
-	"./kn.js": 290,
-	"./ko": 291,
-	"./ko.js": 291,
-	"./ky": 292,
-	"./ky.js": 292,
-	"./lb": 293,
-	"./lb.js": 293,
-	"./lo": 294,
-	"./lo.js": 294,
-	"./lt": 295,
-	"./lt.js": 295,
-	"./lv": 296,
-	"./lv.js": 296,
-	"./me": 297,
-	"./me.js": 297,
-	"./mi": 298,
-	"./mi.js": 298,
-	"./mk": 299,
-	"./mk.js": 299,
-	"./ml": 300,
-	"./ml.js": 300,
-	"./mr": 301,
-	"./mr.js": 301,
-	"./ms": 302,
-	"./ms-my": 303,
-	"./ms-my.js": 303,
-	"./ms.js": 302,
-	"./my": 304,
-	"./my.js": 304,
-	"./nb": 305,
-	"./nb.js": 305,
-	"./ne": 306,
-	"./ne.js": 306,
-	"./nl": 307,
-	"./nl-be": 308,
-	"./nl-be.js": 308,
-	"./nl.js": 307,
-	"./nn": 309,
-	"./nn.js": 309,
-	"./pa-in": 310,
-	"./pa-in.js": 310,
-	"./pl": 311,
-	"./pl.js": 311,
-	"./pt": 312,
-	"./pt-br": 313,
-	"./pt-br.js": 313,
-	"./pt.js": 312,
-	"./ro": 314,
-	"./ro.js": 314,
-	"./ru": 315,
-	"./ru.js": 315,
-	"./sd": 316,
-	"./sd.js": 316,
-	"./se": 317,
-	"./se.js": 317,
-	"./si": 318,
-	"./si.js": 318,
-	"./sk": 319,
-	"./sk.js": 319,
-	"./sl": 320,
-	"./sl.js": 320,
-	"./sq": 321,
-	"./sq.js": 321,
-	"./sr": 322,
-	"./sr-cyrl": 323,
-	"./sr-cyrl.js": 323,
-	"./sr.js": 322,
-	"./ss": 324,
-	"./ss.js": 324,
-	"./sv": 325,
-	"./sv.js": 325,
-	"./sw": 326,
-	"./sw.js": 326,
-	"./ta": 327,
-	"./ta.js": 327,
-	"./te": 328,
-	"./te.js": 328,
-	"./tet": 329,
-	"./tet.js": 329,
-	"./th": 330,
-	"./th.js": 330,
-	"./tl-ph": 331,
-	"./tl-ph.js": 331,
-	"./tlh": 332,
-	"./tlh.js": 332,
-	"./tr": 333,
-	"./tr.js": 333,
-	"./tzl": 334,
-	"./tzl.js": 334,
-	"./tzm": 335,
-	"./tzm-latn": 336,
-	"./tzm-latn.js": 336,
-	"./tzm.js": 335,
-	"./uk": 337,
-	"./uk.js": 337,
-	"./ur": 338,
-	"./ur.js": 338,
-	"./uz": 339,
-	"./uz-latn": 340,
-	"./uz-latn.js": 340,
-	"./uz.js": 339,
-	"./vi": 341,
-	"./vi.js": 341,
-	"./x-pseudo": 342,
-	"./x-pseudo.js": 342,
-	"./yo": 343,
-	"./yo.js": 343,
-	"./zh-cn": 344,
-	"./zh-cn.js": 344,
-	"./zh-hk": 345,
-	"./zh-hk.js": 345,
-	"./zh-tw": 346,
-	"./zh-tw.js": 346
+	"./af": 233,
+	"./af.js": 233,
+	"./ar": 234,
+	"./ar-dz": 235,
+	"./ar-dz.js": 235,
+	"./ar-kw": 236,
+	"./ar-kw.js": 236,
+	"./ar-ly": 237,
+	"./ar-ly.js": 237,
+	"./ar-ma": 238,
+	"./ar-ma.js": 238,
+	"./ar-sa": 239,
+	"./ar-sa.js": 239,
+	"./ar-tn": 240,
+	"./ar-tn.js": 240,
+	"./ar.js": 234,
+	"./az": 241,
+	"./az.js": 241,
+	"./be": 242,
+	"./be.js": 242,
+	"./bg": 243,
+	"./bg.js": 243,
+	"./bn": 244,
+	"./bn.js": 244,
+	"./bo": 245,
+	"./bo.js": 245,
+	"./br": 246,
+	"./br.js": 246,
+	"./bs": 247,
+	"./bs.js": 247,
+	"./ca": 248,
+	"./ca.js": 248,
+	"./cs": 249,
+	"./cs.js": 249,
+	"./cv": 250,
+	"./cv.js": 250,
+	"./cy": 251,
+	"./cy.js": 251,
+	"./da": 252,
+	"./da.js": 252,
+	"./de": 253,
+	"./de-at": 254,
+	"./de-at.js": 254,
+	"./de-ch": 255,
+	"./de-ch.js": 255,
+	"./de.js": 253,
+	"./dv": 256,
+	"./dv.js": 256,
+	"./el": 257,
+	"./el.js": 257,
+	"./en-au": 258,
+	"./en-au.js": 258,
+	"./en-ca": 259,
+	"./en-ca.js": 259,
+	"./en-gb": 260,
+	"./en-gb.js": 260,
+	"./en-ie": 261,
+	"./en-ie.js": 261,
+	"./en-nz": 262,
+	"./en-nz.js": 262,
+	"./eo": 263,
+	"./eo.js": 263,
+	"./es": 264,
+	"./es-do": 265,
+	"./es-do.js": 265,
+	"./es.js": 264,
+	"./et": 266,
+	"./et.js": 266,
+	"./eu": 267,
+	"./eu.js": 267,
+	"./fa": 268,
+	"./fa.js": 268,
+	"./fi": 269,
+	"./fi.js": 269,
+	"./fo": 270,
+	"./fo.js": 270,
+	"./fr": 271,
+	"./fr-ca": 272,
+	"./fr-ca.js": 272,
+	"./fr-ch": 273,
+	"./fr-ch.js": 273,
+	"./fr.js": 271,
+	"./fy": 274,
+	"./fy.js": 274,
+	"./gd": 275,
+	"./gd.js": 275,
+	"./gl": 276,
+	"./gl.js": 276,
+	"./gom-latn": 277,
+	"./gom-latn.js": 277,
+	"./he": 278,
+	"./he.js": 278,
+	"./hi": 279,
+	"./hi.js": 279,
+	"./hr": 280,
+	"./hr.js": 280,
+	"./hu": 281,
+	"./hu.js": 281,
+	"./hy-am": 282,
+	"./hy-am.js": 282,
+	"./id": 283,
+	"./id.js": 283,
+	"./is": 284,
+	"./is.js": 284,
+	"./it": 285,
+	"./it.js": 285,
+	"./ja": 286,
+	"./ja.js": 286,
+	"./jv": 287,
+	"./jv.js": 287,
+	"./ka": 288,
+	"./ka.js": 288,
+	"./kk": 289,
+	"./kk.js": 289,
+	"./km": 290,
+	"./km.js": 290,
+	"./kn": 291,
+	"./kn.js": 291,
+	"./ko": 292,
+	"./ko.js": 292,
+	"./ky": 293,
+	"./ky.js": 293,
+	"./lb": 294,
+	"./lb.js": 294,
+	"./lo": 295,
+	"./lo.js": 295,
+	"./lt": 296,
+	"./lt.js": 296,
+	"./lv": 297,
+	"./lv.js": 297,
+	"./me": 298,
+	"./me.js": 298,
+	"./mi": 299,
+	"./mi.js": 299,
+	"./mk": 300,
+	"./mk.js": 300,
+	"./ml": 301,
+	"./ml.js": 301,
+	"./mr": 302,
+	"./mr.js": 302,
+	"./ms": 303,
+	"./ms-my": 304,
+	"./ms-my.js": 304,
+	"./ms.js": 303,
+	"./my": 305,
+	"./my.js": 305,
+	"./nb": 306,
+	"./nb.js": 306,
+	"./ne": 307,
+	"./ne.js": 307,
+	"./nl": 308,
+	"./nl-be": 309,
+	"./nl-be.js": 309,
+	"./nl.js": 308,
+	"./nn": 310,
+	"./nn.js": 310,
+	"./pa-in": 311,
+	"./pa-in.js": 311,
+	"./pl": 312,
+	"./pl.js": 312,
+	"./pt": 313,
+	"./pt-br": 314,
+	"./pt-br.js": 314,
+	"./pt.js": 313,
+	"./ro": 315,
+	"./ro.js": 315,
+	"./ru": 316,
+	"./ru.js": 316,
+	"./sd": 317,
+	"./sd.js": 317,
+	"./se": 318,
+	"./se.js": 318,
+	"./si": 319,
+	"./si.js": 319,
+	"./sk": 320,
+	"./sk.js": 320,
+	"./sl": 321,
+	"./sl.js": 321,
+	"./sq": 322,
+	"./sq.js": 322,
+	"./sr": 323,
+	"./sr-cyrl": 324,
+	"./sr-cyrl.js": 324,
+	"./sr.js": 323,
+	"./ss": 325,
+	"./ss.js": 325,
+	"./sv": 326,
+	"./sv.js": 326,
+	"./sw": 327,
+	"./sw.js": 327,
+	"./ta": 328,
+	"./ta.js": 328,
+	"./te": 329,
+	"./te.js": 329,
+	"./tet": 330,
+	"./tet.js": 330,
+	"./th": 331,
+	"./th.js": 331,
+	"./tl-ph": 332,
+	"./tl-ph.js": 332,
+	"./tlh": 333,
+	"./tlh.js": 333,
+	"./tr": 334,
+	"./tr.js": 334,
+	"./tzl": 335,
+	"./tzl.js": 335,
+	"./tzm": 336,
+	"./tzm-latn": 337,
+	"./tzm-latn.js": 337,
+	"./tzm.js": 336,
+	"./uk": 338,
+	"./uk.js": 338,
+	"./ur": 339,
+	"./ur.js": 339,
+	"./uz": 340,
+	"./uz-latn": 341,
+	"./uz-latn.js": 341,
+	"./uz.js": 340,
+	"./vi": 342,
+	"./vi.js": 342,
+	"./x-pseudo": 343,
+	"./x-pseudo.js": 343,
+	"./yo": 344,
+	"./yo.js": 344,
+	"./zh-cn": 345,
+	"./zh-cn.js": 345,
+	"./zh-hk": 346,
+	"./zh-hk.js": 346,
+	"./zh-tw": 347,
+	"./zh-tw.js": 347
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1917,11 +2038,11 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 726;
+webpackContext.id = 727;
 
 /***/ }),
 
-/***/ 761:
+/***/ 765:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1929,9 +2050,9 @@ webpackContext.id = 726;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(387);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(386);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(389);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__ = __webpack_require__(97);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1963,9 +2084,6 @@ var MyApp = (function () {
                 var nav = app.getActiveNavs()[0];
                 var activeView = nav.getActive();
                 if (activeView.name === "TabsPage") {
-                    // if (nav.canGoBack()) { //Can we go back?
-                    //   nav.pop();
-                    // } else {
                     var alert_1 = alertCtrl.create({
                         title: 'App termination',
                         message: 'Do you want to Log out from the app?',
@@ -2010,13 +2128,17 @@ var MyApp = (function () {
                     });
                     alert_2.present();
                 }
+                else {
+                    var nav_1 = app.getActiveNav();
+                    nav_1.pop();
+                }
             });
         });
     }
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({template:/*ion-inline-start:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"c:\Users\Bigfern\CUFacebook\CUFacebookApp\src\app\app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\app\app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */]])
 ], MyApp);
@@ -2025,5 +2147,5 @@ MyApp = __decorate([
 
 /***/ })
 
-},[400]);
+},[401]);
 //# sourceMappingURL=main.js.map
