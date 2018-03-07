@@ -1,4 +1,3 @@
-import { TimeProvider } from './../../providers/time/time';
 import { HttpProvider } from './../../providers/http/http-provider';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { Component, ViewChild } from '@angular/core';
@@ -8,6 +7,8 @@ import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { TimeProvider } from '../../providers/time/time';
+
 // import {
 //   StackConfig,
 //   Stack,
@@ -125,6 +126,7 @@ export class NewfeedPage {
         try {
           for (let data of this.newsData) {
             data.created_time = this.timeProvider.getDiffTime(data.created_time);
+            var x = this.timeProvider.getDiffTime(data.created_time);
           }
 
         } catch (error) {
@@ -331,7 +333,20 @@ export class NewfeedPage {
 
   }
 
+<<<<<<< HEAD
 
+=======
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad newfeedPage');
+    if (this.platform.is('cordova')) {
+      this.getPosts();
+    } else {
+      this.getPostForTest();
+    }
+    //this.getCommentsData();
+    //this.createGraph();
+  }
+>>>>>>> 7a09dce78497caf0f0ecd5e219bb617ed369535f
   presentProfileModal(uid: string, user_name: string) {
     //console.log(uid);
     let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "pages" });
