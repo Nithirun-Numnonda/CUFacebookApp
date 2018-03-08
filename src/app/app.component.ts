@@ -74,7 +74,6 @@ export class MyApp {
           alert.present();
         }
         else{
-          let nav = app.getActiveNav();
           nav.pop();
         }
       });
