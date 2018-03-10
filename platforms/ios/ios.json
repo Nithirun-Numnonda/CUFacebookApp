@@ -65,11 +65,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"StreamingMedia\"><param name=\"ios-package\" value=\"StreamingMedia\" /></feature>",
+                            "xml": "<feature name=\"NativePageTransitions\"><param name=\"ios-package\" value=\"NativePageTransitions\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"NativePageTransitions\"><param name=\"ios-package\" value=\"NativePageTransitions\" /></feature>",
+                            "xml": "<feature name=\"StreamingMedia\"><param name=\"ios-package\" value=\"StreamingMedia\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -135,10 +135,10 @@
         "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
-        "com.hutchind.cordova.plugins.streamingmedia": {
+        "com.telerik.plugins.nativepagetransitions": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
-        "com.telerik.plugins.nativepagetransitions": {
+        "com.hutchind.cordova.plugins.streamingmedia": {
             "PACKAGE_NAME": "io.ionic.starter"
         }
     },
@@ -194,19 +194,19 @@
             ]
         },
         {
-            "id": "com.hutchind.cordova.plugins.streamingmedia.StreamingMedia",
-            "file": "plugins/com.hutchind.cordova.plugins.streamingmedia/www/StreamingMedia.js",
-            "pluginId": "com.hutchind.cordova.plugins.streamingmedia",
-            "clobbers": [
-                "streamingMedia"
-            ]
-        },
-        {
             "id": "com.telerik.plugins.nativepagetransitions.NativePageTransitions",
             "file": "plugins/com.telerik.plugins.nativepagetransitions/www/NativePageTransitions.js",
             "pluginId": "com.telerik.plugins.nativepagetransitions",
             "clobbers": [
                 "window.plugins.nativepagetransitions"
+            ]
+        },
+        {
+            "id": "com.hutchind.cordova.plugins.streamingmedia.StreamingMedia",
+            "file": "plugins/com.hutchind.cordova.plugins.streamingmedia/www/StreamingMedia.js",
+            "pluginId": "com.hutchind.cordova.plugins.streamingmedia",
+            "clobbers": [
+                "streamingMedia"
             ]
         }
     ],
@@ -218,7 +218,7 @@
         "cordova-plugin-splashscreen": "4.0.3",
         "cordova-plugin-facebook4": "1.7.4",
         "cordova-plugin-screen-orientation": "3.0.1",
-        "com.hutchind.cordova.plugins.streamingmedia": "0.1.4",
-        "com.telerik.plugins.nativepagetransitions": "0.6.5"
+        "com.telerik.plugins.nativepagetransitions": "0.6.5",
+        "com.hutchind.cordova.plugins.streamingmedia": "0.1.4"
     }
 }

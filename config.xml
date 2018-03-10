@@ -91,6 +91,6 @@
         <variable name="APP_NAME" value="CUAnalysisApp" />
     </plugin>
     <plugin name="cordova-plugin-screen-orientation" spec="~3.0.1" />
-    <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="~0.1.4" />
+    <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="^1.0.2" />
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="~0.6.5" />
 </widget>

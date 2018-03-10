@@ -33,10 +33,10 @@
         "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
-        "com.hutchind.cordova.plugins.streamingmedia": {
+        "com.telerik.plugins.nativepagetransitions": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
-        "com.telerik.plugins.nativepagetransitions": {
+        "com.hutchind.cordova.plugins.streamingmedia": {
             "PACKAGE_NAME": "io.ionic.starter"
         }
     },

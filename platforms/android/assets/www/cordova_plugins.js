@@ -66,19 +66,19 @@ module.exports = [
         ]
     },
     {
-        "id": "com.hutchind.cordova.plugins.streamingmedia.StreamingMedia",
-        "file": "plugins/com.hutchind.cordova.plugins.streamingmedia/www/StreamingMedia.js",
-        "pluginId": "com.hutchind.cordova.plugins.streamingmedia",
-        "clobbers": [
-            "streamingMedia"
-        ]
-    },
-    {
         "id": "com.telerik.plugins.nativepagetransitions.NativePageTransitions",
         "file": "plugins/com.telerik.plugins.nativepagetransitions/www/NativePageTransitions.js",
         "pluginId": "com.telerik.plugins.nativepagetransitions",
         "clobbers": [
             "window.plugins.nativepagetransitions"
+        ]
+    },
+    {
+        "id": "com.hutchind.cordova.plugins.streamingmedia.StreamingMedia",
+        "file": "plugins/com.hutchind.cordova.plugins.streamingmedia/www/StreamingMedia.js",
+        "pluginId": "com.hutchind.cordova.plugins.streamingmedia",
+        "clobbers": [
+            "streamingMedia"
         ]
     }
 ];
@@ -94,8 +94,8 @@ module.exports.metadata =
     "cordova-plugin-facebook4": "1.7.4",
     "es6-promise-plugin": "4.1.0",
     "cordova-plugin-screen-orientation": "3.0.1",
-    "com.hutchind.cordova.plugins.streamingmedia": "0.1.4",
-    "com.telerik.plugins.nativepagetransitions": "0.6.5"
+    "com.telerik.plugins.nativepagetransitions": "0.6.5",
+    "com.hutchind.cordova.plugins.streamingmedia": "0.1.4"
 };
 // BOTTOM OF METADATA
 });

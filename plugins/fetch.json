@@ -77,7 +77,7 @@
     "com.hutchind.cordova.plugins.streamingmedia": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-streaming-media"
+            "id": "cordova-plugin-streaming-media@^1.0.2"
         },
         "is_top_level": true,
         "variables": {}
