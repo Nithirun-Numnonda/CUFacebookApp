@@ -128,11 +128,11 @@ var map = {
 		5
 	],
 	"../pages/setting/setting.module": [
-		779,
+		780,
 		4
 	],
 	"../pages/tabs/tabs.module": [
-		780,
+		779,
 		1
 	],
 	"../pages/user-profile/user-profile.module": [
@@ -985,10 +985,10 @@ var NewfeedPage = (function () {
     }
     NewfeedPage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.navBar.backButtonClick = function (e) {
-            console.log("Back button clicked");
-            _this.navCtrl.parent.viewCtrl.dismiss();
-        };
+        // this.navBar.backButtonClick = (e: UIEvent) => {
+        //   console.log("Back button clicked");
+        //   this.navCtrl.parent.viewCtrl.dismiss();
+        // };
         console.log('ionViewDidLoad newfeedPage');
         this.getSaveStorage();
         this.storage.get('hasPagesFeedData').then(function (val) {
@@ -1473,8 +1473,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/friends/friends.module#FriendsPageModule', name: 'FriendsPage', segment: 'friends', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/newfeed/newfeed.module#NewfeedPageModule', name: 'NewfeedPage', segment: 'newfeed', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/setting/setting.module#SettingPageModule', name: 'SettingPage', segment: 'setting', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/tabs/tabs.module#TabsPageModule', name: 'tabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/setting/setting.module#SettingPageModule', name: 'SettingPage', segment: 'setting', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/user-profile/user-profile.module#UserProfilePageModule', name: 'UserProfilePage', segment: 'user-profile', priority: 'low', defaultHistory: [] }
                 ]
             })

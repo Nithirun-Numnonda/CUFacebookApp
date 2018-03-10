@@ -34,6 +34,9 @@
         <param name="android-package" value="com.telerik.plugins.nativepagetransitions.NativePageTransitions" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="StreamingMedia">
+        <param name="android-package" value="com.hutchind.cordova.plugins.streamingmedia.StreamingMedia" />
+    </feature>
     <name>Fanalyze</name>
     <description>A Facebook Analyzer</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -75,7 +78,4 @@
     <preference name="SplashScreenDelay" value="4000" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreen" value="true" />
-    <feature name="StreamingMedia">
-        <param name="android-package" value="com.hutchind.cordova.plugins.streamingmedia.StreamingMedia" />
-    </feature>
 </widget>

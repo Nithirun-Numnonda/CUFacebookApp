@@ -37,7 +37,7 @@
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-facebook4": "^1.7.4",
         "cordova-plugin-ionic-webview": "^1.1.11",
-        "cordova-plugin-nativestorage": "^2.2.2",
+        "cordova-plugin-nativestorage": "~2.2.2",
         "cordova-plugin-screen-orientation": "^3.0.1",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-streaming-media": "^1.0.2",
@@ -69,7 +69,8 @@
             },
             "cordova-plugin-screen-orientation": {},
             "@ionic-native/streaming-media": {},
-            "@ionic-native/native-page-transitions": {}
+            "@ionic-native/native-page-transitions": {},
+            "cordova-plugin-nativestorage": {}
         },
         "platforms": [
             "android",
