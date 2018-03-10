@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform, Content, Navbar } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
 import { Chart } from 'chart.js';
 
@@ -69,6 +69,7 @@ export class DashboardPage {
   typeData: String = 'commentsData';
   pageTriger: String = 'chart';
   @ViewChild(Content) content: Content;
+  // @ViewChild(Navbar) navBar: Navbar;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -78,14 +79,6 @@ export class DashboardPage {
     private platform: Platform,
     private storage: Storage
   ) {
-    this.storage.get('hasDashboardData').then((val) => {
-      if (val != null) {
-        this.hasData = val;
-      }
-      else {
-        this.hasData = false;
-      }
-    });
     //initial default parameter
     this.hourValue = this.hours[0];
     this.dayValue = this.days[0];
@@ -104,13 +97,26 @@ export class DashboardPage {
   //call when view did load
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
+    // this.navBar.backButtonClick = (e: UIEvent) => {
+    //   console.log("Back button clicked");
+    //   this.navCtrl.parent.viewCtrl.dismiss();
+    // };
     this.getSaveStorage();
-    if (this.platform.is('cordova')) {
-      this.getDashboard();
-      this.setLike();
-    } else {
-      this.getDashboardForTest();
-    }
+    this.storage.get('hasDashboardData').then((val) => {
+      if (val != null) {
+        this.hasData = val;
+      }
+      else {
+        this.hasData = false;
+      }
+      if (this.platform.is('cordova')) {
+        this.getDashboard();
+        this.setLike();
+      } else {
+        this.getDashboardForTest();
+      }
+    });
+
   }
 
   timeSwitchCase() {
@@ -182,11 +188,11 @@ export class DashboardPage {
   getDashboard() {
     this.timeSwitchCase();
     let loading = this.loadingController.create({
-      content: "LOADING, Please wait..."
+      content: "LOADING, Please wait...",
     });
-    // if (!this.hasData) {
-    //   loading.present();
-    // }
+    if (!this.hasData) {
+      loading.present();
+    }
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
       //call method from httpProvider
       this.httpProvider.getDashboard(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
@@ -199,8 +205,8 @@ export class DashboardPage {
               console.log("Token expired!!!");
               this.retryTime += 1;
               if (this.retryTime < 3) {
-                // if (!this.hasData)
-                //   loading.dismissAll();
+                if (!this.hasData)
+                  loading.dismissAll();
                 return this.getDashboard();
               }
               else
@@ -209,8 +215,8 @@ export class DashboardPage {
 
           }
           if (result.id) {
-            // if (!this.hasData)
-            //   loading.dismissAll();
+            if (!this.hasData)
+              loading.dismissAll();
             return null;
           } else {
             //assign data to view
@@ -263,8 +269,8 @@ export class DashboardPage {
               this.isAll = false;
             else
               this.isAll = true;
-            // if (!this.hasData)
-            //   loading.dismissAll();
+            if (!this.hasData)
+              loading.dismissAll();
             this.hasData = true;
           }
         },
@@ -272,8 +278,8 @@ export class DashboardPage {
           //call if fail to get request
           console.error("Error : " + err);
           alert("Can't get Data from the server: " + err);
-          // if (!this.hasData)
-          //   loading.dismissAll();
+          if (!this.hasData)
+            loading.dismissAll();
         },
         () => {
           console.log('getData completed');
@@ -339,7 +345,8 @@ export class DashboardPage {
   getDashboardForTest() {
     this.timeSwitchCase();
     let loading = this.loadingController.create({
-      content: "LOADING, Please wait..."
+      content: "LOADING, Please wait...",
+
     });
     loading.present();
     if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
@@ -598,11 +605,11 @@ export class DashboardPage {
       this.content.scrollToTop();
     } else if (this.pageTriger == 'list') {
       this.pageTriger = 'chart';
-      this.createTime = [];
-      this.total_comments = [];
-      this.total_reactions = [];
       this.content.scrollToTop();
-      this.getDashboard();
+      setTimeout(() => {
+        this.createGraph();
+      }, 200);
+
     }
 
   }

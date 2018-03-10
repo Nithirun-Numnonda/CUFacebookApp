@@ -205,7 +205,7 @@ HomePage = __decorate([
         selector: 'page-home',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/'\n\n\n\n<ion-content style="background:url(assets/imgs/background.jpg);text-align: center" scroll="false" >\n\n    <div style="height:30%;" >\n\n        <img src="assets/imgs/homeLogo.png" style="margin-left:-2%;height:120%;margin-top:40%;"/>\n\n    </div>\n\n    <div >\n\n          \n\n            <button ion-button icon-start  style="margin: 0 auto;text-align: center;margin-top:40%;" color="facebook" (click)="login()">\n\n                <ion-icon name="logo-facebook"></ion-icon>\n\n                Login with Facebook</button>\n\n       </div>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\home\home.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__["a" /* ScreenOrientation */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__["a" /* ScreenOrientation */]])
 ], HomePage);
 
 //# sourceMappingURL=home.js.map
@@ -244,8 +244,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var DashboardPage = (function () {
+    // @ViewChild(Navbar) navBar: Navbar;
     function DashboardPage(navCtrl, navParams, httpProvider, loadingController, modalCtrl, platform, storage) {
-        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.httpProvider = httpProvider;
@@ -265,14 +265,6 @@ var DashboardPage = (function () {
         //for controlUI
         this.typeData = 'commentsData';
         this.pageTriger = 'chart';
-        this.storage.get('hasDashboardData').then(function (val) {
-            if (val != null) {
-                _this.hasData = val;
-            }
-            else {
-                _this.hasData = false;
-            }
-        });
         //initial default parameter
         this.hourValue = this.hours[0];
         this.dayValue = this.days[0];
@@ -289,15 +281,28 @@ var DashboardPage = (function () {
     }
     //call when view did load
     DashboardPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
         console.log('ionViewDidLoad DashboardPage');
+        // this.navBar.backButtonClick = (e: UIEvent) => {
+        //   console.log("Back button clicked");
+        //   this.navCtrl.parent.viewCtrl.dismiss();
+        // };
         this.getSaveStorage();
-        if (this.platform.is('cordova')) {
-            this.getDashboard();
-            this.setLike();
-        }
-        else {
-            this.getDashboardForTest();
-        }
+        this.storage.get('hasDashboardData').then(function (val) {
+            if (val != null) {
+                _this.hasData = val;
+            }
+            else {
+                _this.hasData = false;
+            }
+            if (_this.platform.is('cordova')) {
+                _this.getDashboard();
+                _this.setLike();
+            }
+            else {
+                _this.getDashboardForTest();
+            }
+        });
     };
     DashboardPage.prototype.timeSwitchCase = function () {
         switch (this.sortByTime) {
@@ -368,11 +373,11 @@ var DashboardPage = (function () {
         var _this = this;
         this.timeSwitchCase();
         var loading = this.loadingController.create({
-            content: "LOADING, Please wait..."
+            content: "LOADING, Please wait...",
         });
-        // if (!this.hasData) {
-        //   loading.present();
-        // }
+        if (!this.hasData) {
+            loading.present();
+        }
         if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
             //call method from httpProvider
             this.httpProvider.getDashboard(this.topValue, this.hourValue, this.dayValue, this.monthValue, this.yearValue).subscribe(
@@ -385,8 +390,8 @@ var DashboardPage = (function () {
                         console.log("Token expired!!!");
                         _this.retryTime += 1;
                         if (_this.retryTime < 3) {
-                            // if (!this.hasData)
-                            //   loading.dismissAll();
+                            if (!_this.hasData)
+                                loading.dismissAll();
                             return _this.getDashboard();
                         }
                         else
@@ -394,8 +399,8 @@ var DashboardPage = (function () {
                     }
                 }
                 if (result.id) {
-                    // if (!this.hasData)
-                    //   loading.dismissAll();
+                    if (!_this.hasData)
+                        loading.dismissAll();
                     return null;
                 }
                 else {
@@ -450,16 +455,16 @@ var DashboardPage = (function () {
                         _this.isAll = false;
                     else
                         _this.isAll = true;
-                    // if (!this.hasData)
-                    //   loading.dismissAll();
+                    if (!_this.hasData)
+                        loading.dismissAll();
                     _this.hasData = true;
                 }
             }, function (err) {
                 //call if fail to get request
                 console.error("Error : " + err);
                 alert("Can't get Data from the server: " + err);
-                // if (!this.hasData)
-                //   loading.dismissAll();
+                if (!_this.hasData)
+                    loading.dismissAll();
             }, function () {
                 console.log('getData completed');
             });
@@ -520,7 +525,7 @@ var DashboardPage = (function () {
         var _this = this;
         this.timeSwitchCase();
         var loading = this.loadingController.create({
-            content: "LOADING, Please wait..."
+            content: "LOADING, Please wait...",
         });
         loading.present();
         if (this.hourValue != '0' || this.dayValue != '0' || this.monthValue != '0' || this.yearValue != '0')
@@ -761,17 +766,17 @@ var DashboardPage = (function () {
     };
     //for switch UI
     DashboardPage.prototype.trigerPage = function () {
+        var _this = this;
         if (this.pageTriger == 'chart') {
             this.pageTriger = 'list';
             this.content.scrollToTop();
         }
         else if (this.pageTriger == 'list') {
             this.pageTriger = 'chart';
-            this.createTime = [];
-            this.total_comments = [];
-            this.total_reactions = [];
             this.content.scrollToTop();
-            this.getDashboard();
+            setTimeout(function () {
+                _this.createGraph();
+            }, 200);
         }
     };
     //for open profile user
@@ -799,7 +804,7 @@ DashboardPage = __decorate([
         __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */],
         __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]])
 ], DashboardPage);
 
@@ -873,13 +878,13 @@ var FriendsPage = (function () {
 }());
 FriendsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-friends',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n  Generated template for the FriendsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-content style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n  <ion-header>\n      <ion-toolbar class="btn-wrapper">\n          <ion-title>Your Friends Who Use this app</ion-title>\n      </ion-toolbar>\n    </ion-header>\n<div style="margin-top: 75px;">\n  <ion-list *ngFor="let item of newsData">\n    <ion-card no-padding>\n      <ion-card-content no-padding>\n        <ion-grid no-padding>\n          <ion-row (click)="presentProfileModal(item.id,item.name)">\n            <ion-col>\n              <ion-item>\n                <ion-avatar>\n                  <img id="item-avatar2" src="http://graph.facebook.com/{{item.id}}/picture?type=large">\n                </ion-avatar>\n              </ion-item>\n            </ion-col>\n            <ion-col col-8>\n              <ion-card-header text-wrap id="ion-card-header2" >\n                <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>\n              </ion-card-header>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-card-content>\n    </ion-card>\n  </ion-list>\n</div>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
+        selector: 'page-friends',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/'<!--\n\n  Generated template for the FriendsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-content style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-header>\n\n      <ion-toolbar class="btn-wrapper">\n\n          <ion-title>Your Friends Who Use this app</ion-title>\n\n      </ion-toolbar>\n\n    </ion-header>\n\n<div style="margin-top: 75px;">\n\n  <ion-list *ngFor="let item of newsData">\n\n    <ion-card no-padding>\n\n      <ion-card-content no-padding>\n\n        <ion-grid no-padding>\n\n          <ion-row (click)="presentProfileModal(item.id,item.name)">\n\n            <ion-col>\n\n              <ion-item>\n\n                <ion-avatar>\n\n                  <img id="item-avatar2" src="http://graph.facebook.com/{{item.id}}/picture?type=large">\n\n                </ion-avatar>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-card-header text-wrap id="ion-card-header2" >\n\n                <ion-col style="word-wrap: break-word">{{item.name}}</ion-col>\n\n              </ion-card-header>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-list>\n\n</div>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\friends\friends.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_2__providers_http_http_provider__["a" /* HttpProvider */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]])
 ], FriendsPage);
 
@@ -971,14 +976,6 @@ var NewfeedPage = (function () {
                 .filter(function (x) { return x.type == "photo"; })
                 .map(function (x) { return x.media.image; });
         };
-        this.storage.get('hasPagesFeedData').then(function (val) {
-            if (val != null) {
-                _this.hasData = val;
-            }
-            else {
-                _this.hasData = false;
-            }
-        });
         //for retry
         this.retryTime = 0;
         this.videoOptions = {
@@ -987,14 +984,27 @@ var NewfeedPage = (function () {
         };
     }
     NewfeedPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.navBar.backButtonClick = function (e) {
+            console.log("Back button clicked");
+            _this.navCtrl.parent.viewCtrl.dismiss();
+        };
         console.log('ionViewDidLoad newfeedPage');
         this.getSaveStorage();
-        if (this.platform.is('cordova')) {
-            this.getPosts();
-        }
-        else {
-            this.getPostForTest();
-        }
+        this.storage.get('hasPagesFeedData').then(function (val) {
+            if (val != null) {
+                _this.hasData = val;
+            }
+            else {
+                _this.hasData = false;
+            }
+            if (_this.platform.is('cordova')) {
+                _this.getPosts();
+            }
+            else {
+                _this.getPostForTest();
+            }
+        });
         //this.getCommentsData();
         //this.createGraph();
     };
@@ -1273,9 +1283,13 @@ __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["b" /* Content */]),
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["b" /* Content */])
 ], NewfeedPage.prototype, "content", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* Navbar */]),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* Navbar */])
+], NewfeedPage.prototype, "navBar", void 0);
 NewfeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["Component"])({
-        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n\n\n<ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n\n\n  <ion-list *ngFor="let item of newsData">\n\n\n\n    <ion-card>\n\n\n\n      <ion-item (click)="presentProfileModal(item.page_id,item.page_name)">\n\n        <ion-avatar item-start>\n\n          <img src={{item.page_picture}}>\n\n        </ion-avatar>\n\n        <h2>{{item.page_name}}</h2>\n\n        <p>{{item.created_time}}</p>\n\n      </ion-item>\n\n\n\n      <img  (click)=\'playVideo(item.id)\' src={{item.full_picture}} />\n\n\n\n      <ion-card-content>\n\n        <div *ngFor="let str of item.message.split(\'\n\')">\n\n          {{ str }}\n\n    </div>\n\n      </ion-card-content>\n\n      <div>\n\n        <ion-row style="border-bottom: 1px solid gray;">\n\n\n\n          <ion-col col-2>\n\n          <ion-label style="margin-left:10px;">\n\n            <img src="assets/imgs/icon/flame.png" style="width:24px;">\n\n          </ion-label>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n          <ion-label>{{item.reactions_summary}}</ion-label>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label>\n\n            <img src="assets/imgs/icon/chat.png" style="width:24px;">\n\n          </ion-label>\n\n        </ion-col>\n\n        <ion-col col-5>\n\n          <ion-label>{{item.comments_summary}}</ion-label>\n\n        </ion-col>\n\n\n\n        </ion-row>\n\n      </div>\n\n      <ion-row>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:5px">\n\n            <div>Likes</div>\n\n          </button>\n\n        </ion-col>\n\n        <button class="button circle text-center">\n\n          <i class="ion-crop"></i>\n\n        </button>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <img src="assets/imgs/icon/chat.png" style="width:24px;margin-right:5px">\n\n            <div>Comments</div>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n    </ion-card>\n\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n\n    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more feed..."></ion-infinite-scroll-content>\n\n  </ion-infinite-scroll>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
+        selector: 'page-newfeed',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/'<!--\n\n  Generated template for the NewfeedPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-navbar style="display:none"></ion-navbar> \n\n<ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n\n\n  <ion-list *ngFor="let item of newsData">\n\n\n\n    <ion-card>\n\n\n\n      <ion-item (click)="presentProfileModal(item.page_id,item.page_name)">\n\n        <ion-avatar item-start>\n\n          <img src={{item.page_picture}}>\n\n        </ion-avatar>\n\n        <h2>{{item.page_name}}</h2>\n\n        <p>{{item.created_time}}</p>\n\n      </ion-item>\n\n\n\n      <img  (click)=\'playVideo(item.id)\' src={{item.full_picture}} />\n\n\n\n      <ion-card-content>\n\n        <div *ngFor="let str of item.message.split(\'\n\')">\n\n          {{ str }}\n\n    </div>\n\n      </ion-card-content>\n\n      <div>\n\n        <ion-row style="border-bottom: 1px solid gray;">\n\n\n\n          <ion-col col-2>\n\n          <ion-label style="margin-left:10px;">\n\n            <img src="assets/imgs/icon/flame.png" style="width:24px;">\n\n          </ion-label>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n          <ion-label>{{item.reactions_summary}}</ion-label>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label>\n\n            <img src="assets/imgs/icon/chat.png" style="width:24px;">\n\n          </ion-label>\n\n        </ion-col>\n\n        <ion-col col-5>\n\n          <ion-label>{{item.comments_summary}}</ion-label>\n\n        </ion-col>\n\n\n\n        </ion-row>\n\n      </div>\n\n      <ion-row>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:5px">\n\n            <div>Likes</div>\n\n          </button>\n\n        </ion-col>\n\n        <button class="button circle text-center">\n\n          <i class="ion-crop"></i>\n\n        </button>\n\n        <ion-col>\n\n          <button ion-button full icon-center clear small>\n\n            <img src="assets/imgs/icon/chat.png" style="width:24px;margin-right:5px">\n\n            <div>Comments</div>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n    </ion-card>\n\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n\n    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more feed..."></ion-infinite-scroll-content>\n\n  </ion-infinite-scroll>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\newfeed\newfeed.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_1__providers_http_http_provider__["a" /* HttpProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavController */],
@@ -1283,7 +1297,7 @@ NewfeedPage = __decorate([
         __WEBPACK_IMPORTED_MODULE_1__providers_http_http_provider__["a" /* HttpProvider */],
         __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["g" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */],
-        __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["l" /* Platform */],
         __WEBPACK_IMPORTED_MODULE_2__ionic_native_streaming_media__["a" /* StreamingMedia */],
         __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* ModalController */],
         __WEBPACK_IMPORTED_MODULE_0__providers_time_time__["a" /* TimeProvider */],
@@ -1356,7 +1370,7 @@ var SettingPage = (function () {
 }());
 SettingPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/'<!--\n  Generated template for the SettingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n\n\n<ion-content padding>\n  <ion-list>\n    <button ion-button full clear (click)=\'logout()\'>Log Out</button>\n    <button ion-button *ngIf=\'!isShowCredit\' (click)=\'showCredit()\'>Show Credit</button>\n    <button ion-button *ngIf=\'isShowCredit\' (click)=\'showCredit()\'>Hide Credit</button>\n    <ion-card *ngIf=\'isShowCredit\'>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="http://www.freepik.com" title="Freepik">Freepik</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n      <div>Icons made by\n        <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n          target="_blank">CC 3.0 BY</a>\n      </div>\n    </ion-card>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/,
+        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/'<!--\n\n  Generated template for the SettingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n\n\n\n\n<ion-content padding>\n\n  <ion-list>\n\n    <button ion-button full clear (click)=\'logout()\'>Log Out</button>\n\n    <button ion-button *ngIf=\'!isShowCredit\' (click)=\'showCredit()\'>Show Credit</button>\n\n    <button ion-button *ngIf=\'isShowCredit\' (click)=\'showCredit()\'>Hide Credit</button>\n\n    <ion-card *ngIf=\'isShowCredit\'>\n\n      <div>Icons made by\n\n        <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from\n\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n\n          target="_blank">CC 3.0 BY</a>\n\n      </div>\n\n      <div>Icons made by\n\n        <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from\n\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n\n          target="_blank">CC 3.0 BY</a>\n\n      </div>\n\n      <div>Icons made by\n\n        <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from\n\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n\n          target="_blank">CC 3.0 BY</a>\n\n      </div>\n\n      <div>Icons made by\n\n        <a href="http://www.freepik.com" title="Freepik">Freepik</a> from\n\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n\n          target="_blank">CC 3.0 BY</a>\n\n      </div>\n\n      <div>Icons made by\n\n        <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from\n\n        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by\n\n        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"\n\n          target="_blank">CC 3.0 BY</a>\n\n      </div>\n\n    </ion-card>\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\pages\setting\setting.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
 ], SettingPage);
@@ -1780,7 +1794,7 @@ HttpProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */],
         __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */],
         __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */],
         __WEBPACK_IMPORTED_MODULE_1__ionic_native_screen_orientation__["a" /* ScreenOrientation */]])
 ], HttpProvider);
@@ -2072,7 +2086,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var MyApp = (function () {
     function MyApp(platform, statusBar, splashScreen, app, alertCtrl, facebook, loadingController) {
-        var _this = this;
         this.facebook = facebook;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */];
         platform.ready().then(function () {
@@ -2080,59 +2093,57 @@ var MyApp = (function () {
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
-            platform.registerBackButtonAction(function () {
-                var nav = app.getActiveNavs()[0];
-                var activeView = nav.getActive();
-                if (activeView.name === "TabsPage") {
-                    var alert_1 = alertCtrl.create({
-                        title: 'App termination',
-                        message: 'Do you want to Log out from the app?',
-                        buttons: [{
-                                text: 'Cancel',
-                                role: 'cancel',
-                                handler: function () {
-                                    console.log('Application Logout prevented!');
-                                }
-                            }, {
-                                text: 'Log out',
-                                handler: function () {
-                                    var loading = loadingController.create({ content: "Logging Out..." });
-                                    loading.present();
-                                    _this.facebook.logout().then(function (response) {
-                                        loading.dismiss();
-                                        var nav = app.getActiveNav();
-                                        nav.popToRoot();
-                                    }, function (error) {
-                                    });
-                                }
-                            }]
-                    });
-                    alert_1.present();
-                }
-                else if (activeView.name === "HomePage") {
-                    var alert_2 = alertCtrl.create({
-                        title: 'App termination',
-                        message: 'Do you want to close the app?',
-                        buttons: [{
-                                text: 'Cancel',
-                                role: 'cancel',
-                                handler: function () {
-                                    console.log('Application exit prevented!');
-                                }
-                            }, {
-                                text: 'Close App',
-                                handler: function () {
-                                    platform.exitApp(); // Close this application
-                                }
-                            }]
-                    });
-                    alert_2.present();
-                }
-                else {
-                    var nav_1 = app.getActiveNav();
-                    nav_1.pop();
-                }
-            });
+            // platform.registerBackButtonAction(() => {
+            //   let nav = app.getActiveNavs()[0];
+            //   let activeView = nav.getActive();
+            //   if (activeView.name === "TabsPage") {
+            //     const alert = alertCtrl.create({
+            //       title: 'App termination',
+            //       message: 'Do you want to Log out from the app?',
+            //       buttons: [{
+            //         text: 'Cancel',
+            //         role: 'cancel',
+            //         handler: () => {
+            //           console.log('Application Logout prevented!');
+            //         }
+            //       }, {
+            //         text: 'Log out',
+            //         handler: () => {
+            //           let loading =  loadingController.create({ content: "Logging Out..." });
+            //           loading.present();
+            //           this.facebook.logout().then((response) => {
+            //             loading.dismiss();
+            //             let nav = app.getActiveNav();
+            //             nav.popToRoot();
+            //           }, (error) => {
+            //           })
+            //         }
+            //       }]
+            //     });
+            //     alert.present();
+            //   } else if (activeView.name === "HomePage") {
+            //     const alert = alertCtrl.create({
+            //       title: 'App termination',
+            //       message: 'Do you want to close the app?',
+            //       buttons: [{
+            //         text: 'Cancel',
+            //         role: 'cancel',
+            //         handler: () => {
+            //           console.log('Application exit prevented!');
+            //         }
+            //       }, {
+            //         text: 'Close App',
+            //         handler: () => {
+            //           platform.exitApp(); // Close this application
+            //         }
+            //       }]
+            //     });
+            //     alert.present();
+            //   }
+            //   else{
+            //     app.getRootNav().pop();
+            //   }
+            // });
         });
     }
     return MyApp;
@@ -2140,7 +2151,7 @@ var MyApp = (function () {
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\Bigfern\CUFacebook\CUFacebookApp\src\app\app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_6_ionic_angular_components_alert_alert_controller__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_0__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map

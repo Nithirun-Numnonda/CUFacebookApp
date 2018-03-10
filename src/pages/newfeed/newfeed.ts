@@ -2,7 +2,7 @@ import { TimeProvider } from './../../providers/time/time';
 import { HttpProvider } from './../../providers/http/http-provider';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, Platform, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, Platform, ModalController, Navbar } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
@@ -35,6 +35,7 @@ export class NewfeedPage {
   // @ViewChild('myswing1') swingStack: SwingStackComponent;
   // @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>; 
   @ViewChild(Content) content: Content;
+  @ViewChild(Navbar) navBar: Navbar;
   newsData: any;
   loading: any;
   cards: Array<any>;
@@ -51,7 +52,7 @@ export class NewfeedPage {
 
   nextData = false;
 
-  hasData:boolean;
+  hasData: boolean;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -64,14 +65,6 @@ export class NewfeedPage {
     private timeProvider: TimeProvider,
     private storage: Storage
   ) {
-    this.storage.get('hasPagesFeedData').then((val) => {
-      if (val != null) {
-        this.hasData = val;
-      }
-      else{
-        this.hasData=false;
-      }
-    });
     //for retry
     this.retryTime = 0;
     this.videoOptions = {
@@ -81,13 +74,26 @@ export class NewfeedPage {
 
   }
   ionViewDidLoad() {
+    // this.navBar.backButtonClick = (e: UIEvent) => {
+    //   console.log("Back button clicked");
+    //   this.navCtrl.parent.viewCtrl.dismiss();
+    // };
     console.log('ionViewDidLoad newfeedPage');
     this.getSaveStorage();
-    if (this.platform.is('cordova')) {
-      this.getPosts();
-    } else {
-      this.getPostForTest()
-    }
+    this.storage.get('hasPagesFeedData').then((val) => {
+      if (val != null) {
+        this.hasData = val;
+      }
+      else {
+        this.hasData = false;
+      }
+      if (this.platform.is('cordova')) {
+        this.getPosts();
+      } else {
+        this.getPostForTest()
+      }
+    });
+
     //this.getCommentsData();
     //this.createGraph();
   }
@@ -103,8 +109,8 @@ export class NewfeedPage {
     }
     refresher.complete();
   }
-  getSaveStorage(){
-    
+  getSaveStorage() {
+
     this.storage.get('pagesFeed').then((val) => {
       if (val != null) {
         this.newsData = val;
@@ -179,8 +185,8 @@ export class NewfeedPage {
         } catch (error) {
 
         }
-        this.storage.set('pagesFeed',this.newsData);
-        this.storage.set('hasData',true);
+        this.storage.set('pagesFeed', this.newsData);
+        this.storage.set('hasData', true);
         console.log("Success : " + JSON.stringify(result));
 
         this.retryTime = 0;

@@ -21,62 +21,64 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      platform.registerBackButtonAction(() => {
-        let nav = app.getActiveNavs()[0];
-        let activeView = nav.getActive();
+      // platform.registerBackButtonAction(() => {
+      //   let nav = app.getActiveNavs()[0];
+      //   let activeView = nav.getActive();
+      //   if (activeView.name === "TabsPage") {
+      //     const alert = alertCtrl.create({
+      //       title: 'App termination',
+      //       message: 'Do you want to Log out from the app?',
+      //       buttons: [{
+      //         text: 'Cancel',
+      //         role: 'cancel',
+      //         handler: () => {
+      //           console.log('Application Logout prevented!');
+      //         }
+      //       }, {
+      //         text: 'Log out',
+      //         handler: () => {
+      //           let loading =  loadingController.create({ content: "Logging Out..." });
+      //           loading.present();
+      //           this.facebook.logout().then((response) => {
+      //             loading.dismiss();
+      //             let nav = app.getActiveNav();
+      //             nav.popToRoot();
 
-        if (activeView.name === "TabsPage") {
-          const alert = alertCtrl.create({
-            title: 'App termination',
-            message: 'Do you want to Log out from the app?',
-            buttons: [{
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () => {
-                console.log('Application Logout prevented!');
-              }
-            }, {
-              text: 'Log out',
-              handler: () => {
-                let loading =  loadingController.create({ content: "Logging Out..." });
-                loading.present();
-                this.facebook.logout().then((response) => {
-                  loading.dismiss();
-                  let nav = app.getActiveNav();
-                  nav.popToRoot();
+      //           }, (error) => {
 
-                }, (error) => {
+      //           })
 
-                })
+      //         }
+      //       }]
+      //     });
+      //     alert.present();
 
-              }
-            }]
-          });
-          alert.present();
-
-        } else if (activeView.name === "HomePage") {
-          const alert = alertCtrl.create({
-            title: 'App termination',
-            message: 'Do you want to close the app?',
-            buttons: [{
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () => {
-                console.log('Application exit prevented!');
-              }
-            }, {
-              text: 'Close App',
-              handler: () => {
-                platform.exitApp(); // Close this application
-              }
-            }]
-          });
-          alert.present();
-        }
-        else{
-          nav.pop();
-        }
-      });
+      //   } else if (activeView.name === "HomePage") {
+      //     const alert = alertCtrl.create({
+      //       title: 'App termination',
+      //       message: 'Do you want to close the app?',
+      //       buttons: [{
+      //         text: 'Cancel',
+      //         role: 'cancel',
+      //         handler: () => {
+      //           console.log('Application exit prevented!');
+      //         }
+      //       }, {
+      //         text: 'Close App',
+      //         handler: () => {
+      //           platform.exitApp(); // Close this application
+      //         }
+      //       }]
+      //     });
+      //     alert.present();
+      //   }
+      //   else{
+          
+      //     app.getRootNav().pop();
+          
+          
+      //   }
+      // });
     });
   }
 }
