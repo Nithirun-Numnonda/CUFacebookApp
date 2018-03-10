@@ -68,8 +68,8 @@
                 "APP_NAME": "CUAnalysisApp"
             },
             "cordova-plugin-screen-orientation": {},
-            "com.hutchind.cordova.plugins.streamingmedia": {},
-            "com.telerik.plugins.nativepagetransitions": {}
+            "@ionic-native/streaming-media": {},
+            "@ionic-native/native-page-transitions": {}
         },
         "platforms": [
             "android",
