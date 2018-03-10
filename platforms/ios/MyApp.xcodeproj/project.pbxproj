@@ -46,8 +46,8 @@
 		23B8283957F842A58D6D1771 /* CDVOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D076993F6F01417AADB244F1 /* CDVOrientation.m */; };
 		29F14465CD6E4EF6B3891032 /* NativePageTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = D0561CD08BDE487C8308D97C /* NativePageTransitions.m */; };
 		54DC6ECD7B694D92B7CFF79B /* AppDelegate+nativepagetransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = B216C4CCF43A44C0AC0E5068 /* AppDelegate+nativepagetransitions.m */; };
-		C3B343A39D2F4DCDB85860B5 /* StreamingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0A3D59F054ED2954AFA77 /* StreamingMedia.m */; };
-		0FAE8A3D0E364CF4B9EC23F7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C77607B61124317BAE3829B /* MediaPlayer.framework */; };
+		AB659D88305843AF99D3680C /* StreamingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F928D8268F49558D03B57E /* StreamingMedia.m */; };
+		939AEB38C641488A934BF548 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97321007909A4922923C4A5E /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,9 +144,9 @@
 		B216C4CCF43A44C0AC0E5068 /* AppDelegate+nativepagetransitions.m */ = {isa = PBXFileReference; name = "AppDelegate+nativepagetransitions.m"; path = "com.telerik.plugins.nativepagetransitions/AppDelegate+nativepagetransitions.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		AAC11E0480FB42C0B7D5F079 /* NativePageTransitions.h */ = {isa = PBXFileReference; name = "NativePageTransitions.h"; path = "com.telerik.plugins.nativepagetransitions/NativePageTransitions.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		958264F683474B609C97BFA8 /* AppDelegate+nativepagetransitions.h */ = {isa = PBXFileReference; name = "AppDelegate+nativepagetransitions.h"; path = "com.telerik.plugins.nativepagetransitions/AppDelegate+nativepagetransitions.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		C7B0A3D59F054ED2954AFA77 /* StreamingMedia.m */ = {isa = PBXFileReference; name = "StreamingMedia.m"; path = "com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		66172217E7224CBD92DB3498 /* StreamingMedia.h */ = {isa = PBXFileReference; name = "StreamingMedia.h"; path = "com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		3C77607B61124317BAE3829B /* MediaPlayer.framework */ = {isa = PBXFileReference; name = "MediaPlayer.framework"; path = "System/Library/Frameworks/MediaPlayer.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		99F928D8268F49558D03B57E /* StreamingMedia.m */ = {isa = PBXFileReference; name = "StreamingMedia.m"; path = "com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		236052BE39E043FF94BA2683 /* StreamingMedia.h */ = {isa = PBXFileReference; name = "StreamingMedia.h"; path = "com.hutchind.cordova.plugins.streamingmedia/StreamingMedia.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		97321007909A4922923C4A5E /* MediaPlayer.framework */ = {isa = PBXFileReference; name = "MediaPlayer.framework"; path = "System/Library/Frameworks/MediaPlayer.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,7 +161,7 @@
 				E00D50CB938E4E5BAF0CACA6 /* FBSDKCoreKit.framework in Frameworks */,
 				1BCE1CCBE72540D4B718597B /* FBSDKLoginKit.framework in Frameworks */,
 				E00C1FF498D84F97A649BEFD /* FBSDKShareKit.framework in Frameworks */,
-				0FAE8A3D0E364CF4B9EC23F7 /* MediaPlayer.framework in Frameworks */,
+				939AEB38C641488A934BF548 /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +238,7 @@
 				A010AE60929F45ED85D218DA /* FBSDKCoreKit.framework */,
 				C11F8C9859A847C68578220D /* FBSDKLoginKit.framework */,
 				78A10B16063F4971B2F40F3D /* FBSDKShareKit.framework */,
-				3C77607B61124317BAE3829B /* MediaPlayer.framework */,
+				97321007909A4922923C4A5E /* MediaPlayer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -314,8 +314,8 @@
 				B216C4CCF43A44C0AC0E5068 /* AppDelegate+nativepagetransitions.m */,
 				AAC11E0480FB42C0B7D5F079 /* NativePageTransitions.h */,
 				958264F683474B609C97BFA8 /* AppDelegate+nativepagetransitions.h */,
-				C7B0A3D59F054ED2954AFA77 /* StreamingMedia.m */,
-				66172217E7224CBD92DB3498 /* StreamingMedia.h */,
+				99F928D8268F49558D03B57E /* StreamingMedia.m */,
+				236052BE39E043FF94BA2683 /* StreamingMedia.h */,
 			);
 			name = Plugins;
 			path = "MyApp/Plugins";
@@ -452,7 +452,7 @@
 				23B8283957F842A58D6D1771 /* CDVOrientation.m in Sources */,
 				29F14465CD6E4EF6B3891032 /* NativePageTransitions.m in Sources */,
 				54DC6ECD7B694D92B7CFF79B /* AppDelegate+nativepagetransitions.m in Sources */,
-				C3B343A39D2F4DCDB85860B5 /* StreamingMedia.m in Sources */,
+				AB659D88305843AF99D3680C /* StreamingMedia.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
