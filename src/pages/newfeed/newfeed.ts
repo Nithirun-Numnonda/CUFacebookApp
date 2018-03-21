@@ -335,7 +335,7 @@ export class NewfeedPage {
   likePost(pageid,postid){
     this.historyData.addLikeData({pageid:pageid,postid:postid});
   }
-  dislikePost(postid,pageid){
+  dislikePost(pageid,postid){
     this.historyData.addDisLikeData({pageid:pageid,postid:postid});
   }
   playVideo(uid) {

@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { App } from 'ionic-angular';
+import { Pro } from '@ionic/pro';
+
 
 /**
  * Generated class for the SettingPage page.
@@ -19,8 +21,12 @@ import { App } from 'ionic-angular';
 export class SettingPage {
   homePage:HomePage;
   isShowCredit:boolean=false;
-  
+  public deployChannel = "";
+  public isBeta = false;
+  public downloadProgress = 0;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private facebook:Facebook,private app:App,private loadingController:LoadingController) {
+    //this.checkChannel();
   }
 
   ionViewDidLoad() {
@@ -47,6 +53,19 @@ export class SettingPage {
   }
   showCredit(){
     this.isShowCredit=!this.isShowCredit
+  }
+  //live update
+  async checkChannel() {
+    try {
+      const res = await Pro.deploy.info();
+      this.deployChannel = res.channel;
+      this.isBeta = (this.deployChannel === 'Beta')
+    } catch (err) {
+      // We encountered an error.
+      // Here's how we would log it to Ionic Pro Monitoring while also catching:
+
+      // Pro.monitoring.exception(err);
+    }
   }
 
 }
