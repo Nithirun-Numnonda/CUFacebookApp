@@ -19,6 +19,8 @@ import { TimeProvider } from '../providers/time/time';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions'
 import { IonicStorageModule } from '@ionic/storage';
+import { SearchDataProvider } from '../providers/search-data/search-data';
+import { HistoryDataProvider } from '../providers/history-data/history-data';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { IonicStorageModule } from '@ionic/storage';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpProvider,
     TimeProvider,
-    NativePageTransitions
+    NativePageTransitions,
+    SearchDataProvider,
+    HistoryDataProvider
 
   ]
 })

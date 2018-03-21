@@ -1,3 +1,4 @@
+import { HistoryDataProvider } from './../../providers/history-data/history-data';
 import { TimeProvider } from './../../providers/time/time';
 import { HttpProvider } from './../../providers/http/http-provider';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
@@ -53,6 +54,7 @@ export class NewfeedPage {
   nextData = false;
 
   hasData: boolean;
+  userId:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -63,7 +65,8 @@ export class NewfeedPage {
     private streamingMedia: StreamingMedia,
     private modalCtrl: ModalController,
     private timeProvider: TimeProvider,
-    private storage: Storage
+    private storage: Storage,
+    private historyData:HistoryDataProvider
   ) {
     //for retry
     this.retryTime = 0;
@@ -114,6 +117,14 @@ export class NewfeedPage {
     this.storage.get('pagesFeed').then((val) => {
       if (val != null) {
         this.newsData = val;
+        try {
+          for (let data of this.newsData) {
+            data.created_time = this.timeProvider.getDiffTime(data.created_time);
+          }
+
+        } catch (error) {
+
+        }
       }
     });
   }
@@ -127,6 +138,7 @@ export class NewfeedPage {
         //assign data to view
 
         this.newsData = result.newsfeed.data;
+        this.storage.set('pagesFeed', this.newsData);
         console.log(this.newsData);
         try {
           for (let data of this.newsData) {
@@ -176,7 +188,7 @@ export class NewfeedPage {
 
         //assign data to view
         this.newsData = result.newsfeed.data;
-
+        this.storage.set('pagesFeed', this.newsData);
         try {
           for (let data of this.newsData) {
             data.created_time = this.timeProvider.getDiffTime(data.created_time);
@@ -185,7 +197,7 @@ export class NewfeedPage {
         } catch (error) {
 
         }
-        this.storage.set('pagesFeed', this.newsData);
+        
         this.storage.set('hasData', true);
         console.log("Success : " + JSON.stringify(result));
 
@@ -319,6 +331,12 @@ export class NewfeedPage {
       console.log(value);
     });
 
+  }
+  likePost(pageid,postid){
+    this.historyData.addLikeData({pageid:pageid,postid:postid});
+  }
+  dislikePost(postid,pageid){
+    this.historyData.addDisLikeData({pageid:pageid,postid:postid});
   }
   playVideo(uid) {
     this.httpProvider.getSource(uid).then((result) => {

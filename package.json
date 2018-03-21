@@ -72,7 +72,15 @@
             "cordova-plugin-screen-orientation": {},
             "com.telerik.plugins.nativepagetransitions": {},
             "cordova-plugin-nativestorage": {},
-            "com.hutchind.cordova.plugins.streamingmedia": {}
+            "com.hutchind.cordova.plugins.streamingmedia": {},
+            "cordova-plugin-ionic": {
+                "APP_ID": "dc6d05a1",
+                "CHANNEL_NAME": "background",
+                "UPDATE_METHOD": "none",
+                "WARN_DEBUG": "true",
+                "UPDATE_API": "https://api.ionicjs.com",
+                "MAX_STORE": "2"
+            }
         },
         "platforms": [
             "android"

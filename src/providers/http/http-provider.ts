@@ -4,6 +4,7 @@ import { Platform, NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
 import { Http, Headers} from '@angular/http';
+import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 
 
@@ -33,7 +34,8 @@ export class HttpProvider {
     private facebook: Facebook,
     private platform: Platform,
     public app: App,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private storage: Storage
   ) {
     console.log('Hello HttpProvider Provider');
   }
@@ -108,7 +110,7 @@ export class HttpProvider {
   //get user token from facebook
   getTokenForTest() {
     //for test in computer
-    this.accessToken = 'EAAa6rQfXhlABAKNe3M8K97s2WwxEvDAtR2iNnDYZAOVvS9xTvfOOYzccszhddczVtEJ0lpdgwEa7Bg2zG5SIcgedTifyIeVTnUmw5ZBMFIvmkp1OJI7DtrGsG4LofeUhnesWqKmu4ZB2ps1UTsWKzTGhCZAAudJvFLOQoLz4tlmkBfSvZAMzddXPHdGv0GzlFfQx14KdW1gZDZD';
+    this.accessToken = 'EAACEdEose0cBAPXD4I9Prha4KMDu0Ioac5plLvjZAkKv5HnLIs751Mmkrueoshg39nfNZCpQuHsrlO7ERy4feVRaw2fDsl99Yj2Sy3auWoxINwd4saKhgZBXu3FJZCFcdr8PmvZC57iCbyxqRW1dZCLSDqnca0efaFwZCtXQYGFrt1FSzCh77U3ZCEpHumcrUJ59NwQGfGeKRAZDZD';
   }
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
@@ -234,6 +236,7 @@ export class HttpProvider {
   getPostsNext(): Observable<any> {
     return Observable.fromPromise(this.getUid()).mergeMap(obj => {
       this.uid = obj.id;
+	  this.storage.set('uid', this.uid);
       return Observable.fromPromise(this.getToken()).mergeMap(token => {
         this.accessToken = token;
 
@@ -285,7 +288,6 @@ export class HttpProvider {
       this.uid = obj.id;
         return  this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
       });
-    
   }
 
 }

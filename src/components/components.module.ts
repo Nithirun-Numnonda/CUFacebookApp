@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
+import { SearchBarComponent } from './search-bar/search-bar';
 
 @NgModule({
-	declarations: [],
+	declarations: [SearchBarComponent],
 	imports: [],
-	exports: []
+	exports: [SearchBarComponent]
 })
 export class ComponentsModule {}

@@ -9,9 +9,10 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-button full clear (click)='logout()'>Log Out</button>
-    <button ion-button *ngIf='!isShowCredit' (click)='showCredit()'>Show Credit</button>
-    <button ion-button *ngIf='isShowCredit' (click)='showCredit()'>Hide Credit</button>
+    <button ion-button full (click)='logout()'>Log Out</button>
+    <button ion-button full (click)='search()'>Search</button>
+    <button ion-button  full *ngIf='!isShowCredit' (click)='showCredit()'>Show Credit</button>
+    <button ion-button full *ngIf='isShowCredit' (click)='showCredit()'>Hide Credit</button>
     <ion-card *ngIf='isShowCredit'>
       <div>Icons made by
         <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from

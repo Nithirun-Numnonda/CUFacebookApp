@@ -19,6 +19,7 @@ import { App } from 'ionic-angular';
 export class SettingPage {
   homePage:HomePage;
   isShowCredit:boolean=false;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,private facebook:Facebook,private app:App,private loadingController:LoadingController) {
   }
 
@@ -40,6 +41,9 @@ export class SettingPage {
       console.log(error);
     })
     
+  }
+  search(){
+    this.navCtrl.push('searchPage')
   }
   showCredit(){
     this.isShowCredit=!this.isShowCredit
