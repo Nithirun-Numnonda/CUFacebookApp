@@ -1,3 +1,4 @@
+import { SearchDataProvider } from './../../providers/search-data/search-data';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform, Content, Navbar } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
@@ -25,8 +26,8 @@ export class DashboardPage {
   @ViewChild('barCanvas') barCanvas: ElementRef;
   barChart: any;
   createTime: Array<string>;
-  total_reactions: Array<string>;
-  total_comments: Array<string>;
+  total_reactions: Array<any>;
+  total_comments: Array<any>;
   nativeEle: any;
   maxReactionsPost: any;
   maxReactionsMsg: any;
@@ -34,6 +35,9 @@ export class DashboardPage {
   maxCommentsPost: any;
   maxCommentsMsg: any;
   maxCommentsPic: any;
+  dayComments: Array<any>;
+  dayLikes: Array<any>;
+  segment: any;
 
   //for Data facebook
   commentsData: any;
@@ -77,7 +81,8 @@ export class DashboardPage {
     private loadingController: LoadingController,
     public modalCtrl: ModalController,
     private platform: Platform,
-    private storage: Storage
+    private storage: Storage,
+    private searchData: SearchDataProvider
   ) {
     //initial default parameter
     this.hourValue = this.hours[0];
@@ -91,8 +96,11 @@ export class DashboardPage {
     this.createTime = [];
     this.total_comments = [];
     this.total_reactions = [];
-
+    this.dayComments = [0,0,0,0,0,0,0];
+    this.dayLikes = [0,0,0,0,0,0,0];
+    this.segment = "post";
     this.sortByTime = 'Last 3 months';
+
   }
   //call when view did load
   ionViewDidLoad() {
@@ -233,6 +241,9 @@ export class DashboardPage {
                 if (data.total_comments != 0 || data.total_reactions != 0) {
                   var newDate = new Date(data.created_time);
                   //console.log(newDate.toDateString());
+                  this.dayComments[newDate.getDay()]=this.dayComments[newDate.getDay()]+data.total_comments;
+                  this.dayLikes[newDate.getDay()]=this.dayLikes[newDate.getDay()]+data.total_reactions;
+                  //alert(this.dayLikes[newDate.getDay()]);
                   this.createTime.push(newDate.toDateString());
                   this.total_comments.push(data.total_comments);
                   this.total_reactions.push(data.total_reactions);
@@ -250,14 +261,22 @@ export class DashboardPage {
                 }
               }
             }
+            if (this.reactionsData) {
+              for (let data of this.reactionsData) {
+                this.searchData.addItem(data.name, data._uid, "friends");
+              }
+            }
+
             if (this.pageTriger == "chart")
-              this.createGraph();
+              this.createGraph(this.segment);
             this.storage.set('commentsData', this.commentsData);
             this.storage.set('reactionsData', this.reactionsData);
             this.storage.set('postsSummaryData', this.postsSummaryData);
             this.storage.set('createTime', this.createTime);
             this.storage.set('total_comments', this.total_comments);
             this.storage.set('total_reactions', this.total_reactions);
+            this.storage.set('dayComments', this.dayComments);
+            this.storage.set('dayLikes', this.dayLikes);
             this.storage.set('hasDashboardData', true);
             if (this.platform.is('cordova')) {
               if (this.postsSummaryData)
@@ -320,7 +339,7 @@ export class DashboardPage {
             }
           }
           if (this.pageTriger == "chart")
-            this.createGraph();
+            this.createGraph("post");
           this.retryTime = 0;
           this.httpProvider.setUid(result._uid);
         },
@@ -402,7 +421,7 @@ export class DashboardPage {
               }
             }
             if (this.pageTriger == "chart")
-              this.createGraph();
+              this.createGraph(this.segment);
             //          console.log("Success : " + JSON.stringify(result));
             if (this.platform.is('cordova')) {
               if (this.postsSummaryData)
@@ -509,12 +528,22 @@ export class DashboardPage {
     this.storage.get('total_reactions').then((val) => {
       if (val != null) {
         this.total_reactions = val;
-        this.createGraph();
+        this.createGraph(this.segment);
       }
     });
     this.storage.get('wordCloud').then((val) => {
       if (val != null) {
         this.wordCloud = val;
+      }
+    });
+    this.storage.get('dayComments').then((val) => {
+      if (val != null) {
+        this.dayComments = val;
+      }
+    });
+    this.storage.get('dayLikes').then((val) => {
+      if (val != null) {
+        this.dayLikes = val;
       }
     });
     this.storage.get('maxCommentsMsg').then((val) => {
@@ -549,54 +578,104 @@ export class DashboardPage {
     });
   }
 
+
+  segmentChanged(segment){
+    this.createGraph(segment);
+  }
   //for create graph
-  createGraph() {
+  createGraph(typeOfGraph) {
     if (typeof this.barChart != 'undefined') {
       this.barChart.destroy();
     }
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
+    if (typeOfGraph == "post") {
+      this.barChart = new Chart(this.barCanvas.nativeElement, {
 
-      type: 'bar',
-      data: {
-        labels: this.createTime,
-        datasets: [{
-          label: 'Total comments',
-          data: this.total_comments,
-          backgroundColor: "#bae1ff",
-          borderWidth: 1
-        }, {
-          label: 'Total reactions',
-          data: this.total_reactions,
-          backgroundColor: "#ffb3ba",
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: false,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }],
-          xAxes: [{
-            ticks: {
-              minRotation: 90,
-              fontSize: 10
-            }
+        type: 'bar',
+        data: {
+          labels: this.createTime,
+          datasets: [{
+            label: 'Total comments',
+            data: this.total_comments,
+            backgroundColor: "#bae1ff",
+            borderWidth: 1
+          }, {
+            label: 'Total reactions',
+            data: this.total_reactions,
+            backgroundColor: "#ffb3ba",
+            borderWidth: 1
           }]
         },
-        layout: {
-          padding: {
-            left: 2,
-            right: 2,
-            top: 0,
-            bottom: 2
+        options: {
+          responsive: false,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                minRotation: 90,
+                fontSize: 10
+              }
+            }]
+          },
+          layout: {
+            padding: {
+              left: 2,
+              right: 2,
+              top: 0,
+              bottom: 2
+            }
           }
         }
-      }
 
-    });
+      });
+    }else{
+      this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+        type: 'bar',
+        data: {
+          labels: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          datasets: [{
+            label: 'Total comments',
+            data: this.dayComments,
+            backgroundColor: "#bae1ff",
+            borderWidth: 1
+          }, {
+            label: 'Total reactions',
+            data: this.dayLikes,
+            backgroundColor: "#ffb3ba",
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: false,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                minRotation: 90,
+                fontSize: 10
+              }
+            }]
+          },
+          layout: {
+            padding: {
+              left: 2,
+              right: 2,
+              top: 0,
+              bottom: 2
+            }
+          }
+        }
+
+      });
+    }
   }
   //for switch UI
   trigerPage() {
@@ -607,7 +686,7 @@ export class DashboardPage {
       this.pageTriger = 'chart';
       this.content.scrollToTop();
       setTimeout(() => {
-        this.createGraph();
+        this.createGraph(this.segment);
       }, 200);
 
     }

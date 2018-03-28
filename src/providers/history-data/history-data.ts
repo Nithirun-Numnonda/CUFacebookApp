@@ -1,4 +1,4 @@
-import { Http,Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
@@ -28,13 +28,13 @@ export class HistoryDataProvider {
   addLikeData(data) {
     this.likeData.push(data);
     alert("like " + this.likeData.length);
-    if (this.likeData.length > 5) {
+    if (this.likeData.length >= 5) {
       this.sendData();
     }
   }
   public addDisLikeData(data) {
     this.dislikeData.push(data);
-    if (this.dislikeData.length > 5) {
+    if (this.dislikeData.length >= 5) {
       this.sendData();
     }
   }
@@ -45,15 +45,14 @@ export class HistoryDataProvider {
     alert(this.likeData);
     this.storage.get('uid').then((val) => {
       if (val != null) {
-        
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        this.http.post('http://103.233.194.200:8080/historyData/' + val, JSON.stringify({ likeData: { data: this.likeData }, dislikeData: { data: this.dislikeData } }),options).subscribe((result)=>{
+        this.http.post('http://103.233.194.200:8080/historyData/' + val, JSON.stringify({ likeData: { data: this.likeData }, dislikeData: { data: this.dislikeData } }), options).subscribe((result) => {
           alert(JSON.stringify(result.json()));
           this.likeData = [];
-        this.dislikeData = [];          
+          this.dislikeData = [];
         });
-        
+
       }
 
     });

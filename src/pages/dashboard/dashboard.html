@@ -31,6 +31,22 @@
   </ion-header>
 
   <div *ngIf="pageTriger.match('chart')" class='dashboardContent'>
+    <ion-card>
+      <ion-segment [(ngModel)]="segment" color="primary" (ionChange)="segmentChanged(segment)">
+        <ion-segment-button value="post">
+          Posts
+        </ion-segment-button>
+        <ion-segment-button value="day">
+          Days
+        </ion-segment-button>
+        <ion-segment-button value="am">
+          AM.
+        </ion-segment-button>
+        <ion-segment-button value="pm">
+          PM.
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card>
     <ion-card has-header="true">
       <ion-card-header id="ion-card-header2">
         Top posts in {{sortByTime}}

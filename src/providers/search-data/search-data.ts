@@ -10,17 +10,13 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class SearchDataProvider {
-  items:any;
+  items:Array<any>;
   constructor(public http: Http) {
-    this.items = [
-      {title: 'one'},
-      {title: 'two'},
-      {title: 'three'},
-      {title: 'four'},
-      {title: 'five'},
-      {title: 'six'}
-  ]
-
+    this.items = [];
+    this.addItem("Nithirun Numnonda","1692938524049629","friends");
+}
+addItem(name,id,type){
+  this.items.push({title:name,id:id,type:type});
 }
 
 filterItems(searchTerm){

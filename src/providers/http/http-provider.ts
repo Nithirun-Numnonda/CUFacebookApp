@@ -274,6 +274,9 @@ export class HttpProvider {
   getFriends() {
     return this.facebook.api('/me/friends', ['user_friends']);
   }
+  getPages() {
+    return this.facebook.api('/me/likes', ['user_likes']);
+  }
   getWordCloudForTest() {
     this.getUidForTest();
     

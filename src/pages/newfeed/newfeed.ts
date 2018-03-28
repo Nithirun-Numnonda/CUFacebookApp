@@ -54,7 +54,7 @@ export class NewfeedPage {
   nextData = false;
 
   hasData: boolean;
-  userId:any;
+  userId: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -66,7 +66,7 @@ export class NewfeedPage {
     private modalCtrl: ModalController,
     private timeProvider: TimeProvider,
     private storage: Storage,
-    private historyData:HistoryDataProvider
+    private historyData: HistoryDataProvider
   ) {
     //for retry
     this.retryTime = 0;
@@ -116,15 +116,16 @@ export class NewfeedPage {
 
     this.storage.get('pagesFeed').then((val) => {
       if (val != null) {
-        this.newsData = val;
         try {
-          for (let data of this.newsData) {
+          for (let data of val) {
             data.created_time = this.timeProvider.getDiffTime(data.created_time);
           }
+          this.newsData = val;
 
         } catch (error) {
 
         }
+  
       }
     });
   }
@@ -188,16 +189,18 @@ export class NewfeedPage {
 
         //assign data to view
         this.newsData = result.newsfeed.data;
-        this.storage.set('pagesFeed', this.newsData);
-        try {
-          for (let data of this.newsData) {
-            data.created_time = this.timeProvider.getDiffTime(data.created_time);
+        this.storage.set('pagesFeed', this.newsData).then(()=>{
+          try {
+            for (let data of this.newsData) {
+              data.created_time = this.timeProvider.getDiffTime(data.created_time);
+            }
+  
+          } catch (error) {
+  
           }
+        });
+       
 
-        } catch (error) {
-
-        }
-        
         this.storage.set('hasData', true);
         console.log("Success : " + JSON.stringify(result));
 
@@ -332,11 +335,11 @@ export class NewfeedPage {
     });
 
   }
-  likePost(pageid,postid){
-    this.historyData.addLikeData({pageid:pageid,postid:postid});
+  likePost(pageid, postid) {
+    this.historyData.addLikeData({ pageid: pageid, postid: postid });
   }
-  dislikePost(pageid,postid){
-    this.historyData.addDisLikeData({pageid:pageid,postid:postid});
+  dislikePost(pageid, postid) {
+    this.historyData.addDisLikeData({ pageid: pageid, postid: postid });
   }
   playVideo(uid) {
     this.httpProvider.getSource(uid).then((result) => {

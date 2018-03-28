@@ -1,6 +1,6 @@
 import { SearchDataProvider } from './../../providers/search-data/search-data';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 /**
  * Generated class for the SearchPage page.
@@ -20,7 +20,7 @@ export class SearchPage {
   searchTerm: string = '';
   items: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public dataService:SearchDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public dataService:SearchDataProvider,private modalCtrl:ModalController) {
   }
 
   ionViewDidLoad() {
@@ -28,9 +28,12 @@ export class SearchPage {
     this.setFilteredItems();
   }
   setFilteredItems() {
- 
     this.items = this.dataService.filterItems(this.searchTerm);
-
-}
+  }
+  presentProfileModal(uid: string, user_name: string,type:string) {
+    //console.log(uid);
+    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name,type:type});
+    profileModal.present();
+  }
 
 }
