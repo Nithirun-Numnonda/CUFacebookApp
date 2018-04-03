@@ -4,9 +4,12 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<!-- <expandable-header [scrollArea]="mycontent" headerHeight="125">
+   <search-bar></search-bar> 
+  <ion-navbar style="display:none"></ion-navbar>
+</expandable-header> -->
 
-<ion-navbar style="display:none"></ion-navbar> 
-<ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;">
+<ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;" fullscreen #mycontent>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
@@ -24,32 +27,32 @@
         <p>{{item.created_time}}</p>
       </ion-item>
 
-      <img  (click)='playVideo(item.id)' src={{item.full_picture}} />
+      <img (click)='playVideo(item.id)' src={{item.full_picture}} />
 
       <ion-card-content>
         <div *ngFor="let str of item.message.split('\n')">
           {{ str }}
-    </div>
+        </div>
       </ion-card-content>
       <div>
         <ion-row style="border-bottom: 1px solid gray;">
 
           <ion-col col-2>
-          <ion-label style="margin-left:10px;">
-            <img src="assets/imgs/icon/flame.png" style="width:24px;">
-          </ion-label>
+            <ion-label style="margin-left:10px;">
+              <img src="assets/imgs/icon/flame.png" style="width:24px;">
+            </ion-label>
           </ion-col>
           <ion-col col-3>
-          <ion-label>{{item.reactions_summary}}</ion-label>
-        </ion-col>
-        <ion-col col-2>
-          <ion-label>
-            <img src="assets/imgs/icon/chat.png" style="width:24px;">
-          </ion-label>
-        </ion-col>
-        <ion-col col-5>
-          <ion-label>{{item.comments_summary}}</ion-label>
-        </ion-col>
+            <ion-label>{{item.reactions_summary}}</ion-label>
+          </ion-col>
+          <ion-col col-2>
+            <ion-label>
+              <img src="assets/imgs/icon/chat.png" style="width:24px;">
+            </ion-label>
+          </ion-col>
+          <ion-col col-5>
+            <ion-label>{{item.comments_summary}}</ion-label>
+          </ion-col>
 
         </ion-row>
       </div>

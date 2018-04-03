@@ -13,15 +13,6 @@
         <div>
           <ion-title *ngSwitchCase="'commentsData'" id="subheader">Top Comments Users on Your Posts</ion-title>
           <ion-title *ngSwitchCase="'likesData'" id="subheader">Top Likes Users on Your Posts</ion-title>
-
-          <ion-segment [(ngModel)]="typeData" color="primary">
-            <ion-segment-button value="commentsData">
-              Top Commenters
-            </ion-segment-button>
-            <ion-segment-button value="likesData">
-              Top Reactioners
-            </ion-segment-button>
-          </ion-segment>
         </div>
       </div>
       <div *ngIf="pageTriger.match('chart')">
@@ -44,6 +35,9 @@
         </ion-segment-button>
         <ion-segment-button value="pm">
           PM.
+        </ion-segment-button>
+        <ion-segment-button value="month">
+          Month
         </ion-segment-button>
       </ion-segment>
     </ion-card>
@@ -120,6 +114,16 @@
 
   </div>
   <div *ngIf="pageTriger.match('list')" class='dashboardContent'>
+    <ion-card>
+      <ion-segment [(ngModel)]="typeData" color="primary">
+        <ion-segment-button value="commentsData">
+          Top Commenters
+        </ion-segment-button>
+        <ion-segment-button value="likesData">
+          Top Reactioners
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card>
     <div [ngSwitch]="typeData">
       <div *ngSwitchCase="'commentsData'">
         <ion-list *ngFor="let item of commentsData">

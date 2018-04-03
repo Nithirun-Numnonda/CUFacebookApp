@@ -37,6 +37,15 @@ export class DashboardPage {
   maxCommentsPic: any;
   dayComments: Array<any>;
   dayLikes: Array<any>;
+  hoursComments: Array<any>;
+  hoursLikes: Array<any>;
+  amComments: Array<any>;
+  amLikes: Array<any>;
+  pmComments: Array<any>;
+  pmLikes: Array<any>;
+  monthLabels: Array<any>;
+  monthComments: Array<any>;
+  monthLikes: Array<any>;
   segment: any;
 
   //for Data facebook
@@ -96,8 +105,17 @@ export class DashboardPage {
     this.createTime = [];
     this.total_comments = [];
     this.total_reactions = [];
-    this.dayComments = [0,0,0,0,0,0,0];
-    this.dayLikes = [0,0,0,0,0,0,0];
+    this.dayComments = [0, 0, 0, 0, 0, 0, 0];
+    this.dayLikes = [0, 0, 0, 0, 0, 0, 0];
+    this.hoursComments = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.hoursLikes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.amLikes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.amComments = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.pmLikes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.pmComments = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.monthLabels = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+    this.monthComments = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.monthLikes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     this.segment = "post";
     this.sortByTime = 'Last 3 months';
 
@@ -231,35 +249,9 @@ export class DashboardPage {
             this.commentsData = result.comments.data;
             this.reactionsData = result.reactions.data;
             this.postsSummaryData = result.post_summary.data;
-            this.createTime = [];
-            this.total_comments = [];
-            this.total_reactions = [];
+
             if (this.postsSummaryData) {
-              var maxReactions = 0;
-              var maxComments = 0;
-              for (let data of this.postsSummaryData) {
-                if (data.total_comments != 0 || data.total_reactions != 0) {
-                  var newDate = new Date(data.created_time);
-                  //console.log(newDate.toDateString());
-                  this.dayComments[newDate.getDay()]=this.dayComments[newDate.getDay()]+data.total_comments;
-                  this.dayLikes[newDate.getDay()]=this.dayLikes[newDate.getDay()]+data.total_reactions;
-                  //alert(this.dayLikes[newDate.getDay()]);
-                  this.createTime.push(newDate.toDateString());
-                  this.total_comments.push(data.total_comments);
-                  this.total_reactions.push(data.total_reactions);
-                }
-                if (data.total_comments > maxComments) {
-                  maxComments = data.total_comments
-                  data.created_time = new Date(data.created_time).toDateString();
-                  this.maxCommentsPost = data;
-                  //console.log(maxComments);
-                }
-                if (data.total_reactions > maxReactions) {
-                  maxReactions = data.total_reactions
-                  data.created_time = new Date(data.created_time).toDateString();
-                  this.maxReactionsPost = data;
-                }
-              }
+              this.prepareGraphData();
             }
             if (this.reactionsData) {
               for (let data of this.reactionsData) {
@@ -272,11 +264,7 @@ export class DashboardPage {
             this.storage.set('commentsData', this.commentsData);
             this.storage.set('reactionsData', this.reactionsData);
             this.storage.set('postsSummaryData', this.postsSummaryData);
-            this.storage.set('createTime', this.createTime);
-            this.storage.set('total_comments', this.total_comments);
-            this.storage.set('total_reactions', this.total_reactions);
-            this.storage.set('dayComments', this.dayComments);
-            this.storage.set('dayLikes', this.dayLikes);
+
             this.storage.set('hasDashboardData', true);
             if (this.platform.is('cordova')) {
               if (this.postsSummaryData)
@@ -546,6 +534,41 @@ export class DashboardPage {
         this.dayLikes = val;
       }
     });
+    this.storage.get('amComments').then((val) => {
+      if (val != null) {
+        this.amComments = val;
+      }
+    });
+    this.storage.get('amLikes').then((val) => {
+      if (val != null) {
+        this.amLikes = val;
+      }
+    });
+    this.storage.get('pmComments').then((val) => {
+      if (val != null) {
+        this.pmComments = val;
+      }
+    });
+    this.storage.get('pmLikes').then((val) => {
+      if (val != null) {
+        this.pmLikes = val;
+      }
+    });
+    this.storage.get('monthLabels').then((val) => {
+      if (val != null) {
+        this.monthLabels = val;
+      }
+    });
+    this.storage.get('monthComments').then((val) => {
+      if (val != null) {
+        this.monthComments = val;
+      }
+    });
+    this.storage.get('monthLikes').then((val) => {
+      if (val != null) {
+        this.monthLikes = val;
+      }
+    });
     this.storage.get('maxCommentsMsg').then((val) => {
       if (val != null) {
         this.maxCommentsMsg = val;
@@ -579,8 +602,83 @@ export class DashboardPage {
   }
 
 
-  segmentChanged(segment){
+  segmentChanged(segment) {
     this.createGraph(segment);
+  }
+  //prepare data
+  prepareGraphData() {
+    //initial data
+    var maxReactions = 0;
+    var maxComments = 0;
+    this.createTime = [];
+    this.total_comments = [];
+    this.total_reactions = [];
+    this.dayComments = [0, 0, 0, 0, 0, 0, 0];
+    this.dayLikes = [0, 0, 0, 0, 0, 0, 0];
+    this.hoursComments = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.hoursLikes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.monthLabels = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+    this.monthComments = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.monthLikes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    for (let data of this.postsSummaryData) {
+      if (data.total_comments != 0 || data.total_reactions != 0) {
+        var newDate = new Date(data.created_time);
+
+        //day
+        this.dayComments[newDate.getDay()] = this.dayComments[newDate.getDay()] + data.total_comments;
+        this.dayLikes[newDate.getDay()] = this.dayLikes[newDate.getDay()] + data.total_reactions;
+        //am and pm
+        this.hoursComments[newDate.getHours()] = this.hoursComments[newDate.getHours()] + data.total_comments;
+        this.hoursLikes[newDate.getHours()] = this.hoursLikes[newDate.getHours()] + data.total_reactions;
+        //month
+        this.monthComments[newDate.getMonth()] = this.monthComments[newDate.getMonth()] + data.total_comments;
+        this.monthLikes[newDate.getMonth()] = this.monthLikes[newDate.getMonth()] + data.total_reactions;
+        //post
+        this.createTime.push(newDate.toDateString());
+        this.total_comments.push(data.total_comments);
+        this.total_reactions.push(data.total_reactions);
+      }
+      if (data.total_comments > maxComments) {
+        maxComments = data.total_comments
+        data.created_time = new Date(data.created_time).toDateString();
+        this.maxCommentsPost = data;
+        //console.log(maxComments);
+      }
+      if (data.total_reactions > maxReactions) {
+        maxReactions = data.total_reactions
+        data.created_time = new Date(data.created_time).toDateString();
+        this.maxReactionsPost = data;
+      }
+    }
+
+    for (var i = 0; i < 12; i++) {
+      this.amComments[i] = this.hoursComments[i + 1];
+      this.amLikes[i] = this.hoursLikes[i + 1];
+    }
+    for (var i = 0; i < 11; i++) {
+      this.pmComments[i] = this.hoursComments[i + 13];
+      this.pmLikes[i] = this.hoursLikes[i + 13];
+    }
+    for (var i = 0; i < 12; i++) {
+      if (this.monthComments[i] == 0 && this.monthLikes[i] == 0)
+        this.monthLabels[i] = "";
+    }
+    this.monthLabels = this.monthLabels.filter(month => month != "");
+    this.pmComments[11] = this.hoursComments[0];
+    this.pmLikes[11] = this.hoursLikes[0];
+    this.storage.set('createTime', this.createTime);
+    this.storage.set('total_comments', this.total_comments);
+    this.storage.set('total_reactions', this.total_reactions);
+    this.storage.set('dayComments', this.dayComments);
+    this.storage.set('dayLikes', this.dayLikes);
+    this.storage.set('amComments', this.amComments);
+    this.storage.set('amLikes', this.amLikes);
+    this.storage.set('pmComments', this.pmComments);
+    this.storage.set('pmLikes', this.pmLikes);
+    this.storage.set('monthLabels',this.monthLabels);
+    this.storage.set('monthComments',this.monthComments);
+    this.storage.set('monthLikes',this.monthLikes);
   }
   //for create graph
   createGraph(typeOfGraph) {
@@ -631,12 +729,12 @@ export class DashboardPage {
         }
 
       });
-    }else{
+    } else if (typeOfGraph == "day") {
       this.barChart = new Chart(this.barCanvas.nativeElement, {
 
         type: 'bar',
         data: {
-          labels: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
           datasets: [{
             label: 'Total comments',
             data: this.dayComments,
@@ -645,6 +743,138 @@ export class DashboardPage {
           }, {
             label: 'Total reactions',
             data: this.dayLikes,
+            backgroundColor: "#ffb3ba",
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: false,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                minRotation: 90,
+                fontSize: 10
+              }
+            }]
+          },
+          layout: {
+            padding: {
+              left: 2,
+              right: 2,
+              top: 0,
+              bottom: 2
+            }
+          }
+        }
+
+      });
+    } else if (typeOfGraph == "am") {
+      this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+        type: 'bar',
+        data: {
+          labels: ["1 AM", "2 AM", "3 AM", "4 AM", "5 AM", "6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 AM"],
+          datasets: [{
+            label: 'Total comments',
+            data: this.amComments,
+            backgroundColor: "#bae1ff",
+            borderWidth: 1
+          }, {
+            label: 'Total reactions',
+            data: this.amLikes,
+            backgroundColor: "#ffb3ba",
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: false,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                minRotation: 90,
+                fontSize: 10
+              }
+            }]
+          },
+          layout: {
+            padding: {
+              left: 2,
+              right: 2,
+              top: 0,
+              bottom: 2
+            }
+          }
+        }
+
+      });
+    } else if (typeOfGraph == "pm") {
+      this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+        type: 'bar',
+        data: {
+          labels: ["1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM", "11 PM", "12 PM"],
+          datasets: [{
+            label: 'Total comments',
+            data: this.pmComments,
+            backgroundColor: "#bae1ff",
+            borderWidth: 1
+          }, {
+            label: 'Total reactions',
+            data: this.pmLikes,
+            backgroundColor: "#ffb3ba",
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: false,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                minRotation: 90,
+                fontSize: 10
+              }
+            }]
+          },
+          layout: {
+            padding: {
+              left: 2,
+              right: 2,
+              top: 0,
+              bottom: 2
+            }
+          }
+        }
+
+      });
+    } else if (typeOfGraph == "month") {
+      this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+        type: 'bar',
+        data: {
+          labels: this.monthLabels,
+          datasets: [{
+            label: 'Total comments',
+            data: this.monthComments,
+            backgroundColor: "#bae1ff",
+            borderWidth: 1
+          }, {
+            label: 'Total reactions',
+            data: this.monthLikes,
             backgroundColor: "#ffb3ba",
             borderWidth: 1
           }]

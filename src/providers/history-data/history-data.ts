@@ -27,7 +27,7 @@ export class HistoryDataProvider {
   }
   addLikeData(data) {
     this.likeData.push(data);
-    alert("like " + this.likeData.length);
+    //alert("like " + this.likeData.length);
     if (this.likeData.length >= 5) {
       this.sendData();
     }

@@ -20,6 +20,9 @@ export class SearchBarComponent {
     constructor(public navCtrl: NavController, public dataService: SearchDataProvider) {
  
     }
+    search(){
+        this.navCtrl.push('searchPage')
+      }
  
     ionViewDidLoad() {
  
