@@ -2,22 +2,22 @@ import { HistoryDataProvider } from './../../providers/history-data/history-data
 import { TimeProvider } from './../../providers/time/time';
 import { HttpProvider } from './../../providers/http/http-provider';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild ,ViewChildren,QueryList } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, Platform, ModalController, Navbar } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-// import {
-//   StackConfig,
-//   Stack,
-//   Card,
-//   ThrowEvent,
-//   DragEvent,
-//   SwingStackComponent,
-//   SwingCardComponent
-// } from 'angular2-swing';
+import {
+  StackConfig,
+  Stack,
+  Card,
+  ThrowEvent,
+  DragEvent,
+  Direction,
+  SwingStackComponent,
+  SwingCardComponent} from 'angular2-swing';
 
 /**
  * Generated class for the NewfeedPage page.
@@ -35,12 +35,15 @@ import 'rxjs/add/operator/map';
 export class NewfeedPage {
   // @ViewChild('myswing1') swingStack: SwingStackComponent;
   // @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>; 
+  @ViewChild('myswing1') swingStack: SwingStackComponent;
+  @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
   @ViewChild(Content) content: Content;
   @ViewChild(Navbar) navBar: Navbar;
   newsData: any;
   loading: any;
   cards: Array<any>;
-  // stackConfig: StackConfig;
+  stackConfig: StackConfig;
+  
   recentCard: string = '';
   public posts: Observable<any[]>;
 
@@ -68,6 +71,21 @@ export class NewfeedPage {
     private storage: Storage,
     private historyData: HistoryDataProvider
   ) {
+    this.stackConfig = {
+      allowedDirections: [Direction.LEFT, Direction.RIGHT],
+      throwOutConfidence: (offsetX: number, offsetY: number, targetElement: HTMLElement) => {
+        // you would put ur logic based on offset & targetelement to determine
+        // what is your throwout confidence
+        const xConfidence = Math.min(Math.abs(offsetX) / (targetElement.offsetWidth / 1.5), 1);
+
+        return xConfidence;
+      },
+      transform: (element, x) => {
+        //  console.log("click4");
+          this.onItemMove(element, x);
+        },
+      minThrowOutDistance: 900   // default value is 400
+    };
     //for retry
     this.retryTime = 0;
     this.videoOptions = {
@@ -193,6 +211,7 @@ export class NewfeedPage {
           try {
             for (let data of this.newsData) {
               data.created_time = this.timeProvider.getDiffTime(data.created_time);
+              
             }
   
           } catch (error) {
@@ -335,11 +354,15 @@ export class NewfeedPage {
     });
 
   }
-  likePost(pageid, postid) {
-    this.historyData.addLikeData({ pageid: pageid, postid: postid });
+  likePost(metaData,i) {
+    var card = document.getElementById("card_"+i);
+    this.historyData.addLikeData(metaData);
+    card.style.display="none";
   }
-  dislikePost(pageid, postid) {
-    this.historyData.addDisLikeData({ pageid: pageid, postid: postid });
+  dislikePost(metaData,i) {
+    var card = document.getElementById("card_"+i);
+    this.historyData.addDisLikeData(metaData);
+    card.style.display="none";
   }
   playVideo(uid) {
     this.httpProvider.getSource(uid).then((result) => {
@@ -364,8 +387,12 @@ export class NewfeedPage {
     let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "pages" });
     profileModal.present();
   }
-
-  // ngAfterViewInit() {
+  seeComments(postId: string) {
+    //console.log(uid);
+    let profileModal = this.modalCtrl.create('CommentsPage', { postId: postId});
+    profileModal.present();
+  }
+  
   //   // Either subscribe in controller or set in HTML
   //   this.swingStack.throwin.subscribe((event: DragEvent) => {
   //     event.target.style.background = '#ffffff';
@@ -377,7 +404,11 @@ export class NewfeedPage {
 
   ////part tinder
   // Called whenever we drag an element
-  onItemMove(element, x, y, r) {
+  onItemMove(element, x) {
+    //console.log("click1");
+    //console.log("x :"+x);
+    //console.log("y :"+y);
+    //console.log("r :"+r);
     var color = '';
     var abs = Math.abs(x);
     let min = Math.trunc(Math.min(16 * 16 - abs, 16 * 16));
@@ -385,12 +416,16 @@ export class NewfeedPage {
 
     if (x < 0) {
       color = '#FF' + hexCode + hexCode;
+      
     } else {
       color = '#' + hexCode + 'FF' + hexCode;
+      
     }
 
     element.style.background = color;
-    element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+    //element.style['transform'] = `translateX(0) translate(${x}px)`;
+    // element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, 0px) rotate(0deg)`;
+    element.style['transform'] = `translate(0,0) translateX(${x}px) translateY(0px)`;
   }
   // Connected through HTML
   voteUp(like: boolean) {
@@ -442,6 +477,31 @@ export class NewfeedPage {
     return attachments.data
       .filter(x => x.type == "photo")
       .map(x => x.media.image);
+  }
+  readMore(i){
+    var moretext = document.getElementById("blocktext_"+i);
+    var moretextall = document.getElementById("blocktextall_"+i);
+    var button = document.getElementById("readmore_"+i);
+    moretext.style.display = "none";
+    moretextall.style.display = "block";
+    button.style.display = "none";
+    
+
+  }
+  test(b : boolean){
+    alert(b);
+    if(b){
+      console.log("right");
+    }
+    else{
+      this.cards.pop();
+      console.log("left");
+    }
+  }
+  throwLeft(event:ThrowEvent){
+    alert(event.throwDirection);
+    event.target.style.display="none";
+    alert(event.target.nodeValue);
   }
   ////end part tinder
 }

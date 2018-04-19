@@ -131,6 +131,11 @@ export class DashboardPage {
     this.storage.get('hasDashboardData').then((val) => {
       if (val != null) {
         this.hasData = val;
+        this.httpProvider.getPages().then((result)=>{
+          for(let data of result.data){
+            this.searchData.addItem(data.name,data.id,"pages");
+          }
+        })
       }
       else {
         this.hasData = false;
@@ -252,11 +257,6 @@ export class DashboardPage {
 
             if (this.postsSummaryData) {
               this.prepareGraphData();
-            }
-            if (this.reactionsData) {
-              for (let data of this.reactionsData) {
-                this.searchData.addItem(data.name, data._uid, "friends");
-              }
             }
 
             if (this.pageTriger == "chart")

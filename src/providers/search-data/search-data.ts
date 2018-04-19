@@ -13,7 +13,7 @@ export class SearchDataProvider {
   items:Array<any>;
   constructor(public http: Http) {
     this.items = [];
-    this.addItem("Nithirun Numnonda","1692938524049629","friends");
+    
 }
 addItem(name,id,type){
   this.items.push({title:name,id:id,type:type});

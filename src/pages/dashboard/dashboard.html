@@ -11,12 +11,29 @@
     <ion-toolbar class="btn-wrapper">
       <div [ngSwitch]="typeData" *ngIf="pageTriger.match('list')">
         <div>
-          <ion-title *ngSwitchCase="'commentsData'" id="subheader">Top Comments Users on Your Posts</ion-title>
-          <ion-title *ngSwitchCase="'likesData'" id="subheader">Top Likes Users on Your Posts</ion-title>
+          <ion-row>
+            <ion-col>
+              <ion-title *ngSwitchCase="'commentsData'" id="subheader">Top Commenters Summary
+              </ion-title>
+            </ion-col>
+            <ion-col>
+              <ion-title *ngSwitchCase="'likesData'" id="subheader">Top Reactioners Summary
+              </ion-title>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button icon-only (click)="getDashboard()">
+                <ion-icon name="refresh"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
         </div>
       </div>
       <div *ngIf="pageTriger.match('chart')">
-        <ion-title>Your Posts Summary</ion-title>
+        <ion-title>Your Posts Summary
+          <button ion-button icon-only (click)="getDashboard()">
+            <ion-icon name="refresh"></ion-icon>
+          </button>
+        </ion-title>
       </div>
     </ion-toolbar>
   </ion-header>
@@ -43,7 +60,20 @@
     </ion-card>
     <ion-card has-header="true">
       <ion-card-header id="ion-card-header2">
-        Top posts in {{sortByTime}}
+        <ion-row>
+          <ion-col col-4>Top posts in </ion-col>
+          <ion-col col-8>
+            <ion-select [(ngModel)]="sortByTime" (ionChange)="hasData=false;getDashboard();" class="myCustomSelect">
+              <ion-option>Last 1 day</ion-option>
+              <ion-option>Last 1 week</ion-option>
+              <ion-option>Last 1 month</ion-option>
+              <ion-option>Last 3 months</ion-option>
+              <ion-option>Last 6 months</ion-option>
+              <ion-option>Last 1 year</ion-option>
+              <ion-option>Last 2 years</ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
       </ion-card-header>
 
       <canvas height="350" item-content #barCanvas type></canvas>
@@ -52,7 +82,20 @@
 
     <ion-card *ngIf="maxCommentsPost" has-header="true">
       <ion-card-header text-wrap id="ion-card-header3">
-        Top Post by Comments in {{sortByTime}}
+        <ion-row>
+          <ion-col col-4> Top Post by Comments in </ion-col>
+          <ion-col col-8>
+            <ion-select [(ngModel)]="sortByTime" (ionChange)="getDashboard()" class="myCustomSelect">
+              <ion-option>Last 1 day</ion-option>
+              <ion-option>Last 1 week</ion-option>
+              <ion-option>Last 1 month</ion-option>
+              <ion-option>Last 3 months</ion-option>
+              <ion-option>Last 6 months</ion-option>
+              <ion-option>Last 1 year</ion-option>
+              <ion-option>Last 2 years</ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
       </ion-card-header>
       <ion-card-content>
         <ion-row>
@@ -78,7 +121,20 @@
     </ion-card>
     <ion-card *ngIf="maxReactionsPost">
       <ion-card-header text-wrap id="ion-card-header3">
-        Top Post by Reactions in {{sortByTime}}
+        <ion-row>
+          <ion-col col-4>Top Post by Reactions in </ion-col>
+          <ion-col col-8>
+            <ion-select [(ngModel)]="sortByTime" (ionChange)="getDashboard()" class="myCustomSelect">
+              <ion-option>Last 1 day</ion-option>
+              <ion-option>Last 1 week</ion-option>
+              <ion-option>Last 1 month</ion-option>
+              <ion-option>Last 3 months</ion-option>
+              <ion-option>Last 6 months</ion-option>
+              <ion-option>Last 1 year</ion-option>
+              <ion-option>Last 2 years</ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
       </ion-card-header>
       <ion-card-content>
         <ion-row>
@@ -105,7 +161,20 @@
     </ion-card>
     <ion-card>
       <ion-card-header text-wrap id="ion-card-header3">
-        Word Cloud in {{sortByTime}}
+        <ion-row>
+          <ion-col col-4> Word Cloud in </ion-col>
+          <ion-col col-8>
+            <ion-select [(ngModel)]="sortByTime" (ionChange)="getDashboard()" class="myCustomSelect">
+              <ion-option>Last 1 day</ion-option>
+              <ion-option>Last 1 week</ion-option>
+              <ion-option>Last 1 month</ion-option>
+              <ion-option>Last 3 months</ion-option>
+              <ion-option>Last 6 months</ion-option>
+              <ion-option>Last 1 year</ion-option>
+              <ion-option>Last 2 years</ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
       </ion-card-header>
       <ion-card-content>
         <img [src]='wordCloud'>
@@ -126,6 +195,24 @@
     </ion-card>
     <div [ngSwitch]="typeData">
       <div *ngSwitchCase="'commentsData'">
+        <ion-card has-header="true">
+          <ion-card-header id="ion-card-header3">
+            <ion-row>
+              <ion-col col-6>Top Commenters on Your Posts in </ion-col>
+              <ion-col col-6>
+                <ion-select [(ngModel)]="sortByTime" (ionChange)="hasData=false;getDashboard();" class="myCustomSelect">
+                  <ion-option>Last 1 day</ion-option>
+                  <ion-option>Last 1 week</ion-option>
+                  <ion-option>Last 1 month</ion-option>
+                  <ion-option>Last 3 months</ion-option>
+                  <ion-option>Last 6 months</ion-option>
+                  <ion-option>Last 1 year</ion-option>
+                  <ion-option>Last 2 years</ion-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
         <ion-list *ngFor="let item of commentsData">
           <ion-card no-padding>
             <ion-card-content no-padding>
@@ -165,6 +252,24 @@
         </ion-list>
       </div>
       <div *ngSwitchCase="'likesData'">
+        <ion-card has-header="true">
+          <ion-card-header id="ion-card-header3">
+            <ion-row>
+              <ion-col col-6>Top Reactioners on Your Posts in </ion-col>
+              <ion-col col-6>
+                <ion-select [(ngModel)]="sortByTime" (ionChange)="getDashboard()" class="myCustomSelect">
+                  <ion-option>Last 1 day</ion-option>
+                  <ion-option>Last 1 week</ion-option>
+                  <ion-option>Last 1 month</ion-option>
+                  <ion-option>Last 3 months</ion-option>
+                  <ion-option>Last 6 months</ion-option>
+                  <ion-option>Last 1 year</ion-option>
+                  <ion-option>Last 2 years</ion-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
         <ion-list *ngFor="let item of reactionsData">
           <ion-card no-padding>
             <ion-card-content no-padding>
@@ -194,84 +299,84 @@
                   </ion-col>
                 </ion-row>
                 <ion-row style="text-align: center;">
-                  <ion-col *ngIf="item.like>0" col-2>
+                  <ion-col *ngIf="item.LIKE>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/like.png" style="width:24px;margin-right:3px;">
-                      <label>{{item.like}}</label>
+                      <label>{{item.LIKE}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.love>0" col-2>
+                  <ion-col *ngIf="item.LOVE>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/heart.png" style="width:24px;margin-right:3px;">
-                      <label>{{item.love}}</label>
+                      <label>{{item.LOVE}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.wow>0" col-2>
+                  <ion-col *ngIf="item.WOW>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/surprised.png" style="width:24px;margin-right:3px;">
 
-                      <label>{{item.wow}}</label>
+                      <label>{{item.WOW}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.haha>0" col-2>
+                  <ion-col *ngIf="item.HAHA>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/laughing.png" style="width:24px;margin-right:3px;">
 
-                      <label>{{item.haha}}</label>
+                      <label>{{item.HAHA}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.sad>0" col-2>
+                  <ion-col *ngIf="item.SAD>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/crying.png" style="width:24px;margin-right:3px;">
 
-                      <label>{{item.sad}}</label>
+                      <label>{{item.SAD}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.angry>0" col-2>
+                  <ion-col *ngIf="item.ANGRY>0" col-2>
                     <button ion-button clear small>
-                      <img src="assets/imgs/icon/angry.png" style="width:24px;margin-right:3px;">
+                      <img src="assets/imgs/icon/ANGRY.png" style="width:24px;margin-right:3px;">
 
-                      <label>{{item.angry}}</label>
+                      <label>{{item.ANGRY}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.thankful>0" col-2>
+                  <ion-col *ngIf="item.THANKFUL>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/flower.png" style="width:24px;margin-right:3px;">
 
-                      <label style="margin-left:-10px;">{{item.thankful}}</label>
+                      <label style="margin-left:-10px;">{{item.THANKFUL}}</label>
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.like==0" col-2>
+                  <ion-col *ngIf="item.LIKE==0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/like.png" style="width:24px;opacity: 0.5;">
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.love==0" col-2>
+                  <ion-col *ngIf="item.LOVE==0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/heart.png" style="width:24px;opacity: 0.5;">
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.wow==0" col-2>
+                  <ion-col *ngIf="item.WOW==0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/surprised.png" style="width:24px;opacity: 0.5;">
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.haha==0" col-2>
+                  <ion-col *ngIf="item.HAHA==0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/laughing.png" style="width:24px;opacity: 0.5;">
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.sad==0" col-2>
+                  <ion-col *ngIf="item.SAD==0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/crying.png" style="width:24px;opacity: 0.5;">
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.angry==0" col-2>
+                  <ion-col *ngIf="item.ANGRY==0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/angry.png" style="width:24px;opacity: 0.5;">
                     </button>
                   </ion-col>
-                  <ion-col *ngIf="item.thankful>0" col-2>
+                  <ion-col *ngIf="item.THANKFUL>0" col-2>
                     <button ion-button clear small>
                       <img src="assets/imgs/icon/flower.png" style="width:24px;">
                     </button>
@@ -286,19 +391,6 @@
         <ion-col>
           <button ion-button *ngIf="!isAll" (click)="getAllTops()" color="facebook">See more ...</button>
         </ion-col>
-        <ion-col>
-          <ion-select [(ngModel)]="sortByTime" (ionChange)="getDashboard()">
-            <ion-option>Last 1 day</ion-option>
-            <ion-option>Last 1 week</ion-option>
-            <ion-option>Last 1 month</ion-option>
-            <ion-option>Last 3 months</ion-option>
-            <ion-option>Last 6 months</ion-option>
-            <ion-option>Last 1 year</ion-option>
-            <ion-option>Last 2 years</ion-option>
-          </ion-select>
-        </ion-col>
-
-
       </div>
     </div>
   </div>

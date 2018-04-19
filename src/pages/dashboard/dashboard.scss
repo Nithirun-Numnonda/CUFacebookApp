@@ -30,8 +30,17 @@ page-dashboard {
     #newLine{
         white-space: pre-line!important;
       }
+      .myCustomSelect{
+        max-width: 100% !important;
+        }
+   .ion-select{
     
-   
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    
+  }
+  
     
     
 }
@@ -39,7 +48,7 @@ page-dashboard {
     margin-top: 75px;
 }
 #subheader{
-    font-size: 2px;
+    font-size: 0.5em;
 }
 #subcard{
     margin-left: 10px;
@@ -50,10 +59,5 @@ page-dashboard {
 .card {
     height: 100%;
   }
-  .ion-select{
-    width: 100%;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    
-  }
+  
 

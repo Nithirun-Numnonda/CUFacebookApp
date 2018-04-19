@@ -1,0 +1,9 @@
+{
+    "TABS" :  {
+        "dashboard" : "Dashboard",
+        "pagesfeed" : "เพจฟีด",
+        "friends":"เพื่อน",
+        "setting":"การตั้งค่า"
+    },
+    "Login" : "เข้าสู่ระบบด้วย FACEBOOK"
+}

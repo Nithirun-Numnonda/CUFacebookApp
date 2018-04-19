@@ -151,6 +151,16 @@ export class HttpProvider {
         .map(res => res.json());
     });
   }
+  getDashboard2(id,top, hour, day, month, year): Observable<any> {
+    //set header to authorize with access token
+    return Observable.fromPromise(this.getToken()).mergeMap((token) => {
+      let headers = new Headers();
+      headers.append('access_token', token);
+      return this.http.get(
+        this.setHttpRequest('dashboard/page/'+id, top, hour, day, month, year), { headers: headers }).timeout(90000)
+        .map(res => res.json());
+    });
+  }
   getDashboardForTest(top, hour, day, month, year): Observable<any> {
     //set header to authorize with access token
     this.getTokenForTest();
@@ -217,6 +227,7 @@ export class HttpProvider {
       this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
       .map(res => res.json());
   }
+
   getPosts(): Observable<any> {
     return Observable.fromPromise(this.getUid()).mergeMap(obj => {
       this.uid = obj.id;
@@ -274,9 +285,13 @@ export class HttpProvider {
   getFriends() {
     return this.facebook.api('/me/friends', ['user_friends']);
   }
+  getComments(postid): Observable<any> {
+    return Observable.fromPromise(this.facebook.api('/' + postid + '?fields=comments', ['user_posts']));
+  }
   getPages() {
     return this.facebook.api('/me/likes', ['user_likes']);
   }
+  
   getWordCloudForTest() {
     this.getUidForTest();
     

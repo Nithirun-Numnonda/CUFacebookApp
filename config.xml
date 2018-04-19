@@ -81,6 +81,7 @@
     <allow-navigation href="http://192.168.182.103:8100" />
     <engine name="android" spec="6.4.0" />
     <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="^1.0.2" />
+    <plugin name="com.synconset.imagepicker" spec="~2.1.10" />
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-facebook4" spec="^1.7.4">

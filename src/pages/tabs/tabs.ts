@@ -1,3 +1,4 @@
+import { Dashboard2Page } from './../dashboard2/dashboard2';
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
@@ -23,6 +24,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 export class TabsPage {
 
   dashboardRoot = DashboardPage
+  dashboard2Root = Dashboard2Page
   newfeedRoot = NewfeedPage
   friendsRoot = FriendsPage
   settingRoot = SettingPage

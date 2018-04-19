@@ -4,10 +4,11 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import { ImagePicker } from '@ionic-native/image-picker';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DashboardPage } from '../pages/dashboard/dashboard';
+import { Dashboard2Page } from '../pages/dashboard2/dashboard2';
 import { NewfeedPage } from '../pages/newfeed/newfeed';
 import { FriendsPage } from '../pages/friends/friends';
 import { SettingPage } from '../pages/setting/setting';
@@ -27,6 +28,7 @@ import { HistoryDataProvider } from '../providers/history-data/history-data';
     MyApp,
     HomePage,
     DashboardPage,
+    Dashboard2Page,
     NewfeedPage,
     FriendsPage,
     SettingPage
@@ -45,6 +47,7 @@ import { HistoryDataProvider } from '../providers/history-data/history-data';
     MyApp,
     HomePage,
     DashboardPage,
+    Dashboard2Page,
     NewfeedPage,
     FriendsPage,
     SettingPage
@@ -55,6 +58,7 @@ import { HistoryDataProvider } from '../providers/history-data/history-data';
     Facebook,
     ScreenOrientation,
     StreamingMedia,
+    ImagePicker,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpProvider,
     TimeProvider,

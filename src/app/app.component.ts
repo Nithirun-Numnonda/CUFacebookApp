@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -21,6 +22,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      
       // platform.registerBackButtonAction(() => {
       //   let nav = app.getActiveNavs()[0];
       //   let activeView = nav.getActive();
