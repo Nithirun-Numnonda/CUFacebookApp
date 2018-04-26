@@ -52,10 +52,10 @@ export class UserProfilePage {
       });
   }
   getPosts(){
-    //alert(this.uid);
+    
     this.httpProvider.getPostsById(this.uid).subscribe(
       (postsData) => {
-        //alert(JSON.stringify(postsData));
+        
         this.postsData = postsData.posts.data;
         console.log(this.postsData);
         try {
@@ -68,9 +68,7 @@ export class UserProfilePage {
 
         }
       }, (err) => {
-        alert(JSON.stringify(err));
-        //reject(err);
-        //alert(JSON.stringify(err));
+        
 
       });
   }
@@ -85,8 +83,6 @@ export class UserProfilePage {
         this.mutual_likes=contextData.context.mutual_likes.data;
         this.mutual_likes_count=contextData.context.mutual_likes.summary.total_count;
         }else{
-          this.friends_who_like=contextData.context.friends_who_like.data;
-          this.friends_who_like_count=contextData.context.friends_who_like.summary.total_count;
         }
         this.getPosts();
         //alert(JSON.stringify(this.mutual_likes));

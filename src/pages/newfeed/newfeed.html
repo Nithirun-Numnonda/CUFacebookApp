@@ -1,13 +1,3 @@
-<!--
-  Generated template for the NewfeedPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!-- <expandable-header [scrollArea]="mycontent" headerHeight="125">
-   <search-bar></search-bar> 
-  <ion-navbar style="display:none"></ion-navbar>
-</expandable-header> -->
 
 <ion-content no-bounce style="background:url(assets/imgs/background2.jpg);background-size:cover;" fullscreen #mycontent padding="true">
   <ion-refresher (ionRefresh)="doRefresh($event)">
@@ -81,7 +71,7 @@
           </button>
           <ion-col>
             <button ion-button full icon-center clear small (click)="dislikePost(item.meta_data)">
-              <img src="assets/imgs/icon/chat.png" style="width:24px;margin-right:5px">
+              <img src="assets/imgs/icon/dislike.png" style="width:24px;margin-right:5px">
               <div>Dislike</div>
             </button>
           </ion-col>

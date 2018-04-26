@@ -22,6 +22,10 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions'
 import { IonicStorageModule } from '@ionic/storage';
 import { SearchDataProvider } from '../providers/search-data/search-data';
 import { HistoryDataProvider } from '../providers/history-data/history-data';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
+import { BackbuttonService } from "../services/backbutton.service";
 
 @NgModule({
   declarations: [
@@ -64,7 +68,12 @@ import { HistoryDataProvider } from '../providers/history-data/history-data';
     TimeProvider,
     NativePageTransitions,
     SearchDataProvider,
-    HistoryDataProvider
+    HistoryDataProvider,
+    FileTransfer,
+    FileTransferObject,
+    File,
+    Camera,
+    BackbuttonService
 
   ]
 })

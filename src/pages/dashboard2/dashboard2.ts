@@ -1,3 +1,5 @@
+import { BackbuttonService } from './../../services/backbutton.service';
+import { EN_TAB_PAGES } from './../../app/app.config';
 import { SearchDataProvider } from './../../providers/search-data/search-data';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
@@ -17,10 +19,15 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 export class Dashboard2Page {
   searchTerm: string = '';
   items: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private dataService:SearchDataProvider,private modalCtrl:ModalController) {
-    
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private dataService: SearchDataProvider,
+    private modalCtrl: ModalController,
+    private backbuttonService: BackbuttonService
+  ) {
   }
-  goto(){
+  goto() {
     this.navCtrl.push('imagePickerPage');
   }
   ionViewDidLoad() {
@@ -30,10 +37,15 @@ export class Dashboard2Page {
   setFilteredItems() {
     this.items = this.dataService.filterItems(this.searchTerm);
   }
-  presentProfileModal(uid: string, user_name: string,type:string) {
+  presentProfileModal(uid: string, user_name: string, type: string) {
     //console.log(uid);
-    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name,type:type});
+    let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: type });
     profileModal.present();
+  }
+
+  ionViewWillEnter() {
+    this.backbuttonService.pushPage(EN_TAB_PAGES.EN_TP_ANALYZE,
+      this.navCtrl);
   }
 
 }

@@ -3,19 +3,11 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Platform, NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Injectable } from '@angular/core';
-import { Http, Headers} from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 
 
-
-
-/*
-  Generated class for the HttpProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class HttpProvider {
   //initial
@@ -26,9 +18,7 @@ export class HttpProvider {
   authResponse: any;
   isLogged: boolean;
 
-  // private graphUrl = 'https://graph.facebook.com/';
-  // private graphQuery = `date_format=U&fields=posts{from,created_time,message,attachments}`;
-
+  
   constructor(
     public http: Http,
     private facebook: Facebook,
@@ -46,6 +36,7 @@ export class HttpProvider {
   get navCtrl(): NavController {
     return this.app.getActiveNav();
   }
+  //ใช้ในการ Login เข้าสู่ระบบ โดยใช้ Facebook Cordova plugin
   login() {
     let permissions = new Array<string>();
     //let nav = this.navCtrl;
@@ -59,9 +50,6 @@ export class HttpProvider {
         .then(function (profile) {
           profile.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
         })
-      console.log(permissions);
-      //alert('Logged in Successfully!');
-      console.log(JSON.stringify(response.authResponse));
       this.authResponse = response.authResponse;
       this.uid = this.authResponse.userId;
       this.isLogged = true;
@@ -69,20 +57,10 @@ export class HttpProvider {
         this.screenOrientation.unlock();
       this.navCtrl.push('tabsPage');
     }, (error) => {
-      //for test
-      if (error == 'cordova_not_available') {
-        this.isLogged = true;
-        this.navCtrl.push('tabsPage');
-        this.uid = "878312008845622";
-        console.log(this.uid);
-      } else {
-        //alert("Error: " + JSON.stringify(error));
         console.log(error);
         this.isLogged = false;
-      }
     });
 
-    //console.log(this.uid);
   }
   // set uid
   setUid(uid) {
@@ -104,6 +82,7 @@ export class HttpProvider {
   getUid() {
     return this.facebook.api("/me", []);
   }
+  //ขอ access token
   getToken() {
     return this.facebook.getAccessToken();
   }
@@ -112,6 +91,7 @@ export class HttpProvider {
     //for test in computer
     this.accessToken = 'EAACEdEose0cBAPXD4I9Prha4KMDu0Ioac5plLvjZAkKv5HnLIs751Mmkrueoshg39nfNZCpQuHsrlO7ERy4feVRaw2fDsl99Yj2Sy3auWoxINwd4saKhgZBXu3FJZCFcdr8PmvZC57iCbyxqRW1dZCLSDqnca0efaFwZCtXQYGFrt1FSzCh77U3ZCEpHumcrUJ59NwQGfGeKRAZDZD';
   }
+
   //set url for http request from python server
   setHttpRequest(type, top, hour, day, month, year) {
     //console.log("token: " + this.accessToken);
@@ -141,13 +121,14 @@ export class HttpProvider {
     return request;
   }
 
+  //ขอข้อมูลDashboard จาก server
   getDashboard(top, hour, day, month, year): Observable<any> {
     //set header to authorize with access token
     return Observable.fromPromise(this.getToken()).mergeMap((token) => {
       let headers = new Headers();
       headers.append('access_token', token);
       return this.http.get(
-        this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(90000)
+        this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(120000)
         .map(res => res.json());
     });
   }
@@ -157,21 +138,22 @@ export class HttpProvider {
       let headers = new Headers();
       headers.append('access_token', token);
       return this.http.get(
-        this.setHttpRequest('dashboard/page/'+id, top, hour, day, month, year), { headers: headers }).timeout(90000)
+        this.setHttpRequest('dashboard/page/'+id, top, hour, day, month, year), { headers: headers }).timeout(120000)
         .map(res => res.json());
     });
   }
+  //ใช้ทดสอบ
   getDashboardForTest(top, hour, day, month, year): Observable<any> {
     //set header to authorize with access token
     this.getTokenForTest();
     let headers = new Headers();
     headers.append('access_token', this.accessToken);
     return this.http.get(
-      this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(90000)
+      this.setHttpRequest('dashboard', top, hour, day, month, year), { headers: headers }).timeout(120000)
       .map(res => res.json());
 
   }
-
+  //ขอข้อมูล top reactioner and Top Commenter ทั้งหมด
   getDashboardAllTops() {
     return Observable.fromPromise(this.getUid()).mergeMap(obj => {
       this.uid = obj.id;
@@ -180,7 +162,7 @@ export class HttpProvider {
         let headers = new Headers();
         headers.append('access_token', this.accessToken);
         return this.http.get(
-          this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
+          this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(120000)
           .map(res => res.json());
       });
     });
@@ -192,7 +174,7 @@ export class HttpProvider {
     let headers = new Headers();
     headers.append('access_token', this.accessToken);
     return this.http.get(
-      this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
+      this.setHttpRequest('dashboard/getalltops/' + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(120000)
       .map(res => res.json());
 
   }
@@ -224,7 +206,7 @@ export class HttpProvider {
     //   this.setHttpRequest("newsfeed/" + uid, '', '0', '0', '0', '0'), { headers: headers })
     //   .map(res => res.json());
     return this.http.get(
-      this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
+      this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(120000)
       .map(res => res.json());
   }
 
@@ -239,7 +221,7 @@ export class HttpProvider {
         console.log(this.accessToken);
         headers.append('access_token', this.accessToken);
         return this.http.get(
-          this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
+          this.setHttpRequest("newsfeed/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(120000)
           .map(res => res.json());
       })
     });
@@ -256,7 +238,7 @@ export class HttpProvider {
         console.log(this.accessToken);
         headers.append('access_token', this.accessToken);
         return this.http.get(
-          this.setHttpRequest("newsfeed/next/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(90000)
+          this.setHttpRequest("newsfeed/next/" + this.uid, '', '0', '0', '0', '0'), { headers: headers }).timeout(120000)
           .map(res => res.json());
       })
     });
@@ -306,6 +288,13 @@ export class HttpProvider {
       this.uid = obj.id;
         return  this.setHttpRequest("getwordcloud/" + this.uid, '', '0', '0', '0', '0');
       });
+  }
+  uploadImage(img){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return Observable.fromPromise(this.getUid()).mergeMap(obj => {
+          this.uid = obj.id;
+        return this.http.post('http://103.233.194.200:8080/image/' + this.uid,img ,options);});
   }
 
 }

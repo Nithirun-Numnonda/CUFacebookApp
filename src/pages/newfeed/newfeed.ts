@@ -1,3 +1,5 @@
+import { BackbuttonService } from './../../services/backbutton.service';
+import { EN_TAB_PAGES } from './../../app/app.config';
 import { HistoryDataProvider } from './../../providers/history-data/history-data';
 import { TimeProvider } from './../../providers/time/time';
 import { HttpProvider } from './../../providers/http/http-provider';
@@ -19,12 +21,7 @@ import {
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 
-/**
- * Generated class for the NewfeedPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -69,7 +66,8 @@ export class NewfeedPage {
     private modalCtrl: ModalController,
     private timeProvider: TimeProvider,
     private storage: Storage,
-    private historyData: HistoryDataProvider
+    private historyData: HistoryDataProvider,
+    private backbuttonService:BackbuttonService
   ) {
     this.stackConfig = {
       allowedDirections: [Direction.LEFT, Direction.RIGHT],
@@ -504,4 +502,8 @@ export class NewfeedPage {
     alert(event.target.nodeValue);
   }
   ////end part tinder
+  ionViewWillEnter() {
+    this.backbuttonService.pushPage(EN_TAB_PAGES.EN_TP_PAGESFEED,  
+    this.navCtrl);
+ }
 }

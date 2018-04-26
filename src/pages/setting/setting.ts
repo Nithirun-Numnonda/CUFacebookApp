@@ -1,3 +1,5 @@
+import { EN_TAB_PAGES } from './../../app/app.config';
+import { BackbuttonService } from './../../services/backbutton.service';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
@@ -19,20 +21,27 @@ import { Pro } from '@ionic/pro';
   templateUrl: 'setting.html',
 })
 export class SettingPage {
-  homePage:HomePage;
-  isShowCredit:boolean=false;
+  homePage: HomePage;
+  isShowCredit: boolean = false;
   public deployChannel = "";
   public isBeta = false;
   public downloadProgress = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private facebook:Facebook,private app:App,private loadingController:LoadingController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private facebook: Facebook,
+    private app: App,
+    private loadingController: LoadingController,
+    private backbuttonService: BackbuttonService
+  ) {
     //this.checkChannel();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingPage');
   }
-  getAccess(){
+  getAccess() {
     var token = this.facebook.getAccessToken()
     console.log(token);
     alert(token);
@@ -40,19 +49,19 @@ export class SettingPage {
   logout() {
     let loading = this.loadingController.create({ content: "Logging Out" });
     loading.present();
-    this.facebook.logout().then((response) =>{
+    this.facebook.logout().then((response) => {
       loading.dismissAll();
       this.app.getRootNav().pop()
     }, (error) => {
       console.log(error);
     })
-    
+
   }
-  search(){
+  search() {
     this.navCtrl.push('searchPage')
   }
-  showCredit(){
-    this.isShowCredit=!this.isShowCredit
+  showCredit() {
+    this.isShowCredit = !this.isShowCredit
   }
   //live update
   async checkChannel() {
@@ -67,5 +76,9 @@ export class SettingPage {
       // Pro.monitoring.exception(err);
     }
   }
+  ionViewWillEnter() {
+    this.backbuttonService.pushPage(EN_TAB_PAGES.EN_TP_SETTING,  
+    this.navCtrl);
+ }
 
 }

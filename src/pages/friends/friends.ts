@@ -1,3 +1,5 @@
+import { EN_TAB_PAGES } from './../../app/app.config';
+import { BackbuttonService } from './../../services/backbutton.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Platform, ModalController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http-provider';
@@ -25,7 +27,8 @@ export class FriendsPage {
         private httpProvider: HttpProvider,
         private loadingController: LoadingController,
         private platform:Platform,
-        private modalCtrl:ModalController
+        private modalCtrl:ModalController,
+        private backbuttonService:BackbuttonService
     ) {
     }
     ionViewDidLoad() {
@@ -59,5 +62,10 @@ export class FriendsPage {
         let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name,type:"friends"});
         profileModal.present();
       }
+
+      ionViewWillEnter() {
+        this.backbuttonService.pushPage(EN_TAB_PAGES.EN_TP_FRIENDS,  
+        this.navCtrl);
+     }
     
 }

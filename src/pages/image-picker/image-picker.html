@@ -8,8 +8,12 @@
 
 
 <ion-content padding>
-  <button ion-button full (click)="openImagePicker()">Get Image from Your Gallery</button>
-    <ion-card *ngFor="let photo of photos">
-        <img src="{{photo}}" />
-      </ion-card>
+  <button ion-button full (click)="getImage()">Get Image from Your Gallery</button>
+  
+  <ion-card *ngIf="imageURL">
+    <ion-card-content>
+    <img src="data:image/jpeg;base64,{{imageURL}}" />
+    </ion-card-content>
+  </ion-card>
+  <button ion-button full *ngIf="imageURL" (click)="uploadImage()">Upload File</button>
 </ion-content>

@@ -1,3 +1,5 @@
+import { EN_TAB_PAGES } from './../../app/app.config';
+import { BackbuttonService } from './../../services/backbutton.service';
 import { SearchDataProvider } from './../../providers/search-data/search-data';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, Platform, Content, Navbar } from 'ionic-angular';
@@ -91,7 +93,8 @@ export class DashboardPage {
     public modalCtrl: ModalController,
     private platform: Platform,
     private storage: Storage,
-    private searchData: SearchDataProvider
+    private searchData: SearchDataProvider,
+    private backbuttonService:BackbuttonService
   ) {
     //initial default parameter
     this.hourValue = this.hours[0];
@@ -927,5 +930,8 @@ export class DashboardPage {
     let profileModal = this.modalCtrl.create('UserProfilePage', { userId: uid, name: user_name, type: "friends" });
     profileModal.present();
   }
-
+  ionViewWillEnter() {
+    this.backbuttonService.pushPage(EN_TAB_PAGES.EN_TP_DASHBOARD,  
+    this.navCtrl);
+ }
 }
